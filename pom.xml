@@ -17,14 +17,14 @@
     </properties>
 
     <dependencies>
-        <!--        SPRING-WEBMVC-->
+        <!--        SPRING-WEBMVC -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
 
-        <!--        SERVLET-API-->
+        <!--        SERVLET-API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -32,26 +32,33 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--        JSTL-->
+        <!--        JSTL -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
 
-        <!--        HIBERNATE-->
+        <!--        HIBERNATE -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.2.9.Final</version>
         </dependency>
-        <!--        SPRING-ORM-->
+
+        <!--        HIBERNATE VALIDATOR -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.4.1.Final</version>
+        </dependency>
+        <!--        SPRING-ORM -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>4.3.7.RELEASE</version>
         </dependency>
-        <!--        MYSQL CONNECTOR-->
+        <!--        MYSQL CONNECTOR -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -81,7 +88,7 @@
             <version>2.3.0</version>
         </dependency>
 
-        <!--        ============================ -->
+        <!--        ================ FOR JAVA 8+ -->
 
         <!--        JBCRYPT-->
         <dependency>
