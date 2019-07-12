@@ -1,0 +1,86 @@
+header {
+    background: black;
+    position: relative;
+    height: 300px;
+}
+
+.logo button {
+    width: 140px;
+    height: 140px;
+    border-radius: 20%;
+    background: rgba(240, 0, 0, 1);
+    margin-top: 35px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.logo i {
+    font-size: 70px;
+    color: white;
+}
+
+.logo p {
+    font-family: Michroma, sans-serif;
+    font-size: 24px;
+    left: 50%;
+    text-align: center;
+    margin-top: 5px;
+
+}
+
+.musicsite-music {
+
+    color: red;
+}
+
+.musicsite-site{
+    color: white;
+}
+
+.menu {
+    position: absolute;
+    bottom: 0;
+    width: 600px;
+    left: 50%;
+    background-color: black;
+    margin-right: -50%;
+    transform: translate(-50%);
+    margin-bottom: 0;
+    border-top-color: grey;
+    border-left-color: grey;
+    border-right-color: grey;
+}
+
+.menu div {
+    position: absolute;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%);
+}
+
+.menu div li {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.menu a {
+    color: white;
+    font-size: 20px;
+    font-family: Salsa, cursive;
+    font-weight: 100;
+}
+
+.menu li:hover {
+    background-color: rgb(77, 77, 77);
+}
+
+#highlighted-elem {
+    background-color: rgb(230, 230, 0);
+}
+
+#highlighted-elem a {
+    color: black;
+    font-weight: bold;
+}
+
