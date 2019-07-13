@@ -1,5 +1,7 @@
 package com.musicsite.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -27,11 +29,15 @@ public class Album {
     @Column(name = "image_link")
     private String imageLink;
 
-    @ManyToOne
-    private Performer performer;
+    @ManyToMany (fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Performer> albumPerformers;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
-    List<Track> tracks = new ArrayList<>();
+    @Column(name = "tracks")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Track> albumTracks = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -65,24 +71,25 @@ public class Album {
         this.imageLink = imageLink;
     }
 
-    public Performer getPerformer() {
-        return performer;
+
+    public List<Performer> getAlbumPerformers() {
+        return albumPerformers;
     }
 
-    public void setPerformer(Performer performer) {
-        this.performer = performer;
+    public void setAlbumPerformers(List<Performer> albumPerformers) {
+        this.albumPerformers = albumPerformers;
     }
 
-    public List<Track> getTracks() {
-        return tracks;
+    public List<Track> getAlbumTracks() {
+        return albumTracks;
     }
 
-    public void setTracks(List<Track> tracks) {
-        this.tracks = tracks;
+    public void setAlbumTracks(List<Track> albumTracks) {
+        this.albumTracks = albumTracks;
     }
 
     @Override
     public String toString() {
-        return performer + " - " + yearOfPublication + " - " + name;
+        return albumPerformers.toString() + " - " + yearOfPublication + " - " + name;
     }
 }

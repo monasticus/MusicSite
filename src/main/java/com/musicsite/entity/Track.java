@@ -1,5 +1,7 @@
 package com.musicsite.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -18,11 +20,15 @@ public class Track {
     @Size(min = 2, max = 50)
     private String name;
 
-    @ManyToMany(mappedBy = "tracks", fetch = FetchType.EAGER)
-    private List<Album> albums = new ArrayList<>();
+    @ManyToMany(mappedBy = "albumTracks", fetch = FetchType.EAGER)
+    @Column(name = "albums")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Album> trackAlbums = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Performer> performers = new ArrayList<>();
+    @Column(name = "performers")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Performer> trackPerformers = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -40,24 +46,24 @@ public class Track {
         this.name = name;
     }
 
-    public List<Album> getAlbums() {
-        return albums;
+    public List<Album> getTrackAlbums() {
+        return trackAlbums;
     }
 
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
+    public void setTrackAlbums(List<Album> trackAlbums) {
+        this.trackAlbums = trackAlbums;
     }
 
-    public List<Performer> getPerformers() {
-        return performers;
+    public List<Performer> getTrackPerformers() {
+        return trackPerformers;
     }
 
-    public void setPerformers(List<Performer> performers) {
-        this.performers = performers;
+    public void setTrackPerformers(List<Performer> trackPerformers) {
+        this.trackPerformers = trackPerformers;
     }
 
     @Override
     public String toString() {
-        return performers.toString() + " - " + name;
+        return trackPerformers.toString() + " - " + name;
     }
 }

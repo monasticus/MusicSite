@@ -1,5 +1,7 @@
 package com.musicsite.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -19,11 +21,15 @@ public class Performer {
     @Size(min = 2, max = 50)
     private String name;
 
-    @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER)
-    private List<Album> albums = new ArrayList<>();
+    @ManyToMany(mappedBy = "albumPerformers", fetch = FetchType.EAGER)
+    @Column(name = "albums")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Album> performerAlbums = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "performers", fetch = FetchType.EAGER)
-    private List<Track> tracks = new ArrayList<>();
+    @ManyToMany(mappedBy = "trackPerformers", fetch = FetchType.EAGER)
+    @Column(name = "tracks")
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Track> performerTracks = new ArrayList<>();
 
     @Column(name = "image_link")
     private String imageLink;
@@ -51,21 +57,22 @@ public class Performer {
         this.name = name;
     }
 
-    public List<Album> getAlbums() {
-        return albums;
+    public List<Album> getPerformerAlbums() {
+        return performerAlbums;
     }
 
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
+    public void setPerformerAlbums(List<Album> performerAlbums) {
+        this.performerAlbums = performerAlbums;
     }
 
-    public List<Track> getTracks() {
-        return tracks;
+    public List<Track> getPerformerTracks() {
+        return performerTracks;
     }
 
-    public void setTracks(List<Track> tracks) {
-        this.tracks = tracks;
+    public void setPerformerTracks(List<Track> performerTracks) {
+        this.performerTracks = performerTracks;
     }
+
 
     public String getImageLink() {
         return imageLink;
