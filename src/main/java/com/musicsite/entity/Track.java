@@ -5,13 +5,14 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="tracks")
-public class Track {
+public class Track extends Opus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,6 +20,10 @@ public class Track {
     @NotBlank
     @Size(min = 2, max = 50)
     private String name;
+
+    @Pattern(regexp = "\\d{4}")
+    @Column(name = "year_of_publication")
+    private String yearOfPublication;
 
     @ManyToMany(mappedBy = "tracks", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -28,21 +33,14 @@ public class Track {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Performer> performers = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
+    @Column(precision = 3, scale = 2)
+    private Double average;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Rating> ratings = new ArrayList<>();
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public List<Album> getAlbums() {
         return albums;
@@ -52,16 +50,24 @@ public class Track {
         this.albums = albums;
     }
 
-    public List<Performer> getPerformers() {
-        return performers;
+    public Double getAverage() {
+        return average;
     }
 
-    public void setPerformers(List<Performer> performers) {
-        this.performers = performers;
+    public void setAverage(Double average) {
+        this.average = average;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     @Override
     public String toString() {
-        return performers.toString() + " - " + name;
+        return performers.toString() + " - " + name + " (" + yearOfPublication + ")";
     }
 }

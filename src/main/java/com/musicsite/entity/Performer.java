@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "performers")
-public class Performer {
+public class Performer extends Ens{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +40,13 @@ public class Performer {
     @Column(name = "image_link")
     private String imageLink;
 
+    @Column(precision = 3, scale = 2)
+    private Double average;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Rating> ratings = new ArrayList<>();
+
 
 //    private String wiki;
 //
@@ -47,13 +54,6 @@ public class Performer {
 //
 //    private String spotify;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public List<Album> getAlbums() {
         return albums;
@@ -101,6 +101,14 @@ public class Performer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
 
     @Override

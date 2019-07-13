@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "albums")
-public class Album {
+public class Album extends Opus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,29 +38,12 @@ public class Album {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Track> tracks = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
+    @Column(precision = 3, scale = 2)
+    private Double average;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getYearOfPublication() {
-        return yearOfPublication;
-    }
-
-    public void setYearOfPublication(String yearOfPublication) {
-        this.yearOfPublication = yearOfPublication;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Rating> ratings = new ArrayList<>();
 
     public String getImageLink() {
         return imageLink;
@@ -70,20 +53,43 @@ public class Album {
         this.imageLink = imageLink;
     }
 
-    public List<Performer> getPerformers() {
-        return performers;
-    }
-
-    public void setPerformers(List<Performer> performers) {
-        this.performers = performers;
-    }
-
     public List<Track> getTracks() {
         return tracks;
     }
 
     public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
+    }
+
+    public Double getAverage() {
+        return average;
+    }
+
+    public void setAverage(Double average) {
+        this.average = average;
+    }
+
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    @PrePersist
+    public void startAverage() {
+        average = 0.0;
+    }
+
+    @PreUpdate
+    public void updateAverage() {
+        double sum = 0.0;
+        for (Rating rating : ratings)
+            sum += rating.getValue();
+
+
+        average = sum / ratings.size();
     }
 
     @Override
