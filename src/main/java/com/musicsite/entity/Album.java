@@ -31,13 +31,12 @@ public class Album {
 
     @ManyToMany (fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Performer> albumPerformers;
+    private List<Performer> performers;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @Column(name = "tracks")
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Track> albumTracks = new ArrayList<>();
+    private List<Track> tracks = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -71,25 +70,24 @@ public class Album {
         this.imageLink = imageLink;
     }
 
-
-    public List<Performer> getAlbumPerformers() {
-        return albumPerformers;
+    public List<Performer> getPerformers() {
+        return performers;
     }
 
-    public void setAlbumPerformers(List<Performer> albumPerformers) {
-        this.albumPerformers = albumPerformers;
+    public void setPerformers(List<Performer> performers) {
+        this.performers = performers;
     }
 
-    public List<Track> getAlbumTracks() {
-        return albumTracks;
+    public List<Track> getTracks() {
+        return tracks;
     }
 
-    public void setAlbumTracks(List<Track> albumTracks) {
-        this.albumTracks = albumTracks;
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
     }
 
     @Override
     public String toString() {
-        return albumPerformers.toString() + " - " + yearOfPublication + " - " + name;
+        return performers.toString() + " - " + yearOfPublication + " - " + name;
     }
 }

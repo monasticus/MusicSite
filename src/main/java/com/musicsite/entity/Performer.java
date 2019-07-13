@@ -21,15 +21,13 @@ public class Performer {
     @Size(min = 2, max = 50)
     private String name;
 
-    @ManyToMany(mappedBy = "albumPerformers", fetch = FetchType.EAGER)
-    @Column(name = "albums")
+    @OneToMany(mappedBy = "performers", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Album> performerAlbums = new ArrayList<>();
+    private List<Album> albums = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "trackPerformers", fetch = FetchType.EAGER)
-    @Column(name = "tracks")
+    @ManyToMany(mappedBy = "performers", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Track> performerTracks = new ArrayList<>();
+    private List<Track> tracks = new ArrayList<>();
 
     @Column(name = "image_link")
     private String imageLink;
@@ -57,22 +55,21 @@ public class Performer {
         this.name = name;
     }
 
-    public List<Album> getPerformerAlbums() {
-        return performerAlbums;
+    public List<Album> getAlbums() {
+        return albums;
     }
 
-    public void setPerformerAlbums(List<Album> performerAlbums) {
-        this.performerAlbums = performerAlbums;
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
 
-    public List<Track> getPerformerTracks() {
-        return performerTracks;
+    public List<Track> getTracks() {
+        return tracks;
     }
 
-    public void setPerformerTracks(List<Track> performerTracks) {
-        this.performerTracks = performerTracks;
+    public void setTracks(List<Track> tracks) {
+        this.tracks = tracks;
     }
-
 
     public String getImageLink() {
         return imageLink;

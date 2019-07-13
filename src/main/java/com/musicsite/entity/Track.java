@@ -20,15 +20,13 @@ public class Track {
     @Size(min = 2, max = 50)
     private String name;
 
-    @ManyToMany(mappedBy = "albumTracks", fetch = FetchType.EAGER)
-    @Column(name = "albums")
+    @ManyToMany(mappedBy = "tracks", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Album> trackAlbums = new ArrayList<>();
+    private List<Album> albums = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @Column(name = "performers")
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Performer> trackPerformers = new ArrayList<>();
+    private List<Performer> performers = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -46,24 +44,24 @@ public class Track {
         this.name = name;
     }
 
-    public List<Album> getTrackAlbums() {
-        return trackAlbums;
+    public List<Album> getAlbums() {
+        return albums;
     }
 
-    public void setTrackAlbums(List<Album> trackAlbums) {
-        this.trackAlbums = trackAlbums;
+    public void setAlbums(List<Album> albums) {
+        this.albums = albums;
     }
 
-    public List<Performer> getTrackPerformers() {
-        return trackPerformers;
+    public List<Performer> getPerformers() {
+        return performers;
     }
 
-    public void setTrackPerformers(List<Performer> trackPerformers) {
-        this.trackPerformers = trackPerformers;
+    public void setPerformers(List<Performer> performers) {
+        this.performers = performers;
     }
 
     @Override
     public String toString() {
-        return trackPerformers.toString() + " - " + name;
+        return performers.toString() + " - " + name;
     }
 }
