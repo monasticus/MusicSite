@@ -29,9 +29,13 @@ public class User {
     @Column(name = "first_name")
     private String firstName;
 
+    @Column(length = 100)
+    private String password;
+
+    @Transient
     @NotBlank
     @Size(min = 8, max = 50)
-    private String password;
+    private String tempPassword;
 
     public Long getId() {
         return id;
@@ -65,6 +69,14 @@ public class User {
         this.firstName = firstName;
     }
 
+    public String getTempPassword() {
+        return tempPassword;
+    }
+
+    public void setTempPassword(String tempPassword) {
+        this.tempPassword = tempPassword;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -75,7 +87,7 @@ public class User {
 
     @PrePersist
     public void prePersist() {
-        password = BCrypt.hashpw(password, BCrypt.gensalt());
+        password = BCrypt.hashpw(tempPassword, BCrypt.gensalt());
     }
 
     @Override

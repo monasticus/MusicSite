@@ -1,7 +1,9 @@
 header {
+    font-family: Michroma, sans-serif;
     background: black;
     position: relative;
-    height: 300px;
+    height: 330px;
+    border-bottom: 2px solid white;
 }
 
 .logo button {
@@ -18,19 +20,18 @@ header {
 .logo i {
     font-size: 70px;
     color: white;
+    text-shadow: 2px 2px 15px black;
 }
 
-.logo p {
-    font-family: Michroma, sans-serif;
+.logo .musicsite {
     font-size: 24px;
     left: 50%;
     text-align: center;
     margin-top: 5px;
-
+    font-weight: bold;
 }
 
 .musicsite-music {
-
     color: red;
 }
 
@@ -38,18 +39,24 @@ header {
     color: white;
 }
 
+.music-side {
+    font-size: 14px;
+    left: 50%;
+    text-align: center;
+    margin-top: 10px;
+}
+
 .menu {
     position: absolute;
     bottom: 0;
-    width: 600px;
+    width: 700px;
     left: 50%;
-    background-color: black;
     margin-right: -50%;
-    transform: translate(-50%);
     margin-bottom: 0;
-    border-top-color: grey;
-    border-left-color: grey;
-    border-right-color: grey;
+    transform: translate(-50%);
+    background-color: black;
+    border-color: grey;
+    border-radius: 3%;
 }
 
 .menu div {
@@ -67,8 +74,8 @@ header {
 .menu a {
     color: white;
     font-size: 20px;
-    font-family: Salsa, cursive;
-    font-weight: 100;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px white;
 }
 
 .menu li:hover {
@@ -76,11 +83,74 @@ header {
 }
 
 #highlighted-elem {
-    background-color: rgb(230, 230, 0);
+    background-color: rgb(237, 237, 0);
 }
 
 #highlighted-elem a {
     color: black;
     font-weight: bold;
+    text-shadow: 0 0 1px black;
 }
 
+h1{
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.login-form,
+.register-form {
+    background-color: rgb(237,237,237);
+    width: 600px;
+    position: relative;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.login-form {
+    height: 440px;
+}
+
+.login-form span{
+    color: rgb(0, 0, 204);
+}
+
+input {
+    background: #ffffff;
+    padding: 8px;
+    width: 500px;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    margin-bottom: 10px;
+    line-height: 25px;
+}
+
+body {
+    height: 150%;
+    background-color: black;
+}
+
+.error {
+    color: red;
+    font-size: 15px;
+}
+
+.logout {
+    border: 1px solid white;
+    color: white;
+    right: 5px;
+    top: 5px;
+    z-index: 1000;
+    position: absolute;
+    width: 150px;
+    height: 45px;
+    background-color: black;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 7%;
+}
+
+.logout i {
+    font-size: 24px;
+    margin-right: 10px;
+}

@@ -1,9 +1,14 @@
 <header>
+    <c:if test="${not empty id}">
+        <button class="logout" onclick="document.location.href='/logout'"><i class="fas fa-running"></i>Logout</button>
+    </c:if>
     <div class="logo">
+
         <button onclick="document.location.href='/'"><i class="glyphicon glyphicon-music"></i></button>
-        <p>
+        <p class="musicsite">
             <span class="musicsite-music">music</span><span class="musicsite-site">site.</span>
         </p>
+        <p class="music-side"><span class="musicsite-site">music side </span><span class="musicsite-music">of your life</span></p>
     </div>
 
     <nav class="menu navbar navbar-expand-lg">
@@ -13,7 +18,7 @@
                     <a class="nav-link" href="#">performers </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">XXX</a>
+                    <a class="nav-link" href="#">albums</a>
                 </li>
                 <li class="nav-item active " id="highlighted-elem">
 
@@ -22,22 +27,20 @@
                         <a class="nav-link" href="/login">Login </a>
                     </c:when>
                     <c:otherwise>
-                        <a class="nav-link" href="/">Hello ${name} </a>
+                        <a class="nav-link" href="/usr/settings">${name} </a>
                     </c:otherwise>
                 </c:choose>
 
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">albums</a>
+                    <a class="nav-link" href="#">tracks</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">tracks</a>
+                    <a class="nav-link" href="#">categories</a>
                 </li>
             </ul>
         </div>
     </nav>
-
-
 
 
 

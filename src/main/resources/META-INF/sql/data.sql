@@ -1,0 +1,2 @@
+INSERT INTO musicsite.users (id, email, first_name, password, username) VALUES (1, 'blabla@gmail.com', 'Tomasz', '$2a$10$crECq/A.Cdlvb5CTsJAIJ.Pjmxi2xsYBtSFaakYIm2EJtwVzy0kCm', 'Angel');
+INSERT INTO musicsite.users (id, email, first_name, password, username) VALUES (2, 'pss@gmail.com', 'Mr. Hide', '$2a$10$1gb3IF3813JSbZ2X7XERGOVPTYAmIvdOP1MdCs5xVG8DLKEB41uby', 'Dr. Jekyll');
