@@ -36,11 +36,48 @@ public class Track extends Opus {
     @Column(precision = 3, scale = 2)
     private Double average;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "track", fetch = FetchType.EAGER)
     private List<Rating> ratings = new ArrayList<>();
 
+    @Override
+    public Long getId() {
+        return id;
+    }
 
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getYearOfPublication() {
+        return yearOfPublication;
+    }
+
+    @Override
+    public void setYearOfPublication(String yearOfPublication) {
+        this.yearOfPublication = yearOfPublication;
+    }
+
+    @Override
+    public List<Performer> getPerformers() {
+        return performers;
+    }
+
+    @Override
+    public void setPerformers(List<Performer> performers) {
+        this.performers = performers;
+    }
 
     public List<Album> getAlbums() {
         return albums;

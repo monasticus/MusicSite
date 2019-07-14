@@ -9,27 +9,15 @@ public abstract class Opus extends Ens{
     private String yearOfPublication;
     private List<Performer> performers = new ArrayList<>();
 
-    public String getName() {
-        return name;
-    }
+    public abstract String getName();
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public abstract void setName(String name) ;
 
-    public String getYearOfPublication() {
-        return yearOfPublication;
-    }
+    public abstract String getYearOfPublication();
 
-    public void setYearOfPublication(String yearOfPublication) {
-        this.yearOfPublication = yearOfPublication;
-    }
+    public abstract void setYearOfPublication(String yearOfPublication);
 
-    public List<Performer> getPerformers() {
-        return performers;
-    }
+    public abstract List<Performer> getPerformers();
 
-    public void setPerformers(List<Performer> performers) {
-        this.performers = performers;
-    }
+    public abstract void setPerformers(List<Performer> performers);
 }

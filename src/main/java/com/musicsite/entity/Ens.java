@@ -4,14 +4,8 @@ package com.musicsite.entity;
 
 public abstract class Ens {
 
-    Long id;
+    public abstract Long getId();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public abstract void setId(Long id);
 
 }

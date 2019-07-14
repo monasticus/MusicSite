@@ -21,7 +21,16 @@ public class Rating extends Ens{
     @ManyToOne
     private User user;
 
-    private int value;
+    private int rating;
+
+    @ManyToOne
+    private Performer performer;
+
+    @ManyToOne
+    private Album album;
+
+    @ManyToOne
+    private Track track;
 
 
 
@@ -49,11 +58,40 @@ public class Rating extends Ens{
         this.user = user;
     }
 
-    public int getValue() {
-        return value;
+    public int getRating() {
+        return rating;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public Performer getPerformer() {
+        return performer;
+    }
+
+    public void setPerformer(Performer performer) {
+        this.performer = performer;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    public Track getTrack() {
+        return track;
+    }
+
+    public void setTrack(Track track) {
+        this.track = track;
+    }
+
+    @Override
+    public String toString() {
+        return "(rating: " + rating + ")";
     }
 }

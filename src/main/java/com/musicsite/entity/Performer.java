@@ -19,6 +19,7 @@ public class Performer extends Ens{
 
     @NotBlank
     @Size(min = 2, max = 50)
+    @Column(unique = true)
     private String pseudonym;
 
     @Size(min = 2, max = 50)
@@ -43,8 +44,7 @@ public class Performer extends Ens{
     @Column(precision = 3, scale = 2)
     private Double average;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER)
     private List<Rating> ratings = new ArrayList<>();
 
 
@@ -54,6 +54,24 @@ public class Performer extends Ens{
 //
 //    private String spotify;
 
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getAverage() {
+        return average;
+    }
+
+    public void setAverage(Double average) {
+        this.average = average;
+    }
 
     public List<Album> getAlbums() {
         return albums;

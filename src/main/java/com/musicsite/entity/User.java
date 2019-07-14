@@ -41,6 +41,16 @@ public class User extends Ens{
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Rating> ratings;
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
