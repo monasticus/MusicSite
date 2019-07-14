@@ -44,6 +44,13 @@ public class User extends Ens{
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings;
 
+    @Column(columnDefinition = "BIT")
+    private boolean admin;
+
+    public User() {
+        admin = false;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -102,8 +109,16 @@ public class User extends Ens{
         this.ratings = ratings;
     }
 
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
     @PrePersist
-    public void prePersist() {
+    public void hashPassword() {
         password = BCrypt.hashpw(tempPassword, BCrypt.gensalt());
     }
 
