@@ -12,8 +12,8 @@
     </div>
 
     <nav class="menu navbar navbar-expand-lg">
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+        <div id="navbarNav">
+            <ul class="navbar-nav list-group list-group-horizontal-sm">
                 <li class="nav-item active">
                     <a class="nav-link" href="#">performers </a>
                 </li>
