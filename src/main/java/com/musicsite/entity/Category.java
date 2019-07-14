@@ -20,15 +20,12 @@ public class Category extends Ens{
 
     @NotBlank(groups = {CategoryValidationGroup.class, Default.class})
     @Size(min = 2, max = 25, groups = {CategoryValidationGroup.class, Default.class})
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Album> albums = new ArrayList<>();
-
-    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Performer> performers = new ArrayList<>();
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -58,14 +55,6 @@ public class Category extends Ens{
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
-    }
-
-    public List<Performer> getPerformers() {
-        return performers;
-    }
-
-    public void setPerformers(List<Performer> performers) {
-        this.performers = performers;
     }
 
     public List<Track> getTracks() {

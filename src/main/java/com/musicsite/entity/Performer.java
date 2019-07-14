@@ -53,10 +53,6 @@ public class Performer extends Ens{
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
-    @ManyToOne
-    @NotNull
-    private Category category;
-
 
 //    private String wiki;
 //
@@ -141,14 +137,6 @@ public class Performer extends Ens{
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     @PrePersist

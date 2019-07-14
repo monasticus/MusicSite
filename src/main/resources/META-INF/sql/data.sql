@@ -10,12 +10,25 @@ INSERT INTO musicsite.performers (id, average, first_name, image_link, last_name
 INSERT INTO musicsite.performers (id, average, first_name, image_link, last_name, proposition, pseudonym) VALUES (3, 0, 'Earl', null, 'Simmons', true, 'DMX');
 
 -- =============== ALBUMS
-INSERT INTO musicsite.albums (id, average, image_link, name, proposition, year_of_publication, performer_id) VALUES (1, 0, null, 'Szacunek ludzi ulicy', false, '2006', 1);
-INSERT INTO musicsite.albums (id, average, image_link, name, proposition, year_of_publication, performer_id) VALUES (2, 0, null, 'Najlepszą Obroną Jest Atak', false, '2005', 1);
-INSERT INTO musicsite.albums (id, average, image_link, name, proposition, year_of_publication, performer_id) VALUES (3, 0, null, 'Kaya', false, '1978', 2);
-INSERT INTO musicsite.albums (id, average, image_link, name, proposition, year_of_publication, performer_id) VALUES (4, 0, null, 'Flesh of my flesh blood of my blood', true, '1998', 3);
+INSERT INTO musicsite.albums (id, average, image_link, name, proposition, year_of_publication, performer_id, category_id) VALUES (1, 0, null, 'Szacunek ludzi ulicy', false, '2006', 1, 1);
+INSERT INTO musicsite.albums (id, average, image_link, name, proposition, year_of_publication, performer_id, category_id) VALUES (2, 0, null, 'Najlepszą Obroną Jest Atak', false, '2005', 1, 1);
+INSERT INTO musicsite.albums (id, average, image_link, name, proposition, year_of_publication, performer_id, category_id) VALUES (3, 0, null, 'Kaya', false, '1978', 2, 4);
+INSERT INTO musicsite.albums (id, average, image_link, name, proposition, year_of_publication, performer_id, category_id) VALUES (4, 0, null, 'Flesh of my flesh blood of my blood', true, '1998', 3, 1);
 
 -- =============== TRACKS
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, performer_id) VALUES (1, 0, 'my niggas (skit)', true, '1998', 4, 3);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, performer_id, category_id) VALUES (1, 0, 'my niggas (skit)', true, '1998', 4, 3, 1);
+
+
+-- =============== CATEGORIES
+INSERT INTO musicsite.categories (id, name) VALUES (8, 'Funk');
+INSERT INTO musicsite.categories (id, name) VALUES (3, 'Pop');
+INSERT INTO musicsite.categories (id, name) VALUES (1, 'Rap');
+INSERT INTO musicsite.categories (id, name) VALUES (4, 'Reggae');
+INSERT INTO musicsite.categories (id, name) VALUES (6, 'Rhythm and blues');
+INSERT INTO musicsite.categories (id, name) VALUES (2, 'Rock');
+INSERT INTO musicsite.categories (id, name) VALUES (7, 'Soul');
+INSERT INTO musicsite.categories (id, name) VALUES (5, 'Trip-hop');
+
+
 
 
