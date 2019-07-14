@@ -11,6 +11,6 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-
+<%@include file="../fragments/dashboard.jspf" %>
 </body>
 </html>

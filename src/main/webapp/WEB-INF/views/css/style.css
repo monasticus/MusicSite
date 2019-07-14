@@ -35,7 +35,7 @@ header {
     color: red;
 }
 
-.musicsite-site{
+.musicsite-site {
     color: white;
 }
 
@@ -92,14 +92,14 @@ header {
     text-shadow: 0 0 1px black;
 }
 
-h1{
+h1 {
     margin-top: 40px;
     margin-bottom: 50px;
 }
 
 .login-form,
 .register-form {
-    background-color: rgb(237,237,237);
+    background-color: rgb(237, 237, 237);
     width: 600px;
     position: relative;
     font-size: 16px;
@@ -111,7 +111,7 @@ h1{
     height: 440px;
 }
 
-.login-form span{
+.login-form span {
     color: rgb(0, 0, 204);
 }
 
@@ -136,12 +136,12 @@ body {
 }
 
 .success {
-    color: rgb(0,196,0);
+    color: rgb(0, 196, 0);
     font-size: 15px;
 }
 
 .form-information {
-    color: rgb(0,0,204);
+    color: rgb(0, 0, 204);
     font-size: 14px;
 }
 
@@ -163,4 +163,44 @@ body {
 .logout i {
     font-size: 24px;
     margin-right: 10px;
+}
+
+.dashboard {
+    background-color: black;
+    z-index: 1000;
+    position: absolute;
+    width: 230px;
+    height: 100%;
+    font-weight: bold;
+
+}
+
+.dashboard .add-options {
+    margin-top: 100px;
+    margin-left: 50px;
+}
+
+.dashboard h2 {
+    color: rgb(184, 184, 184);
+
+    font-size: 30px;
+}
+
+.dashboard a {
+    color: white;
+    font-size: 20px;
+    margin-left: 25px;
+
+}
+
+.dashboard a:hover {
+    color: rgb(237, 237, 0);
+}
+
+.admin {
+    border: 1px solid rgb(184, 184, 184);
+}
+
+.admin:hover {
+    border: 1px solid rgb(237, 237, 0);
 }

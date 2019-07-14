@@ -1,0 +1,15 @@
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<section class="dashboard">
+    <div class="add-options">
+        <h2>Add</h2>
+        <nav class="nav flex-column">
+            <a class="nav-link" href="/add/performer">performer</a>
+            <a class="nav-link" href="/add/album">album</a>
+            <a class="nav-link" href="/add/track">track</a>
+            <c:if test="${capo == true}">
+                <a class="nav-link admin" href="/adm/add/category">category</a>
+            </c:if>
+        </nav>
+    </div>
+</section>

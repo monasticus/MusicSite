@@ -12,6 +12,7 @@
 </head>
 <body>
 <%@include file="../fragments/header.jspf"%>
+<%@include file="../fragments/dashboard.jspf" %>
 <div class="container register-form">
     <h1>New category</h1>
     <c:choose>
