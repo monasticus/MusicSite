@@ -1,5 +1,4 @@
 header {
-    font-family: Michroma, sans-serif;
     background: black;
     position: relative;
     height: 330px;
@@ -128,6 +127,7 @@ input {
 body {
     height: 150%;
     background-color: black;
+    font-family: Michroma, sans-serif;
 }
 
 .error {
@@ -237,4 +237,65 @@ body {
     margin-left: 50px;
     font-size: 25px;
     color: rgb(237, 237, 237);
+}
+
+.ens-page {
+    border: 1px solid rgb(237, 237, 237);
+    width: 900px;
+    height: 100%;
+    margin: 30px auto 0;
+}
+
+.ens-top {
+    border: 1px solid rgb(237, 237, 237);
+    margin-top: 40px;
+}
+
+.ens-image {
+    text-align: center;
+    margin-left: 40px;
+    width: 150px;
+    height: 180px;
+    border: 1px solid rgb(237, 237, 237);
+    float: left;
+}
+
+.ens-image i {
+    font-size: 120px;
+    bottom: 2px;
+    color: rgb(237, 237, 237);
+    top: 35px;
+}
+
+.ens-basic-information {
+    border: 1px solid rgb(237, 237, 237);
+    float: left;
+
+    margin-left: 30px;
+}
+
+.ens-basic-information .ens-name {
+    font-size: 40px;
+    color: rgb(237, 237, 237);
+    font-weight: bold;
+}
+
+.ens-mid {
+    border: 1px solid rgb(237, 237, 237);
+    clear: left;
+}
+
+.ens-mid .related-enta {
+    border: 1px solid rgb(237, 237, 237);
+    margin-left: 40px;
+    margin-top: 40px;
+    width: 500px;
+    height: 200px;
+    float: left;
+}
+.ens-mid .related-enta a {
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    display: block;
 }
