@@ -20,13 +20,21 @@ INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publicatio
 
 
 -- =============== CATEGORIES
+INSERT INTO musicsite.categories (id, name) VALUES (9, 'Blues‎');
+INSERT INTO musicsite.categories (id, name) VALUES (15, 'Classical music');
+INSERT INTO musicsite.categories (id, name) VALUES (10, 'Country');
+INSERT INTO musicsite.categories (id, name) VALUES (17, 'Dance music');
+INSERT INTO musicsite.categories (id, name) VALUES (11, 'Film music');
 INSERT INTO musicsite.categories (id, name) VALUES (8, 'Funk');
+INSERT INTO musicsite.categories (id, name) VALUES (12, 'Jazz');
+INSERT INTO musicsite.categories (id, name) VALUES (17, 'Metal');
 INSERT INTO musicsite.categories (id, name) VALUES (3, 'Pop');
 INSERT INTO musicsite.categories (id, name) VALUES (1, 'Rap');
 INSERT INTO musicsite.categories (id, name) VALUES (4, 'Reggae');
 INSERT INTO musicsite.categories (id, name) VALUES (6, 'Rhythm and blues');
 INSERT INTO musicsite.categories (id, name) VALUES (2, 'Rock');
 INSERT INTO musicsite.categories (id, name) VALUES (7, 'Soul');
+INSERT INTO musicsite.categories (id, name) VALUES (16, 'Sung poetry');
 INSERT INTO musicsite.categories (id, name) VALUES (5, 'Trip-hop');
 
 

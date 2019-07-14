@@ -4,6 +4,7 @@ import com.musicsite.validation.AlbumValidationGroup;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -47,9 +48,9 @@ public class Album extends Opus {
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
-    @ManyToOne
-    @NotNull
-    private Category category;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @NotEmpty
+    private List<Category> categories = new ArrayList<>();
 
     public Album() {
         proposition = true;
@@ -125,12 +126,12 @@ public class Album extends Opus {
         this.proposition = proposition;
     }
 
-    public Category getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     @PrePersist

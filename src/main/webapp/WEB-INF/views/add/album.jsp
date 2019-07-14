@@ -48,6 +48,13 @@
             </div><br>
         </c:if>
 
+        <form:select path="categories"
+                     items="${categories}"
+                     itemLabel="name"
+                     itemValue="id"
+                     multiple="true"/>
+        <form:errors path="categories" cssClass="error" element="div"/><br>
+
         <br><input type="submit" value="Save album">
 
     </form:form>

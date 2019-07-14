@@ -1,10 +1,8 @@
 package com.musicsite.controller;
 
-import com.musicsite.entity.Album;
-import com.musicsite.entity.Performer;
-import com.musicsite.entity.Track;
-import com.musicsite.entity.Opus;
+import com.musicsite.entity.*;
 import com.musicsite.repository.AlbumRepository;
+import com.musicsite.repository.CategoryRepository;
 import com.musicsite.repository.PerformerRepository;
 import com.musicsite.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +19,22 @@ import java.util.List;
 @RequestMapping("/add")
 public class AddController {
 
-    PerformerRepository performerRepository;
-    TrackRepository trackRepository;
-    AlbumRepository albumRepository;
+    private PerformerRepository performerRepository;
+    private TrackRepository trackRepository;
+    private AlbumRepository albumRepository;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    public AddController(PerformerRepository performerRepository, TrackRepository trackRepository, AlbumRepository albumRepository) {
+    public AddController(PerformerRepository performerRepository, TrackRepository trackRepository, AlbumRepository albumRepository, CategoryRepository categoryRepository) {
         this.performerRepository = performerRepository;
         this.trackRepository = trackRepository;
         this.albumRepository = albumRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
+    @ModelAttribute("categories")
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
     }
 
     @GetMapping("/{className:performer|album|track}")
@@ -205,9 +210,7 @@ public class AddController {
     private Album checkAlbum(Model model, String albumName, Performer performer) {
         Album album = null;
         if (albumRepository.getAlbumsByNameIgnoreCase(albumName).stream().anyMatch(a -> a.getPerformer().getId().equals(performer.getId()))){
-            List<Album> albums = albumRepository.getAlbumsByNameIgnoreCase(albumName);
-            album = albums.stream().filter(a -> a.getPerformer().getId().equals(performer.getId())).findFirst().get();
-
+            album = albumRepository.getAlbumsByNameIgnoreCase(albumName).stream().filter(a -> a.getPerformer().getId().equals(performer.getId())).findFirst().get();
         }
 
         if(album == null)

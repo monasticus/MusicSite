@@ -56,7 +56,13 @@
             </div><br>
         </c:if>
 
-        <br><input type="submit" value="Save album">
+        Category:<br>
+        <form:select path="category"
+                     items="${categories}"
+                     itemLabel="name"
+                     itemValue="id"/> <br>
+
+        <br><input type="submit" value="Save track">
 
     </form:form>
 
