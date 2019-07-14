@@ -25,31 +25,31 @@ public class Album extends Opus {
     @Size(min = 2, max = 50, groups = {AlbumValidationGroup.class, Default.class})
     private String name;
 
-    @Pattern(regexp = "\\d{4}", groups = {AlbumValidationGroup.class, Default.class})
-    @Column(name = "year_of_publication")
-    private String yearOfPublication;
-
-    @Column(name = "image_link")
-    private String imageLink;
-
     @ManyToOne
     @NotNull(groups = AlbumValidationGroup.class)
     private Performer performer;
-
 
     @OneToMany(mappedBy = "album", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Track> tracks = new ArrayList<>();
 
-    @Column(precision = 3, scale = 2)
-    private Double average;
+    @Pattern(regexp = "\\d{4}", groups = {AlbumValidationGroup.class, Default.class})
+    @Column(name = "year_of_publication")
+    private String yearOfPublication;
 
     @OneToMany(mappedBy = "album", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings = new ArrayList<>();
 
+    @Column(precision = 3, scale = 2)
+    private Double average;
+
     @Column(columnDefinition = "BIT")
     private boolean proposition;
+
+    @ManyToOne
+    @NotNull
+    private Category category;
 
     public Album() {
         proposition = true;
@@ -93,14 +93,6 @@ public class Album extends Opus {
         this.performer = performer;
     }
 
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
-    }
-
     public List<Track> getTracks() {
         return tracks;
     }
@@ -131,6 +123,14 @@ public class Album extends Opus {
 
     public void setProposition(boolean proposition) {
         this.proposition = proposition;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @PrePersist
