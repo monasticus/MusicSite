@@ -1,12 +1,15 @@
 package com.musicsite.entity;
 
+import com.musicsite.validation.TrackValidationGroup;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +20,20 @@ public class Track extends Opus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min = 2, max = 50)
+    @NotBlank(groups = {TrackValidationGroup.class, Default.class})
+    @Size(min = 2, max = 50, groups = {TrackValidationGroup.class, Default.class})
     private String name;
 
-    @Pattern(regexp = "\\d{4}")
+    @Pattern(regexp = "\\d{4}", groups = {TrackValidationGroup.class, Default.class})
     @Column(name = "year_of_publication")
     private String yearOfPublication;
 
-    @ManyToMany(mappedBy = "tracks", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Album> albums = new ArrayList<>();
+    @ManyToOne
+    @Size(min = 2, max = 50, groups = {TrackValidationGroup.class, Default.class})
+    private Album album;
 
     @ManyToOne
+    @NotNull(groups = TrackValidationGroup.class)
     private Performer performer;
 
     @Column(precision = 3, scale = 2)
@@ -38,6 +42,13 @@ public class Track extends Opus {
     @OneToMany(mappedBy = "track", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings = new ArrayList<>();
+
+    @Column(columnDefinition = "BIT")
+    private boolean proposition;
+
+    public Track() {
+        proposition = true;
+    }
 
     @Override
     public Long getId() {
@@ -77,12 +88,12 @@ public class Track extends Opus {
         this.performer = performer;
     }
 
-    public List<Album> getAlbums() {
-        return albums;
+    public Album getAlbum() {
+        return album;
     }
 
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 
     public Double getAverage() {
@@ -99,6 +110,29 @@ public class Track extends Opus {
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    @PrePersist
+    public void startAverage() {
+        average = 0.0;
+    }
+
+    @PreUpdate
+    public void updateAverage() {
+        double sum = 0.0;
+        for (Rating rating : ratings)
+            sum += rating.getRating();
+
+
+        average = sum / ratings.size();
+    }
+
+    public boolean isProposition() {
+        return proposition;
+    }
+
+    public void setProposition(boolean proposition) {
+        this.proposition = proposition;
     }
 
     @Override

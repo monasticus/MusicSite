@@ -1,5 +1,6 @@
 package com.musicsite.entity;
 
+import com.musicsite.validation.AlbumValidationGroup;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,11 @@ public class Album extends Opus {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min = 2, max = 50)
+    @NotBlank(groups = {AlbumValidationGroup.class, Default.class})
+    @Size(min = 2, max = 50, groups = {AlbumValidationGroup.class, Default.class})
     private String name;
 
-    @Pattern(regexp = "\\d{4}")
+    @Pattern(regexp = "\\d{4}", groups = {AlbumValidationGroup.class, Default.class})
     @Column(name = "year_of_publication")
     private String yearOfPublication;
 
@@ -31,11 +33,11 @@ public class Album extends Opus {
     private String imageLink;
 
     @ManyToOne
-    @NotNull
+    @NotNull(groups = AlbumValidationGroup.class)
     private Performer performer;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "album", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Track> tracks = new ArrayList<>();
 
@@ -45,6 +47,13 @@ public class Album extends Opus {
     @OneToMany(mappedBy = "album", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings = new ArrayList<>();
+
+    @Column(columnDefinition = "BIT")
+    private boolean proposition;
+
+    public Album() {
+        proposition = true;
+    }
 
     @Override
     public Long getId() {
@@ -114,6 +123,14 @@ public class Album extends Opus {
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public boolean isProposition() {
+        return proposition;
+    }
+
+    public void setProposition(boolean proposition) {
+        this.proposition = proposition;
     }
 
     @PrePersist

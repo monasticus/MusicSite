@@ -49,6 +49,9 @@ public class Performer extends Ens{
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings = new ArrayList<>();
 
+    @Column(columnDefinition = "BIT")
+    private boolean proposition;
+
 
 //    private String wiki;
 //
@@ -56,6 +59,10 @@ public class Performer extends Ens{
 //
 //    private String spotify;
 
+
+    public Performer() {
+        proposition = true;
+    }
 
     @Override
     public Long getId() {
@@ -129,6 +136,29 @@ public class Performer extends Ens{
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    @PrePersist
+    public void startAverage() {
+        average = 0.0;
+    }
+
+    @PreUpdate
+    public void updateAverage() {
+        double sum = 0.0;
+        for (Rating rating : ratings)
+            sum += rating.getRating();
+
+
+        average = sum / ratings.size();
+    }
+
+    public boolean isProposition() {
+        return proposition;
+    }
+
+    public void setProposition(boolean proposition) {
+        this.proposition = proposition;
     }
 
     @Override
