@@ -29,14 +29,14 @@ public class Track extends Opus {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Album> albums = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Performer> performers = new ArrayList<>();
+    @ManyToOne
+    private Performer performer;
 
     @Column(precision = 3, scale = 2)
     private Double average;
 
     @OneToMany(mappedBy = "track", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings = new ArrayList<>();
 
     @Override
@@ -69,14 +69,12 @@ public class Track extends Opus {
         this.yearOfPublication = yearOfPublication;
     }
 
-    @Override
-    public List<Performer> getPerformers() {
-        return performers;
+    public Performer getPerformer() {
+        return performer;
     }
 
-    @Override
-    public void setPerformers(List<Performer> performers) {
-        this.performers = performers;
+    public void setPerformer(Performer performer) {
+        this.performer = performer;
     }
 
     public List<Album> getAlbums() {
@@ -105,6 +103,6 @@ public class Track extends Opus {
 
     @Override
     public String toString() {
-        return performers.toString() + " - " + name + " (" + yearOfPublication + ")";
+        return performer.getPseudonym() + " - " + name + " (" + yearOfPublication + ")";
     }
 }

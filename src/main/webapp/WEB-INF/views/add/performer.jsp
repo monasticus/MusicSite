@@ -19,7 +19,11 @@
            <p class="error"><c:out value="Performer already exists in database."/> </p>
        </c:when>
         <c:when test="${success == true}">
-            <p class="success"><c:out value="Performer has been successfully added.<br>Thank You!"/> </p>
+            <p class="success">
+                <span><c:out value="Performer has been successfully added."/></span>
+                <br>
+                <span><c:out value="Thank You!"/> </span>
+            </p>
         </c:when>
     </c:choose>
 
@@ -29,19 +33,18 @@
         <form:input path="pseudonym"/>
         <form:errors path="pseudonym" cssClass="error" element="div"/><br>
 
-        First Name: <br>
+        *First Name: <br>
         <form:input path="firstName"/>
         <form:errors path="firstName" cssClass="error" element="div"/><br>
 
-        Last Name: <br>
+        *Last Name: <br>
         <form:input path="lastName"/>
         <form:errors path="lastName" cssClass="error" element="div"/><br>
 
-        Password: <br>
-        <form:password path="tempPassword"/>
-        <form:errors path="tempPassword" cssClass="error" element="div"/><br>
-
-        <br><input type="submit" value="Register">
+        <p class="form-information">
+            <c:out value="*not necessary to save performer"/>
+        </p>
+        <br><input type="submit" value="Save performer">
 
     </form:form>
 </div>

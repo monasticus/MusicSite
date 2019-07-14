@@ -30,11 +30,12 @@ public class Performer extends Ens{
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "performers", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @Fetch(value = FetchMode.SUBSELECT)
+    @Column()
     private List<Album> albums = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "performers", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "performer", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Track> tracks = new ArrayList<>();
 
@@ -45,6 +46,7 @@ public class Performer extends Ens{
     private Double average;
 
     @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings = new ArrayList<>();
 
 

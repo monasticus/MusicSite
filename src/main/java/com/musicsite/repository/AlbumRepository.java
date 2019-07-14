@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
-    List<Album> getAlbumsByPerformers(Performer performer);
+    List<Album> getAlbumsByPerformer(Performer performer);
     List<Album> getAlbumsByName(String name);
 }

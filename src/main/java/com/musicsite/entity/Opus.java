@@ -1,13 +1,10 @@
 package com.musicsite.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Opus extends Ens{
 
     private String name;
     private String yearOfPublication;
-    private List<Performer> performers = new ArrayList<>();
+    private Performer performer;
 
     public abstract String getName();
 
@@ -17,7 +14,11 @@ public abstract class Opus extends Ens{
 
     public abstract void setYearOfPublication(String yearOfPublication);
 
-    public abstract List<Performer> getPerformers();
+    public Performer getPerformer() {
+        return performer;
+    }
 
-    public abstract void setPerformers(List<Performer> performers);
+    public void setPerformer(Performer performer) {
+        this.performer = performer;
+    }
 }

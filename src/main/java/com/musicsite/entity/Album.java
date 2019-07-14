@@ -5,6 +5,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -29,9 +30,9 @@ public class Album extends Opus {
     @Column(name = "image_link")
     private String imageLink;
 
-    @ManyToMany (fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Performer> performers = new ArrayList<>();
+    @ManyToOne
+    @NotNull
+    private Performer performer;
 
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -42,6 +43,7 @@ public class Album extends Opus {
     private Double average;
 
     @OneToMany(mappedBy = "album", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings = new ArrayList<>();
 
     @Override
@@ -74,14 +76,12 @@ public class Album extends Opus {
         this.yearOfPublication = yearOfPublication;
     }
 
-    @Override
-    public List<Performer> getPerformers() {
-        return performers;
+    public Performer getPerformer() {
+        return performer;
     }
 
-    @Override
-    public void setPerformers(List<Performer> performers) {
-        this.performers = performers;
+    public void setPerformer(Performer performer) {
+        this.performer = performer;
     }
 
     public String getImageLink() {
@@ -133,6 +133,6 @@ public class Album extends Opus {
 
     @Override
     public String toString() {
-        return performers.toString() + " - " + yearOfPublication + " - " + name;
+        return performer.getPseudonym() + " - " + yearOfPublication + " - " + name;
     }
 }
