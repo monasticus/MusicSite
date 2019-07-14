@@ -10,4 +10,5 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     List<Album> getAlbumsByPerformer(Performer performer);
     List<Album> getAlbumsByName(String name);
+    Album getFirstAlbumByName(String name);
 }
