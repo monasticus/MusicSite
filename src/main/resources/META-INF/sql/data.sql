@@ -27,7 +27,7 @@ INSERT INTO musicsite.categories (id, name) VALUES (17, 'Dance music');
 INSERT INTO musicsite.categories (id, name) VALUES (11, 'Film music');
 INSERT INTO musicsite.categories (id, name) VALUES (8, 'Funk');
 INSERT INTO musicsite.categories (id, name) VALUES (12, 'Jazz');
-INSERT INTO musicsite.categories (id, name) VALUES (17, 'Metal');
+INSERT INTO musicsite.categories (id, name) VALUES (18, 'Metal');
 INSERT INTO musicsite.categories (id, name) VALUES (3, 'Pop');
 INSERT INTO musicsite.categories (id, name) VALUES (1, 'Rap');
 INSERT INTO musicsite.categories (id, name) VALUES (4, 'Reggae');

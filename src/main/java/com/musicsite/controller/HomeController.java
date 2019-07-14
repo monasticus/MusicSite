@@ -62,6 +62,7 @@ public class HomeController {
         HttpSession session = request.getSession();
         session.setAttribute("id", user.getId());
         session.setAttribute("name", user.getFirstName());
+        session.setAttribute("capo", user.isAdmin());
         return "redirect:/";
     }
 

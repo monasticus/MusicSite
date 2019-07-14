@@ -33,13 +33,13 @@ public class AdminController {
         this.categoryRepository = categoryRepository;
     }
 
-    @GetMapping("/category")
+    @GetMapping("/add/category")
     public String showCategoryForm(Model model) {
         model.addAttribute("category", new Category());
         return "admin/category";
     }
 
-    @PostMapping("/category")
+    @PostMapping("/add/category")
     public String saveCategory(@Valid Category category, BindingResult result, Model model) {
 
         if (result.hasErrors())

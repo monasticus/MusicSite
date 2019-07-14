@@ -13,7 +13,7 @@
 <body>
 <%@include file="../fragments/header.jspf"%>
 <div class="container register-form">
-    <h1>New performer</h1>
+    <h1>New category</h1>
     <c:choose>
        <c:when test="${duplicate == true}">
            <p class="error"><c:out value="Category already exists in database."/> </p>
