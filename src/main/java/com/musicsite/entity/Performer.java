@@ -141,6 +141,9 @@ public class Performer extends Ens{
     @PrePersist
     public void startAverage() {
         average = 0.0;
+        pseudonym = pseudonym.trim().toLowerCase();
+        firstName = firstName.trim().toLowerCase();
+        lastName = lastName.trim().toLowerCase();
     }
 
     @PreUpdate

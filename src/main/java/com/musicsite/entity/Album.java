@@ -136,6 +136,7 @@ public class Album extends Opus {
     @PrePersist
     public void startAverage() {
         average = 0.0;
+        name = name.trim().toLowerCase();
     }
 
     @PreUpdate

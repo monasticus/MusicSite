@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -46,7 +47,7 @@ public class AddController {
                 break;
         }
 
-        return "add/"+className;
+        return "add/" + className;
     }
 
 
@@ -57,7 +58,7 @@ public class AddController {
         if (result.hasErrors())
             return "add/performer";
 
-        List<Performer> performers = performerRepository.getPerformersByPseudonym(performer.getPseudonym());
+        List<Performer> performers = performerRepository.getPerformersByPseudonymIgnoreCase(performer.getPseudonym());
 
         boolean duplicate = false;
 
@@ -83,11 +84,23 @@ public class AddController {
     // ============================== ALBUM
 
     @PostMapping("/album")
-    public String saveAlbum(@Valid Album album, BindingResult result, Model model) {
+    public String saveAlbum(@Valid Album album, BindingResult result, Model model, @RequestParam String performerName) {
+        performerName = performerName.trim().toLowerCase();
+
+        // --- Validate inputs
+
+        Performer existingPerformer = checkPerformer(model, performerName);
+
         if (result.hasErrors())
             return "add/album";
 
-        List<Album> albums = albumRepository.getAlbumsByName(album.getName());
+        if (existingPerformer == null)
+            return "add/album";
+
+        album.setPerformer(existingPerformer);
+
+        // --- Validate album
+        List<Album> albums = albumRepository.getAlbumsByNameIgnoreCase(album.getName());
 
         boolean duplicate = false;
 
@@ -98,6 +111,7 @@ public class AddController {
             model.addAttribute("duplicate", duplicate);
             return "add/album";
         }
+
 
 
         albumRepository.save(album);
@@ -111,11 +125,32 @@ public class AddController {
     // ============================== TRACK
 
     @PostMapping("/track")
-    public String saveTrack(@Valid Track track, BindingResult result, Model model) {
+    public String saveTrack(@Valid Track track, BindingResult result, Model model, @RequestParam String albumName, @RequestParam String performerName) {
+
+        performerName = performerName.trim().toLowerCase();
+        albumName = albumName.trim().toLowerCase();
+
+        // --- Validate inputs
+
+        Performer performer = checkPerformer(model, performerName);
+        Album album = null;
+
+        if (!"".equals(albumName))
+            album = checkAlbum(model, albumName, performer);
+
+
         if (result.hasErrors())
             return "add/track";
 
-        List<Track> tracks = trackRepository.getTracksByName(track.getName());
+        if (performer == null || (!"".equals(albumName) && album == null))
+            return "add/track";
+
+
+        track.setPerformer(performer);
+        track.setAlbum(album);
+
+        // --- Validate track
+        List<Track> tracks = trackRepository.getTracksByNameIgnoreCase(track.getName());
 
         boolean duplicate = false;
 
@@ -127,7 +162,15 @@ public class AddController {
             return "add/track";
         }
 
+        if (!"".equals(albumName) && !track.getYearOfPublication().equals(track.getAlbum().getYearOfPublication())){
+            result.addError (new FieldError("track","yearOfPublication","The year of publication of the following album is different from the one given to the song. Album's year of publication is: "+ track.getAlbum().getYearOfPublication()));
+            return "add/track";
+        }
+
+
+
         trackRepository.save(track);
+
         model.addAttribute("track", new Track());
         model.addAttribute("success", true);
 
@@ -140,7 +183,37 @@ public class AddController {
 
         Boolean duplicatePerformers = o.getPerformer().equals(opus.getPerformer());
 
-        return  duplicateYears && duplicatePerformers;
+        return duplicateYears && duplicatePerformers;
+    }
+
+    private Performer checkPerformer(Model model, String performerName) {
+
+        if ("".equals(performerName)) {
+            model.addAttribute("emptyPerformerName", true);
+            return null;
+        }
+
+        Performer performer = performerRepository.getFirstPerformerByPseudonymIgnoreCase(performerName);
+
+        if(performer == null)
+            model.addAttribute("performerDoesNotExists", true);
+
+
+        return performer;
+    }
+
+    private Album checkAlbum(Model model, String albumName, Performer performer) {
+        Album album = null;
+        if (albumRepository.getAlbumsByNameIgnoreCase(albumName).stream().anyMatch(a -> a.getPerformer().getId().equals(performer.getId()))){
+            List<Album> albums = albumRepository.getAlbumsByNameIgnoreCase(albumName);
+            album = albums.stream().filter(a -> a.getPerformer().getId().equals(performer.getId())).findFirst().get();
+
+        }
+
+        if(album == null)
+            model.addAttribute("albumDoesNotExists", true);
+
+        return album;
     }
 
 }

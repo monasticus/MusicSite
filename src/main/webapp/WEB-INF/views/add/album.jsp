@@ -33,20 +33,33 @@
         <form:input path="name"/>
         <form:errors path="name" cssClass="error" element="div"/><br>
 
-        *Year: <br>
-        <form:input path="yearOfPublication"/>
+        Year (YYYY): <br>
+        <form:input path="yearOfPublication" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
         <form:errors path="yearOfPublication" cssClass="error" element="div"/><br>
 
         Performer: <br>
-        <form:input path="performer"/>
-        <form:errors path="performer" cssClass="error" element="div"/><br>
-        <a href="/add/performer" class="add-performer"> add performer</a>
-        <p class="form-information">
-            <c:out value="*not necessary to save the album"/>
-        </p>
+        <input name="performerName"/><br>
+        <c:if test="${emptyPerformerName == true}">
+            <div class="error"> The field cannot be empty </div><br>
+        </c:if>
+        <c:if test="${performerDoesNotExists == true}">
+            <div class="error"> The database does not contain such a performer.<br>
+                If you want, first add the performer
+            </div><br>
+        </c:if>
+
         <br><input type="submit" value="Save album">
 
     </form:form>
+
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" href="/add/track">add track</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/add/performer">add performer</a>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

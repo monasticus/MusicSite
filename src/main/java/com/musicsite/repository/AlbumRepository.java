@@ -9,6 +9,6 @@ import java.util.List;
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     List<Album> getAlbumsByPerformer(Performer performer);
-    List<Album> getAlbumsByName(String name);
-    Album getFirstAlbumByName(String name);
+    List<Album> getAlbumsByNameIgnoreCase(String name);
+    Album getFirstAlbumByNameIgnoreCase(String name);
 }

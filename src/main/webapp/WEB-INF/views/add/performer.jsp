@@ -47,6 +47,15 @@
         <br><input type="submit" value="Save performer">
 
     </form:form>
+
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" href="/add/album">add album</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/add/track">add track</a>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

@@ -12,6 +12,6 @@ public class PerformerConverter implements Converter<String, Performer> {
 
     @Override
     public Performer convert(String pseudonym) {
-        return performerRepository.getFirstPerformerByPseudonym(pseudonym);
+        return performerRepository.getFirstPerformerByPseudonymIgnoreCase(pseudonym);
     }
 }

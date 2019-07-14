@@ -29,7 +29,6 @@ public class Track extends Opus {
     private String yearOfPublication;
 
     @ManyToOne
-    @Size(min = 2, max = 50, groups = {TrackValidationGroup.class, Default.class})
     private Album album;
 
     @ManyToOne
@@ -115,6 +114,7 @@ public class Track extends Opus {
     @PrePersist
     public void startAverage() {
         average = 0.0;
+        name = name.trim().toLowerCase();
     }
 
     @PreUpdate

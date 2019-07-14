@@ -33,7 +33,6 @@ public class Rating extends Ens{
     private Track track;
 
 
-
     public Long getId() {
         return id;
     }

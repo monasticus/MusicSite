@@ -47,7 +47,7 @@ public class HomeController {
 
         User user = null;
         if (success) {
-            user = userRepository.getUserByEmail(email);
+            user = userRepository.getUserByEmailIgnoreCase(email);
             if (user == null)
                 success = false;
             else if (!BCrypt.checkpw(password, user.getPassword()))
@@ -86,7 +86,7 @@ public class HomeController {
             return "main/register";
         }
 
-        if (userRepository.getUserByEmail(user.getEmail()) != null) {
+        if (userRepository.getUserByEmailIgnoreCase(user.getEmail()) != null) {
             result.addError(new FieldError("user", "email", "User already exists"));
             return "main/register";
         }

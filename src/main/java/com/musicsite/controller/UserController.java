@@ -52,7 +52,7 @@ public class UserController {
             return "user/edit";
 
 
-        if (userRepository.getUserByEmail(user.getEmail()) != null && !userRepository.getUserByEmail(user.getEmail()).getId().equals(originUser.getId())) {
+        if (userRepository.getUserByEmailIgnoreCase(user.getEmail()) != null && !userRepository.getUserByEmailIgnoreCase(user.getEmail()).getId().equals(originUser.getId())) {
 
             result.addError(new FieldError("user", "email", "User with this email already exists"));
             return "user/edit";
