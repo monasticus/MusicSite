@@ -1,7 +1,7 @@
 header {
     background: black;
     position: relative;
-    height: 330px;
+    height: 370px;
     border-bottom: 2px solid white;
 }
 
@@ -43,6 +43,25 @@ header {
     left: 50%;
     text-align: center;
     margin-top: 10px;
+}
+
+.searcher {
+
+    margin: 0 auto;
+    width: 450px;
+}
+
+.searcher input {
+    margin: 0 auto;
+    font-size: 15px;
+}
+
+.searcher button {
+    width: 100px;
+    height: 32px;
+    font-size: 16px;
+    color: rgb(237, 237, 0);
+    border: 1px solid rgb(237, 237, 0);
 }
 
 .menu {
@@ -287,8 +306,15 @@ body {
     margin-top: 20px;
     margin-left: 20px;
     font-size: 20px;
-    color: rgb(237, 237, 237);
     border: 1px solid rgb(237, 237, 237);
+}
+
+.ens-basic-information .ratings a {
+    color: rgb(237, 237, 0);
+}
+
+.ens-basic-information .ratings a:hover {
+    color: rgb(240, 0, 0);
 }
 
 .small-inf {
