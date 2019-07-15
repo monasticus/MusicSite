@@ -23,18 +23,28 @@
             </div>
             <div class="ratings">
                 <div class="small-inf">
-                Your rating:
+                    Your rating:
                 </div>
-                <i class="tune glyphicon glyphicon-music" data-rating-tune="1"></i>
-                <i class="tune glyphicon glyphicon-music" data-rating-tune="2"></i>
-                <i class="tune glyphicon glyphicon-music" data-rating-tune="3"></i>
-                <i class="tune glyphicon glyphicon-music" data-rating-tune="4"></i>
-                <i class="tune glyphicon glyphicon-music" data-rating-tune="5"></i>
+                <a href="/performer/${performer.id}/setRate/1">
+                    <i class="tune glyphicon glyphicon-music" data-rating-tune="1"></i>
+                </a>
+                <a href="/performer/${performer.id}/setRate/2">
+                    <i class="tune glyphicon glyphicon-music" data-rating-tune="2"></i>
+                </a>
+                <a href="/performer/${performer.id}/setRate/3">
+                    <i class="tune glyphicon glyphicon-music" data-rating-tune="3"></i>
+                </a>
+                <a href="/performer/${performer.id}/setRate/4">
+                    <i class="tune glyphicon glyphicon-music" data-rating-tune="4"></i>
+                </a>
+                <a href="/performer/${performer.id}/setRate/5">
+                    <i class="tune glyphicon glyphicon-music" data-rating-tune="5"></i>
+                </a>
             </div>
         </div>
         <div class="ens-average">
             <p>
-            ${performer.average}
+                ${performer.average}
             </p>
         </div>
     </div>
@@ -53,7 +63,8 @@
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <ul>
                         <c:forEach var="album" items="${performer.albums}">
-                            <li class="performer-album"><a href="/albums/${album.id}">${album.name} (${album.yearOfPublication})</a></li>
+                            <li class="performer-album"><a href="/albums/${album.id}">${album.name}
+                                (${album.yearOfPublication})</a></li>
                         </c:forEach>
 
                         <p>

@@ -37,9 +37,9 @@ public class PerformerController {
         return performerRepository.findAll();
     }
 
-    @GetMapping("/{performerPseudonym}")
-    public String showForm(@PathVariable String performerPseudonym, Model model) {
-        Performer performer = performerRepository.getFirstPerformerByPseudonymIgnoreCase(performerPseudonym);
+    @GetMapping("/{id}")
+    public String showForm(@PathVariable String id, Model model) {
+        Performer performer = performerRepository.findOne(Long.parseLong(id));
         if (performer == null)
             return "main/blank";
 
