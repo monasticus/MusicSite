@@ -22,10 +22,14 @@ import java.util.List;
 public class PerformerController {
 
     private PerformerRepository performerRepository;
+    private AlbumRepository albumRepository;
+    private TrackRepository trackRepository;
 
     @Autowired
-    public PerformerController(PerformerRepository performerRepository) {
+    public PerformerController(PerformerRepository performerRepository, AlbumRepository albumRepository, TrackRepository trackRepository) {
         this.performerRepository = performerRepository;
+        this.albumRepository = albumRepository;
+        this.trackRepository = trackRepository;
     }
 
     @ModelAttribute("performers")
@@ -39,6 +43,8 @@ public class PerformerController {
         if (performer == null)
             return "main/blank";
 
+        performer.setAlbums(albumRepository.getAlbumsByPerformerOrderByYearOfPublicationDesc(performer));
+        performer.setTracks(trackRepository.getTracksByPerformerOrderByYearOfPublicationDesc(performer));
         model.addAttribute("performer", performer);
 
         return "main/performer";

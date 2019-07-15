@@ -12,4 +12,5 @@ public interface TrackRepository extends JpaRepository<Track, Long> {
     List<Track> getTracksByNameIgnoreCase(String name);
     List<Track> getTracksByAlbum(Album album);
     List<Track> getTracksByPerformer(Performer performer);
+    List<Track> getTracksByPerformerOrderByYearOfPublicationDesc(Performer performer);
 }

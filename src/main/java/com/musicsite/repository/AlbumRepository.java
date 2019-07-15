@@ -9,6 +9,7 @@ import java.util.List;
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     List<Album> getAlbumsByPerformer(Performer performer);
+    List<Album> getAlbumsByPerformerOrderByYearOfPublicationDesc(Performer performer);
     List<Album> getAlbumsByNameIgnoreCase(String name);
     Album getFirstAlbumByNameIgnoreCase(String name);
 }

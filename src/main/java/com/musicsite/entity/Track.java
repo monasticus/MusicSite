@@ -124,19 +124,21 @@ public class Track extends Opus {
     }
 
     @PrePersist
-    public void startAverage() {
+    public void prePer() {
         average = 0.0;
         name = name.trim().toLowerCase();
     }
 
     @PreUpdate
-    public void updateAverage() {
+    public void preUp() {
         double sum = 0.0;
         for (Rating rating : ratings)
             sum += rating.getRating();
 
 
         average = sum / ratings.size();
+
+        name = name.trim().toLowerCase();
     }
 
     public boolean isProposition() {

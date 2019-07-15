@@ -5,7 +5,7 @@
     <title>musicsite - ${performer.pseudonym}</title>
     <%@include file="../fragments/head.html" %>
     <style>
-        <%@include file="../css/style.css"%>
+        <%@include file="/resources/css/style.css"%>
     </style>
 </head>
 <body>
@@ -17,12 +17,28 @@
         <div class="ens-image">
             <i class="glyphicon glyphicon-user"></i>
         </div>
-    </div>
-    <div class="ens-basic-information">
-        <div class="ens-name">
-            ${performer.pseudonym}
+        <div class="ens-basic-information">
+            <div class="ens-name">
+                ${performer.pseudonym}
+            </div>
+            <div class="ratings">
+                <div class="small-inf">
+                Your rating:
+                </div>
+                <i class="tune glyphicon glyphicon-music" data-rating-tune="1"></i>
+                <i class="tune glyphicon glyphicon-music" data-rating-tune="2"></i>
+                <i class="tune glyphicon glyphicon-music" data-rating-tune="3"></i>
+                <i class="tune glyphicon glyphicon-music" data-rating-tune="4"></i>
+                <i class="tune glyphicon glyphicon-music" data-rating-tune="5"></i>
+            </div>
+        </div>
+        <div class="ens-average">
+            <p>
+            ${performer.average}
+            </p>
         </div>
     </div>
+
     <div class="ens-mid">
         <div class="related-enta">
             <nav>
@@ -37,7 +53,7 @@
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <ul>
                         <c:forEach var="album" items="${performer.albums}">
-                            <li><a href="/albums/${album.name}">${album.name} (${album.yearOfPublication})</a> </li>
+                            <li class="performer-album"><a href="/albums/${album.id}">${album.name} (${album.yearOfPublication})</a></li>
                         </c:forEach>
 
                         <p>
@@ -51,7 +67,7 @@
                     <ul>
                         <c:forEach var="track" items="${performer.tracks}">
                             <c:if test="${track.album == null}">
-                                <li><a href="/tracks/${track.name}">${track.name} (${track.yearOfPublication})</a> </li>
+                                <li><a href="/tracks/${track.id}">${track.name} (${track.yearOfPublication})</a></li>
                             </c:if>
                         </c:forEach>
                     </ul>

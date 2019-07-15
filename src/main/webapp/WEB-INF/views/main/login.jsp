@@ -7,7 +7,7 @@
     <%@include file="../fragments/head.html"%>
     <link rel="stylesheet" href="/WEB-INF/css/style.css">
     <style>
-        <%@include file="../css/style.css"%>
+        <%@include file="/resources/css/style.css"%>
     </style>
 </head>
 <body>

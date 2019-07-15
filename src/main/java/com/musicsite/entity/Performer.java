@@ -5,7 +5,6 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +38,6 @@ public class Performer extends Ens{
     @ManyToMany(mappedBy = "performer", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Track> tracks = new ArrayList<>();
-
-    @Column(name = "image_link")
-    private String imageLink;
 
     @Column(precision = 3, scale = 2)
     private Double average;
@@ -99,14 +95,6 @@ public class Performer extends Ens{
         this.tracks = tracks;
     }
 
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
-    }
-
     public String getPseudonym() {
         return pseudonym;
     }
@@ -140,21 +128,21 @@ public class Performer extends Ens{
     }
 
     @PrePersist
-    public void startAverage() {
+    public void prePers() {
         average = 0.0;
-        pseudonym = pseudonym.trim().toLowerCase();
-        firstName = firstName.trim().toLowerCase();
-        lastName = lastName.trim().toLowerCase();
+        pseudonym = pseudonym.trim();
     }
 
     @PreUpdate
-    public void updateAverage() {
+    public void preUp() {
         double sum = 0.0;
         for (Rating rating : ratings)
             sum += rating.getRating();
 
 
         average = sum / ratings.size();
+
+        pseudonym = pseudonym.trim();
     }
 
     public boolean isProposition() {

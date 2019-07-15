@@ -117,6 +117,7 @@ public class User extends Ens{
         this.admin = admin;
     }
 
+
     @PrePersist
     public void hashPassword() {
         password = BCrypt.hashpw(tempPassword, BCrypt.gensalt());

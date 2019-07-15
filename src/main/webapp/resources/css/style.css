@@ -127,6 +127,7 @@ input {
 body {
     height: 150%;
     background-color: black;
+    /*background-color: rgb(229,255,204);*/
     font-family: Michroma, sans-serif;
 }
 
@@ -168,16 +169,18 @@ body {
 .dashboard {
     background-color: black;
     z-index: 1000;
-    position: absolute;
     width: 230px;
-    height: 100%;
+    height: 160%;
     font-weight: bold;
+    position: absolute;
 
 }
 
 .dashboard .add-options {
     margin-top: 100px;
     margin-left: 50px;
+
+    position: fixed;
 }
 
 .dashboard h2 {
@@ -270,7 +273,6 @@ body {
 .ens-basic-information {
     border: 1px solid rgb(237, 237, 237);
     float: left;
-
     margin-left: 30px;
 }
 
@@ -278,6 +280,45 @@ body {
     font-size: 40px;
     color: rgb(237, 237, 237);
     font-weight: bold;
+    border: 1px solid rgb(237, 237, 237);
+}
+
+.ens-basic-information .ratings {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 20px;
+    color: rgb(237, 237, 237);
+    border: 1px solid rgb(237, 237, 237);
+}
+
+.small-inf {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(230, 8, 8);
+    margin-bottom: 10px;
+}
+
+.tune {
+    padding-right: 10px;
+    left: 10px;
+}
+
+.ens-average {
+    border: 1px solid rgb(237, 237, 237);
+    float: right;
+    width: 110px;
+    height: 120px;
+    margin-top: 30px;
+    margin-right: 70px;
+    text-align: center;
+
+}
+
+.ens-average p {
+    margin-top: 20px;
+    white-space: nowrap;
+    color: white;
+    font-size: 50px;
 }
 
 .ens-mid {
@@ -306,4 +347,9 @@ body {
 #nav-profile {
     color: white;
     font-size: 50px;
+}
+
+.performer-album a {
+    color: white;
+    font-size: 20px;
 }

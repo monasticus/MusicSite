@@ -5,7 +5,7 @@
     <title>musicsite - albums</title>
     <%@include file="../fragments/head.html"%>
     <style>
-        <%@include file="../css/style.css"%>
+        <%@include file="/resources/css/style.css"%>
     </style>
 </head>
 <body>

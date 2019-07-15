@@ -52,6 +52,7 @@ public class Album extends Opus {
     @NotEmpty
     private List<Category> categories = new ArrayList<>();
 
+
     public Album() {
         proposition = true;
     }
@@ -135,13 +136,13 @@ public class Album extends Opus {
     }
 
     @PrePersist
-    public void startAverage() {
+    public void prePer() {
         average = 0.0;
         name = name.trim().toLowerCase();
     }
 
     @PreUpdate
-    public void updateAverage() {
+    public void preUp() {
         double sum = 0.0;
         for (Rating rating : ratings)
             sum += rating.getRating();
