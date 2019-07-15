@@ -35,12 +35,26 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <ul>
+                        <c:forEach var="album" items="${performer.albums}">
+                            <li><a href="/albums/${album.name}">${album.name} (${album.yearOfPublication})</a> </li>
+                        </c:forEach>
 
-                    <p>
-                        albums
-                    </p>
+                        <p>
+                            albums
+                        </p>
+
+                    </ul>
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                    <ul>
+                        <c:forEach var="track" items="${performer.tracks}">
+                            <c:if test="${track.album == null}">
+                                <li><a href="/tracks/${track.name}">${track.name} (${track.yearOfPublication})</a> </li>
+                            </c:if>
+                        </c:forEach>
+                    </ul>
                     <p>
                         tracks
                     </p>
