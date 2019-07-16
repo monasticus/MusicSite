@@ -1,6 +1,7 @@
 package com.musicsite.service;
 
 import com.musicsite.entity.Album;
+import com.musicsite.entity.Category;
 import com.musicsite.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,10 @@ public class AlbumService {
 
     public List<Album> getAlbumPropositions() {
         return albumRepository.getAlbumsByPropositionFalseOrderByAverageDesc();
+    }
+
+    public List<Album> getAlbumsByCategories(List<Category> categories) {
+        return albumRepository.getAlbumsByCategoriesAndPropositionFalseOrderByAverageDesc(categories);
     }
 
 }

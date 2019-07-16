@@ -8,10 +8,11 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "performers")
-public class Performer extends Ens{
+public class Performer extends Ens {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +49,9 @@ public class Performer extends Ens{
 
     @Column(columnDefinition = "BIT")
     private boolean proposition;
+
+    @Transient
+    private List<Category> categories;
 
 
 //    private String wiki;
@@ -154,6 +158,15 @@ public class Performer extends Ens{
     public void setProposition(boolean proposition) {
         this.proposition = proposition;
     }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
 
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
 package com.musicsite.service;
 
+import com.musicsite.entity.Category;
 import com.musicsite.entity.Track;
 import com.musicsite.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,9 @@ public class TrackService {
 
     public List<Track> getTrackPropositions() {
         return trackRepository.getTracksByPropositionFalseOrderByAverageDesc();
+    }
+
+    public List<Track> getTracksByCategories(List<Category> categories) {
+        return trackRepository.getTracksByCategoryAndPropositionFalseOrderByAverageDesc(categories);
     }
 }

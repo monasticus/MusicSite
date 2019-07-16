@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category getFirstCategoryByNameIgnoreCase(String name);
-    List<Category> getCategories();
 }

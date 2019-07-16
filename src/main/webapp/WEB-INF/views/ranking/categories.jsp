@@ -30,11 +30,11 @@
 
     <div class="category-selection">
 
-        <form:form action="post" modelAttribute="categorySelector">
+        <form:form method="post" modelAttribute="categorySelector">
 
             <h5 class="categories">Select:</h5>
-            <hr class="horizontal-line">
-            <div>
+            <hr class="horizontal-line-select">
+            <div class="categories-checkboxes-list">
                 <input type="submit" value="Show" class="categories-show-content">
                 <div class="categories-checkboxes">
                     <form:checkboxes path="categoryList"
@@ -47,77 +47,76 @@
         </form:form>
     </div>
 
+    <c:if test="${not empty categorySelector.categoryList}">
 
-    <%--<c:if test="${not empty categorySelector.categoryList}">--%>
+        <div class="categories-content">
+
+            <c:if test="${not empty performers}">
+                <div class="categories-performers">
+                    <h1 class="ens-type">Performers</h1>
+                    <%@include file="../fragments/performers-table.jspf"%>
+                </div>
+            </c:if>
+            <c:if test="${not empty albums}">
+                <div class="categories-albums">
+                    <h1 class="ens-type">Albums</h1>
+
+                    <%@include file="../fragments/albums-table.jspf"%>
+
+                </div>
+            </c:if>
+            <c:if test="${not empty tracks}">
+                <div class="categories-tracks">
+                    <h1 class="ens-type">Tracks</h1>
+                    <hr class="horizontal-line-enta">
+                </div>
+            </c:if>
+
+        </div>
+    </c:if>
 
 
-    <%--    <section class="ranking-page">--%>
-    <%--        <h1 class="ranking-ens-type">Albums</h1>--%>
+    <%--            <h1 class="ranking-ens-type">Albums</h1>--%>
 
 
-    <%--        <c:choose>--%>
-    <%--            <c:when test="${empty albums}">--%>
+    <%--                    <table class="ranking table table-hover">--%>
+    <%--                        <tbody>--%>
+    <%--                        <c:forEach var="album" items="${albums}" varStatus="nums">--%>
+    <%--                            <tr class="rangking-item">--%>
+    <%--                                <th class="ranking-ordering-num" scope="row">--%>
+    <%--                                    <div>${nums.count}</div>--%>
+    <%--                                </th>--%>
 
-    <%--                <p class="no-data">--%>
-    <%--                    Albums list is empty.--%>
-    <%--                </p>--%>
-    <%--                <ul class="nav justify-content-center">--%>
-    <%--                    <li class="nav-item">--%>
-    <%--                        <a class="nav-link active" href="/add/performer">add performer</a>--%>
-    <%--                    </li>--%>
-    <%--                    <li class="nav-item">--%>
-    <%--                        <a class="nav-link active" href="/add/album">add album</a>--%>
-    <%--                    </li>--%>
-    <%--                    <li class="nav-item">--%>
-    <%--                        <a class="nav-link active" href="/add/track">add track</a>--%>
-    <%--                    </li>--%>
-    <%--                </ul>--%>
+    <%--                                <td class="ranking-ens-name">--%>
 
-    <%--            </c:when>--%>
-    <%--            <c:otherwise>--%>
-    <%--                <table class="ranking table table-hover">--%>
-    <%--                    <tbody>--%>
-    <%--                    <c:forEach var="album" items="${albums}" varStatus="nums">--%>
-    <%--                        <tr class="rangking-item">--%>
-    <%--                            <th class="ranking-ordering-num" scope="row">--%>
-    <%--                                <div>${nums.count}</div>--%>
-    <%--                            </th>--%>
+    <%--                                    <a href="/album/${album.id}">--%>
+    <%--                                            ${album.name}--%>
+    <%--                                    </a>--%>
 
-    <%--                            <td class="ranking-ens-name">--%>
-
-    <%--                                <a href="/album/${album.id}">--%>
-    <%--                                        ${album.name}--%>
-    <%--                                </a>--%>
-
-    <%--                            </td>--%>
-    <%--                            <td class="ranking-ens-average">--%>
-    <%--                                <div>${album.average}</div>--%>
-    <%--                            </td>--%>
-
-    <%--                            <c:if test="${not empty capo}">--%>
-    <%--                                <td class="admin-column">--%>
-    <%--                                    <button class="admin-options"--%>
-    <%--                                            onclick="document.location.href='/adm/album/remove/${album.id}'">Remove--%>
-    <%--                                    </button>--%>
-    <%--                                    <br>--%>
-    <%--                                    <button class="admin-options"--%>
-    <%--                                            onclick="document.location.href='/adm/album/edit/${album.id}'">Edit--%>
-    <%--                                    </button>--%>
     <%--                                </td>--%>
-    <%--                            </c:if>--%>
-    <%--                        </tr>--%>
-    <%--                    </c:forEach>--%>
+    <%--                                <td class="ranking-ens-average">--%>
+    <%--                                    <div>${album.average}</div>--%>
+    <%--                                </td>--%>
+
+    <%--                                <c:if test="${not empty capo}">--%>
+    <%--                                    <td class="admin-column">--%>
+    <%--                                        <button class="admin-options"--%>
+    <%--                                                onclick="document.location.href='/adm/album/remove/${album.id}'">Remove--%>
+    <%--                                        </button>--%>
+    <%--                                        <br>--%>
+    <%--                                        <button class="admin-options"--%>
+    <%--                                                onclick="document.location.href='/adm/album/edit/${album.id}'">Edit--%>
+    <%--                                        </button>--%>
+    <%--                                    </td>--%>
+    <%--                                </c:if>--%>
+    <%--                            </tr>--%>
+    <%--                        </c:forEach>--%>
 
 
-    <%--                    </tbody>--%>
-    <%--                </table>--%>
-    <%--            </c:otherwise>--%>
-    <%--        </c:choose>--%>
+    <%--                        </tbody>--%>
+    <%--                    </table>--%>
 
 
-    <%--    </section>--%>
-
-    <%--</c:if>--%>
 </section>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

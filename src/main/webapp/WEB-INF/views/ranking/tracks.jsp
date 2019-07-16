@@ -49,56 +49,7 @@
 
         </c:when>
         <c:otherwise>
-            <table class="ranking table table-hover">
-                <tbody>
-                <c:forEach var="track" items="${tracks}" varStatus="nums">
-                    <tr class="rangking-item">
-                        <th class="ranking-ordering-num" scope="row">
-                            <div>${nums.count}</div>
-                        </th>
-
-                        <td>
-                            <div class="ranking-ens-name">
-                                <a href="/tracks/${track.id}">
-                                        ${track.name} (${track.yearOfPublication})
-                                </a>
-                            </div>
-                            <div class="ranking-track-info">
-                                Performer: ${track.performer.pseudonym}<br>
-                                Album:
-                                <c:choose>
-                                    <c:when test="${empty track.album}">
-                                        ---
-                                    </c:when>
-                                    <c:otherwise>
-                                        ${track.album.name}
-                                    </c:otherwise>
-                                </c:choose>
-
-                            </div>
-
-                        </td>
-                        <td class="ranking-ens-average">
-                            <div>${track.average}</div>
-                        </td>
-
-                        <c:if test="${not empty capo}">
-                            <td class="admin-column">
-                                <button class="admin-options"
-                                        onclick="document.location.href='/adm/track/remove/${track.id}'">Remove
-                                </button>
-                                <br>
-                                <button class="admin-options"
-                                        onclick="document.location.href='/adm/track/edit/${track.id}'">Edit
-                                </button>
-                            </td>
-                        </c:if>
-                    </tr>
-                </c:forEach>
-
-
-                </tbody>
-            </table>
+            <%@include file="../fragments/tracks-table.jspf"%>
         </c:otherwise>
     </c:choose>
 

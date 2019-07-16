@@ -8,9 +8,7 @@ import com.musicsite.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/ranking")
@@ -34,7 +32,7 @@ public class RankingController {
 
         switch (enta) {
             case "performers":
-                model.addAttribute("performers", performerService.getPerformerPropositions());
+                model.addAttribute("performers", performerService.getPerformerPropositionsWithCategories());
                 return "ranking/performers";
             case "albums":
                 model.addAttribute("albums", albumService.getAlbumPropositions());
@@ -50,5 +48,14 @@ public class RankingController {
                 return "main/blank";
         }
 
+    }
+
+    @PostMapping("/categories")
+    public String showData(@ModelAttribute CategorySelector categorySelector, Model model) {
+        model.addAttribute("albums", albumService.getAlbumsByCategories(categorySelector.getCategoryList()));
+        model.addAttribute("tracks", trackService.getTracksByCategories(categorySelector.getCategoryList()));
+        model.addAttribute("performers", performerService.getPerformersByCategories(categorySelector.getCategoryList()));
+        model.addAttribute("categories", categoryService.getActiveCategories());
+        return "ranking/categories";
     }
 }

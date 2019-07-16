@@ -1,8 +1,6 @@
 package com.musicsite.service;
 
-import com.musicsite.entity.Performer;
-import com.musicsite.entity.Rating;
-import com.musicsite.entity.User;
+import com.musicsite.entity.*;
 import com.musicsite.repository.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -48,6 +48,35 @@ public class PerformerService {
         return performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
     }
 
+    public List<Performer> getPerformerPropositionsWithCategories() {
+        return performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
+    }
+
+    public void setPerformersCategories(List<Performer> performers) {
+        performers.forEach(this::setPerformerCategories);
+    }
+
+    public void setPerformerCategories(Performer performer) {
+        List<Category> categories = new ArrayList<>();
+
+        for (Album album : performer.getAlbums()) {
+            for (Category c : album.getCategories()) {
+                if (!categories.contains(c)) {
+                    categories.add(c);
+                }
+            }
+        }
+
+        for (Track track : performer.getTracks()) {
+            Category category = track.getCategory();
+            if (!categories.contains(category))
+                categories.add(category);
+
+        }
+
+        performer.setCategories(categories);
+    }
+
     @Transactional(propagation = Propagation.NEVER)
     public void orderData(Performer performer) {
         if (performer.getAlbums().size() > 0) {
@@ -81,6 +110,38 @@ public class PerformerService {
         Performer performer = performerRepository.findOne(performerId);
         performer.updateAverage();
         performerRepository.save(performer);
+    }
+
+    public List<Performer> getPerformersByCategories(List<Category> categories) {
+
+//        List<Performer> categoryPerformers = new ArrayList<>();
+//        List<Performer> allPerformers = getPerformerPropositions();
+//        setPerformersCategories(allPerformers);
+//        for (Performer performer : allPerformers) {
+//            for (Category category : performer.getCategories()) {
+//                if (categories.contains(category)){
+//                    categoryPerformers.add(performer);
+//                    break;
+//                }
+//
+//            }
+//        }
+
+
+        List<Performer> performers = getPerformerPropositions()
+                .stream()
+                .filter(p -> p.getAlbums()
+                        .stream()
+                        .anyMatch(a -> a.getCategories()
+                                .stream()
+                                .anyMatch(c1 -> categories.stream().anyMatch(c2 -> c1.getId().equals(c2.getId()))))
+                        ||
+                        p.getTracks()
+                                .stream()
+                                .anyMatch(t -> categories.stream().anyMatch(c -> t.getCategory().getId().equals(c.getId()))))
+                .collect(Collectors.toList());
+        setPerformersCategories(performers);
+        return performers;
     }
 
 }

@@ -49,33 +49,7 @@
 
         </c:when>
         <c:otherwise>
-            <table class="ranking table table-hover">
-                <tbody>
-                <c:forEach var="performer" items="${performers}" varStatus="nums">
-                    <tr class="rangking-item">
-                        <th class="ranking-ordering-num" scope="row"><div>${nums.count}</div></th>
-
-                        <td class="ranking-ens-name">
-
-                            <a href="/performer/${performer.id}">
-                                    ${performer.pseudonym}
-                            </a>
-
-                        </td>
-                        <td class="ranking-ens-average"><div>${performer.average}</div></td>
-
-                        <c:if test="${not empty capo}">
-                            <td class="admin-column">
-                                <button class="admin-options" onclick="document.location.href='/adm/performer/remove/${performer.id}'">Remove</button> <br>
-                                <button class="admin-options" onclick="document.location.href='/adm/performer/edit/${performer.id}'">Edit</button>
-                            </td>
-                        </c:if>
-                    </tr>
-                </c:forEach>
-
-
-                </tbody>
-            </table>
+            <%@include file="../fragments/performers-table.jspf"%>
         </c:otherwise>
     </c:choose>
 

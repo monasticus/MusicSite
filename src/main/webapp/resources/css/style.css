@@ -475,11 +475,37 @@ h5.categories {
     float: left;
 }
 
-.categories-checkboxes {
-    float: left;
-}
 
-hr.horizontal-line {
+
+hr.horizontal-line-select {
     border: 3px solid white;
     border-radius: 5px;
+}
+
+h1.ens-type {
+    border-bottom: 1px solid white;
+    padding-bottom: 10px;
+}
+
+
+
+.categories-content {
+    color:white;
+    margin-top: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.categories-ens-details {
+    margin-top: 20px;
+    color: aqua;
+}
+
+.categories-ens-category {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    margin-left: 2px;
+    margin-right: 2px;
 }

@@ -49,33 +49,7 @@
 
         </c:when>
         <c:otherwise>
-            <table class="ranking table table-hover">
-                <tbody>
-                <c:forEach var="album" items="${albums}" varStatus="nums">
-                    <tr class="rangking-item">
-                        <th class="ranking-ordering-num" scope="row"><div>${nums.count}</div></th>
-
-                        <td class="ranking-ens-name">
-
-                            <a href="/album/${album.id}">
-                                    ${album.name}
-                            </a>
-
-                        </td>
-                        <td class="ranking-ens-average"><div>${album.average}</div></td>
-
-                        <c:if test="${not empty capo}">
-                            <td class="admin-column">
-                                <button class="admin-options" onclick="document.location.href='/adm/album/remove/${album.id}'">Remove</button> <br>
-                                <button class="admin-options" onclick="document.location.href='/adm/album/edit/${album.id}'">Edit</button>
-                            </td>
-                        </c:if>
-                    </tr>
-                </c:forEach>
-
-
-                </tbody>
-            </table>
+            <%@include file="../fragments/albums-table.jspf"%>
         </c:otherwise>
     </c:choose>
 
