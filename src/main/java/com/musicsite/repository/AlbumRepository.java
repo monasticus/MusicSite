@@ -1,6 +1,7 @@
 package com.musicsite.repository;
 
 import com.musicsite.entity.Album;
+import com.musicsite.entity.Category;
 import com.musicsite.entity.Performer;
 import com.musicsite.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,5 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     Album getFirstAlbumByNameIgnoreCase(String name);
     List<Album> getAlbumsByPropositionTrue();
     List<Album> getAlbumsByPropositionFalseOrderByAverageDesc();
+    List<Album> getAlbumsByCategoriesOrderByAverageDesc(Category category);
 }

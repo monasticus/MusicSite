@@ -441,6 +441,45 @@ button.admin-options {
     font-size: 30px;
 }
 
-.ranking-track-info {
+h1.categories {
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    border-bottom: 1px solid white;
 
+}
+
+h5.categories {
+    color: white;
+    margin-right: 50px;
+    text-align: right;
+    font-weight: bolder;
+}
+
+.category-checkbox {
+    width: 50px;
+}
+
+.category-selection {
+    color: white;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.categories-show-content {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    width: 100px;
+    height: 50px;
+    float: left;
+}
+
+.categories-checkboxes {
+    float: left;
+}
+
+hr.horizontal-line {
+    border: 3px solid white;
+    border-radius: 5px;
 }

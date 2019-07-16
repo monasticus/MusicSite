@@ -1,6 +1,7 @@
 package com.musicsite.repository;
 
 import com.musicsite.entity.Album;
+import com.musicsite.entity.Category;
 import com.musicsite.entity.Performer;
 import com.musicsite.entity.Track;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,6 @@ public interface TrackRepository extends JpaRepository<Track, Long> {
     List<Track> getTracksByPerformer(Performer performer);
     List<Track> getTracksByPerformerOrderByYearOfPublicationDesc(Performer performer);
     List<Track> getTracksByPropositionFalseOrderByAverageDesc();
+    List<Track> getTracksByCategoryOrderByAverageDesc(Category category);
 
 }

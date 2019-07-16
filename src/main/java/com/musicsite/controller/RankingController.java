@@ -1,6 +1,8 @@
 package com.musicsite.controller;
 
+import com.musicsite.entity.CategorySelector;
 import com.musicsite.service.AlbumService;
+import com.musicsite.service.CategoryService;
 import com.musicsite.service.PerformerService;
 import com.musicsite.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,14 @@ public class RankingController {
     private PerformerService performerService;
     private AlbumService albumService;
     private TrackService trackService;
+    private CategoryService categoryService;
 
     @Autowired
-    public RankingController(PerformerService performerService, AlbumService albumService, TrackService trackService) {
+    public RankingController(PerformerService performerService, AlbumService albumService, TrackService trackService, CategoryService categoryService) {
         this.performerService = performerService;
         this.albumService = albumService;
         this.trackService = trackService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping("/{enta}")
@@ -38,6 +42,10 @@ public class RankingController {
             case "tracks":
                 model.addAttribute("tracks", trackService.getTrackPropositions());
                 return "ranking/tracks";
+            case "categories" :
+                model.addAttribute("categories", categoryService.getActiveCategories());
+                model.addAttribute("categorySelector", new CategorySelector());
+                return "ranking/categories";
             default:
                 return "main/blank";
         }
