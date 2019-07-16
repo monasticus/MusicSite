@@ -3,10 +3,22 @@
 <html>
 <head>
     <title>musicsite - ${performer.pseudonym}</title>
-    <%@include file="../fragments/head.html" %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--FONT AWESOME-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
     <style>
         <%@include file="/resources/css/style.css"%>
     </style>
+
 </head>
 <body>
 <%@include file="../fragments/header.jspf" %>
@@ -21,24 +33,34 @@
             <div class="ens-name">
                 ${performer.pseudonym}
             </div>
-            <div class="ratings">
+            <div class="ratings"
+
+                    <c:choose>
+                        <c:when test="${empty userPerformerRating}">
+                            data-user-rating='0'>
+                        </c:when>
+                        <c:otherwise>
+                            data-user-rating=${userPerformerRating}'>
+                        </c:otherwise>
+                    </c:choose>
+
                 <div class="small-inf">
                     Your rating:
                 </div>
                 <a href="/performer/${performer.id}/setRate/1">
-                    <i class="tune glyphicon glyphicon-music" data-rating-tune="1"></i>
+                    <i class="tune fas fa-music" data-rating-tune="1"></i>
                 </a>
                 <a href="/performer/${performer.id}/setRate/2">
-                    <i class="tune glyphicon glyphicon-music" data-rating-tune="2"></i>
+                    <i class="tune fas fa-music" data-rating-tune="2"></i>
                 </a>
                 <a href="/performer/${performer.id}/setRate/3">
-                    <i class="tune glyphicon glyphicon-music" data-rating-tune="3"></i>
+                    <i class="tune fas fa-music" data-rating-tune="3"></i>
                 </a>
                 <a href="/performer/${performer.id}/setRate/4">
-                    <i class="tune glyphicon glyphicon-music" data-rating-tune="4"></i>
+                    <i class="tune fas fa-music" data-rating-tune="4"></i>
                 </a>
                 <a href="/performer/${performer.id}/setRate/5">
-                    <i class="tune glyphicon glyphicon-music" data-rating-tune="5"></i>
+                    <i class="tune fas fa-music" data-rating-tune="5"></i>
                 </a>
             </div>
         </div>
@@ -60,10 +82,11 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <ul>
+                <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <ul class="list-group">
                         <c:forEach var="album" items="${performer.albums}">
-                            <li class="performer-album"><a href="/albums/${album.id}">${album.name}
+                            <li class="performer-album list-group-item list-group-item-primary"><a
+                                    href="/albums/${album.id}">${album.name}
                                 (${album.yearOfPublication})</a></li>
                         </c:forEach>
 
@@ -91,5 +114,19 @@
         </div>
     </div>
 </section>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<script src="<c:url value="/resources/css/style.css"/>" rel="stylesheet"></script>
+<script type="text/javascript" src="/resources/js/Ens-Pages.js"></script>
 </body>
 </html>

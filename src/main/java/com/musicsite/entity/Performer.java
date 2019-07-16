@@ -127,6 +127,15 @@ public class Performer extends Ens{
         this.ratings = ratings;
     }
 
+    public void updateAverage() {
+        double sum = 0.0;
+        for (Rating rating : ratings)
+            sum += rating.getRating();
+
+
+        average = sum / ratings.size();
+    }
+
     @PrePersist
     public void prePers() {
         average = 0.0;
@@ -135,13 +144,6 @@ public class Performer extends Ens{
 
     @PreUpdate
     public void preUp() {
-        double sum = 0.0;
-        for (Rating rating : ratings)
-            sum += rating.getRating();
-
-
-        average = sum / ratings.size();
-
         pseudonym = pseudonym.trim();
     }
 

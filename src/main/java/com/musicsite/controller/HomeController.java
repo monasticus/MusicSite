@@ -27,7 +27,7 @@ public class HomeController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping("/**")
+    @RequestMapping("/")
     public String displayHomePage() {
         return "main/home";
     }
@@ -60,7 +60,7 @@ public class HomeController {
         }
 
         HttpSession session = request.getSession();
-        session.setAttribute("id", user.getId());
+        session.setAttribute("loggedUserId", user.getId());
         session.setAttribute("name", user.getFirstName());
         session.setAttribute("capo", user.isAdmin());
         return "redirect:/";

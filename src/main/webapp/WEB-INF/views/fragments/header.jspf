@@ -1,10 +1,10 @@
 <header>
-    <c:if test="${not empty id}">
+    <c:if test="${not empty loggedUserId}">
         <button class="logout" onclick="document.location.href='/logout'"><i class="fas fa-running"></i>Logout</button>
     </c:if>
     <div class="logo">
 
-        <button onclick="document.location.href='/'"><i class="glyphicon glyphicon-music"></i></button>
+        <button onclick="document.location.href='/'"><i class="fas fa-music"></i></button>
         <p class="musicsite">
             <span class="musicsite-music">music</span><span class="musicsite-site">site.</span>
         </p>
@@ -29,7 +29,7 @@
                 <li class="nav-item active " id="highlighted-elem">
 
                     <c:choose>
-                        <c:when test="${empty id}">
+                        <c:when test="${empty loggedUserId}">
                             <a class="nav-link" href="/login">Login </a>
                         </c:when>
                         <c:otherwise>

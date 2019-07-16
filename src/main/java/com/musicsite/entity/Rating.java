@@ -1,5 +1,6 @@
 package com.musicsite.entity;
 
+import com.musicsite.controller.PerformerController;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -15,15 +16,12 @@ public class Rating extends Ens{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "data_id")
-    private Long dataId;
-
     @ManyToOne
     private User user;
 
     private int rating;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Performer performer;
 
     @ManyToOne
@@ -39,14 +37,6 @@ public class Rating extends Ens{
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getDataId() {
-        return dataId;
-    }
-
-    public void setDataId(Long dataId) {
-        this.dataId = dataId;
     }
 
     public User getUser() {
@@ -87,6 +77,16 @@ public class Rating extends Ens{
 
     public void setTrack(Track track) {
         this.track = track;
+    }
+
+    @PrePersist
+    public void prePer() {
+
+    }
+
+    @PreUpdate
+    public void preUp() {
+
     }
 
     @Override

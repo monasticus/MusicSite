@@ -72,4 +72,10 @@ public class AppConfig implements WebMvcConfigurer {
         return new CategoryConverter();
     }
 
+    @Override
+
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
 }

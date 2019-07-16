@@ -21,7 +21,7 @@ public class UserFilter implements Filter {
 
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession();
-        boolean loggedIn = session.getAttribute("id") != null;
+        boolean loggedIn = session.getAttribute("loggedUserId") != null;
 
         if (loggedIn) {
             HttpServletResponse response = (HttpServletResponse) resp;

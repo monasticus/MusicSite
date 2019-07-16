@@ -29,7 +29,7 @@ public class AdminAuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpSession session = request.getSession();
 
-        boolean loggedIn = session.getAttribute("id") != null;
+        boolean loggedIn = session.getAttribute("loggedUserId") != null;
 
         if (loggedIn) {
             boolean admin = (boolean) session.getAttribute("capo");
