@@ -400,11 +400,11 @@ p.no-data {
     background-color: grey;
 }
 
-.performer-average {
+.ranking-ens-average {
     width: 60px;
 }
 
-.performer-average div {
+.ranking-ens-average div {
     font-size: 40px;
     color: black;
     border-radius: 35%;
@@ -428,7 +428,7 @@ button.admin-options {
     width: 100px;
 }
 
-.performer-name a {
+.ranking-ens-name a {
     font-size: 20px;
     color: black;
 }

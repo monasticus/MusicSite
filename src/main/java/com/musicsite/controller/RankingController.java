@@ -37,7 +37,7 @@ public class RankingController {
                 model.addAttribute("performers", performerService.getPerformers());
                 return "ranking/performers";
             case "albums":
-                model.addAttribute("albums", albumService.getAlbums());
+                model.addAttribute("albums", albumService.getCapitalizedAlbums());
                 return "ranking/albums";
             case "tracks":
                 model.addAttribute("tracks", trackService.getTracks());

@@ -55,24 +55,19 @@
                     <tr class="rangking-item">
                         <th class="ranking-ordering-num" scope="row"><div>${nums.count}</div></th>
 
-                        <td class="performer-info">
-                            <div class="performer-name">
-                                <a href="/performer/${performer.id}">
-                                        ${performer.pseudonym}
-                                </a>
+                        <td class="ranking-ens-name">
 
-                            </div>
+                            <a href="/performer/${performer.id}">
+                                    ${performer.pseudonym}
+                            </a>
 
-                            <div class="perormer-categories">
-                                <c:forEach var="categorie"
-                            </div>
                         </td>
-                        <td class="performer-average"><div>${performer.average}</div></td>
+                        <td class="ranking-ens-average"><div>${performer.average}</div></td>
 
                         <c:if test="${not empty capo}">
                             <td class="admin-column">
-                                <button class="admin-options" onclick="document.location.href='/performer/remove/${performer.id}'">Remove</button> <br>
-                                <button class="admin-options" onclick="document.location.href='/performer/edit/${performer.id}'">Edit</button>
+                                <button class="admin-options" onclick="document.location.href='/adm/performer/remove/${performer.id}'">Remove</button> <br>
+                                <button class="admin-options" onclick="document.location.href='/adm/performer/edit/${performer.id}'">Edit</button>
                             </td>
                         </c:if>
                     </tr>
