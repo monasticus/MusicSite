@@ -65,12 +65,11 @@ header {
 }
 
 .menu {
-    position: absolute;
+    position: relative;
     bottom: 0;
-    width: 800px;
     left: 50%;
+    margin-top: 32px;
     margin-right: -50%;
-    margin-bottom: 0;
     transform: translate(-50%);
     background-color: black;
     border-color: grey;
@@ -376,5 +375,68 @@ body {
     font-size: 50px;
 }
 
-.performer-album a {
+
+.ranking-page {
+    border: 1px solid rgb(237, 237, 237);
+    width: 900px;
+    height: 100%;
+    margin: 30px auto 0;
+    color: white;
+}
+
+h1.ranking-ens-type {
+    margin-left: 30px;
+    font-size: 50px;
+}
+
+p.no-data {
+    margin-left: 60px;
+    font-size: 20px;
+    font-style: italic;
+}
+
+.ranking {
+    color:white;
+    background-color: grey;
+}
+
+.performer-average {
+    width: 60px;
+}
+
+.performer-average div {
+    font-size: 40px;
+    color: black;
+    border-radius: 35%;
+    width: 75px;
+    height: 65px;
+    background-color: yellow;
+    text-align: center;
+    padding-top: 10px;
+}
+
+button.admin-options {
+    width: 80px;
+    color: black;
+    background-color: yellow;
+    border: 1px solid white;
+    margin-top: 10px;
+    margin-down: 10px;
+}
+
+.admin-column {
+    width: 100px;
+}
+
+.performer-name a {
+    font-size: 20px;
+    color: black;
+}
+
+.ranking-ordering-num {
+    width: 50px;
+}
+
+.ranking-ordering-num div{
+    font-size: 30px;
 }

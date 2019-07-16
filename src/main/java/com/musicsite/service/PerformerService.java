@@ -78,4 +78,5 @@ public class PerformerService {
         performer.updateAverage();
         performerRepository.save(performer);
     }
+
 }

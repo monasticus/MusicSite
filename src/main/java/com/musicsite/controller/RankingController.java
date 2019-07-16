@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/ranking")
 public class RankingController {
 
-    PerformerService performerService;
-    AlbumService albumService;
-    TrackService trackService;
+    private PerformerService performerService;
+    private AlbumService albumService;
+    private TrackService trackService;
 
     @Autowired
     public RankingController(PerformerService performerService, AlbumService albumService, TrackService trackService) {
@@ -34,19 +34,17 @@ public class RankingController {
 
         switch (enta) {
             case "performers":
-                model.addAttribute("enta", performerService.getPerformers());
-                break;
+                model.addAttribute("performers", performerService.getPerformers());
+                return "ranking/performers";
             case "albums":
-                model.addAttribute("enta", albumService.getAlbums());
-                break;
+                model.addAttribute("albums", albumService.getAlbums());
+                return "ranking/albums";
             case "tracks":
-                model.addAttribute("enta", trackService.getTracks());
-                break;
+                model.addAttribute("tracks", trackService.getTracks());
+                return "ranking/tracks";
             default:
                 return "main/blank";
         }
 
-
-        return "ranking/".concat(enta);
     }
 }
