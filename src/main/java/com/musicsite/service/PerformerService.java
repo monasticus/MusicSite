@@ -44,6 +44,10 @@ public class PerformerService {
         return performerRepository.findAll();
     }
 
+    public List<Performer> getPerformerPropositions() {
+        return performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
+    }
+
     @Transactional(propagation = Propagation.NEVER)
     public void orderData(Performer performer) {
         if (performer.getAlbums().size() > 0) {

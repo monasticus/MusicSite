@@ -138,7 +138,7 @@ public class Album extends Opus {
     @PrePersist
     public void prePer() {
         average = 0.0;
-        name = name.trim().toLowerCase();
+        name = name.trim();
     }
 
     @PreUpdate
@@ -149,6 +149,7 @@ public class Album extends Opus {
 
 
         average = sum / ratings.size();
+        name = name.trim();
     }
 
     @Override

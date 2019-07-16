@@ -13,7 +13,7 @@ public class CategoryConverter implements Converter<String, Category> {
     CategoryRepository categoryRepository;
 
     @Override
-    public Category convert(String name) {
-        return categoryRepository.getFirstCategoryByName(name);
+    public Category convert(String id) {
+        return categoryRepository.findOne(Long.parseLong(id));
     }
 }

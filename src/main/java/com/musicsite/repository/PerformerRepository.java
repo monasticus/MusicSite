@@ -9,4 +9,5 @@ public interface PerformerRepository extends JpaRepository<Performer, Long> {
 
     Performer getFirstPerformerByPseudonymIgnoreCase(String pseudonym);
     List<Performer> getPerformersByPseudonymIgnoreCase(String pseudonym);
+    List<Performer> getPerformersByPropositionFalseOrderByAverageDesc();
 }

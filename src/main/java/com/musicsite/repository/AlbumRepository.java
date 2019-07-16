@@ -15,4 +15,5 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     List<Album> getAlbumsByNameIgnoreCase(String name);
     Album getFirstAlbumByNameIgnoreCase(String name);
     List<Album> getAlbumsByPropositionTrue();
+    List<Album> getAlbumsByPropositionFalseOrderByAverageDesc();
 }

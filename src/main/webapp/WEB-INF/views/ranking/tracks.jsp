@@ -20,7 +20,91 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<%@include file="../fragments/dashboard.jspf" %>
+<c:if test="${not empty loggedUserId}">
+    <%@include file="../fragments/dashboard.jspf" %>
+</c:if>
+
+
+<section class="ranking-page">
+    <h1 class="ranking-ens-type">Tracks</h1>
+
+
+    <c:choose>
+        <c:when test="${empty tracks}">
+
+            <p class="no-data">
+                Track list is empty.
+            </p>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/add/performer">add performer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/add/album">add album</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/add/track">add track</a>
+                </li>
+            </ul>
+
+        </c:when>
+        <c:otherwise>
+            <table class="ranking table table-hover">
+                <tbody>
+                <c:forEach var="track" items="${tracks}" varStatus="nums">
+                    <tr class="rangking-item">
+                        <th class="ranking-ordering-num" scope="row">
+                            <div>${nums.count}</div>
+                        </th>
+
+                        <td>
+                            <div class="ranking-ens-name">
+                                <a href="/tracks/${track.id}">
+                                        ${track.name} (${track.yearOfPublication})
+                                </a>
+                            </div>
+                            <div class="ranking-track-info">
+                                Performer: ${track.performer.pseudonym}<br>
+                                Album:
+                                <c:choose>
+                                    <c:when test="${empty track.album}">
+                                        ---
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${track.album.name}
+                                    </c:otherwise>
+                                </c:choose>
+
+                            </div>
+
+                        </td>
+                        <td class="ranking-ens-average">
+                            <div>${track.average}</div>
+                        </td>
+
+                        <c:if test="${not empty capo}">
+                            <td class="admin-column">
+                                <button class="admin-options"
+                                        onclick="document.location.href='/adm/track/remove/${track.id}'">Remove
+                                </button>
+                                <br>
+                                <button class="admin-options"
+                                        onclick="document.location.href='/adm/track/edit/${track.id}'">Edit
+                                </button>
+                            </td>
+                        </c:if>
+                    </tr>
+                </c:forEach>
+
+
+                </tbody>
+            </table>
+        </c:otherwise>
+    </c:choose>
+
+
+</section>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

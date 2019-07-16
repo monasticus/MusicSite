@@ -126,7 +126,7 @@ public class Track extends Opus {
     @PrePersist
     public void prePer() {
         average = 0.0;
-        name = name.trim().toLowerCase();
+        name = name.trim();
     }
 
     @PreUpdate
@@ -138,7 +138,7 @@ public class Track extends Opus {
 
         average = sum / ratings.size();
 
-        name = name.trim().toLowerCase();
+        name = name.trim();
     }
 
     public boolean isProposition() {
