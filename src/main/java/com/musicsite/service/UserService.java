@@ -4,6 +4,7 @@ import com.musicsite.entity.Performer;
 import com.musicsite.entity.Rating;
 import com.musicsite.entity.User;
 import com.musicsite.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ public class UserService {
     private UserRepository userRepository;
     private RatingRepository ratingRepository;
 
+    @Autowired
     public UserService(PerformerRepository performerRepository,
                             AlbumRepository albumRepository,
                             TrackRepository trackRepository,
