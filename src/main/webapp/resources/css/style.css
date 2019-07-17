@@ -293,6 +293,7 @@ body {
 .ens-basic-information {
     float: left;
     margin-left: 30px;
+    margin-bottom: 20px;
 }
 
 .ens-basic-information .ens-name {
@@ -305,6 +306,7 @@ body {
     margin-top: 20px;
     margin-left: 20px;
     font-size: 20px;
+    width: 370px;
 }
 
 .ens-basic-information .ratings a {
@@ -312,17 +314,17 @@ body {
 }
 
 .ens-basic-information .ratings a:hover {
-    color: rgb(240, 0, 0);
+    color: rgb(0, 123, 255);
 }
 
 .album-performer {
     color:white;
     font-size: 25px;
     margin-left: 10px;
+    width: 370px;
 }
 
 .album-performer a {
-    color: rgb(237, 237, 0);
     font-style: italic;
 }
 
@@ -342,19 +344,14 @@ a:hover {
     left: 10px;
 }
 
-.ratings a:hover {
-    text-decoration: none;
-}
 
 .ens-average {
     border: 1px solid rgb(237, 237, 237);
-    float: right;
+    float: left;
     width: 110px;
     height: 120px;
-    margin-top: 30px;
-    margin-right: 70px;
     text-align: center;
-
+    margin-right: 60px;
 }
 
 .ens-average p {
@@ -362,6 +359,20 @@ a:hover {
     white-space: nowrap;
     color: white;
     font-size: 50px;
+}
+
+.track-list {
+    margin-left: 60px;
+}
+
+
+.track-list li {
+    font-size: 20px;
+}
+
+.performers-track-album {
+    font-size: 14px;
+    margin-left: 30px
 }
 
 .ens-page-categories{
@@ -382,7 +393,6 @@ a:hover {
 }
 
 .ens-mid .related-enta {
-    border: 1px solid rgb(237, 237, 237);
     margin-left: 40px;
     margin-top: 40px;
     width: 820px;
@@ -556,4 +566,13 @@ h1.ens-type {
 .propositions-heading {
     color: white;
     font-size: 17px;
+}
+
+.album-tracks {
+    color:white;
+    margin: 50px
+}
+
+.album-tracks h2 {
+    margin: 50px
 }

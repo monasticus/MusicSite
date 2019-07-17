@@ -133,7 +133,7 @@ public class PerformerService {
     }
 
     public List<Performer> getOnlyPerformerPropositions() {
-        return performerRepository.getPerformersByPropositionTrue();
+        return setPerformersCategories(performerRepository.getPerformersByPropositionTrue());
     }
 
     public List<Performer> getPerformersByQuery (String query) {

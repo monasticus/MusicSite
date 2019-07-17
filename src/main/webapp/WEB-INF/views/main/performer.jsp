@@ -33,6 +33,11 @@
             <div class="ens-name">
                 ${performer.pseudonym}
             </div>
+            <div class="ens-average">
+                <p>
+                    ${performer.average}
+                </p>
+            </div>
             <div class="ratings"
 
                     <c:choose>
@@ -64,11 +69,7 @@
             </a>
             </div>
         </div>
-        <div class="ens-average">
-            <p>
-                ${performer.average}
-            </p>
-        </div>
+
         <div class="ens-page-categories">
             Categories:
             <c:forEach var="category" items="${performer.categories}">
@@ -93,7 +94,7 @@
                     <ul class="list-group">
                         <c:forEach var="album" items="${performerAlbums}">
                             <li class="list-group-item list-group-item-primary"><a
-                                    href="/albums/${album.id}">${album.name}
+                                    href="/album/${album.id}">${album.name}
                                 (${album.yearOfPublication})</a></li>
                         </c:forEach>
                     </ul>
@@ -109,8 +110,10 @@
                             <ul class="list-group">
                                 <c:forEach var="track" items="${performerTracks}">
                                     <li class="list-group-item list-group-item-primary"><a
-                                            href="/tracks/${track.id}">${track.name}
-                                        (${track.yearOfPublication})</a></li>
+                                            href="/track/${track.id}">(${track.yearOfPublication}) ${track.name}
+                                        </a> <br>
+                                        <span class="performers-track-album">Album: <c:out value="${track.album.name}" default="---"/> </span>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </c:otherwise>

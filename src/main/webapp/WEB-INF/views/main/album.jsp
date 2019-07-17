@@ -34,6 +34,13 @@
             <div class="ens-name">
                 ${album.name} (${album.yearOfPublication})
             </div>
+
+            <div class="ens-average">
+                <p>
+                    ${album.average}
+                </p>
+            </div>
+
             <div class="album-performer">
                 <a href="/performer/${album.performer.id}">${album.performer.pseudonym}</a>
             </div>
@@ -67,12 +74,10 @@
                 <i class="tune fas fa-music" data-rating-tune="5"></i>
             </a>
             </div>
+
+
         </div>
-        <div class="ens-average">
-            <p>
-                ${album.average}
-            </p>
-        </div>
+
         <div class="ens-page-categories">
             Categories:
             <c:forEach var="category" items="${album.categories}">
@@ -82,8 +87,10 @@
         </div>
     </div>
 
+
     <div class="ens-mid">
         <div class="album-tracks">
+            <h2>Track listing</h2>
             <c:choose>
                 <c:when test="${empty album.tracks}">
                     <p class="no-data">

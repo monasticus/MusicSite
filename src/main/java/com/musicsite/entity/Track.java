@@ -140,13 +140,6 @@ public class Track extends Opus {
 
     @PreUpdate
     public void preUp() {
-        double sum = 0.0;
-        for (Rating rating : ratings)
-            sum += rating.getRating();
-
-
-        average = sum / ratings.size();
-
         name = name.trim();
     }
 
