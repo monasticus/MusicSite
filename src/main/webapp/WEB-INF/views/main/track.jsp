@@ -83,10 +83,10 @@
     </div>
 
 
-    <div class="ens-mid">
+    <div class="embed-responsive embed-responsive-16by9">
         <iframe width="896" height="500" src="https://www.youtube.com/embed/${trackHyperlink}" frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
+                allowfullscreen class="embed-responsive-item"></iframe>
     </div>
 </section>
 

@@ -44,32 +44,20 @@ public class TrackService {
     }
 
     public List<Track> getRandomTracks(int bound) {
-        List<Track> allTracks = trackRepository.findAll();
-
-        if (allTracks.size() <= 3)
-            return allTracks;
-
-        return getRandomTracks(allTracks, bound);
-    }
-
-    private List<Track> getRandomTracks(List<Track> allTracks, int bound) {
-        List<Integer> indexes = new ArrayList<>();
+        List<Track> tracks = new ArrayList<>();
         Random random = new Random();
 
-        while (indexes.size() < bound) {
-            int attempt = random.nextInt(allTracks.size());
-            if (indexes.contains(attempt))
-                attempt = random.nextInt(allTracks.size());
+        while (tracks.size() < bound) {
+            long attempt = (long) random.nextInt(trackRepository.getLastId());
+
+            Track track = trackRepository.findOne(attempt);
+            if (track == null || tracks.stream().anyMatch(t -> t.getId().equals(track.getId())))
+                attempt = (long) random.nextInt(trackRepository.getLastId());
             else
-                indexes.add(attempt);
+                tracks.add(track);
         }
 
-        List<Track> randomTracks = new ArrayList<>();
-        randomTracks.add(allTracks.get(indexes.get(0)));
-        randomTracks.add(allTracks.get(indexes.get(1)));
-        randomTracks.add(allTracks.get(indexes.get(2)));
-
-        return randomTracks;
+        return tracks;
     }
 
     public List<Track> getTracksWithPropositions() {

@@ -1,44 +1,45 @@
-<table class="ranking table table-hover">
-    <tbody>
-    <c:forEach var="performer" items="${performers}" varStatus="nums">
-        <tr class="rangking-item">
-            <th class="ranking-ordering-num" scope="row">
-                <div>${nums.count}</div>
-            </th>
+<div class="rankings-content">
+    <table class="table table-hover">
+        <tbody>
+        <c:forEach var="performer" items="${performers}" varStatus="nums">
+            <tr class="shadow p-3 mb-5 bg-white rounded">
+                <th class="ranking-ordering-num" scope="row">
+                    <div>${nums.count}</div>
+                </th>
 
-            <td class="ranking-ens-name">
-
-                <a href="/performer/${performer.id}">
-                        ${performer.pseudonym}
-                </a>
-
-                <div class="categories-ens-details">
-                    Categories:
-                    <c:forEach var="category" items="${performer.categories}">
+                <td class="ranking-ens-name">
+                    <div class="bg-warning category-list">
+                        <a href="/performer/${performer.id}">
+                                ${performer.pseudonym}
+                        </a>
+                    </div>
+                        <div class="category-list bg-info">
+                            Categories:
+                            <c:forEach var="category" items="${performer.categories}">
                                             <span class="categories-ens-category"><c:out
                                                     value="${category.name}"/></span>
-                    </c:forEach>
-                </div>
-
-            </td>
-            <td class="ranking-ens-average">
-                <div>${performer.average}</div>
-            </td>
-
-            <c:if test="${not empty capo}">
-                <td class="admin-column">
-                    <button class="admin-options"
-                            onclick="document.location.href='/adm/performer/remove/${performer.id}'">Remove
-                    </button>
-                    <br>
-                    <button class="admin-options"
-                            onclick="document.location.href='/adm/performer/edit/${performer.id}'">Edit
-                    </button>
+                            </c:forEach>
+                        </div>
                 </td>
-            </c:if>
-        </tr>
-    </c:forEach>
+                <td class="ranking-ens-average">
+                    <div>${performer.average}</div>
+                </td>
+
+                <c:if test="${not empty capo}">
+                    <td class="admin-column">
+                        <button class="admin-options"
+                                onclick="document.location.href='/adm/performer/remove/${performer.id}'">Remove
+                        </button>
+                        <br>
+                        <button class="admin-options"
+                                onclick="document.location.href='/adm/performer/edit/${performer.id}'">Edit
+                        </button>
+                    </td>
+                </c:if>
+            </tr>
+        </c:forEach>
 
 
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>

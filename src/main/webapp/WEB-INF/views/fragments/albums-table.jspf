@@ -1,41 +1,43 @@
-<table class="ranking table table-hover">
-    <tbody>
-    <c:forEach var="album" items="${albums}" varStatus="nums">
-        <tr class="rangking-item">
-            <th class="ranking-ordering-num" scope="row">
-                <div>${nums.count}</div>
-            </th>
+<div class="rankings-content">
+    <table class="table table-hover">
+        <tbody>
+        <c:forEach var="album" items="${albums}" varStatus="nums">
+            <tr class="shadow p-3 mb-5 bg-white rounded">
+                <th class="ranking-ordering-num" scope="row">
+                    <div>${nums.count}</div>
+                </th>
 
-            <td class="ranking-ens-name">
-
-                <a href="/album/${album.id}">
-                        ${album.name}
-                </a>
-
-                <div class="categories-ens-details">
-                    Categories:
-                    <c:forEach var="category" items="${album.categories}">
+                <td class="ranking-ens-name">
+                    <div class="bg-warning category-list">
+                        <a href="/album/${album.id}">
+                                ${album.name}
+                        </a>
+                    </div>
+                    <div class="category-list bg-info">
+                        Categories:
+                        <c:forEach var="category" items="${album.categories}">
                                             <span class="categories-ens-category"><c:out
                                                     value="${category.name}"/></span>
-                    </c:forEach>
-                </div>
-            </td>
-            <td class="ranking-ens-average">
-                <div>${album.average}</div>
-            </td>
-
-            <c:if test="${not empty capo}">
-                <td class="admin-column">
-                    <button class="admin-options"
-                            onclick="document.location.href='/adm/album/remove/${album.id}'">Remove
-                    </button>
-                    <br>
-                    <button class="admin-options"
-                            onclick="document.location.href='/adm/album/edit/${album.id}'">Edit
-                    </button>
+                        </c:forEach>
+                    </div>
                 </td>
-            </c:if>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+                <td class="ranking-ens-average">
+                    <div>${album.average}</div>
+                </td>
+
+                <c:if test="${not empty capo}">
+                    <td class="admin-column">
+                        <button class="admin-options"
+                                onclick="document.location.href='/adm/album/remove/${album.id}'">Remove
+                        </button>
+                        <br>
+                        <button class="admin-options"
+                                onclick="document.location.href='/adm/album/edit/${album.id}'">Edit
+                        </button>
+                    </td>
+                </c:if>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</div>

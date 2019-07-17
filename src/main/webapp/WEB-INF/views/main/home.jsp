@@ -25,24 +25,24 @@
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <div class="div-track">
+                <div class="embed-responsive embed-responsive-16by9">
                     <iframe width="560" height="315" src="https://www.youtube.com/embed/${firstTrack}" frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen class="video-track"></iframe>
+                            allowfullscreen class="embed-responsive-item"></iframe>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="div-track">
+                <div class="embed-responsive embed-responsive-16by9">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/${secondTrack}" frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen class="video-track"></iframe>
+                        allowfullscreen class="embed-responsive-item"></iframe>
                 </div>
             </div>
             <div class="carousel-item">
-                <div class="div-track">
+                <div class="embed-responsive embed-responsive-16by9">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/${thirdTrack}" frameborder="0"
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen class="video-track"></iframe>
+                        allowfullscreen class="embed-responsive-item"></iframe>
                 </div>
             </div>
         </div>
@@ -55,7 +55,9 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
+    <div class="refresh-button">
+    <button type="button" class="btn btn-outline-info" onclick="document.location.href='/'">Refresh</button>
+    </div>
 </div>
 
 

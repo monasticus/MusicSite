@@ -13,15 +13,22 @@ import java.util.List;
 public interface TrackRepository extends JpaRepository<Track, Long> {
 
     List<Track> getTracksByNameIgnoreCase(String name);
-    List<Track> getTracksByAlbum(Album album);
+
     List<Track> getTracksByPropositionTrue();
-    List<Track> getTracksByPerformer(Performer performer);
+
     List<Track> getTracksByPerformerOrderByYearOfPublicationDesc(Performer performer);
+
     List<Track> getTracksByPerformerAndPropositionFalseOrderByYearOfPublicationDesc(Performer performer);
+
     List<Track> getTracksByPropositionFalseOrderByAverageDesc();
+
+
     List<Track> getTracksByCategoryAndPropositionFalseOrderByAverageDesc(Category category);
+
     List<Track> getTracksByCategoryInAndPropositionFalseOrderByAverageDesc(List<Category> categories);
 
+    @Query(value = "SELECT id FROM tracks ORDER BY id DESC LIMIT 1", nativeQuery = true)
+    int getLastId();
 
     @Query("SELECT t FROM Track t WHERE LOWER(t.name) like LOWER(concat('%', :part, '%') ) AND t.proposition = 0")
     List<Track> customGetTracksByQuery(@Param("part") String part);

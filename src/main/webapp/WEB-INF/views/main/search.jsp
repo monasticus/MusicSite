@@ -20,29 +20,23 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<section class="ens-page">
+<section class="container">
 
-    <div class="categories-content">
+    <div class="rankings-content">
 
         <c:if test="${not empty performers}">
-            <div class="categories-performers">
                 <h1 class="ens-type">Performers</h1>
                 <%@include file="../fragments/performers-table.jspf"%>
-            </div>
+
         </c:if>
         <c:if test="${not empty albums}">
-            <div class="categories-albums">
                 <h1 class="ens-type">Albums</h1>
-
                 <%@include file="../fragments/albums-table.jspf"%>
 
-            </div>
         </c:if>
         <c:if test="${not empty tracks}">
-            <div class="categories-tracks">
                 <h1 class="ens-type">Tracks</h1>
                 <%@include file="../fragments/tracks-table.jspf"%>
-            </div>
         </c:if>
         <c:if test="${empty performers && empty albums && empty tracks}">
             <p class="no-data">

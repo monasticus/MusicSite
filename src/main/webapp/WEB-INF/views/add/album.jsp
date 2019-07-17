@@ -39,12 +39,12 @@
 
         <div class="form-group">
             Name: <br>
-            <form:input path="name" class="form-control"/>
+            <form:input path="name" cssClass="form-control"/>
             <form:errors path="name" cssClass="error" element="div"/><br>
         </div>
         <div class="form-group">
             Year (YYYY): <br>
-            <form:input path="yearOfPublication" class="form-control" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
+            <form:input path="yearOfPublication" cssClass="form-control" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
             <form:errors path="yearOfPublication" cssClass="error" element="div"/><br>
         </div>
         <div class="form-group">
@@ -68,10 +68,10 @@
                      itemLabel="name"
                      itemValue="id"
                      multiple="true"
-                     class="form-control"/>
+                     cssClass="form-control"/>
         <form:errors path="categories" cssClass="error" element="div"/><br>
 
-        <br><input type="submit" value="Save album" class=" btn btn-primary">
+        <br><input type="submit" value="Save" class=" btn btn-primary">
 
     </form:form>
 

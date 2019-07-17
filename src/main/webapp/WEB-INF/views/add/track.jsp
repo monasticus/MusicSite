@@ -39,12 +39,12 @@
     <form:form method="post" modelAttribute="track">
         <div class="form-group">
             Name: <br>
-            <form:input path="name" class="form-control"/>
+            <form:input path="name" cssClass="form-control"/>
             <form:errors path="name" cssClass="error" element="div"/><br>
         </div>
         <div class="form-group">
             Year (YYYY): <br>
-            <form:input path="yearOfPublication" class="form-control" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
+            <form:input path="yearOfPublication" cssClass="form-control" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
             <form:errors path="yearOfPublication" cssClass="error" element="div"/><br>
         </div>
         <div class="form-group">
@@ -79,9 +79,9 @@
                      items="${categories}"
                      itemLabel="name"
                      itemValue="id"
-                     class="form-control"/> <br>
+                     cssClass="form-control"/> <br>
 
-        <br><input type="submit" value="Save track" class=" btn btn-primary">
+        <br><input type="submit" value="Save" class=" btn btn-primary">
 
     </form:form>
 

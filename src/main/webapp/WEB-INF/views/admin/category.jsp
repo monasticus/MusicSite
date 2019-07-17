@@ -20,13 +20,13 @@
     </style>
 </head>
 <body>
-<%@include file="../fragments/header.jspf"%>
-<div class="container register-form">
+<%@include file="../fragments/header.jspf" %>
+<div class="container my-form">
     <h1>New category</h1>
     <c:choose>
-       <c:when test="${duplicate == true}">
-           <p class="error"><c:out value="Category already exists in database."/> </p>
-       </c:when>
+        <c:when test="${duplicate == true}">
+            <p class="error"><c:out value="Category already exists in database."/></p>
+        </c:when>
         <c:when test="${success == true}">
             <p class="success">
                 <span><c:out value="Category has been successfully added."/></span>
@@ -37,12 +37,12 @@
     </c:choose>
 
     <form:form method="post" modelAttribute="category">
-
-        Name: <br>
-        <form:input path="name"/>
-        <form:errors path="name" cssClass="error" element="div"/><br>
-
-        <br><input type="submit" value="Save category">
+        <div class="form-group">
+            Name: <br>
+            <form:input path="name"/>
+            <form:errors path="name" cssClass="error" element="div"/><br>
+        </div>
+        <br><input type="submit" value="Save" class="btn btn-primary">
 
     </form:form>
 

@@ -52,6 +52,9 @@ public class RankingController {
 
     @PostMapping("/categories")
     public String showData(@ModelAttribute CategorySelector categorySelector, Model model) {
+        if (categorySelector.getCategoryList().size() < 1)
+            return "ranking/categories";
+
         model.addAttribute("albums", albumService.getAlbumsByCategories(categorySelector.getCategoryList()));
         model.addAttribute("tracks", trackService.getTracksByCategories(categorySelector.getCategoryList()));
         model.addAttribute("performers", performerService.getPerformersByCategories(categorySelector.getCategoryList()));

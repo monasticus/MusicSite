@@ -38,23 +38,23 @@
     <form:form method="post" modelAttribute="performer">
         <div class="form-group">
             Pseudonym / Group name: <br>
-            <form:input path="pseudonym" class="form-control"/>
+            <form:input path="pseudonym" cssClass="form-control"/>
             <form:errors path="pseudonym" cssClass="error" element="div"/><br>
         </div>
         <div class="form-group">
             *First Name: <br>
-            <form:input path="firstName" class="form-control"/>
+            <form:input path="firstName" cssClass="form-control"/>
             <form:errors path="firstName" cssClass="error" element="div"/><br>
         </div>
         <div class="form-group">
             *Last Name: <br>
-            <form:input path="lastName" class="form-control"/>
+            <form:input path="lastName" cssClass="form-control"/>
             <form:errors path="lastName" cssClass="error" element="div"/><br>
         </div>
         <p class="form-information">
             <c:out value="*not necessary to save performer"/>
         </p>
-        <br><input type="submit" value="Save" class=" btn btn-primary">
+        <br><input type="submit" value="Save" class="btn btn-primary">
 
     </form:form>
 

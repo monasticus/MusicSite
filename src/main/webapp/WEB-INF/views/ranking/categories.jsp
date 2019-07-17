@@ -21,59 +21,40 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<section class="ens-page">
-    <h1 class="categories">Categories</h1>
-
-    <div class="category-selection">
-
+<div class="container border border-danger">
+    <h1 class="heading">Categories</h1>
+    <div class="categories-form">
         <form:form method="post" modelAttribute="categorySelector">
 
-            <h5 class="categories">Select:</h5>
-            <hr class="horizontal-line-select">
-            <div class="categories-checkboxes-list">
-                <input type="submit" value="Show" class="categories-show-content">
-                <div class="categories-checkboxes">
+            <div class="form-group">
+                <div class="form-check form-check-inline">
                     <form:checkboxes path="categoryList"
                                      items="${categories}"
                                      itemLabel="name"
                                      itemValue="id"
-                                     cssClass="category-checkbox"/>
+                                     cssClass="form-check-input"/>
                 </div>
             </div>
+            <input type="submit" value="Show" class="btn btn-outline-danger">
         </form:form>
     </div>
-
     <c:if test="${not empty categorySelector.categoryList}">
 
-        <div class="categories-content">
-
             <c:if test="${not empty performers}">
-                <div class="categories-performers">
-                    <h1 class="ens-type">Performers</h1>
-                    <%@include file="../fragments/performers-table.jspf"%>
-                </div>
+                <h1 class="ens-type">Performers</h1>
+                <%@include file="../fragments/performers-table.jspf" %>
             </c:if>
             <c:if test="${not empty albums}">
-                <div class="categories-albums">
-                    <h1 class="ens-type">Albums</h1>
-
-                    <%@include file="../fragments/albums-table.jspf"%>
-
-                </div>
+                <h1 class="ens-type">Albums</h1>
+                <%@include file="../fragments/albums-table.jspf" %>
             </c:if>
             <c:if test="${not empty tracks}">
-                <div class="categories-tracks">
-                    <h1 class="ens-type">Tracks</h1>
-                    <%@include file="../fragments/tracks-table.jspf"%>
-                </div>
+                <h1 class="ens-type">Tracks</h1>
+                <%@include file="../fragments/tracks-table.jspf" %>
             </c:if>
 
-        </div>
     </c:if>
-
-
-</section>
-
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
