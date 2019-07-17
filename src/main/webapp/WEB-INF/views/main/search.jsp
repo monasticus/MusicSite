@@ -19,8 +19,44 @@
 </head>
 <body>
 <%@include file="../fragments/header.jspf" %>
+<c:if test="${not empty loggedUserId}">
+    <%@include file="../fragments/dashboard.jspf" %>
+</c:if>
 
-<%@include file="../fragments/dashboard.jspf" %>
+<section class="ens-page">
+
+    <div class="categories-content">
+
+        <c:if test="${not empty performers}">
+            <div class="categories-performers">
+                <h1 class="ens-type">Performers</h1>
+                <%@include file="../fragments/performers-table.jspf"%>
+            </div>
+        </c:if>
+        <c:if test="${not empty albums}">
+            <div class="categories-albums">
+                <h1 class="ens-type">Albums</h1>
+
+                <%@include file="../fragments/albums-table.jspf"%>
+
+            </div>
+        </c:if>
+        <c:if test="${not empty tracks}">
+            <div class="categories-tracks">
+                <h1 class="ens-type">Tracks</h1>
+                <hr class="horizontal-line-enta">
+            </div>
+        </c:if>
+        <c:if test="${empty performers && empty albums && empty tracks}">
+            <p class="no-data">
+                No results.
+            </p>
+        </c:if>
+
+    </div>
+</section>
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

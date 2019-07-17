@@ -315,6 +315,21 @@ body {
     color: rgb(240, 0, 0);
 }
 
+.album-performer {
+    color:white;
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+.album-performer a {
+    color: rgb(237, 237, 0);
+    font-style: italic;
+}
+
+a:hover {
+    text-decoration: none
+}
+
 .small-inf {
     font-size: 12px;
     font-weight: bold;
@@ -327,6 +342,9 @@ body {
     left: 10px;
 }
 
+.ratings a:hover {
+    text-decoration: none;
+}
 
 .ens-average {
     border: 1px solid rgb(237, 237, 237);

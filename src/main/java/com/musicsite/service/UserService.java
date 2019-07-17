@@ -1,5 +1,6 @@
 package com.musicsite.service;
 
+import com.musicsite.entity.Album;
 import com.musicsite.entity.Performer;
 import com.musicsite.entity.Rating;
 import com.musicsite.entity.User;
@@ -38,6 +39,14 @@ public class UserService {
 
     public int getPerformerUserRating (Long userId, Performer performer) {
         Rating rating = ratingRepository.getRatingByUserAndPerformer(getUser(userId), performer);
+        if (rating == null)
+            return 0;
+        else
+            return rating.getRating();
+    }
+
+    public int getAlbumUserRating (Long userId, Album album) {
+        Rating rating = ratingRepository.getRatingByUserAndAlbum(getUser(userId), album);
         if (rating == null)
             return 0;
         else

@@ -1,8 +1,6 @@
 package com.musicsite.service;
 
-import com.musicsite.entity.Album;
-import com.musicsite.entity.Category;
-import com.musicsite.entity.Performer;
+import com.musicsite.entity.*;
 import com.musicsite.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +32,32 @@ public class AlbumService {
         this.ratingRepository = ratingRepository;
     }
 
+    public Album getAlbum(Long id) {
+        return albumRepository.findOne(id);
+    }
+
+    public void saveRating(Long userId, Long albumId, int rating) {
+        User user = userRepository.findOne(userId);
+        Album album = albumRepository.findOne(albumId);
+        Rating userRating = ratingRepository.getRatingByUserAndAlbum(user, album);
+
+        if (userRating == null) {
+            userRating = new Rating();
+            userRating.setAlbum(album);
+            userRating.setUser(user);
+        }
+
+        userRating.setRating(rating);
+
+        ratingRepository.save(userRating);
+    }
+
+    public void updateAlbumAverage(Long albumId) {
+        Album album = albumRepository.findOne(albumId);
+        album.updateAverage();
+        albumRepository.save(album);
+    }
+
     public List<Album> getAlbumsWithPropositions() {
         return albumRepository.findAll();
     }
@@ -52,6 +76,10 @@ public class AlbumService {
 
     public List<Album> getAlbumsByCategories(List<Category> categories) {
         return albumRepository.getAlbumsByCategoriesInAndPropositionFalseOrderByAverageDesc(categories);
+    }
+
+    public List<Album> getAlbumsByQuery (String query) {
+        return albumRepository.customGetAlbumsByQuery(query);
     }
 
     public void removeAlbum(Long id) {

@@ -136,6 +136,10 @@ public class PerformerService {
         return performerRepository.getPerformersByPropositionTrue();
     }
 
+    public List<Performer> getPerformersByQuery (String query) {
+        return setPerformersCategories(performerRepository.customGetPerformersByQuery(query));
+    }
+
     public void removePerformer(Long id) {
         performerRepository.delete(id);
     }

@@ -111,6 +111,15 @@ public class Album extends Opus {
         this.average = average;
     }
 
+    public void updateAverage() {
+        double sum = 0.0;
+        for (Rating rating : ratings)
+            sum += rating.getRating();
+
+
+        average = sum / ratings.size();
+    }
+
     public List<Rating> getRatings() {
         return ratings;
     }

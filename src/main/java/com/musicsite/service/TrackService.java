@@ -1,5 +1,6 @@
 package com.musicsite.service;
 
+import com.musicsite.entity.Album;
 import com.musicsite.entity.Category;
 import com.musicsite.entity.Performer;
 import com.musicsite.entity.Track;
@@ -52,6 +53,10 @@ public class TrackService {
 
     public List<Track> getOnlyTrackPropositions() {
         return trackRepository.getTracksByPropositionTrue();
+    }
+
+    public List<Track> getTracksByQuery (String query) {
+        return trackRepository.customGetTracksByQuery(query);
     }
 
     public void removeTrack(Long id) {
