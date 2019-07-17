@@ -266,14 +266,12 @@ body {
 }
 
 .ens-page {
-    border: 1px solid rgb(237, 237, 237);
     width: 900px;
     margin: 30px auto 0;
 }
 
 .ens-top {
-    border: 1px solid rgb(237, 237, 237);
-    margin-top: 40px;
+    margin-top: 70px;
 }
 
 .ens-image {
@@ -293,7 +291,6 @@ body {
 }
 
 .ens-basic-information {
-    border: 1px solid rgb(237, 237, 237);
     float: left;
     margin-left: 30px;
 }
@@ -302,14 +299,12 @@ body {
     font-size: 40px;
     color: rgb(237, 237, 237);
     font-weight: bold;
-    border: 1px solid rgb(237, 237, 237);
 }
 
 .ens-basic-information .ratings {
     margin-top: 20px;
     margin-left: 20px;
     font-size: 20px;
-    border: 1px solid rgb(237, 237, 237);
 }
 
 .ens-basic-information .ratings a {
@@ -349,6 +344,18 @@ body {
     white-space: nowrap;
     color: white;
     font-size: 50px;
+}
+
+.ens-page-categories{
+    clear: left;
+    color: white;
+    margin-left: 220px;
+    margin-bottom: 10px;
+}
+
+.ens-categories {
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .ens-mid {

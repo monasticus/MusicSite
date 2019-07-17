@@ -42,6 +42,10 @@ public class TrackService {
         return trackRepository.getTracksByPropositionFalseOrderByAverageDesc();
     }
 
+    public List<Track> getPerformerTracksWithoutPropositions(Performer performer) {
+        return trackRepository.getTracksByPerformerAndPropositionFalseOrderByYearOfPublicationDesc(performer);
+    }
+
     public List<Track> getTracksByCategories(List<Category> categories) {
         return trackRepository.getTracksByCategoryInAndPropositionFalseOrderByAverageDesc(categories);
     }

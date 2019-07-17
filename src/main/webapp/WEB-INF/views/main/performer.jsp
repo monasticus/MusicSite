@@ -41,30 +41,37 @@
                         </c:otherwise>
                     </c:choose>
 
-                <div class="small-inf">
-                    Your rating:
-                </div>
-                <a href="/performer/${performer.id}/setRate/1">
-                    <i class="tune fas fa-music" data-rating-tune="1"></i>
-                </a>
-                <a href="/performer/${performer.id}/setRate/2">
-                    <i class="tune fas fa-music" data-rating-tune="2"></i>
-                </a>
-                <a href="/performer/${performer.id}/setRate/3">
-                    <i class="tune fas fa-music" data-rating-tune="3"></i>
-                </a>
-                <a href="/performer/${performer.id}/setRate/4">
-                    <i class="tune fas fa-music" data-rating-tune="4"></i>
-                </a>
-                <a href="/performer/${performer.id}/setRate/5">
-                    <i class="tune fas fa-music" data-rating-tune="5"></i>
-                </a>
+            <div class="small-inf">
+                Your rating:
+            </div>
+            <a href="/performer/${performer.id}/setRate/1">
+                <i class="tune fas fa-music" data-rating-tune="1"></i>
+            </a>
+            <a href="/performer/${performer.id}/setRate/2">
+                <i class="tune fas fa-music" data-rating-tune="2"></i>
+            </a>
+            <a href="/performer/${performer.id}/setRate/3">
+                <i class="tune fas fa-music" data-rating-tune="3"></i>
+            </a>
+            <a href="/performer/${performer.id}/setRate/4">
+                <i class="tune fas fa-music" data-rating-tune="4"></i>
+            </a>
+            <a href="/performer/${performer.id}/setRate/5">
+                <i class="tune fas fa-music" data-rating-tune="5"></i>
+            </a>
             </div>
         </div>
         <div class="ens-average">
             <p>
                 ${performer.average}
             </p>
+        </div>
+        <div class="ens-page-categories">
+            Categories:
+            <c:forEach var="category" items="${performer.categories}">
+                                            <span class="ens-categories"><c:out
+                                                    value="${category.name}"/></span>
+            </c:forEach>
         </div>
     </div>
 
@@ -81,31 +88,30 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <ul class="list-group">
-                        <c:forEach var="album" items="${performer.albums}">
-                            <li class="performer-album list-group-item list-group-item-primary"><a
+                        <c:forEach var="album" items="${performerAlbums}">
+                            <li class="list-group-item list-group-item-primary"><a
                                     href="/albums/${album.id}">${album.name}
                                 (${album.yearOfPublication})</a></li>
                         </c:forEach>
-
-                        <p>
-                            albums
-                        </p>
-
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-
-                    <ul>
-                        <c:forEach var="track" items="${performer.tracks}">
-                            <c:if test="${track.album == null}">
-                                <li><a href="/tracks/${track.id}">${track.name} (${track.yearOfPublication})</a></li>
-                            </c:if>
-                        </c:forEach>
-                    </ul>
-                    <p>
-                        tracks
-                    </p>
-
+                    <c:choose>
+                        <c:when test="${empty performer.tracks}">
+                            <p class="no-data">
+                                Track list is empty.
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <ul class="list-group">
+                                <c:forEach var="track" items="${performerTracks}">
+                                    <li class="list-group-item list-group-item-primary"><a
+                                            href="/tracks/${track.id}">${track.name}
+                                        (${track.yearOfPublication})</a></li>
+                                </c:forEach>
+                            </ul>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

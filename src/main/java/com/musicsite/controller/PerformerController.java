@@ -3,7 +3,9 @@ package com.musicsite.controller;
 
 import com.musicsite.entity.*;
 import com.musicsite.repository.*;
+import com.musicsite.service.AlbumService;
 import com.musicsite.service.PerformerService;
+import com.musicsite.service.TrackService;
 import com.musicsite.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,18 @@ import java.util.List;
 public class PerformerController {
     private PerformerService performerService;
     private UserService userService;
+    private AlbumService albumService;
+    private TrackService trackService;
 
     @Autowired
     public PerformerController(PerformerService performerService,
-                               UserService userService) {
+                               UserService userService,
+                               AlbumService albumService,
+                               TrackService trackService) {
         this.performerService = performerService;
         this.userService = userService;
+        this.albumService = albumService;
+        this.trackService = trackService;
     }
 
 
@@ -43,7 +51,10 @@ public class PerformerController {
 
 
         performerService.orderData(performer);
+        performerService.setPerformerCategories(performer);
         model.addAttribute("performer", performer);
+        model.addAttribute("performerAlbums", albumService.getPerformerAlbumsWithoutPropositions(performer));
+        model.addAttribute("performerTracks", trackService.getPerformerTracksWithoutPropositions(performer));
 
         return "main/performer";
     }
