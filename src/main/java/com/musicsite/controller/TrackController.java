@@ -1,9 +1,8 @@
 package com.musicsite.controller;
 
 import com.musicsite.entity.Album;
-import com.musicsite.entity.Performer;
+import com.musicsite.entity.Track;
 import com.musicsite.service.AlbumService;
-import com.musicsite.service.PerformerService;
 import com.musicsite.service.TrackService;
 import com.musicsite.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,48 +15,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/album")
-public class AlbumController {
+@RequestMapping("/track")
+public class TrackController {
 
     private UserService userService;
-    private AlbumService albumService;
+    private TrackService trackService;
 
     @Autowired
-    public AlbumController(UserService userService,
-                           AlbumService albumService) {
+    public TrackController(UserService userService,
+                           TrackService trackService) {
         this.userService = userService;
-        this.albumService = albumService;
+        this.trackService = trackService;
     }
 
 
     @GetMapping("/{id}")
     public String showForm(@PathVariable String id, Model model, HttpSession session) {
-        Album album = albumService.getAlbum(Long.parseLong(id));
-        if (album == null || album.isProposition())
+        Track track = trackService.getTrack(Long.parseLong(id));
+        if (track == null || track.isProposition())
             return "main/blank";
 
         Long userId = (Long) session.getAttribute("loggedUserId");
         if (userId != null)
-            model.addAttribute("userAlbumRating", userService.getAlbumUserRating(userId, album));
+            model.addAttribute("userAlbumRating", userService.getTrackUserRating(userId, track));
 
 
-        model.addAttribute("album", album);
+        model.addAttribute("track", track);
 
-        return "main/album";
+        return "main/track";
     }
 
-    @GetMapping("/{albumId}/setRate/{rating}")
-    public String ratePerformer(@PathVariable Long albumId, @PathVariable int rating, HttpSession session) {
+    @GetMapping("/{trackId}/setRate/{rating}")
+    public String ratePerformer(@PathVariable Long trackId, @PathVariable int rating, HttpSession session) {
 
         Long userId = (Long) session.getAttribute("loggedUserId");
 
         if (userId == null)
             return "redirect:/login";
 
-        albumService.saveRating(userId, albumId, rating);
-        albumService.updateAlbumAverage(albumId);
+        trackService.saveRating(userId, trackId, rating);
+        trackService.updateTrackAverage(trackId);
 
-        return "redirect:/album/".concat(String.valueOf(albumId));
+        return "redirect:/track/".concat(String.valueOf(trackId));
     }
 
 }

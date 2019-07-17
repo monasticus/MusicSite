@@ -1,9 +1,6 @@
 package com.musicsite.service;
 
-import com.musicsite.entity.Album;
-import com.musicsite.entity.Category;
-import com.musicsite.entity.Performer;
-import com.musicsite.entity.Track;
+import com.musicsite.entity.*;
 import com.musicsite.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +30,10 @@ public class TrackService {
         this.trackRepository = trackRepository;
         this.userRepository = userRepository;
         this.ratingRepository = ratingRepository;
+    }
+
+    public Track getTrack(Long id) {
+        return trackRepository.findOne(id);
     }
 
     public List<Track> getTracksWithPropositions() {
@@ -66,6 +67,28 @@ public class TrackService {
     public void confirmTrack(Long id) {
         Track track = trackRepository.findOne(id);
         track.setProposition(false);
+        trackRepository.save(track);
+    }
+
+    public void saveRating(Long userId, Long trackId, int rating) {
+        User user = userRepository.findOne(userId);
+        Track track = trackRepository.findOne(trackId);
+        Rating userRating = ratingRepository.getRatingByUserAndTrack(user, track);
+
+        if (userRating == null) {
+            userRating = new Rating();
+            userRating.setTrack(track);
+            userRating.setUser(user);
+        }
+
+        userRating.setRating(rating);
+
+        ratingRepository.save(userRating);
+    }
+
+    public void updateTrackAverage(Long trackId) {
+        Track track = trackRepository.findOne(trackId);
+        track.updateAverage();
         trackRepository.save(track);
     }
 }

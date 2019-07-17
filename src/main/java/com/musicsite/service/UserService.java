@@ -1,9 +1,6 @@
 package com.musicsite.service;
 
-import com.musicsite.entity.Album;
-import com.musicsite.entity.Performer;
-import com.musicsite.entity.Rating;
-import com.musicsite.entity.User;
+import com.musicsite.entity.*;
 import com.musicsite.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +44,14 @@ public class UserService {
 
     public int getAlbumUserRating (Long userId, Album album) {
         Rating rating = ratingRepository.getRatingByUserAndAlbum(getUser(userId), album);
+        if (rating == null)
+            return 0;
+        else
+            return rating.getRating();
+    }
+
+    public int getTrackUserRating (Long userId, Track track) {
+        Rating rating = ratingRepository.getRatingByUserAndTrack(getUser(userId), track);
         if (rating == null)
             return 0;
         else
