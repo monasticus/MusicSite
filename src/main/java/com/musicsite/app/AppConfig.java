@@ -56,6 +56,7 @@ public class AppConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
+    // === CONVERTERS
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(getPerformerConverter());
@@ -72,8 +73,9 @@ public class AppConfig implements WebMvcConfigurer {
         return new CategoryConverter();
     }
 
-    @Override
 
+    // === RESOURCE HANDLERS
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }

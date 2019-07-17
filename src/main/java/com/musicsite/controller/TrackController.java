@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,18 +30,30 @@ public class TrackController {
     }
 
 
+
+
     @GetMapping("/{id}")
-    public String showForm(@PathVariable String id, Model model, HttpSession session) {
-        Track track = trackService.getTrack(Long.parseLong(id));
+    public String showForm(@PathVariable Long id, Model model, HttpSession session) {
+        Track track = trackService.getTrack(id);
         if (track == null || track.isProposition())
             return "main/blank";
 
         Long userId = (Long) session.getAttribute("loggedUserId");
         if (userId != null)
-            model.addAttribute("userAlbumRating", userService.getTrackUserRating(userId, track));
+            model.addAttribute("userTrackRating", userService.getTrackUserRating(userId, track));
+
+
+        String hyperlink = trackService.getYoutubeURL(id);
+        model.addAttribute("trackHyperlink", hyperlink);
+
 
 
         model.addAttribute("track", track);
+
+
+
+
+
 
         return "main/track";
     }

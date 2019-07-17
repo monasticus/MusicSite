@@ -2,10 +2,15 @@ package com.musicsite.service;
 
 import com.musicsite.entity.*;
 import com.musicsite.repository.*;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -90,5 +95,25 @@ public class TrackService {
         Track track = trackRepository.findOne(trackId);
         track.updateAverage();
         trackRepository.save(track);
+    }
+
+    public String getYoutubeURL (Long id) {
+        Track track = trackRepository.findOne(id);
+        String websiteURL = "https://www.youtube.com/results?search_query=";
+
+        websiteURL = websiteURL.concat(track.getPerformer().getPseudonym().replaceAll(" ", "+")).concat("+");
+        websiteURL = websiteURL.concat(track.getName().replaceAll(" ", "+"));
+        Connection connect = Jsoup.connect(websiteURL);
+
+        String result = new String();
+        try {
+            Document doc = connect.get();
+            Elements links = doc.select("ol.item-section>li>div>div>div>a");
+            result = links.get(0).attr("href");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result.replace("/watch?v=", "");
     }
 }

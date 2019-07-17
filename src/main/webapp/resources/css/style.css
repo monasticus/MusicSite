@@ -283,12 +283,19 @@ body {
     float: left;
 }
 
+
+
 .ens-image i {
     font-size: 120px;
     margin-top: 30px;
     color: rgb(237, 237, 237);
     top: 35px;
 }
+i.track-icon {
+    font-size: 90px;
+    margin-top: 40px;
+}
+
 
 .ens-basic-information {
     float: left;
@@ -317,14 +324,14 @@ body {
     color: rgb(0, 123, 255);
 }
 
-.album-performer {
+.ens-performer {
     color:white;
     font-size: 25px;
     margin-left: 10px;
     width: 370px;
 }
 
-.album-performer a {
+.ens-performer a {
     font-style: italic;
 }
 

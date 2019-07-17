@@ -2,6 +2,7 @@ package com.musicsite.controller;
 
 import com.musicsite.entity.User;
 import com.musicsite.repository.UserRepository;
+import com.musicsite.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,11 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 
-    UserRepository userRepository;
+    UserService userService;
 
     @Autowired
-    public HomeController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public HomeController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping("/")
@@ -47,7 +48,7 @@ public class HomeController {
 
         User user = null;
         if (success) {
-            user = userRepository.getUserByEmailIgnoreCase(email);
+            user = userService.getUserByEmail(email);
             if (user == null)
                 success = false;
             else if (!BCrypt.checkpw(password, user.getPassword()))
@@ -87,12 +88,12 @@ public class HomeController {
             return "main/register";
         }
 
-        if (userRepository.getUserByEmailIgnoreCase(user.getEmail()) != null) {
+        if (userService.getUserByEmail(user.getEmail()) != null) {
             result.addError(new FieldError("user", "email", "User already exists"));
             return "main/register";
         }
 
-        userRepository.save(user);
+        userService.save(user);
 
         return "redirect:login";
     }

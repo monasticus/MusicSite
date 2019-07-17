@@ -44,7 +44,7 @@
         <c:if test="${not empty tracks}">
             <div class="categories-tracks">
                 <h1 class="ens-type">Tracks</h1>
-                <hr class="horizontal-line-enta">
+                <%@include file="../fragments/tracks-table.jspf"%>
             </div>
         </c:if>
         <c:if test="${empty performers && empty albums && empty tracks}">

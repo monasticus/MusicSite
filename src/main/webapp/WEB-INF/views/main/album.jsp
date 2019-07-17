@@ -41,7 +41,7 @@
                 </p>
             </div>
 
-            <div class="album-performer">
+            <div class="ens-performer">
                 <a href="/performer/${album.performer.id}">${album.performer.pseudonym}</a>
             </div>
             <div class="ratings"
@@ -112,7 +112,7 @@
                     <ol class="track-list">
                         <c:forEach var="track" items="${album.tracks}">
                             <li class="album-single-track"><a
-                                    href="/tracks/${track.id}">${track.name}
+                                    href="/track/${track.id}">${track.name}
                             </a></li>
                         </c:forEach>
                     </ol>

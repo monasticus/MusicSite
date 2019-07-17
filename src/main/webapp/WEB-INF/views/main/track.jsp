@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>musicsite - ${track} </title>
+    <title>musicsite - ${album.name}</title>
     <!-- Bootstrap -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,6 +23,79 @@
 <c:if test="${not empty loggedUserId}">
     <%@include file="../fragments/dashboard.jspf" %>
 </c:if>
+
+
+<section class="ens-page">
+    <div class="ens-top">
+        <div class="ens-image">
+            <i class="track-icon fas fa-music"></i>
+        </div>
+        <div class="ens-basic-information">
+            <div class="ens-name">
+                ${track.name}
+            </div>
+
+            <div class="ens-average">
+                <p>
+                    ${track.average}
+                </p>
+            </div>
+
+            <div class="ens-performer">
+                <a href="/performer/${track.performer.id}">${track.performer.pseudonym}</a>
+            </div>
+
+            <div class="ratings"
+
+                    <c:choose>
+                        <c:when test="${empty userTrackRating}">
+                            data-user-rating='0'>
+                        </c:when>
+                        <c:otherwise>
+                            data-user-rating=${userTrackRating}'>
+                        </c:otherwise>
+                    </c:choose>
+
+            <div class="small-inf">
+                Your rating:
+            </div>
+            <a href="/album/${album.id}/setRate/1">
+                <i class="tune fas fa-music" data-rating-tune="1"></i>
+            </a>
+            <a href="/album/${album.id}/setRate/2">
+                <i class="tune fas fa-music" data-rating-tune="2"></i>
+            </a>
+            <a href="/album/${album.id}/setRate/3">
+                <i class="tune fas fa-music" data-rating-tune="3"></i>
+            </a>
+            <a href="/album/${album.id}/setRate/4">
+                <i class="tune fas fa-music" data-rating-tune="4"></i>
+            </a>
+            <a href="/album/${album.id}/setRate/5">
+                <i class="tune fas fa-music" data-rating-tune="5"></i>
+            </a>
+            </div>
+
+
+        </div>
+
+        <div class="ens-page-categories">
+            Category:
+            <span class="ens-categories">
+            <c:out value="${track.category.name}"/>
+        </span>
+        </div>
+    </div>
+
+
+    <div class="ens-mid">
+        <iframe width="896" height="500" src="https://www.youtube.com/embed/${trackHyperlink}" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+</section>
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

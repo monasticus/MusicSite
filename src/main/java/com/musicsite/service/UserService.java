@@ -30,12 +30,20 @@ public class UserService {
         this.ratingRepository = ratingRepository;
     }
 
-    public User getUser(Long id) {
+    public User getUserById(Long id) {
         return userRepository.findOne(id);
     }
 
+    public User getUserByEmail(String email){
+        return userRepository.getUserByEmailIgnoreCase(email);
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
     public int getPerformerUserRating (Long userId, Performer performer) {
-        Rating rating = ratingRepository.getRatingByUserAndPerformer(getUser(userId), performer);
+        Rating rating = ratingRepository.getRatingByUserAndPerformer(getUserById(userId), performer);
         if (rating == null)
             return 0;
         else
@@ -43,7 +51,7 @@ public class UserService {
     }
 
     public int getAlbumUserRating (Long userId, Album album) {
-        Rating rating = ratingRepository.getRatingByUserAndAlbum(getUser(userId), album);
+        Rating rating = ratingRepository.getRatingByUserAndAlbum(getUserById(userId), album);
         if (rating == null)
             return 0;
         else
@@ -51,7 +59,7 @@ public class UserService {
     }
 
     public int getTrackUserRating (Long userId, Track track) {
-        Rating rating = ratingRepository.getRatingByUserAndTrack(getUser(userId), track);
+        Rating rating = ratingRepository.getRatingByUserAndTrack(getUserById(userId), track);
         if (rating == null)
             return 0;
         else
