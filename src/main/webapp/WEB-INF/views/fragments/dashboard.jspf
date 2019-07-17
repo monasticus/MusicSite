@@ -1,7 +1,6 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="dashboard">
-    <div class="add-options">
+    <div class="dashboard-options">
         <h2>Add</h2>
         <nav class="nav flex-column">
             <a class="nav-link" href="/add/performer">performer</a>
@@ -12,4 +11,11 @@
             </c:if>
         </nav>
     </div>
+    <c:if test="${capo == true}">
+        <div class="dashboard-options">
+            <a class="admin-headline admin" href="/adm/propositions">
+            Propositions
+            </a>
+        </div>
+    </c:if>
 </section>
