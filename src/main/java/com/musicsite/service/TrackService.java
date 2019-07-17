@@ -64,8 +64,8 @@ public class TrackService {
         return trackRepository.findAll();
     }
 
-    public List<Track> getOnlyTracks() {
-        return trackRepository.getTracksByPropositionFalseOrderByAverageDesc();
+    public List<Track> getTracksByPropositions(boolean value) {
+        return trackRepository.getTracksByPropositionOrderByAverageDesc(value);
     }
 
     public List<Track> getPerformerTracksWithoutPropositions(Performer performer) {

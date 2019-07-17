@@ -30,14 +30,15 @@
                 ${track.name}
             </div>
 
-            <div class="ens-average">
-                <p>
-                    ${track.average}
-                </p>
-            </div>
+
 
             <div class="ens-performer">
                 <a href="/performer/${track.performer.id}">${track.performer.pseudonym}</a>
+            </div>
+            <div class="ranking-rate rounded-sm border border-dark bg-success">
+                <div>
+                    ${track.average}
+                </div>
             </div>
 
             <div class="ratings"

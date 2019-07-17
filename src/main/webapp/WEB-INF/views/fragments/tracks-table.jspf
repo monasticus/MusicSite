@@ -37,7 +37,7 @@
                     </div>
 
                 </td>
-                <td class="ranking-ens-average">
+                <td class="ranking-rate rounded-sm border border-dark bg-success">
                     <div>${track.average}</div>
                 </td>
 

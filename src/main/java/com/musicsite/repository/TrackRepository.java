@@ -20,7 +20,7 @@ public interface TrackRepository extends JpaRepository<Track, Long> {
 
     List<Track> getTracksByPerformerAndPropositionFalseOrderByYearOfPublicationDesc(Performer performer);
 
-    List<Track> getTracksByPropositionFalseOrderByAverageDesc();
+    List<Track> getTracksByPropositionOrderByAverageDesc(boolean value);
 
 
     List<Track> getTracksByCategoryAndPropositionFalseOrderByAverageDesc(Category category);

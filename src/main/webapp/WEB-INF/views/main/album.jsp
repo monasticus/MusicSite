@@ -30,14 +30,16 @@
                 ${album.name} (${album.yearOfPublication})
             </div>
 
-            <div class="ens-average">
-                <p>
-                    ${album.average}
-                </p>
-            </div>
+
 
             <div class="ens-performer">
                 <a href="/performer/${album.performer.id}">${album.performer.pseudonym}</a>
+            </div>
+
+            <div class="ranking-rate rounded-sm border border-dark bg-success">
+                <div>
+                    ${album.average}
+                </div>
             </div>
             <div class="ratings"
 

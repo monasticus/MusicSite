@@ -38,7 +38,7 @@ public class RankingController {
                 model.addAttribute("albums", albumService.getAlbumPropositionsAverageOrdered());
                 return "ranking/albums";
             case "tracks":
-                model.addAttribute("tracks", trackService.getOnlyTracks());
+                model.addAttribute("tracks", trackService.getTracksByPropositions(false));
                 return "ranking/tracks";
             case "categories" :
                 model.addAttribute("categories", categoryService.getActiveCategories());

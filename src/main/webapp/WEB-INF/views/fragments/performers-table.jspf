@@ -21,7 +21,7 @@
                             </c:forEach>
                         </div>
                 </td>
-                <td class="ranking-ens-average">
+                <td class="ranking-rate rounded-sm border border-dark bg-success">
                     <div>${performer.average}</div>
                 </td>
 

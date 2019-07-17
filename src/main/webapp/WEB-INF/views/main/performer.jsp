@@ -29,10 +29,10 @@
             <div class="ens-name">
                 ${performer.pseudonym}
             </div>
-            <div class="ens-average">
-                <p>
+            <div class="ranking-rate rounded-sm border border-dark bg-success">
+                <div>
                     ${performer.average}
-                </p>
+                </div>
             </div>
             <div class="ratings"
 
