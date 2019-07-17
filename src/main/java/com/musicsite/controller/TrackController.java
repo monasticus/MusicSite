@@ -46,14 +46,7 @@ public class TrackController {
         String hyperlink = trackService.getYoutubeURL(id);
         model.addAttribute("trackHyperlink", hyperlink);
 
-
-
         model.addAttribute("track", track);
-
-
-
-
-
 
         return "main/track";
     }

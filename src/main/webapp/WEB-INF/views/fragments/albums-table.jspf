@@ -27,13 +27,19 @@
 
                 <c:if test="${not empty capo}">
                     <td class="admin-column">
-                        <button class="admin-options"
-                                onclick="document.location.href='/adm/album/remove/${album.id}'">Remove
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                                onclick="document.location.href='/adm/album/remove/${album.id}'">
+                            Remove
                         </button>
+
                         <br>
-                        <button class="admin-options"
-                                onclick="document.location.href='/adm/album/edit/${album.id}'">Edit
+
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"
+                                onclick="document.location.href='/adm/album/edit/${album.id}'">
+                            Edit
                         </button>
+
                     </td>
                 </c:if>
             </tr>

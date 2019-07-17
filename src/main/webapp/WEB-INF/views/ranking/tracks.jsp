@@ -20,8 +20,8 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<section class="ranking-page">
-    <h1 class="ranking-ens-type">Tracks</h1>
+<div class="container border border-danger">
+    <h1 class="heading">Tracks</h1>
 
 
     <c:choose>
@@ -49,7 +49,7 @@
     </c:choose>
 
 
-</section>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

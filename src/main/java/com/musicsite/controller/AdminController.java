@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("adm/")
+@RequestMapping("/adm")
 public class AdminController {
 
     private PerformerService performerService;
@@ -97,5 +97,22 @@ public class AdminController {
         }
 
         return "redirect:/adm/propositions";
+    }
+
+    @RequestMapping("/{itemType}/remove/{id}")
+    public String removeItem(@PathVariable String itemType, @PathVariable Long id){
+        switch (itemType) {
+            case "performer":
+                performerService.removePerformer(id);
+                break;
+            case "album":
+                albumService.removeAlbum(id);
+                break;
+            case "track":
+                trackService.removeTrack(id);
+                break;
+        }
+
+        return "redirect:/ranking".concat(itemType).concat("s");
     }
 }

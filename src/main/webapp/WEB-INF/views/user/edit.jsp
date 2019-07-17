@@ -21,27 +21,30 @@
 <body>
 <%@include file="../fragments/header.jspf"%>
 
-<div class="container register-form">
+<div class="container my-form">
     <h1>Register</h1>
     <form:form method="post" modelAttribute="user">
-
+    <div class="form-group">
         Username: <br>
-        <form:input path="username"/>
+        <form:input path="username" cssClass="form-control"/>
         <form:errors path="username" cssClass="error" element="div"/><br>
-
+    </div>
+    <div class="form-group">
         First Name: <br>
-        <form:input path="firstName"/>
+        <form:input path="firstName" cssClass="form-control"/>
         <form:errors path="firstName" cssClass="error" element="div"/><br>
-
+    </div>
+    <div class="form-group">
         Email: <br>
-        <form:input path="email"/>
+        <form:input path="email" cssClass="form-control"/>
         <form:errors path="email" cssClass="error" element="div"/><br>
-
+    </div>
+    <div class="form-group">
         Enter the password: <br>
-        <form:password path="password"/>
+        <form:password path="password" cssClass="form-control"/>
         <form:errors path="password" cssClass="error" element="div"/><br>
-
-        <br><input type="submit" value="Update">
+    </div>
+        <br><input type="submit" value="Update" class=" btn btn-primary">
 
     </form:form>
 </div>
