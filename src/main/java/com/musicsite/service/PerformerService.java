@@ -40,23 +40,24 @@ public class PerformerService {
         return performerRepository.findOne(id);
     }
 
-    public List<Performer> getPerformers() {
+    public List<Performer> getPerformersWithPropositions() {
         return performerRepository.findAll();
     }
 
-    public List<Performer> getPerformerPropositions() {
+    public List<Performer> getOnlyPerformers() {
         return performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
     }
 
-    public List<Performer> getPerformerPropositionsWithCategories() {
-        return performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
+    public List<Performer> getPerformersWithCategories() {
+        return setPerformersCategories(performerRepository.getPerformersByPropositionFalseOrderByAverageDesc());
     }
 
-    public void setPerformersCategories(List<Performer> performers) {
+    public List<Performer> setPerformersCategories(List<Performer> performers) {
         performers.forEach(this::setPerformerCategories);
+        return performers;
     }
 
-    public void setPerformerCategories(Performer performer) {
+    public Performer setPerformerCategories(Performer performer) {
         List<Category> categories = new ArrayList<>();
 
         for (Album album : performer.getAlbums()) {
@@ -75,6 +76,7 @@ public class PerformerService {
         }
 
         performer.setCategories(categories);
+        return performer;
     }
 
     @Transactional(propagation = Propagation.NEVER)
@@ -114,21 +116,7 @@ public class PerformerService {
 
     public List<Performer> getPerformersByCategories(List<Category> categories) {
 
-//        List<Performer> categoryPerformers = new ArrayList<>();
-//        List<Performer> allPerformers = getPerformerPropositions();
-//        setPerformersCategories(allPerformers);
-//        for (Performer performer : allPerformers) {
-//            for (Category category : performer.getCategories()) {
-//                if (categories.contains(category)){
-//                    categoryPerformers.add(performer);
-//                    break;
-//                }
-//
-//            }
-//        }
-
-
-        List<Performer> performers = getPerformerPropositions()
+        List<Performer> performers = getOnlyPerformers()
                 .stream()
                 .filter(p -> p.getAlbums()
                         .stream()
@@ -144,4 +132,17 @@ public class PerformerService {
         return performers;
     }
 
+    public List<Performer> getOnlyPerformerPropositions() {
+        return performerRepository.getPerformersByPropositionTrue();
+    }
+
+    public void removePerformer(Long id) {
+        performerRepository.delete(id);
+    }
+
+    public void confirmPerformer(Long id) {
+        Performer performer = performerRepository.findOne(id);
+        performer.setProposition(false);
+        performerRepository.save(performer);
+    }
 }

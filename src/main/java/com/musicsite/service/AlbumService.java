@@ -33,16 +33,30 @@ public class AlbumService {
         this.ratingRepository = ratingRepository;
     }
 
-    public List<Album> getAlbums() {
+    public List<Album> getAlbumsWithPropositions() {
         return albumRepository.findAll();
     }
 
-    public List<Album> getAlbumPropositions() {
+    public List<Album> getOnlyAlbumPropositions() {
+        return albumRepository.getAlbumsByPropositionTrue();
+    }
+
+    public List<Album> getAlbumPropositionsAverageOrdered() {
         return albumRepository.getAlbumsByPropositionFalseOrderByAverageDesc();
     }
 
     public List<Album> getAlbumsByCategories(List<Category> categories) {
-        return albumRepository.getAlbumsByCategoriesAndPropositionFalseOrderByAverageDesc(categories);
+        return albumRepository.getAlbumsByCategoriesInAndPropositionFalseOrderByAverageDesc(categories);
+    }
+
+    public void removeAlbum(Long id) {
+        albumRepository.delete(id);
+    }
+
+    public void confirmAlbum(Long id) {
+        Album album = albumRepository.findOne(id);
+        album.setProposition(false);
+        albumRepository.save(album);
     }
 
 }

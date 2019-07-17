@@ -18,5 +18,5 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     List<Album> getAlbumsByPropositionTrue();
     List<Album> getAlbumsByPropositionFalseOrderByAverageDesc();
     List<Album> getAlbumsByCategoriesAndPropositionFalseOrderByAverageDesc(Category category);
-    List<Album> getAlbumsByCategoriesAndPropositionFalseOrderByAverageDesc(List<Category> categories);
+    List<Album> getAlbumsByCategoriesInAndPropositionFalseOrderByAverageDesc(List<Category> categories);
 }

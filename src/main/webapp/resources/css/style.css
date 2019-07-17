@@ -387,6 +387,7 @@ body {
 h1.ranking-ens-type {
     margin-left: 30px;
     font-size: 50px;
+    color: white;
 }
 
 p.no-data {
@@ -508,4 +509,22 @@ h1.ens-type {
     border-right: 1px solid white;
     margin-left: 2px;
     margin-right: 2px;
+}
+
+.propositions-table {
+    width: 820px;
+    margin: 70px auto 0;
+}
+
+.propositions-table th{
+    color: white;
+}
+
+.propositions-table td{
+    color: chocolate;
+}
+
+.propositions-heading {
+    color: white;
+    font-size: 17px;
 }

@@ -1,35 +1,32 @@
 package com.musicsite.controller;
 
 import com.musicsite.entity.Category;
-import com.musicsite.repository.AlbumRepository;
 import com.musicsite.repository.CategoryRepository;
-import com.musicsite.repository.PerformerRepository;
-import com.musicsite.repository.TrackRepository;
+import com.musicsite.service.AlbumService;
+import com.musicsite.service.PerformerService;
+import com.musicsite.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("adm/")
 public class AdminController {
 
-    private PerformerRepository performerRepository;
-    private TrackRepository trackRepository;
-    private AlbumRepository albumRepository;
+    private PerformerService performerService;
+    private TrackService trackService;
+    private AlbumService albumService;
     private CategoryRepository categoryRepository;
 
     @Autowired
-    public AdminController(PerformerRepository performerRepository, TrackRepository trackRepository, AlbumRepository albumRepository, CategoryRepository categoryRepository) {
-        this.performerRepository = performerRepository;
-        this.trackRepository = trackRepository;
-        this.albumRepository = albumRepository;
+    public AdminController(PerformerService performerService, TrackService trackService, AlbumService albumService, CategoryRepository categoryRepository) {
+        this.performerService = performerService;
+        this.trackService = trackService;
+        this.albumService = albumService;
         this.categoryRepository = categoryRepository;
     }
 
@@ -56,5 +53,49 @@ public class AdminController {
         model.addAttribute("success", true);
 
         return "admin/category";
+    }
+
+    @GetMapping("/propositions")
+    public String displayPropositions(Model model) {
+        model.addAttribute("performers", performerService.getOnlyPerformerPropositions());
+        model.addAttribute("albums", albumService.getOnlyAlbumPropositions());
+        model.addAttribute("tracks", trackService.getOnlyTrackPropositions());
+
+        return "admin/propositions";
+
+    }
+
+    @RequestMapping("/propositions/{type}/discard")
+    public String discardProposition(@PathVariable String type, @RequestParam Long id) {
+        switch (type) {
+            case "performer":
+                performerService.removePerformer(id);
+                break;
+            case "album":
+                albumService.removeAlbum(id);
+                break;
+            case "track":
+                trackService.removeTrack(id);
+                break;
+        }
+
+        return "redirect:/adm/propositions";
+    }
+
+    @RequestMapping("/propositions/{type}/confirm")
+    public String confirmProposition(@PathVariable String type, @RequestParam Long id) {
+        switch (type) {
+            case "performer":
+                performerService.confirmPerformer(id);
+                break;
+            case "album":
+                albumService.confirmAlbum(id);
+                break;
+            case "track":
+                trackService.confirmTrack(id);
+                break;
+        }
+
+        return "redirect:/adm/propositions";
     }
 }

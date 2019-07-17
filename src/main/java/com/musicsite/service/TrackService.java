@@ -1,6 +1,7 @@
 package com.musicsite.service;
 
 import com.musicsite.entity.Category;
+import com.musicsite.entity.Performer;
 import com.musicsite.entity.Track;
 import com.musicsite.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +34,29 @@ public class TrackService {
         this.ratingRepository = ratingRepository;
     }
 
-    public List<Track> getTracks() {
+    public List<Track> getTracksWithPropositions() {
         return trackRepository.findAll();
     }
 
-    public List<Track> getTrackPropositions() {
+    public List<Track> getOnlyTracks() {
         return trackRepository.getTracksByPropositionFalseOrderByAverageDesc();
     }
 
     public List<Track> getTracksByCategories(List<Category> categories) {
-        return trackRepository.getTracksByCategoryAndPropositionFalseOrderByAverageDesc(categories);
+        return trackRepository.getTracksByCategoryInAndPropositionFalseOrderByAverageDesc(categories);
+    }
+
+    public List<Track> getOnlyTrackPropositions() {
+        return trackRepository.getTracksByPropositionTrue();
+    }
+
+    public void removeTrack(Long id) {
+        trackRepository.delete(id);
+    }
+
+    public void confirmTrack(Long id) {
+        Track track = trackRepository.findOne(id);
+        track.setProposition(false);
+        trackRepository.save(track);
     }
 }

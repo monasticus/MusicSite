@@ -10,11 +10,11 @@ INSERT INTO musicsite.performers (id, average, first_name, last_name, propositio
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (3, 0, 'Earl', 'Simmons', true, 'DMX');
 
 -- =============== ALBUMS
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (1, 0, 'szacunek ludzi ulicy', false, '2006', 1);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (2, 0, 'najlepszą obroną jest tak', false, '2005', 1);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (3, 0, 'kaya', false, '1978', 2);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (4, 0, 'flesh of my flesh blood of my blood', true, '1998', 3);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (5, 0, 'reedukacja', true, '2011', 1);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (1, 0, 'Szacunek ludzi ulicy', false, '2006', 1);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (2, 0, 'Najlepszą obroną jest tak', false, '2005', 1);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (3, 0, 'Kaya', false, '1978', 2);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (4, 0, 'Flesh of my flesh blood of my blood', true, '1998', 3);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (5, 0, 'Reedukacja', true, '2011', 1);
 
 -- =============== TRACKS
 INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, performer_id, category_id) VALUES (1, 0, 'my niggas (skit)', true, '1998', 4, 3, 1);

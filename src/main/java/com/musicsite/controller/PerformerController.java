@@ -30,10 +30,6 @@ public class PerformerController {
         this.userService = userService;
     }
 
-//    @ModelAttribute("performers")
-//    public List<Performer> getPerformers() {
-//        return performerService.getPerformers();
-//    }
 
     @GetMapping("/{id}")
     public String showForm(@PathVariable String id, Model model, HttpSession session) {

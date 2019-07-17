@@ -1,56 +1,37 @@
-<div>
+<span class="propositions-heading">Albums</span>
     <table class="table table-hover">
-
-        <!-- SCOPE="COL" -->
         <thead>
         <tr>
             <th scope="col"> #</th>
-            <th scope="col"> Exercise ID</th>
-            <th scope="col"> Exercise title</th>
-            <th scope="col"> User ID</th>
-            <th scope="col"> Username</th>
-            <th scope="col"> Created</th>
+            <th scope="col"> Performer</th>
+            <th scope="col"> Name</th>
+            <th scope="col"> Published</th>
+            <th scope="col"> Categories</th>
             <th scope="col"> Action</th>
         </tr>
         </thead>
 
-        <!-- ROWS -->
         <tbody>
 
-        <!-- FOR EACH OF SOLUTIONS GET THE VALUES -->
-        <c:forEach var="sol" items="${solutions}">
+        <c:forEach var="album" items="${albums}" varStatus="nums">
             <tr>
-                <!-- COL: SOLUTION ID -->
-                <th scope="row"> ${sol.id}</th>
-                <!-- COL: EXERCISE ID -->
-                <td> ${sol.exerciseId} </td>
-                <!-- COL: EXERCISE TITLE -->
-                <td> ${sol.exerciseTitle} </td>
-                <!-- COL: USER ID -->
-                <td> ${sol.userId} </td>
-                <!-- COL: USERNAME -->
-                <td> ${sol.username} </td>
-                <!-- COL: CREATED -->
-                <td> ${sol.created} </td>
-                <!-- COL: ACTIONS -->
+                <th scope="row"> ${nums.count}</th>
+                <td> ${album.performer.pseudonym} </td>
+                <td> ${album.name} </td>
+                <td> ${album.yearOfPublication} </td>
                 <td>
-                    <!-- ADMIN AND NORMAL OPTIONS -->
-                    <c:choose>
-
-                        <c:when test="${param.mode.equals('admin')}">
-                            <a href="/solutions/edit?id=${sol.id}" style=" margin-right: 3px">Edit</a> <br>
-                            <a href="/solutions/delete?id=${sol.id}">Delete</a> <br>
-                            <a href="/solutions/details?back=admin&id=${sol.id}">Details</a>
-                        </c:when>
-
-                        <c:otherwise>
-                            <a href="/solutions/details?back=home&id=${sol.id}">Details</a>
-                        </c:otherwise>
-
-                    </c:choose>
+                    <c:forEach var="category" items="${album.categories}">
+                        <c:out value="${category.name}"/><br>
+                    </c:forEach>
+                </td>
+                <td>
+                    <button class="admin-options" onclick="document.location.href='/adm/propositions/album/confirm?id=${album.id}'">Confirm</button><br>
+                    <button class="admin-options" onclick="document.location.href='/adm/propositions/album/discard?id=${album.id}'">Discard</button>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-</div>
+
+
+

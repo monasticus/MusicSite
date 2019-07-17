@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "AdminAuthenticationFilter", urlPatterns = {"/adm/*", "/adm/add/*"})
+@WebFilter(filterName = "AdminAuthenticationFilter",
+        urlPatterns = {
+                "/adm/*",
+                "/adm/add/*",
+                "/adm/propositions/*/*"})
+
 public class AdminAuthenticationFilter implements Filter {
 
 

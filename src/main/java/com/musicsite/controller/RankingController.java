@@ -32,13 +32,13 @@ public class RankingController {
 
         switch (enta) {
             case "performers":
-                model.addAttribute("performers", performerService.getPerformerPropositionsWithCategories());
+                model.addAttribute("performers", performerService.getPerformersWithCategories());
                 return "ranking/performers";
             case "albums":
-                model.addAttribute("albums", albumService.getAlbumPropositions());
+                model.addAttribute("albums", albumService.getAlbumPropositionsAverageOrdered());
                 return "ranking/albums";
             case "tracks":
-                model.addAttribute("tracks", trackService.getTrackPropositions());
+                model.addAttribute("tracks", trackService.getOnlyTracks());
                 return "ranking/tracks";
             case "categories" :
                 model.addAttribute("categories", categoryService.getActiveCategories());
