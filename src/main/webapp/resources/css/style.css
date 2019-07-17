@@ -1,8 +1,14 @@
+body {
+    height: 150%;
+    background-color: black;
+    /*background-color: rgb(229,255,204);*/
+    font-family: Michroma, sans-serif;
+}
+
+/*========== HEADER =======================*/
+
 header {
     background: black;
-    position: relative;
-    height: 370px;
-    border-bottom: 2px solid white;
 }
 
 .logo button {
@@ -45,108 +51,34 @@ header {
     margin-top: 10px;
 }
 
-.searcher {
-
-    margin: 0 auto;
-    width: 450px;
-}
-
-.searcher input {
-    margin: 0 auto;
-    font-size: 15px;
-}
-
-.searcher button {
-    width: 100px;
-    height: 32px;
-    font-size: 16px;
-    color: rgb(237, 237, 0);
-    border: 1px solid rgb(237, 237, 0);
-}
-
-.menu {
-    position: relative;
-    bottom: 0;
-    left: 50%;
-    margin-top: 32px;
-    margin-right: -50%;
-    transform: translate(-50%);
-    background-color: black;
-    border-color: grey;
-    border-radius: 3%;
-}
-
-.menu div {
-    position: absolute;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%);
-}
-
-.menu div li {
-    padding-right: 10px;
-    padding-left: 10px;
-}
-
-.menu a {
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px white;
-}
-
-.menu li:hover {
-    background-color: rgb(77, 77, 77);
-}
-
 #highlighted-elem {
     background-color: rgb(237, 237, 0);
 }
 
 #highlighted-elem a {
     color: black;
-    font-weight: bold;
-    text-shadow: 0 0 1px black;
 }
 
-h1 {
-    margin-top: 40px;
-    margin-bottom: 50px;
-}
+/*========== FORMS =======================*/
 
-.login-form,
-.register-form {
+.my-form {
     background-color: rgb(237, 237, 237);
     width: 600px;
-    position: relative;
-    font-size: 16px;
     text-align: center;
     margin-top: 50px;
+    padding-bottom: 40px;
 }
 
-.login-form {
-    height: 440px;
+.my-form h1 {
+    margin-top: 40px;
+    padding-top: 25px;
+    margin-bottom: 30px;
 }
 
-.login-form span {
-    color: rgb(0, 0, 204);
-}
-
-input {
-    background: #ffffff;
-    padding: 8px;
-    width: 500px;
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    margin-bottom: 10px;
-    line-height: 25px;
-}
-
-body {
-    height: 150%;
-    background-color: black;
-    /*background-color: rgb(229,255,204);*/
-    font-family: Michroma, sans-serif;
+.my-form p#register-link {
+    margin-right: 10px;
+    text-align: right;
+    font-size: 14px;
 }
 
 .error {
@@ -164,19 +96,13 @@ body {
     font-size: 14px;
 }
 
+/*========== USER OPTIONS =======================*/
+
 .logout {
-    border: 1px solid white;
-    color: white;
     right: 5px;
     top: 5px;
     z-index: 1000;
     position: absolute;
-    width: 150px;
-    height: 45px;
-    background-color: black;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 7%;
 }
 
 .logout i {
@@ -184,51 +110,23 @@ body {
     margin-right: 10px;
 }
 
-.dashboard {
-    background-color: black;
-    z-index: 1000;
-    width: 230px;
-    height: 160%;
-    font-weight: bold;
+#carouselExampleControls {
+    margin-top: 40px;
+}
+
+.div-track{
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.video-track {
     position: absolute;
-
-}
-
-.dashboard .dashboard-options {
-    margin-top: 100px;
-    margin-left: 50px;
-
-}
-
-.dashboard h2 {
-    color: rgb(184, 184, 184);
-
-    font-size: 30px;
-}
-
-.dashboard a.nav-link {
-    color: white;
-    font-size: 20px;
-    margin-left: 25px;
-}
-
-.dashboard a:hover {
-    color: rgb(237, 237, 0);
-    text-decoration: none;
-}
-
-.admin {
-    border: 1px solid rgb(184, 184, 184);
-}
-
-.admin:hover {
-    border: 1px solid rgb(237, 237, 0);
-}
-
-.admin-headline {
-    font-size: 30px;
-    color: rgb(184, 184, 184);
-    font-weight: normal;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .page-not-found {

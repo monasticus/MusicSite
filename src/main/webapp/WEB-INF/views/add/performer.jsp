@@ -19,14 +19,13 @@
     </style>
 </head>
 <body>
-<%@include file="../fragments/header.jspf"%>
-<%@include file="../fragments/dashboard.jspf" %>
-<div class="container register-form">
+<%@include file="../fragments/header.jspf" %>
+<div class="container my-form">
     <h1>New performer</h1>
     <c:choose>
-       <c:when test="${duplicate == true}">
-           <p class="error"><c:out value="Performer already exists in database."/> </p>
-       </c:when>
+        <c:when test="${duplicate == true}">
+            <p class="error"><c:out value="Performer already exists in database."/></p>
+        </c:when>
         <c:when test="${success == true}">
             <p class="success">
                 <span><c:out value="Performer has been successfully added."/></span>
@@ -37,23 +36,25 @@
     </c:choose>
 
     <form:form method="post" modelAttribute="performer">
-
-        Pseudonym / Group name: <br>
-        <form:input path="pseudonym"/>
-        <form:errors path="pseudonym" cssClass="error" element="div"/><br>
-
-        *First Name: <br>
-        <form:input path="firstName"/>
-        <form:errors path="firstName" cssClass="error" element="div"/><br>
-
-        *Last Name: <br>
-        <form:input path="lastName"/>
-        <form:errors path="lastName" cssClass="error" element="div"/><br>
-
+        <div class="form-group">
+            Pseudonym / Group name: <br>
+            <form:input path="pseudonym" class="form-control"/>
+            <form:errors path="pseudonym" cssClass="error" element="div"/><br>
+        </div>
+        <div class="form-group">
+            *First Name: <br>
+            <form:input path="firstName" class="form-control"/>
+            <form:errors path="firstName" cssClass="error" element="div"/><br>
+        </div>
+        <div class="form-group">
+            *Last Name: <br>
+            <form:input path="lastName" class="form-control"/>
+            <form:errors path="lastName" cssClass="error" element="div"/><br>
+        </div>
         <p class="form-information">
             <c:out value="*not necessary to save performer"/>
         </p>
-        <br><input type="submit" value="Save performer">
+        <br><input type="submit" value="Save" class=" btn btn-primary">
 
     </form:form>
 

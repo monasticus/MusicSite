@@ -20,7 +20,6 @@
 </head>
 <body>
 <%@include file="../fragments/header.jspf" %>
-<%@include file="../fragments/dashboard.jspf" %>
 <section class="ens-page">
     <h1 class="ranking-ens-type">Propositions</h1>
 

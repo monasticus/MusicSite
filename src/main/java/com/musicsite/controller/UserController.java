@@ -2,6 +2,7 @@ package com.musicsite.controller;
 
 import com.musicsite.entity.User;
 import com.musicsite.repository.UserRepository;
+import com.musicsite.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -20,30 +20,27 @@ import javax.validation.Valid;
 @RequestMapping("/usr")
 public class UserController {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/settings")
     public String editUser(Model model, HttpSession session) {
-        session.setAttribute("chances", 3);
-        User user = userRepository.findOne((Long) session.getAttribute("id"));
+        User user = userService.getUserById((Long) session.getAttribute("loggedUserId"));
         model.addAttribute("user", user);
         return "user/edit";
     }
 
     @PostMapping("/settings")
-    public String updateUser(@Valid User user, BindingResult result, HttpSession session) {
-        User originUser = userRepository.findOne((Long) session.getAttribute("id"));
+    public String updateUser(@Valid User newUser, BindingResult result, HttpSession session) {
+        User originUser = userService.getUserById((Long) session.getAttribute("loggedUserId"));
 
-        if (!BCrypt.checkpw(user.getTempPassword(), originUser.getPassword())) {
-            session.setAttribute("chances", ((int) session.getAttribute("chances") - 1));
-            if ((int) session.getAttribute("chances") == 0)
-                return "redirect:/logout";
-
+        if (!BCrypt.checkpw(newUser.getPassword(), originUser.getPassword())) {
             result.addError(new FieldError("user", "email", "Incorrect password!"));
             return "user/edit";
         }
@@ -52,20 +49,21 @@ public class UserController {
             return "user/edit";
 
 
-        if (userRepository.getUserByEmailIgnoreCase(user.getEmail()) != null && !userRepository.getUserByEmailIgnoreCase(user.getEmail()).getId().equals(originUser.getId())) {
-
+        if (isEmailNonUnique(newUser, originUser)) {
             result.addError(new FieldError("user", "email", "User with this email already exists"));
             return "user/edit";
         }
 
-        originUser.setEmail(user.getEmail());
-        originUser.setFirstName(user.getFirstName());
-        originUser.setUsername(user.getUsername());
 
-        session.setAttribute("name", user.getFirstName());
+        userService.updateUser(originUser, newUser);
+        session.setAttribute("name", originUser.getFirstName());
 
-        userRepository.save(originUser);
+
 
         return "redirect:/";
+    }
+
+    private boolean isEmailNonUnique(@Valid User newUser, User originUser) {
+        return userService.getUserByEmail(newUser.getEmail()) != null && !userService.getUserByEmail(newUser.getEmail()).getId().equals(originUser.getId());
     }
 }

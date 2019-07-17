@@ -1,7 +1,8 @@
 package com.musicsite.controller;
 
+import com.musicsite.entity.Track;
 import com.musicsite.entity.User;
-import com.musicsite.repository.UserRepository;
+import com.musicsite.service.TrackService;
 import com.musicsite.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
-    UserService userService;
+    private UserService userService;
+    private TrackService trackService;
 
     @Autowired
-    public HomeController(UserService userService) {
+    public HomeController(UserService userService, TrackService trackService) {
         this.userService = userService;
+        this.trackService = trackService;
     }
 
     @RequestMapping("/")
-    public String displayHomePage() {
+    public String displayHomePage(Model model) {
+        List<Track> tracks = trackService.getRandomTracks(3);
+        model.addAttribute("firstTrack", trackService.getYoutubeURL(tracks.get(0).getId()));
+        model.addAttribute("secondTrack", trackService.getYoutubeURL(tracks.get(1).getId()));
+        model.addAttribute("thirdTrack", trackService.getYoutubeURL(tracks.get(2).getId()));
         return "main/home";
     }
 
@@ -67,7 +75,7 @@ public class HomeController {
         return "redirect:/";
     }
 
-    private boolean isNotCorrect(@RequestParam String email, @RequestParam String password) {
+    private boolean isNotCorrect(String email, String password) {
         return email == null || email.trim().equals("") || password == null || password.trim().equals("");
     }
 
@@ -80,11 +88,24 @@ public class HomeController {
     @PostMapping("/register")
     public String createUser(@Valid User user, BindingResult result,
                              @RequestParam String confirmPassword) {
+
         if (result.hasErrors())
             return "main/register";
 
-        if (!user.getTempPassword().equals(confirmPassword)) {
+
+        if (confirmPassword.length() < 1) {
+            result.addError(new FieldError("user", "password", "Confirm password!"));
+            return "main/register";
+        }
+
+
+        if (!confirmPassword.equals(user.getPassword())) {
             result.addError(new FieldError("user", "password", "Passwords do not match!"));
+            return "main/register";
+        }
+
+        if (user.getPassword().length() < 8 || user.getPassword().length() > 30){
+            result.addError(new FieldError("user", "password", "The password must contain between 8 and 30 characters!"));
             return "main/register";
         }
 

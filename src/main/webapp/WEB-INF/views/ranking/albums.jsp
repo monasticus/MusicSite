@@ -20,11 +20,6 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<c:if test="${not empty loggedUserId}">
-    <%@include file="../fragments/dashboard.jspf" %>
-</c:if>
-
-
 <section class="ranking-page">
     <h1 class="ranking-ens-type">Albums</h1>
 

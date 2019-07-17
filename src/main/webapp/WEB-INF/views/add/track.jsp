@@ -20,13 +20,12 @@
     </style>
 </head>
 <body>
-<%@include file="../fragments/header.jspf"%>
-<%@include file="../fragments/dashboard.jspf" %>
-<div class="container register-form">
+<%@include file="../fragments/header.jspf" %>
+<div class="container my-form">
     <h1>New track</h1>
     <c:choose>
         <c:when test="${duplicate == true}">
-            <p class="error"><c:out value="Track already exists in database."/> </p>
+            <p class="error"><c:out value="Track already exists in database."/></p>
         </c:when>
         <c:when test="${success == true}">
             <p class="success">
@@ -38,41 +37,51 @@
     </c:choose>
 
     <form:form method="post" modelAttribute="track">
+        <div class="form-group">
+            Name: <br>
+            <form:input path="name" class="form-control"/>
+            <form:errors path="name" cssClass="error" element="div"/><br>
+        </div>
+        <div class="form-group">
+            Year (YYYY): <br>
+            <form:input path="yearOfPublication" class="form-control" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
+            <form:errors path="yearOfPublication" cssClass="error" element="div"/><br>
+        </div>
+        <div class="form-group">
+            Performer: <br>
+            <input name="performerName" class="form-control"/><br>
+        </div>
 
-        Name: <br>
-        <form:input path="name"/>
-        <form:errors path="name" cssClass="error" element="div"/><br>
-
-        Year (YYYY): <br>
-        <form:input path="yearOfPublication" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
-        <form:errors path="yearOfPublication" cssClass="error" element="div"/><br>
-
-        Performer: <br>
-        <input name="performerName"/><br>
         <c:if test="${emptyPerformerName == true}">
-            <div class="error"> The field cannot be empty </div><br>
+            <div class="error"> The field cannot be empty</div>
+            <br>
         </c:if>
         <c:if test="${performerDoesNotExists == true}">
             <div class="error"> The database does not contain such a performer.<br>
                 If you want, first add the performer
-            </div><br>
+            </div>
+            <br>
         </c:if>
 
+    <div class="form-group">
         Album: <br>
-        <input name="albumName" placeholder="if not applicable - skip"/><br>
+        <input name="albumName" class="form-control" placeholder="if not applicable - skip"/><br>
+    </div>
         <c:if test="${albumDoesNotExists == true}">
             <div class="error"> The database does not contain such an album.<br>
                 If you want, first add the album.
-            </div><br>
+            </div>
+            <br>
         </c:if>
 
         Category:<br>
         <form:select path="category"
                      items="${categories}"
                      itemLabel="name"
-                     itemValue="id"/> <br>
+                     itemValue="id"
+                     class="form-control"/> <br>
 
-        <br><input type="submit" value="Save track">
+        <br><input type="submit" value="Save track" class=" btn btn-primary">
 
     </form:form>
 

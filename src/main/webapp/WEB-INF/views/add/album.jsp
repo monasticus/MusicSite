@@ -19,13 +19,12 @@
     </style>
 </head>
 <body>
-<%@include file="../fragments/header.jspf"%>
-<%@include file="../fragments/dashboard.jspf" %>
-<div class="container register-form">
+<%@include file="../fragments/header.jspf" %>
+<div class="container my-form">
     <h1>New album</h1>
     <c:choose>
         <c:when test="${duplicate == true}">
-            <p class="error"><c:out value="Album already exists in database."/> </p>
+            <p class="error"><c:out value="Album already exists in database."/></p>
         </c:when>
         <c:when test="${success == true}">
             <p class="success">
@@ -38,33 +37,41 @@
 
     <form:form method="post" modelAttribute="album">
 
-        Name: <br>
-        <form:input path="name"/>
-        <form:errors path="name" cssClass="error" element="div"/><br>
-
-        Year (YYYY): <br>
-        <form:input path="yearOfPublication" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
-        <form:errors path="yearOfPublication" cssClass="error" element="div"/><br>
-
-        Performer: <br>
-        <input name="performerName"/><br>
+        <div class="form-group">
+            Name: <br>
+            <form:input path="name" class="form-control"/>
+            <form:errors path="name" cssClass="error" element="div"/><br>
+        </div>
+        <div class="form-group">
+            Year (YYYY): <br>
+            <form:input path="yearOfPublication" class="form-control" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
+            <form:errors path="yearOfPublication" cssClass="error" element="div"/><br>
+        </div>
+        <div class="form-group">
+            Performer: <br>
+            <input name="performerName" class="form-control"/><br>
+        </div>
         <c:if test="${emptyPerformerName == true}">
-            <div class="error"> The field cannot be empty </div><br>
+            <div class="error"> The field cannot be empty</div>
+            <br>
         </c:if>
         <c:if test="${performerDoesNotExists == true}">
             <div class="error"> The database does not contain such a performer.<br>
                 If you want, first add the performer
-            </div><br>
+            </div>
+            <br>
         </c:if>
+
 
         <form:select path="categories"
                      items="${categories}"
                      itemLabel="name"
                      itemValue="id"
-                     multiple="true"/>
+                     multiple="true"
+                     class="form-control"/>
         <form:errors path="categories" cssClass="error" element="div"/><br>
 
-        <br><input type="submit" value="Save album">
+        <br><input type="submit" value="Save album" class=" btn btn-primary">
 
     </form:form>
 

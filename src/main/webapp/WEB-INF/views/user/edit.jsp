@@ -20,6 +20,7 @@
 </head>
 <body>
 <%@include file="../fragments/header.jspf"%>
+
 <div class="container register-form">
     <h1>Register</h1>
     <form:form method="post" modelAttribute="user">
@@ -37,8 +38,8 @@
         <form:errors path="email" cssClass="error" element="div"/><br>
 
         Enter the password: <br>
-        <form:password path="tempPassword"/>
-        <form:errors path="tempPassword" cssClass="error" element="div"/><br>
+        <form:password path="password"/>
+        <form:errors path="password" cssClass="error" element="div"/><br>
 
         <br><input type="submit" value="Update">
 

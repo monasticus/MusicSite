@@ -65,4 +65,11 @@ public class UserService {
         else
             return rating.getRating();
     }
+
+    public void updateUser(User originUser, User newUser) {
+        originUser.setFirstName(newUser.getFirstName());
+        originUser.setUsername(newUser.getUsername());
+        originUser.setEmail(newUser.getEmail());
+        userRepository.save(originUser);
+    }
 }

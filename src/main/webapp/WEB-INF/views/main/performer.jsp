@@ -20,10 +20,6 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<c:if test="${not empty loggedUserId}">
-    <%@include file="../fragments/dashboard.jspf" %>
-</c:if>
-
 <section class="ens-page">
     <div class="ens-top">
         <div class="ens-image">

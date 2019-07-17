@@ -19,33 +19,43 @@
     </style>
 </head>
 <body>
-<%@include file="../fragments/header.jspf"%>
-<div class="container register-form">
-<h1>Register</h1>
-<form:form method="post" modelAttribute="user">
+<%@include file="../fragments/header.jspf" %>
+<div class="container my-form">
+    <h1>Register</h1>
+    <form:form method="post" modelAttribute="user">
 
-    Username: <br>
-    <form:input path="username"/>
-    <form:errors path="username" cssClass="error" element="div"/><br>
+        <div class="form-group">
+            Username:
+            <form:input path="username" class="form-control"/>
+            <form:errors path="username" cssClass="error" element="div"/>
+        </div>
 
-    First Name: <br>
-    <form:input path="firstName"/>
-    <form:errors path="firstName" cssClass="error" element="div"/><br>
+        <div class="form-group">
+            First Name:
+            <form:input path="firstName" class="form-control"/>
+            <form:errors path="firstName" cssClass="error" element="div"/>
+        </div>
 
-    Email: <br>
-    <form:input path="email"/>
-    <form:errors path="email" cssClass="error" element="div"/><br>
+        <div class="form-group">
+            Email:
+            <form:input path="email" class="form-control"/>
+            <form:errors path="email" cssClass="error" element="div"/>
+        </div>
 
-    Password: <br>
-    <form:password path="tempPassword"/>
-    <form:errors path="tempPassword" cssClass="error" element="div"/><br>
+        <div class="form-group">
+            Password:
+            <form:password path="password" class="form-control"/>
+            <form:errors path="password" cssClass="error" element="div"/>
+        </div>
 
-    Confirm the password: <br>
-    <input type="password" name="confirmPassword" /><br>
+        <div class="form-group">
+            Confirm the password: <br>
+            <input type="password" name="confirmPassword" class="form-control"/>
+        </div>
 
-    <br><input type="submit" value="Register">
+        <br><input type="submit" value="Register" class=" btn btn-primary">
 
-</form:form>
+    </form:form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

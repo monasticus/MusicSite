@@ -35,17 +35,13 @@ public class User extends Ens{
     @Column(length = 100)
     private String password;
 
-    @Transient
-    @NotBlank
-    @Size(min = 8, max = 50)
-    private String tempPassword;
+    @Column(columnDefinition = "BIT")
+    private boolean admin;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Rating> ratings;
 
-    @Column(columnDefinition = "BIT")
-    private boolean admin;
 
     public User() {
         admin = false;
@@ -85,28 +81,12 @@ public class User extends Ens{
         this.firstName = firstName;
     }
 
-    public String getTempPassword() {
-        return tempPassword;
-    }
-
-    public void setTempPassword(String tempPassword) {
-        this.tempPassword = tempPassword;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     public boolean isAdmin() {
@@ -117,10 +97,17 @@ public class User extends Ens{
         this.admin = admin;
     }
 
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 
     @PrePersist
     public void hashPassword() {
-        password = BCrypt.hashpw(tempPassword, BCrypt.gensalt());
+        password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     @Override

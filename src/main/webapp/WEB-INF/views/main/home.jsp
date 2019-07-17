@@ -19,9 +19,44 @@
 </head>
 <body>
 <%@include file="../fragments/header.jspf" %>
-<c:if test="${not empty loggedUserId}">
-    <%@include file="../fragments/dashboard.jspf" %>
-</c:if>
+
+<div class="container">
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="div-track">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/${firstTrack}" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen class="video-track"></iframe>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="div-track">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/${secondTrack}" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen class="video-track"></iframe>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="div-track">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/${thirdTrack}" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen class="video-track"></iframe>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

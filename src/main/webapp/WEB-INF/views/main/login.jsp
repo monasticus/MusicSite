@@ -19,21 +19,28 @@
     </style>
 </head>
 <body>
-<%@include file="../fragments/header.jspf"%>
-<div class="container login-form">
+<%@include file="../fragments/header.jspf" %>
+
+<div class="container my-form">
     <h1>Login</h1>
     <c:if test="${correct == false}">
         <p class="error">Data is not correct!</p>
     </c:if>
     <form method="post">
-        Email: <br>
-        <input type="email" name="email" required/><br>
-        Password: <br>
-        <input type="password" name="password" required/><br>
+        <div class="form-group">
+            Email: <br>
+            <input type="email" name="email" class="form-control" required/>
+        </div>
 
-        <br><input type="submit" value="Log In">
+        <div class="form-group">
+            Password: <br>
+            <input type="password" name="password" class="form-control" required/>
+            <p id="register-link"> <a class="register" href="/register"> Register </a></p>
+        </div>
+
+        <br><input type="submit" value="Log In" class=" btn btn-primary">
     </form>
-        <span> <a class="register" href="/register"> Register </a></span>
+
 
 </div>
 

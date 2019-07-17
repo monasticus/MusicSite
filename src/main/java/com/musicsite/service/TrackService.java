@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional
@@ -41,6 +43,35 @@ public class TrackService {
         return trackRepository.findOne(id);
     }
 
+    public List<Track> getRandomTracks(int bound) {
+        List<Track> allTracks = trackRepository.findAll();
+
+        if (allTracks.size() <= 3)
+            return allTracks;
+
+        return getRandomTracks(allTracks, bound);
+    }
+
+    private List<Track> getRandomTracks(List<Track> allTracks, int bound) {
+        List<Integer> indexes = new ArrayList<>();
+        Random random = new Random();
+
+        while (indexes.size() < bound) {
+            int attempt = random.nextInt(allTracks.size());
+            if (indexes.contains(attempt))
+                attempt = random.nextInt(allTracks.size());
+            else
+                indexes.add(attempt);
+        }
+
+        List<Track> randomTracks = new ArrayList<>();
+        randomTracks.add(allTracks.get(indexes.get(0)));
+        randomTracks.add(allTracks.get(indexes.get(1)));
+        randomTracks.add(allTracks.get(indexes.get(2)));
+
+        return randomTracks;
+    }
+
     public List<Track> getTracksWithPropositions() {
         return trackRepository.findAll();
     }
@@ -61,7 +92,7 @@ public class TrackService {
         return trackRepository.getTracksByPropositionTrue();
     }
 
-    public List<Track> getTracksByQuery (String query) {
+    public List<Track> getTracksByQuery(String query) {
         return trackRepository.customGetTracksByQuery(query);
     }
 
@@ -97,7 +128,7 @@ public class TrackService {
         trackRepository.save(track);
     }
 
-    public String getYoutubeURL (Long id) {
+    public String getYoutubeURL(Long id) {
         Track track = trackRepository.findOne(id);
         String websiteURL = "https://www.youtube.com/results?search_query=";
 
