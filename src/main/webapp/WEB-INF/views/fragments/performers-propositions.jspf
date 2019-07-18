@@ -22,8 +22,8 @@
                 <td> <c:out value="${performer.firstName}" default="---"/> </td>
                 <td> <c:out value="${performer.lastName}" default="---"/> </td>
                 <td>
-                    <button class="admin-options" onclick="document.location.href='/adm/propositions/performer/confirm?id=${performer.id}'">Confirm</button><br>
-                    <button class="admin-options" onclick="document.location.href='/adm/propositions/performer/discard?id=${performer.id}'">Discard</button>
+                    <button class="btn btn-outline-success" onclick="document.location.href='/adm/propositions/performer/confirm?id=${performer.id}'">Confirm</button><br>
+                    <button class="btn btn-outline-danger" onclick="document.location.href='/adm/propositions/performer/discard?id=${performer.id}'">Discard</button>
                 </td>
             </tr>
         </c:forEach>

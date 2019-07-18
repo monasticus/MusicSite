@@ -35,10 +35,10 @@ public class RankingController {
                 model.addAttribute("performers", performerService.getPerformersWithCategories());
                 return "ranking/performers";
             case "albums":
-                model.addAttribute("albums", albumService.getAlbumPropositionsAverageOrdered());
+                model.addAttribute("albums", albumService.getAlbumsByPropositionOrderByAverage(false));
                 return "ranking/albums";
             case "tracks":
-                model.addAttribute("tracks", trackService.getTracksByPropositions(false));
+                model.addAttribute("tracks", trackService.getTracksByPropositionsOrderByAverage(false));
                 return "ranking/tracks";
             case "categories" :
                 model.addAttribute("categories", categoryService.getActiveCategories());
@@ -55,8 +55,8 @@ public class RankingController {
         if (categorySelector.getCategoryList().size() < 1)
             return "ranking/categories";
 
-        model.addAttribute("albums", albumService.getAlbumsByCategories(categorySelector.getCategoryList()));
-        model.addAttribute("tracks", trackService.getTracksByCategories(categorySelector.getCategoryList()));
+        model.addAttribute("albums", albumService.getAlbumsByCategoriesAndPropositionsOrderByAverage(categorySelector.getCategoryList(), false));
+        model.addAttribute("tracks", trackService.getTracksByCategoriesAndPropositionOrderByAverage(categorySelector.getCategoryList(), false));
         model.addAttribute("performers", performerService.getPerformersByCategories(categorySelector.getCategoryList()));
         model.addAttribute("categories", categoryService.getActiveCategories());
         return "ranking/categories";

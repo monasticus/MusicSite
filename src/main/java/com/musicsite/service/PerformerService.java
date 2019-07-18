@@ -3,6 +3,7 @@ package com.musicsite.service;
 import com.musicsite.entity.*;
 import com.musicsite.repository.*;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,19 +38,28 @@ public class PerformerService {
     }
 
     public Performer getPerformer(Long id) {
-        return performerRepository.findOne(id);
+        Performer performer = performerRepository.findOne(id);
+        Hibernate.initialize(performer.getAlbums());
+        performer.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories()));
+        Hibernate.initialize(performer.getTracks());
+        Hibernate.initialize(performer.getRatings());
+        setPerformerCategories(performer);
+        return performer;
     }
 
-    public List<Performer> getPerformersWithPropositions() {
-        return performerRepository.findAll();
-    }
 
     public List<Performer> getOnlyPerformers() {
-        return performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
+        List<Performer> performers = performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
+        performers.forEach(p -> Hibernate.initialize(p.getAlbums()));
+        performers.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));
+        performers.forEach(p -> Hibernate.initialize(p.getTracks()));
+        performers.forEach(p -> Hibernate.initialize(p.getRatings()));
+        performers.forEach(this::setPerformerCategories);
+        return performers;
     }
 
     public List<Performer> getPerformersWithCategories() {
-        return setPerformersCategories(performerRepository.getPerformersByPropositionFalseOrderByAverageDesc());
+        return setPerformersCategories(getOnlyPerformers());
     }
 
     public List<Performer> setPerformersCategories(List<Performer> performers) {
@@ -133,11 +143,21 @@ public class PerformerService {
     }
 
     public List<Performer> getOnlyPerformerPropositions() {
-        return setPerformersCategories(performerRepository.getPerformersByPropositionTrue());
+        List<Performer> propositions = performerRepository.getPerformersByPropositionTrue();
+        propositions.forEach(p -> Hibernate.initialize(p.getAlbums()));
+        propositions.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));
+        propositions.forEach(p -> Hibernate.initialize(p.getTracks()));
+        propositions.forEach(p -> Hibernate.initialize(p.getRatings()));
+        return setPerformersCategories(propositions);
     }
 
     public List<Performer> getPerformersByQuery (String query) {
-        return setPerformersCategories(performerRepository.customGetPerformersByQuery(query));
+        List<Performer> performers = performerRepository.customGetPerformersByQuery(query);
+        performers.forEach(p -> Hibernate.initialize(p.getAlbums()));
+        performers.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));
+        performers.forEach(p -> Hibernate.initialize(p.getTracks()));
+        performers.forEach(p -> Hibernate.initialize(p.getRatings()));
+        return setPerformersCategories(performers);
     }
 
     public void removePerformer(Long id) {

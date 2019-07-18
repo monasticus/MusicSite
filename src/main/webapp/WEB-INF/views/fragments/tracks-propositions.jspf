@@ -23,11 +23,11 @@
                 <c:out value="${track.category.name}"/>
             </td>
             <td>
-                <button class="admin-options"
+                <button class="btn btn-outline-success"
                         onclick="document.location.href='/adm/propositions/track/confirm?id=${track.id}'">Confirm
                 </button>
                 <br>
-                <button class="admin-options"
+                <button class="btn btn-outline-danger"
                         onclick="document.location.href='/adm/propositions/track/discard?id=${track.id}'">Discard
                 </button>
             </td>

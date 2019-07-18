@@ -1,7 +1,6 @@
 package com.musicsite.controller;
 
 import com.musicsite.entity.Category;
-import com.musicsite.repository.CategoryRepository;
 import com.musicsite.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,8 +61,8 @@ public class AdminController {
     @GetMapping("/propositions")
     public String displayPropositions(Model model) {
         model.addAttribute("performers", performerService.getOnlyPerformerPropositions());
-        model.addAttribute("albums", albumService.getOnlyAlbumPropositions());
-        model.addAttribute("tracks", trackService.getOnlyTrackPropositions());
+        model.addAttribute("albums", albumService.getAlbumsByPropositions(true));
+        model.addAttribute("tracks", trackService.getTracksByPropositions(true));
 
         return "admin/propositions";
 

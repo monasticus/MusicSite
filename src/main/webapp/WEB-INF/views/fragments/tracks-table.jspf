@@ -10,7 +10,7 @@
                 <td>
                     <div class="ranking-ens-name">
                         <div class="bg-warning category-list">
-                        <a href="/tracks/${track.id}">
+                        <a href="/track/${track.id}">
                                 ${track.name} (${track.yearOfPublication})
                         </a>
                         </div>
@@ -28,11 +28,10 @@
                         </c:choose>
 
                         <div class="category-list bg-info">
-                            Categories:
-                            <c:forEach var="category" items="${track.categories}">
-                                            <span class="categories-ens-category"><c:out
-                                                    value="${category.name}"/></span>
-                            </c:forEach>
+                            Category:
+                             <span class="categories-ens-category"><c:out
+                                                    value="${track.category.name}"/></span>
+
                         </div>
                     </div>
 
@@ -41,7 +40,7 @@
                     <div>${track.average}</div>
                 </td>
 
-                <c:if test="${not empty capo}">
+                <c:if test="${capo == true}">
                     <td class="admin-column">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
                                 onclick="document.location.href='/adm/track/remove/${track.id}'">

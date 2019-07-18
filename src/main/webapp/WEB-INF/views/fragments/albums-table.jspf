@@ -25,7 +25,7 @@
                     <div>${album.average}</div>
                 </td>
 
-                <c:if test="${not empty capo}">
+                <c:if test="${capo == true}">
                     <td class="admin-column">
 
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"

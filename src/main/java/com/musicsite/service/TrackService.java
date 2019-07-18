@@ -2,6 +2,7 @@ package com.musicsite.service;
 
 import com.musicsite.entity.*;
 import com.musicsite.repository.*;
+import org.hibernate.Hibernate;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -40,7 +42,11 @@ public class TrackService {
     }
 
     public Track getTrack(Long id) {
-        return trackRepository.findOne(id);
+        Track track = trackRepository.findOne(id);
+        Hibernate.initialize(track.getRatings());
+        Hibernate.initialize(track.getAlbum().getRatings());
+        Hibernate.initialize(track.getAlbum().getCategories());
+        return track;
     }
 
 
@@ -56,31 +62,39 @@ public class TrackService {
                 tracks.add(track);
         }
 
+        tracks.forEach(t -> Hibernate.initialize(t.getRatings()));
+
         return tracks;
     }
 
-    public List<Track> getTracksWithPropositions() {
-        return trackRepository.findAll();
-    }
-
     public List<Track> getTracksByPropositions(boolean value) {
-        return trackRepository.getTracksByPropositionOrderByAverageDesc(value);
+        List<Track> tracks =  trackRepository.getTracksByProposition(value);
+        tracks.forEach(p -> Hibernate.initialize(p.getRatings()));
+        return tracks;
     }
 
-    public List<Track> getPerformerTracksWithoutPropositions(Performer performer) {
-        return trackRepository.getTracksByPerformerAndPropositionFalseOrderByYearOfPublicationDesc(performer);
+    public List<Track> getTracksByPropositionsOrderByAverage(boolean value) {
+        List<Track> tracks =  trackRepository.getTracksByPropositionOrderByAverageDesc(value);
+        tracks.forEach(p -> Hibernate.initialize(p.getRatings()));
+        return tracks;
     }
 
-    public List<Track> getTracksByCategories(List<Category> categories) {
-        return trackRepository.getTracksByCategoryInAndPropositionFalseOrderByAverageDesc(categories);
+    public List<Track> getTracksByPerformerAndPropositionsOrderByYear(Performer performer, boolean value) {
+        List<Track> tracks =  trackRepository.getTracksByPerformerAndPropositionOrderByYearOfPublicationDesc(performer, value);
+        tracks.forEach(p -> Hibernate.initialize(p.getRatings()));
+        return tracks;
     }
 
-    public List<Track> getOnlyTrackPropositions() {
-        return trackRepository.getTracksByPropositionTrue();
+    public List<Track> getTracksByCategoriesAndPropositionOrderByAverage(List<Category> categories, boolean value) {
+        List<Track> tracks =  trackRepository.getDistinctTracksByCategoryInAndPropositionOrderByAverageDesc(categories, value).stream().distinct().collect(Collectors.toList());
+        tracks.forEach(p -> Hibernate.initialize(p.getRatings()));
+        return tracks;
     }
 
     public List<Track> getTracksByQuery(String query) {
-        return trackRepository.customGetTracksByQuery(query);
+        List<Track> tracks =  trackRepository.customGetTracksByQuery(query);
+        tracks.forEach(p -> Hibernate.initialize(p.getRatings()));
+        return tracks;
     }
 
     public void removeTrack(Long id) {

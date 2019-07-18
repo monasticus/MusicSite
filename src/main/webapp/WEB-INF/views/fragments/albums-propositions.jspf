@@ -25,8 +25,8 @@
                     </c:forEach>
                 </td>
                 <td>
-                    <button class="admin-options" onclick="document.location.href='/adm/propositions/album/confirm?id=${album.id}'">Confirm</button><br>
-                    <button class="admin-options" onclick="document.location.href='/adm/propositions/album/discard?id=${album.id}'">Discard</button>
+                    <button class="btn btn-outline-success" onclick="document.location.href='/adm/propositions/album/confirm?id=${album.id}'">Confirm</button><br>
+                    <button class="btn btn-outline-danger" onclick="document.location.href='/adm/propositions/album/discard?id=${album.id}'">Discard</button>
                 </td>
             </tr>
         </c:forEach>

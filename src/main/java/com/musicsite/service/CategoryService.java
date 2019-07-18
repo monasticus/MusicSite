@@ -2,6 +2,7 @@ package com.musicsite.service;
 
 import com.musicsite.entity.Category;
 import com.musicsite.repository.*;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,32 +13,18 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class CategoryService {
-
-    private PerformerRepository performerRepository;
-    private AlbumRepository albumRepository;
-    private TrackRepository trackRepository;
-    private UserRepository userRepository;
-    private RatingRepository ratingRepository;
     private CategoryRepository categoryRepository;
 
     @Autowired
-    public CategoryService(PerformerRepository performerRepository,
-                           AlbumRepository albumRepository,
-                           TrackRepository trackRepository,
-                           UserRepository userRepository,
-                           RatingRepository ratingRepository,
-                           CategoryRepository categoryRepository) {
-
-        this.performerRepository = performerRepository;
-        this.albumRepository = albumRepository;
-        this.trackRepository = trackRepository;
-        this.userRepository = userRepository;
-        this.ratingRepository = ratingRepository;
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
     public List<Category> getCategories() {
-        return categoryRepository.findAll();
+        List<Category> categories = categoryRepository.findAll();
+        categories.forEach(c -> Hibernate.initialize(c.getTracks()));
+        categories.forEach(c -> Hibernate.initialize(c.getAlbums()));
+        return categories;
     }
 
     public List<Category> getActiveCategories() {

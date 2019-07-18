@@ -2,22 +2,18 @@ package com.musicsite.controller;
 
 
 import com.musicsite.entity.*;
-import com.musicsite.repository.*;
 import com.musicsite.service.AlbumService;
 import com.musicsite.service.PerformerService;
 import com.musicsite.service.TrackService;
 import com.musicsite.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("/performer")
@@ -51,10 +47,9 @@ public class PerformerController {
 
 
         performerService.orderData(performer);
-        performerService.setPerformerCategories(performer);
         model.addAttribute("performer", performer);
-        model.addAttribute("performerAlbums", albumService.getPerformerAlbums(performer, false));
-        model.addAttribute("performerTracks", trackService.getPerformerTracksWithoutPropositions(performer));
+        model.addAttribute("performerAlbums", albumService.getAlbumsByPerformerAndPropositionOrderByYear(performer, false));
+        model.addAttribute("performerTracks", trackService.getTracksByPerformerAndPropositionsOrderByYear(performer, false));
 
         return "main/performer";
     }

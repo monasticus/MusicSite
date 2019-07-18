@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "albums")
@@ -157,4 +158,17 @@ public class Album extends Opus {
     public String toString() {
         return performer.getPseudonym() + " - " + yearOfPublication + " - " + name;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Album album = (Album) o;
+//        return id.equals(album.id);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id);
+//    }
 }
