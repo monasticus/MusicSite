@@ -31,10 +31,12 @@
         <c:when test="${justConfirmed == true}">
             <div class="success">
                 Thank You for registration on
-                <p class="music-side">
-                <span class="musicsite-music">music</span><span class="musicsite-site">site.</span> !
-                </p>
-                    You can log in now.
+                <div class="musicsite-elem-parent">
+                    <p class="musicsite-elem">
+                        <span class="musicsite-music">music</span><span class="musicsite-site">site.</span>
+                    </p>
+                </div>
+                You can log in now.
             </div>
         </c:when>
         <c:when test="${justConfirmed == false}">
@@ -45,15 +47,7 @@
         </c:when>
     </c:choose>
 
-    <div class="success">
-        Thank You for registration on
-        <div class="musicsite-elem-parent">
-            <p class="musicsite-elem">
-                <span class="musicsite-music">music</span><span class="musicsite-site">site.</span>
-            </p>
-        </div>
-        You can log in now.
-    </div>
+
 
 
     <form method="post">

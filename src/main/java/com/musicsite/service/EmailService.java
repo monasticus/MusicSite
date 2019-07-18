@@ -46,7 +46,7 @@ public class EmailService {
         String userId = String.format(Objects.requireNonNull(template.getText()), id, hashUsername);
 
 
-        helper.setText(userId, true); // Use this or above line.
+        helper.setText(userId, true);
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setFrom("musicsite.mailservice.com");
