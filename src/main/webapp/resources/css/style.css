@@ -340,6 +340,7 @@ h1.ranking-ens-type {
 }
 
 p.no-data {
+    color: white;
     margin-left: 60px;
     font-size: 20px;
     font-style: italic;

@@ -52,4 +52,8 @@ public class CategoryService {
             return activeCategories;
     }
 
+    public void save (Category category) {
+        categoryRepository.save(category);
+    }
+
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CategorySelector {
 
-    List<Category> categoryList = new ArrayList<>();
+    private List<Category> categoryList = new ArrayList<>();
 
     public List<Category> getCategoryList() {
         return categoryList;

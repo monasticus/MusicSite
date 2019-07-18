@@ -30,16 +30,14 @@ public class Album extends Opus {
     @NotNull(groups = AlbumValidationGroup.class)
     private Performer performer;
 
-    @OneToMany(mappedBy = "album", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "album")
     private List<Track> tracks = new ArrayList<>();
 
     @Pattern(regexp = "\\d{4}", groups = {AlbumValidationGroup.class, Default.class})
     @Column(name = "year_of_publication")
     private String yearOfPublication;
 
-    @OneToMany(mappedBy = "album", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "album")
     private List<Rating> ratings = new ArrayList<>();
 
     @Column(precision = 3, scale = 2)
@@ -48,7 +46,7 @@ public class Album extends Opus {
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @NotEmpty
     private List<Category> categories = new ArrayList<>();
 

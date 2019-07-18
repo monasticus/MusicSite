@@ -49,6 +49,7 @@
 
             </ul>
             <form action="/search" method="post" class="form-inline my-2 my-lg-0">
+
                 <c:if test="${not empty loggedUserId}">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
@@ -63,6 +64,8 @@
                                 <c:if test="${capo == true}">
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item admin" href="/adm/add/category">add category</a>
+                                    <a class="dropdown-item admin" href="/adm/propositions">list of propositions</a>
+                                    <a class="dropdown-item admin" href="/adm/users">list of users</a>
                                 </c:if>
 
                             </div>

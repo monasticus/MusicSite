@@ -66,8 +66,8 @@ public class AlbumService {
         return albumRepository.getAlbumsByPropositionTrue();
     }
 
-    public List<Album> getPerformerAlbumsWithoutPropositions(Performer performer) {
-        return albumRepository.getAlbumsByPerformerAndPropositionFalseOrderByYearOfPublicationDesc(performer);
+    public List<Album> getPerformerAlbums(Performer performer, boolean value) {
+        return albumRepository.getAlbumsByPerformerAndPropositionOrderByYearOfPublicationDesc(performer, value);
     }
 
     public List<Album> getAlbumPropositionsAverageOrdered() {

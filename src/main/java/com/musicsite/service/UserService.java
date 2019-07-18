@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserService {
@@ -28,6 +30,10 @@ public class UserService {
         this.trackRepository = trackRepository;
         this.userRepository = userRepository;
         this.ratingRepository = ratingRepository;
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     public User getUserById(Long id) {
@@ -71,5 +77,9 @@ public class UserService {
         originUser.setUsername(newUser.getUsername());
         originUser.setEmail(newUser.getEmail());
         userRepository.save(originUser);
+    }
+
+    public void removeUser(Long id) {
+        userRepository.delete(id);
     }
 }

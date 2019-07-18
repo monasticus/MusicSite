@@ -1,8 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>musicsite - albums</title>
+    <title>musicsite - propositions</title>
     <!-- Bootstrap -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,39 +19,45 @@
     </style>
 </head>
 <body>
-
 <%@include file="../fragments/header.jspf" %>
+<section class="ens-page">
+    <h1 class="ranking-ens-type">Propositions</h1>
 
-<div class="container border border-danger">
-    <h1 class="heading">Albums</h1>
+    <div class="propositions-table">
+        <span class="propositions-heading">Users</span>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col"> #</th>
+                <th scope="col"> Username</th>
+                <th scope="col"> First Name</th>
+                <th scope="col"> Email</th>
+                <th scope="col"> Action</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <c:forEach var="user" items="${users}" varStatus="nums">
+                <tr>
+                    <th scope="row"> ${nums.count}</th>
+                    <td> ${user.username} </td>
+                    <td> ${user.firstName} </td>
+                    <td> ${user.email} </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+                                onclick="document.location.href='/adm/user/remove/${user.id}'">
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 
 
-        <c:if test="${empty albums}">
-
-            <p class="no-data">
-                Albums list is empty.
-            </p>
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/performer">add performer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/album">add album</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/track">add track</a>
-                </li>
-            </ul>
-
-        </c:if>
-        <c:if test="${not empty albums}">
-            <%@include file="../fragments/albums-table.jspf"%>
-        </c:if>
-
-
-
-</div>
-
+</section>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

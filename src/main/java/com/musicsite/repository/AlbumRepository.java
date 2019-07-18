@@ -12,14 +12,11 @@ import java.util.List;
 
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
-    List<Album> getAlbumsByPerformer(Performer performer);
     List<Album> getAlbumsByPerformerOrderByYearOfPublicationDesc(Performer performer);
-    List<Album> getAlbumsByPerformerAndPropositionFalseOrderByYearOfPublicationDesc(Performer performer);
+    List<Album> getAlbumsByPerformerAndPropositionOrderByYearOfPublicationDesc(Performer performer, boolean value);
     List<Album> getAlbumsByNameIgnoreCase(String name);
-    Album getFirstAlbumByNameIgnoreCase(String name);
     List<Album> getAlbumsByPropositionTrue();
     List<Album> getAlbumsByPropositionFalseOrderByAverageDesc();
-    List<Album> getAlbumsByCategoriesAndPropositionFalseOrderByAverageDesc(Category category);
     List<Album> getAlbumsByCategoriesInAndPropositionFalseOrderByAverageDesc(List<Category> categories);
 
 

@@ -53,7 +53,7 @@ public class PerformerController {
         performerService.orderData(performer);
         performerService.setPerformerCategories(performer);
         model.addAttribute("performer", performer);
-        model.addAttribute("performerAlbums", albumService.getPerformerAlbumsWithoutPropositions(performer));
+        model.addAttribute("performerAlbums", albumService.getPerformerAlbums(performer, false));
         model.addAttribute("performerTracks", trackService.getPerformerTracksWithoutPropositions(performer));
 
         return "main/performer";

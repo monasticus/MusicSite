@@ -38,8 +38,7 @@ public class User extends Ens{
     @Column(columnDefinition = "BIT")
     private boolean admin;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "user")
     private List<Rating> ratings;
 
 

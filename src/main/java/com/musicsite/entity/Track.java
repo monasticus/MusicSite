@@ -38,16 +38,15 @@ public class Track extends Opus {
     @Column(precision = 3, scale = 2)
     private Double average;
 
-    @OneToMany(mappedBy = "track", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "track")
     private List<Rating> ratings = new ArrayList<>();
-
-    @Column(columnDefinition = "BIT")
-    private boolean proposition;
 
     @ManyToOne
     @NotNull
     private Category category;
+
+    @Column(columnDefinition = "BIT")
+    private boolean proposition;
 
     public Track() {
         proposition = true;

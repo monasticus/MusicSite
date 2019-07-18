@@ -2,9 +2,7 @@ package com.musicsite.controller;
 
 import com.musicsite.entity.Category;
 import com.musicsite.repository.CategoryRepository;
-import com.musicsite.service.AlbumService;
-import com.musicsite.service.PerformerService;
-import com.musicsite.service.TrackService;
+import com.musicsite.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +18,20 @@ public class AdminController {
     private PerformerService performerService;
     private TrackService trackService;
     private AlbumService albumService;
-    private CategoryRepository categoryRepository;
+    private CategoryService categoryService;
+    private UserService userService;
 
     @Autowired
-    public AdminController(PerformerService performerService, TrackService trackService, AlbumService albumService, CategoryRepository categoryRepository) {
+    public AdminController(PerformerService performerService,
+                           TrackService trackService,
+                           AlbumService albumService,
+                           CategoryService categoryService,
+                           UserService userService) {
         this.performerService = performerService;
         this.trackService = trackService;
         this.albumService = albumService;
-        this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @GetMapping("/add/category")
@@ -42,13 +46,13 @@ public class AdminController {
         if (result.hasErrors())
             return "admin/category";
 
-        boolean duplicate = categoryRepository.findAll().stream().anyMatch(c -> c.getName().equals(category.getName()));
+        boolean duplicate = categoryService.getCategories().stream().anyMatch(c -> c.getName().equals(category.getName()));
         if (duplicate) {
             model.addAttribute("duplicate", duplicate);
             return "admin/category";
         }
 
-        categoryRepository.save(category);
+        categoryService.save(category);
         model.addAttribute("category", new Category());
         model.addAttribute("success", true);
 
@@ -100,7 +104,7 @@ public class AdminController {
     }
 
     @RequestMapping("/{itemType}/remove/{id}")
-    public String removeItem(@PathVariable String itemType, @PathVariable Long id){
+    public String removeItem(@PathVariable String itemType, @PathVariable Long id) {
         switch (itemType) {
             case "performer":
                 performerService.removePerformer(id);
@@ -111,8 +115,17 @@ public class AdminController {
             case "track":
                 trackService.removeTrack(id);
                 break;
+            case "user":
+                userService.removeUser(id);
         }
 
         return "redirect:/ranking".concat(itemType).concat("s");
     }
+
+    @RequestMapping("users")
+    public String displayUsers(Model model) {
+        model.addAttribute("users", userService.getUsers());
+        return "admin/users";
+    }
+
 }

@@ -23,12 +23,10 @@ public class Category extends Ens{
     @Column(unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(mappedBy = "categories")
     private List<Album> albums = new ArrayList<>();
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "category")
     private List<Track> tracks = new ArrayList<>();
 
 

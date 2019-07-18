@@ -43,17 +43,16 @@ public class TrackService {
         return trackRepository.findOne(id);
     }
 
+
     public List<Track> getRandomTracks(int bound) {
         List<Track> tracks = new ArrayList<>();
+        List<Long> idList = trackRepository.getIdList();
         Random random = new Random();
 
         while (tracks.size() < bound) {
-            long attempt = (long) random.nextInt(trackRepository.getLastId());
-
+            Long attempt = idList.get(  random.nextInt( idList.size() )  );
             Track track = trackRepository.findOne(attempt);
-            if (track == null || tracks.stream().anyMatch(t -> t.getId().equals(track.getId())))
-                attempt = (long) random.nextInt(trackRepository.getLastId());
-            else
+            if (!tracks.contains(track))
                 tracks.add(track);
         }
 

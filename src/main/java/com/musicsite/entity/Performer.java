@@ -31,20 +31,17 @@ public class Performer extends Ens {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.PERSIST)
     @Column()
     private List<Album> albums = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "performer", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(mappedBy = "performer")
     private List<Track> tracks = new ArrayList<>();
 
     @Column(precision = 3, scale = 2)
     private Double average;
 
-    @OneToMany(mappedBy = "performer", fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "performer")
     private List<Rating> ratings = new ArrayList<>();
 
     @Column(columnDefinition = "BIT")
