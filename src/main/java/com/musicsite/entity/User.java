@@ -38,12 +38,16 @@ public class User extends Ens{
     @Column(columnDefinition = "BIT")
     private boolean admin;
 
+    @Column(columnDefinition = "BIT")
+    private boolean confirmed;
+
     @OneToMany(mappedBy = "user")
     private List<Rating> ratings;
 
 
     public User() {
         admin = false;
+        confirmed = false;
     }
 
     @Override
@@ -102,6 +106,14 @@ public class User extends Ens{
 
     public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 
     @PrePersist

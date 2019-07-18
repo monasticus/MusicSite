@@ -116,6 +116,7 @@ public class AdminController {
                 break;
             case "user":
                 userService.removeUser(id);
+                return "redirect:/adm/users";
         }
 
         return "redirect:/ranking/".concat(itemType).concat("s");

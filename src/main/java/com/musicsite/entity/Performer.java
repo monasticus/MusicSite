@@ -47,7 +47,7 @@ public class Performer extends Ens {
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
-    @OneToMany
+    @OneToMany(mappedBy = "performer")
     private List<Comment> comments = new ArrayList<>();
 
     @Transient

@@ -31,6 +31,7 @@
                 <th scope="col"> Username</th>
                 <th scope="col"> First Name</th>
                 <th scope="col"> Email</th>
+                <th scope="col"> Confirmed</th>
                 <th scope="col"> Action</th>
             </tr>
             </thead>
@@ -43,6 +44,16 @@
                     <td> ${user.username} </td>
                     <td> ${user.firstName} </td>
                     <td> ${user.email} </td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${user.confirmed}">
+                                <span class="success">Yes</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="error">No</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>
                         <a href="/adm/user/remove/${user.id}" class="btn btn-danger"
                            data-toggle="modal"

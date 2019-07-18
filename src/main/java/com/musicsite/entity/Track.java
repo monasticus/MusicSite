@@ -48,7 +48,7 @@ public class Track extends Opus {
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
-    @OneToMany
+    @OneToMany(mappedBy = "track")
     private List<Comment> comments = new ArrayList<>();
 
     public Track() {

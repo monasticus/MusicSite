@@ -51,7 +51,7 @@ public class Album extends Opus {
     @NotEmpty
     private List<Category> categories = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "album")
     private List<Comment> comments = new ArrayList<>();
 
 

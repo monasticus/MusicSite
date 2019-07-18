@@ -2,19 +2,22 @@ package com.musicsite.controller;
 
 import com.musicsite.entity.Track;
 import com.musicsite.entity.User;
+import com.musicsite.service.EmailService;
 import com.musicsite.service.TrackService;
 import com.musicsite.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -25,11 +28,16 @@ public class HomeController {
 
     private UserService userService;
     private TrackService trackService;
+    private EmailService emailService;
+
 
     @Autowired
-    public HomeController(UserService userService, TrackService trackService) {
+    public HomeController(UserService userService,
+                          TrackService trackService,
+                          EmailService emailService) {
         this.userService = userService;
         this.trackService = trackService;
+        this.emailService = emailService;
     }
 
     @RequestMapping("/")
@@ -38,6 +46,7 @@ public class HomeController {
         model.addAttribute("firstTrack", trackService.getYoutubeURL(tracks.get(0).getId()));
         model.addAttribute("secondTrack", trackService.getYoutubeURL(tracks.get(1).getId()));
         model.addAttribute("thirdTrack", trackService.getYoutubeURL(tracks.get(2).getId()));
+
         return "main/home";
     }
 
@@ -65,6 +74,11 @@ public class HomeController {
 
         if (!success) {
             model.addAttribute("correct", success);
+            return "main/login";
+        }
+
+        if (!user.isConfirmed()){
+            model.addAttribute("justConfirmed", false);
             return "main/login";
         }
 
@@ -115,9 +129,39 @@ public class HomeController {
         }
 
         userService.save(user);
+        sendConfirmingEmail(user);
 
         return "redirect:login";
     }
+
+    private void sendConfirmingEmail(@Valid User user) {
+        Long userId = userService.getUserByUsername(user.getUsername()).getId();
+        try {
+            emailService.sendHTMLEmail(user.getEmail(), "Confirm registration", userId, BCrypt.hashpw(user.getUsername(), BCrypt.gensalt()));
+        } catch (MessagingException e) {
+            emailService.sendSimpleMessage(user.getEmail(), "Registration failed", "If you see this message it means that something goes wrong during the registration. Try again.");
+            userService.removeUser(userId);
+        }
+    }
+
+    @RequestMapping("/user-confirm/{id}")
+    public String confirmUser(@PathVariable Long id, @RequestParam String x, Model model) {
+        User user = userService.getUserById(id);
+        if(user.isConfirmed())
+            return "main/blank";
+
+        try {
+            if (!BCrypt.checkpw(user.getUsername(), x))
+                return "main/blank";
+        } catch (IllegalArgumentException e) {
+            return "main/blank";
+        }
+
+        userService.confirm(id);
+        model.addAttribute("justConfirmed", true);
+        return "main/login";
+    }
+
 
     @GetMapping("/logout")
     public String logoutUser(HttpSession session) {

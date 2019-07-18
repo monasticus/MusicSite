@@ -1,19 +1,20 @@
 
 
 -- =============== USERS
-INSERT INTO musicsite.users (id, admin, email, first_name, password, username) VALUES (1, true, 'pss@gmail.com', 'Mr. Hide', '$2a$10$1gb3IF3813JSbZ2X7XERGOVPTYAmIvdOP1MdCs5xVG8DLKEB41uby', 'Dr. Jekyll');
-INSERT INTO musicsite.users (id, admin, email, first_name, password, username) VALUES (2, false, 'blabla@gmail.com', 'Tomasz', '$2a$10$crECq/A.Cdlvb5CTsJAIJ.Pjmxi2xsYBtSFaakYIm2EJtwVzy0kCm', 'Angel');
-INSERT INTO musicsite.users (id, admin, email, first_name, password, username) VALUES (3, false, 'barbara@rabarbar', 'Barbara', '$2a$10$xp2XCf2OIQjcuf02KjbnrupLCrfzAyfE4OAEZN1P0xagIsy4uUIwm', 'Rabarbar');
+INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (1, true, true, 'pss@gmail.com', 'Mr. Hide', '$2a$10$1gb3IF3813JSbZ2X7XERGOVPTYAmIvdOP1MdCs5xVG8DLKEB41uby', 'Dr. Jekyll');
+INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (2, false, true, 'blabla@gmail.com', 'Tomasz', '$2a$10$crECq/A.Cdlvb5CTsJAIJ.Pjmxi2xsYBtSFaakYIm2EJtwVzy0kCm', 'Angel');
+INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (3, false, true, 'barbara@rabarbar', 'Barbara', '$2a$10$xp2XCf2OIQjcuf02KjbnrupLCrfzAyfE4OAEZN1P0xagIsy4uUIwm', 'Rabarbar');
 
 
 
 -- =============== PERFORMERS
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (1, 4, 'Ryszard', 'Andrzejewski', false, 'Peja');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (1, 3.5, 'Ryszard', 'Andrzejewski', false, 'Peja');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (2, 0, 'Bob', 'Marley', false, 'Bob Marley & The Wailers');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (3, 0, 'Earl', 'Simmons', true, 'DMX');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (3, 0, 'Earl', 'Simmons', false, 'DMX');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (4, 0, null, null, false, 'A Tribe Called Quest');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (5, 0, 'Piotr', 'Kowalczyk', false, 'Tau');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (6, 0, 'Lauryn', 'Hill', false, 'Lauryn Hill');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (7, 0, 'Adam', 'Zieliński', false, 'Łona');
 
 
 -- =============== ALBUMS

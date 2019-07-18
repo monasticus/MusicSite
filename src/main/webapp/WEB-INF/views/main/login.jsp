@@ -26,6 +26,36 @@
     <c:if test="${correct == false}">
         <p class="error">Data is not correct!</p>
     </c:if>
+
+    <c:choose>
+        <c:when test="${justConfirmed == true}">
+            <div class="success">
+                Thank You for registration on
+                <p class="music-side">
+                <span class="musicsite-music">music</span><span class="musicsite-site">site.</span> !
+                </p>
+                    You can log in now.
+            </div>
+        </c:when>
+        <c:when test="${justConfirmed == false}">
+            <p class="error">
+                You have not confirmed your account yet. <br>
+                Check your mailbox!
+            </p>
+        </c:when>
+    </c:choose>
+
+    <div class="success">
+        Thank You for registration on
+        <div class="musicsite-elem-parent">
+            <p class="musicsite-elem">
+                <span class="musicsite-music">music</span><span class="musicsite-site">site.</span>
+            </p>
+        </div>
+        You can log in now.
+    </div>
+
+
     <form method="post">
         <div class="form-group">
             Email: <br>
@@ -35,7 +65,7 @@
         <div class="form-group">
             Password: <br>
             <input type="password" name="password" class="form-control" required/>
-            <p id="register-link"> <a class="register" href="/register"> Register </a></p>
+            <p id="register-link"><a class="register" href="/register"> Register </a></p>
         </div>
 
         <br><input type="submit" value="Log In" class=" btn btn-primary">

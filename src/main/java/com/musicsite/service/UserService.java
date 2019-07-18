@@ -32,6 +32,10 @@ public class UserService {
         this.ratingRepository = ratingRepository;
     }
 
+    public User getUserByUsername(String username) {
+        return userRepository.getUserByUsernameIgnoreCase(username);
+    }
+
     public List<User> getUsers() {
         return userRepository.findAll();
     }
@@ -81,5 +85,9 @@ public class UserService {
 
     public void removeUser(Long id) {
         userRepository.delete(id);
+    }
+
+    public void confirm(Long id){
+        userRepository.findOne(id).setConfirmed(true);
     }
 }
