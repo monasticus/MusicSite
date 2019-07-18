@@ -22,61 +22,61 @@
 <%@include file="../fragments/header.jspf" %>
 
 <section class="ens-page border border-info">
-    <div class="ens-top">
-        <div class="ens-image">
-            <i class="fa fa-user-circle"></i>
-        </div>
-        <div class="ens-basic-information">
-            <div class="ens-name">
-                ${performer.pseudonym}
+    <div class="ens-top bg-light">
+        <div class="d-flex bd-highlight mb-3">
+            <div class="ens-image p-2">
+                <i class="fa fa-user-circle"></i>
             </div>
-            <div class="ranking-rate rounded-sm border border-dark bg-success">
-                <div>
-                    ${performer.average}
+            <div class="ens-name align-self-start">
+                <p>${performer.pseudonym}</p>
+                <div class="small-inf">
+                    Your rating:
+                </div>
+                <div class="ens-user-rating">
+                    <div class="ratings"
+                            <c:choose>
+                                <c:when test="${empty userPerformerRating}">
+                                    data-user-rating='0'>
+                                </c:when>
+                                <c:otherwise>
+                                    data-user-rating=${userPerformerRating}'>
+                                </c:otherwise>
+                            </c:choose>
+
+
+                    <a class="text-success" href="/performer/${performer.id}/setRate/1">
+                        <i class="tune fas fa-music" data-rating-tune="1"></i>
+                    </a>
+                    <a class="text-success" href="/performer/${performer.id}/setRate/2">
+                        <i class="tune fas fa-music" data-rating-tune="2"></i>
+                    </a>
+                    <a class="text-success" href="/performer/${performer.id}/setRate/3">
+                        <i class="tune fas fa-music" data-rating-tune="3"></i>
+                    </a>
+                    <a class="text-success" href="/performer/${performer.id}/setRate/4">
+                        <i class="tune fas fa-music" data-rating-tune="4"></i>
+                    </a>
+                    <a class="text-success" href="/performer/${performer.id}/setRate/5">
+                        <i class="tune fas fa-music" data-rating-tune="5"></i>
+                    </a>
+                    </div>
+                </div>
+
+                <div class="ens-categories">
+                    Categories:
+                    <c:forEach var="category" items="${performer.categories}">
+                        <span><c:out value="${category.name}"/></span>
+                    </c:forEach>
                 </div>
             </div>
-            <div class="ratings"
 
-                    <c:choose>
-                        <c:when test="${empty userPerformerRating}">
-                            data-user-rating='0'>
-                        </c:when>
-                        <c:otherwise>
-                            data-user-rating=${userPerformerRating}'>
-                        </c:otherwise>
-                    </c:choose>
-
-            <div class="small-inf">
-                Your rating:
+            <div class="ens-average rounded ml-auto p-2 border border-dark bg-success">
+                <div>${performer.average}</div>
             </div>
-            <a href="/performer/${performer.id}/setRate/1">
-                <i class="tune fas fa-music" data-rating-tune="1"></i>
-            </a>
-            <a href="/performer/${performer.id}/setRate/2">
-                <i class="tune fas fa-music" data-rating-tune="2"></i>
-            </a>
-            <a href="/performer/${performer.id}/setRate/3">
-                <i class="tune fas fa-music" data-rating-tune="3"></i>
-            </a>
-            <a href="/performer/${performer.id}/setRate/4">
-                <i class="tune fas fa-music" data-rating-tune="4"></i>
-            </a>
-            <a href="/performer/${performer.id}/setRate/5">
-                <i class="tune fas fa-music" data-rating-tune="5"></i>
-            </a>
-            </div>
-        </div>
-
-        <div class="ens-page-categories">
-            Categories:
-            <c:forEach var="category" items="${performer.categories}">
-                                            <span class="ens-categories"><c:out
-                                                    value="${category.name}"/></span>
-            </c:forEach>
         </div>
     </div>
 
-    <div class="ens-mid">
+    <div class="ens-mid bg-light">
         <div class="related-enta">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -99,7 +99,7 @@
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <c:choose>
                         <c:when test="${empty performer.tracks}">
-                            <p class="no-data">
+                            <p class="empty-track-list">
                                 Track list is empty.
                             </p>
                         </c:when>
@@ -121,38 +121,46 @@
         </div>
     </div>
 
+    <div class="ens-bottom bg-light">
+        <div class="border border-primary bg-info">
+            <c:if test="${not empty loggedUserId}">
+                <div class="comment-area d-block p-2">
+                    <h1>New comment</h1>
+                    <form:form method="post" modelAttribute="comment">
 
-    <div class="border border-primary bg-light">
-        <c:if test="${not empty loggedUserId}">
-            <div class="comment-area d-block p-2 bg-info">
-                <h1>Comment</h1>
-                <form:form method="post" modelAttribute="comment">
-
-                    <div class="form-group">
-                        <form:textarea path="content" rows="3" cssClass="form-control bg-light"/>
-                        <form:errors path="content" cssClass="error" element="div"/>
-                    </div>
-                    <form:hidden path="user" value="${loggedUserId}"/>
-                    <div class="d-flex flex-row-reverse">
-                        <input type="submit" class="btn btn-warning" value="Comment">
-                    </div>
-                </form:form>
-            </div>
-        </c:if>
-        <c:if test="${not empty performer.comments}">
-            <div class="comment-area d-block p-2 bg-light">
-                <c:forEach var="comment" items="${performer.comments}">
-                    <div class="comment-div">
-                        <span>${comment.user.username}</span>
-                        <div class="comment-single bg-secondary">
-                                ${comment.content}
+                        <div class="form-group">
+                            <form:textarea path="content" rows="3" cssClass="form-control bg-light"/>
+                            <form:errors path="content" cssClass="error" element="div"/>
                         </div>
-                    </div>
-                </c:forEach>
-            </div>
-        </c:if>
-    </div>
+                        <form:hidden path="user" value="${loggedUserId}"/>
+                        <div class="d-flex flex-row-reverse">
+                            <input type="submit" class="btn btn-warning" value="Comment" title="Comment">
+                        </div>
+                    </form:form>
+                </div>
+            </c:if>
+            <c:if test="${not empty performer.comments}">
+                <h3 class="comments-h2">Comments</h3>
+                <div class="comment-area overflow-auto d-block p-2">
+                    <c:forEach var="comment" items="${performer.comments}">
+                        <div class="comment-div bg-secondary">
+                            <div class="comment-content">
+                                    ${comment.content}
+                            </div>
 
+                            <p class="comment-username text-warning">
+                                by ${comment.user.username}
+                                <c:if test="${loggedUserId == comment.user.id}">
+                                    <a href="/usr/comment-remove/${comment.id}" class="btn btn-danger btn-sm"
+                                       title="Remove comment">Remove</a>
+                                </c:if>
+                            </p>
+                        </div>
+                    </c:forEach>
+                </div>
+            </c:if>
+        </div>
+    </div>
 
 </section>
 

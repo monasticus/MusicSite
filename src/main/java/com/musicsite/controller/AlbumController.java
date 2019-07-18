@@ -2,10 +2,7 @@ package com.musicsite.controller;
 
 import com.musicsite.entity.Album;
 import com.musicsite.entity.Performer;
-import com.musicsite.service.AlbumService;
-import com.musicsite.service.PerformerService;
-import com.musicsite.service.TrackService;
-import com.musicsite.service.UserService;
+import com.musicsite.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,12 +18,15 @@ public class AlbumController {
 
     private UserService userService;
     private AlbumService albumService;
+    private RatingService ratingService;
 
     @Autowired
     public AlbumController(UserService userService,
-                           AlbumService albumService) {
+                           AlbumService albumService,
+                           RatingService ratingService) {
         this.userService = userService;
         this.albumService = albumService;
+        this.ratingService = ratingService;
     }
 
 
@@ -54,7 +54,11 @@ public class AlbumController {
         if (userId == null)
             return "redirect:/login";
 
-        albumService.saveRating(userId, albumId, rating);
+        if (userService.getAlbumUserRating(userId, albumService.getAlbum(albumId)) == (rating))
+            ratingService.removePerformerRating(userId, albumId);
+        else
+            albumService.saveRating(userId, albumId, rating);
+
         albumService.updateAlbumAverage(albumId);
 
         return "redirect:/album/".concat(String.valueOf(albumId));

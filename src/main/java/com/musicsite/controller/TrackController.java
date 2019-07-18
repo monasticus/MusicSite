@@ -3,6 +3,7 @@ package com.musicsite.controller;
 import com.musicsite.entity.Album;
 import com.musicsite.entity.Track;
 import com.musicsite.service.AlbumService;
+import com.musicsite.service.RatingService;
 import com.musicsite.service.TrackService;
 import com.musicsite.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,16 @@ public class TrackController {
 
     private UserService userService;
     private TrackService trackService;
+    private RatingService ratingService;
 
     @Autowired
     public TrackController(UserService userService,
-                           TrackService trackService) {
+                           TrackService trackService,
+                           RatingService ratingService) {
         this.userService = userService;
         this.trackService = trackService;
+        this.ratingService = ratingService;
     }
-
-
 
 
     @GetMapping("/{id}")
@@ -59,7 +61,11 @@ public class TrackController {
         if (userId == null)
             return "redirect:/login";
 
-        trackService.saveRating(userId, trackId, rating);
+        if (userService.getTrackUserRating(userId, trackService.getTrack(trackId)) == (rating))
+            ratingService.removeTrackRating(userId, trackId);
+        else
+            trackService.saveRating(userId, trackId, rating);
+
         trackService.updateTrackAverage(trackId);
 
         return "redirect:/track/".concat(String.valueOf(trackId));

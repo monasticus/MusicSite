@@ -20,6 +20,10 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
+    public Comment getComment(Long id) {
+        return commentRepository.findOne(id);
+    }
+
     public void save (Comment comment) {
         commentRepository.save(comment);
     }

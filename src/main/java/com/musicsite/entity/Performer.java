@@ -32,7 +32,7 @@ public class Performer extends Ens {
     private String lastName;
 
     @OneToMany(mappedBy = "performer", cascade = CascadeType.PERSIST)
-    @Column()
+    @Column
     private List<Album> albums = new ArrayList<>();
 
     @ManyToMany(mappedBy = "performer")

@@ -7,13 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -25,24 +20,27 @@ public class PerformerController {
     private AlbumService albumService;
     private TrackService trackService;
     private CommentService commentService;
+    private RatingService ratingService;
 
     @Autowired
     public PerformerController(PerformerService performerService,
                                UserService userService,
                                AlbumService albumService,
                                TrackService trackService,
-                               CommentService commentService) {
+                               CommentService commentService,
+                               RatingService ratingService) {
         this.performerService = performerService;
         this.userService = userService;
         this.albumService = albumService;
         this.trackService = trackService;
         this.commentService = commentService;
+        this.ratingService = ratingService;
     }
 
 
     @GetMapping("/{id}")
-    public String showForm(@PathVariable String id, Model model, HttpSession session) {
-        Performer performer = performerService.getPerformerById(Long.parseLong(id));
+    public String showForm(@PathVariable Long id, Model model, HttpSession session) {
+        Performer performer = performerService.getPerformerById(id);
         if (performer == null || performer.isProposition())
             return "main/blank";
 
@@ -57,18 +55,27 @@ public class PerformerController {
         model.addAttribute("performerAlbums", albumService.getAlbumsByPerformerAndPropositionOrderByYear(performer, false));
         model.addAttribute("performerTracks", trackService.getTracksByPerformerAndPropositionsOrderByYear(performer, false));
 
-
         return "main/performer";
     }
 
-    @PostMapping("/{id}")
-    public String comment(@Valid Comment comment, BindingResult result, @PathVariable Long id) {
-        if (result.hasErrors())
-            return "main/performer";
+    @PostMapping("/{performerId}")
+    public String comment(@Valid Comment comment, BindingResult result, HttpSession session, Model model, @PathVariable Long performerId) {
+        if (result.hasErrors()) {
+            Performer performer = performerService.getPerformerById(performerId);
+            Long userId = (Long) session.getAttribute("loggedUserId");
+            model.addAttribute("userPerformerRating", userService.getPerformerUserRating(userId, performer));
+            model.addAttribute("comment", new Comment().setUser(userService.getUserById(userId)).setPerformer(performer));
+            performerService.orderData(performer);
+            model.addAttribute("performer", performer);
+            model.addAttribute("performerAlbums", albumService.getAlbumsByPerformerAndPropositionOrderByYear(performer, false));
+            model.addAttribute("performerTracks", trackService.getTracksByPerformerAndPropositionsOrderByYear(performer, false));
 
-        comment.setPerformer(performerService.getPerformerById(id));
+            return "main/performer";
+        }
+
+        comment.setPerformer(performerService.getPerformerById(performerId));
         commentService.save(comment);
-        return "redirect:/performer/".concat(String.valueOf(id));
+        return "redirect:/performer/".concat(String.valueOf(performerId));
     }
 
     @GetMapping("/{performerId}/setRate/{rating}")
@@ -79,7 +86,11 @@ public class PerformerController {
         if (userId == null)
             return "redirect:/login";
 
-        performerService.saveRating(userId, performerId, rating);
+        if (userService.getPerformerUserRating(userId, performerService.getPerformerById(performerId)) == (rating))
+            ratingService.removePerformerRating(userId, performerId);
+        else
+            performerService.saveRating(userId, performerId, rating);
+
         performerService.updatePerformerAverage(performerId);
 
         return "redirect:/performer/".concat(String.valueOf(performerId));

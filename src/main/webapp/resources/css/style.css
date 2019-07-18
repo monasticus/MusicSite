@@ -8,6 +8,7 @@ body {
     color:#fff;
     background-color:#333;
     font-family: Michroma, sans-serif;
+    padding-bottom: 40px;
 }
 
 /*========== HEADER =======================*/
@@ -195,60 +196,83 @@ h1 {
 .ens-page {
     width: 900px;
     margin: 30px auto 0;
+    opacity: 0.9;
 }
 
 .ens-top {
-    margin-bottom: 80px;
+    padding-top: 50px;
+    padding-bottom: 40px;
+    margin-bottom: 20px;
+    opacity: 1;
+    color: black;
 }
+
 
 .ens-image {
     text-align: center;
     margin-left: 40px;
     width: 150px;
     height: 180px;
-    border: 1px solid rgb(237, 237, 237);
-    float: left;
+    border: 1px solid black;
 }
-
-
 
 .ens-image i {
     font-size: 120px;
     margin-top: 30px;
-    color: rgb(237, 237, 237);
+    color: black;
+    opacity: 0.8;
     top: 35px;
 }
+
 i.track-icon {
     font-size: 90px;
     margin-top: 40px;
 }
 
-
-.ens-basic-information {
-    float: left;
-    margin-left: 30px;
-    margin-bottom: 20px;
-}
-
-.ens-basic-information .ens-name {
+.ens-name {
     font-size: 40px;
-    color: rgb(237, 237, 237);
+    color: black;
     font-weight: bold;
-}
-
-.ens-basic-information .ratings {
-    margin-top: 20px;
     margin-left: 20px;
+}
+
+.ens-user-rating{
+    font-size: 30px;
+}
+
+.small-inf {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-style: italic;
+    margin-left: 120px;
+}
+
+.ens-average {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    font-size: 35px;
+    margin-right: 60px;
+}
+
+.ens-average div {
+    margin-top: 15px;
+}
+
+.ens-categories {
+    font-size: 15px;
+}
+
+.ens-categories span {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.empty-track-list {
     font-size: 20px;
-    width: 370px;
-}
-
-.ens-basic-information .ratings a {
-    color: rgb(237, 237, 0);
-}
-
-.ens-basic-information .ratings a:hover {
-    color: rgb(0, 123, 255);
+    color: black;
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 .ens-performer {
@@ -266,12 +290,7 @@ a:hover {
     text-decoration: none
 }
 
-.small-inf {
-    font-size: 12px;
-    font-weight: bold;
-    color: rgb(230, 8, 8);
-    margin-bottom: 10px;
-}
+
 
 .tune {
     padding-right: 10px;
@@ -279,17 +298,44 @@ a:hover {
 }
 
 
-.ens-average {
-    float: left;
-    margin-right: 60px;
+
+
+.comments-h2 {
+    margin-top: 25px;
+    margin-left: 30px;
 }
 
-.ens-average p {
-    margin-top: 20px;
-    white-space: nowrap;
-    color: white;
-    font-size: 50px;
+.comment-area {
+    margin-bottom: 70px;
 }
+
+.comment-area form,
+.comment-area .comment-div{
+    width: 700px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.comment-div {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 20px;
+}
+
+.content {
+    margin-top: 20px;
+    text-align: right;
+}
+
+
+
+.comment-username {
+    text-align: right;
+    bottom: 5px;
+    padding-bottom: 10px;
+}
+
 
 .track-list {
     margin-left: 60px;
@@ -297,6 +343,10 @@ a:hover {
 
 
 .track-list li {
+    font-size: 20px;
+}
+
+.track-list li:hover {
     font-size: 20px;
 }
 
@@ -312,14 +362,10 @@ a:hover {
     margin-bottom: 10px;
 }
 
-.ens-categories {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
 .ens-mid {
     border: 1px solid rgb(237, 237, 237);
     padding-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 .ens-mid .related-enta {
@@ -475,12 +521,3 @@ p.no-data {
     text-align: center;
 }
 
-.comment-area form,
-.comment-area .comment-div{
-    width: 700px;
-    margin: 0 auto;
-}
-
-.comment-div {
-    padding: 20px;
-}
