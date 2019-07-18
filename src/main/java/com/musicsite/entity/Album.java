@@ -51,6 +51,9 @@ public class Album extends Opus {
     @NotEmpty
     private List<Category> categories = new ArrayList<>();
 
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
+
 
     public Album() {
         proposition = true;
@@ -143,6 +146,14 @@ public class Album extends Opus {
         this.categories = categories;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @PrePersist
     public void prePer() {
         average = 0.0;
@@ -159,16 +170,4 @@ public class Album extends Opus {
         return performer.getPseudonym() + " - " + yearOfPublication + " - " + name;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Album album = (Album) o;
-//        return id.equals(album.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
 }

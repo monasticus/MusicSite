@@ -47,6 +47,9 @@ public class Performer extends Ens {
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
+
     @Transient
     private List<Category> categories;
 
@@ -135,6 +138,14 @@ public class Performer extends Ens {
 
 
         average = sum / ratings.size();
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @PrePersist

@@ -48,6 +48,9 @@ public class Track extends Opus {
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
+
     public Track() {
         proposition = true;
     }
@@ -129,6 +132,14 @@ public class Track extends Opus {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @PrePersist
