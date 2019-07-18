@@ -49,7 +49,8 @@
         </div>
         <div class="form-group">
             Performer: <br>
-            <input name="performerName" class="form-control"/><br>
+            <input name="performerName" class="form-control"
+            value="<c:out value="${loadPerformerName}" default=""/>" /><br>
         </div>
 
         <c:if test="${emptyPerformerName == true}">
@@ -65,7 +66,8 @@
 
     <div class="form-group">
         Album: <br>
-        <input name="albumName" class="form-control" placeholder="if not applicable - skip"/><br>
+        <input name="albumName" class="form-control" placeholder="if not applicable - skip"
+               value="<c:out value="${loadAlbumName}" default=""/>" /><br>
     </div>
         <c:if test="${albumDoesNotExists == true}">
             <div class="error"> The database does not contain such an album.<br>

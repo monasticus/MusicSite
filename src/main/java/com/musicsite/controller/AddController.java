@@ -5,6 +5,10 @@ import com.musicsite.repository.AlbumRepository;
 import com.musicsite.repository.CategoryRepository;
 import com.musicsite.repository.PerformerRepository;
 import com.musicsite.repository.TrackRepository;
+import com.musicsite.service.AlbumService;
+import com.musicsite.service.CategoryService;
+import com.musicsite.service.PerformerService;
+import com.musicsite.service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,36 +23,51 @@ import java.util.List;
 @RequestMapping("/add")
 public class AddController {
 
-    private PerformerRepository performerRepository;
-    private TrackRepository trackRepository;
-    private AlbumRepository albumRepository;
-    private CategoryRepository categoryRepository;
+    private PerformerService performerService;
+    private TrackService trackService;
+    private AlbumService albumService;
+    private CategoryService categoryService;
 
     @Autowired
-    public AddController(PerformerRepository performerRepository, TrackRepository trackRepository, AlbumRepository albumRepository, CategoryRepository categoryRepository) {
-        this.performerRepository = performerRepository;
-        this.trackRepository = trackRepository;
-        this.albumRepository = albumRepository;
-        this.categoryRepository = categoryRepository;
+    public AddController(PerformerService performerService, TrackService trackService, AlbumService albumService, CategoryService categoryService) {
+        this.performerService = performerService;
+        this.trackService = trackService;
+        this.albumService = albumService;
+        this.categoryService = categoryService;
     }
 
     @ModelAttribute("categories")
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        return categoryService.getCategoriesSaute();
     }
 
     @GetMapping("/{className:performer|album|track}")
-    public String showForm(@PathVariable String className, Model model) {
+    public String showForm(@PathVariable String className, Model model, @RequestParam(required = false) Long id) {
 
         switch (className) {
             case "performer":
-                model.addAttribute(className, new Performer());
+                if (id != null)
+                    model.addAttribute(className, performerService.getPerformerById(id));
+                else
+                    model.addAttribute(className, new Performer());
                 break;
             case "album":
-                model.addAttribute(className, new Album());
+                if (id != null) {
+                    Album album = albumService.getAlbum(id);
+                    model.addAttribute("loadPerformerName", album.getPerformer().getPseudonym());
+                    model.addAttribute(className, album);
+                } else
+                    model.addAttribute(className, new Album());
                 break;
             case "track":
-                model.addAttribute(className, new Track());
+                if (id != null) {
+                    Track track = trackService.getTrack(id);
+                    model.addAttribute("loadPerformerName", track.getPerformer().getPseudonym());
+                    if (track.getAlbum() != null)
+                        model.addAttribute("loadAlbumName", track.getAlbum().getName());
+                    model.addAttribute(className, track);
+                } else
+                    model.addAttribute(className, new Track());
                 break;
         }
 
@@ -63,7 +82,7 @@ public class AddController {
         if (result.hasErrors())
             return "add/performer";
 
-        List<Performer> performers = performerRepository.getPerformersByPseudonymIgnoreCase(performer.getPseudonym());
+        List<Performer> performers = performerService.getPerformersByPseudonymSaute(performer.getPseudonym());
 
         boolean duplicate = false;
 
@@ -75,7 +94,7 @@ public class AddController {
             return "add/performer";
         }
 
-        performerRepository.save(performer);
+        performerService.save(performer);
         model.addAttribute("performer", new Performer());
         model.addAttribute("success", true);
 
@@ -105,7 +124,7 @@ public class AddController {
         album.setPerformer(existingPerformer);
 
         // --- Validate album
-        List<Album> albums = albumRepository.getAlbumsByNameIgnoreCase(album.getName());
+        List<Album> albums = albumService.getAlbumsByNameSaute(album.getName());
 
         boolean duplicate = false;
 
@@ -119,7 +138,7 @@ public class AddController {
 
 
 
-        albumRepository.save(album);
+        albumService.save(album);
 
         model.addAttribute("album", new Album());
         model.addAttribute("success", true);
@@ -155,7 +174,7 @@ public class AddController {
         track.setAlbum(album);
 
         // --- Validate track
-        List<Track> tracks = trackRepository.getTracksByNameIgnoreCase(track.getName());
+        List<Track> tracks = trackService.getTracksByNameSaute(track.getName());
 
         boolean duplicate = false;
 
@@ -174,7 +193,7 @@ public class AddController {
 
 
 
-        trackRepository.save(track);
+        trackService.save(track);
 
         model.addAttribute("track", new Track());
         model.addAttribute("success", true);
@@ -198,7 +217,7 @@ public class AddController {
             return null;
         }
 
-        Performer performer = performerRepository.getFirstPerformerByPseudonymIgnoreCase(performerName);
+        Performer performer = performerService.getPerformerByPseudonymSaute(performerName);
 
         if(performer == null)
             model.addAttribute("performerDoesNotExists", true);
@@ -209,9 +228,8 @@ public class AddController {
 
     private Album checkAlbum(Model model, String albumName, Performer performer) {
         Album album = null;
-        if (albumRepository.getAlbumsByNameIgnoreCase(albumName).stream().anyMatch(a -> a.getPerformer().getId().equals(performer.getId()))){
-            album = albumRepository.getAlbumsByNameIgnoreCase(albumName).stream().filter(a -> a.getPerformer().getId().equals(performer.getId())).findFirst().get();
-        }
+        if (albumService.getAlbumsByNameSaute(albumName).stream().anyMatch(a -> a.getPerformer().getId().equals(performer.getId())))
+            album = albumService.getAlbumsByNameSaute(albumName).stream().filter(a -> a.getPerformer().getId().equals(performer.getId())).findFirst().get();
 
         if(album == null)
             model.addAttribute("albumDoesNotExists", true);

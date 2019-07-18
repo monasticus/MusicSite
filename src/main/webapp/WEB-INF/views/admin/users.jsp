@@ -21,10 +21,9 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 <section class="ens-page">
-    <h1 class="ranking-ens-type">Propositions</h1>
+    <h1 class="ranking-ens-type">Users</h1>
 
     <div class="propositions-table">
-        <span class="propositions-heading">Users</span>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -45,10 +44,13 @@
                     <td> ${user.firstName} </td>
                     <td> ${user.email} </td>
                     <td>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
-                                onclick="document.location.href='/adm/user/remove/${user.id}'">
-                            Remove
-                        </button>
+                        <a href="/adm/user/remove/${user.id}" class="btn btn-danger"
+                           data-toggle="modal"
+                           data-target="#deleteModal"
+                           data-item-id="${user.id}"
+                           data-item-type="user"
+                           data-item-name="${user.username}"
+                           title="Remove user">Remove</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -58,6 +60,27 @@
 
 
 </section>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Removing confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove user <span id="itemName"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="deleteId" type="button" class="btn btn-danger">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -70,5 +93,6 @@
         crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="/resources/js/Ens-Pages.js"></script>
+<script type="text/javascript" src="/resources/js/Admin.js"></script>
 </body>
 </html>

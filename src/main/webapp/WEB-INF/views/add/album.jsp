@@ -44,12 +44,14 @@
         </div>
         <div class="form-group">
             Year (YYYY): <br>
-            <form:input path="yearOfPublication" cssClass="form-control" data-toggle="tooltip" data-placement="top" title="Must be: YYYY"/>
+            <form:input path="yearOfPublication" cssClass="form-control" data-toggle="tooltip" data-placement="top"
+                        title="Must be: YYYY"/>
             <form:errors path="yearOfPublication" cssClass="error" element="div"/><br>
         </div>
         <div class="form-group">
             Performer: <br>
-            <input name="performerName" class="form-control"/><br>
+            <input name="performerName" class="form-control"
+                   value="<c:out value="${loadPerformerName}" default=""/>"/><br>
         </div>
         <c:if test="${emptyPerformerName == true}">
             <div class="error"> The field cannot be empty</div>

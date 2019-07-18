@@ -49,6 +49,9 @@ public class TrackService {
         return track;
     }
 
+    public void save(Track track) {
+        trackRepository.save(track);
+    }
 
     public List<Track> getRandomTracks(int bound) {
         List<Track> tracks = new ArrayList<>();
@@ -65,6 +68,10 @@ public class TrackService {
         tracks.forEach(t -> Hibernate.initialize(t.getRatings()));
 
         return tracks;
+    }
+
+    public List<Track> getTracksByNameSaute(String name) {
+        return trackRepository.getTracksByNameIgnoreCase(name);
     }
 
     public List<Track> getTracksByPropositions(boolean value) {

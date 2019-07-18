@@ -37,7 +37,7 @@ public class PerformerController {
 
     @GetMapping("/{id}")
     public String showForm(@PathVariable String id, Model model, HttpSession session) {
-        Performer performer = performerService.getPerformer(Long.parseLong(id));
+        Performer performer = performerService.getPerformerById(Long.parseLong(id));
         if (performer == null || performer.isProposition())
             return "main/blank";
 

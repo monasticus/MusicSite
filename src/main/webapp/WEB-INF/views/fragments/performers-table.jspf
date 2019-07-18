@@ -27,17 +27,16 @@
 
                 <c:if test="${capo == true}">
                     <td class="admin-column">
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
-                                onclick="document.location.href='/adm/performer/remove/${performer.id}'">
-                            Remove
-                        </button>
 
-                        <br>
+                        <a href="/adm/performer/remove/${performer.id}" class="btn btn-danger"
+                           data-toggle="modal"
+                           data-target="#deleteModal"
+                           data-item-id="${performer.id}"
+                           data-item-type="performer"
+                           data-item-name="${performer.pseudonym}"
+                           title="Remove performer">Remove</a><br>
+                        <a href="/add/performer?id=${performer.id}" class="btn btn-info">Edit</a>
 
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"
-                                onclick="document.location.href='/adm/performer/edit/${performer.id}'">
-                            Edit
-                        </button>
                     </td>
                 </c:if>
             </tr>
@@ -46,4 +45,25 @@
 
         </tbody>
     </table>
+</div>
+
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Removing confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to remove performer <span id="itemName"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="deleteId" type="button" class="btn btn-danger">Remove</button>
+            </div>
+        </div>
+    </div>
 </div>

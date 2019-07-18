@@ -35,6 +35,14 @@ public class AlbumService {
         return album;
     }
 
+    public void save(Album album) {
+        albumRepository.save(album);
+    }
+
+    public List<Album> getAlbumsByNameSaute(String name) {
+        return albumRepository.getAlbumsByNameIgnoreCase(name);
+    }
+
     public void saveRating(Long userId, Long albumId, int rating) {
         User user = userRepository.findOne(userId);
         Album album = albumRepository.findOne(albumId);

@@ -46,5 +46,6 @@
         crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="/resources/js/Ens-Pages.js"></script>
+<script type="text/javascript" src="/resources/js/Admin.js.js"></script>
 </body>
 </html>

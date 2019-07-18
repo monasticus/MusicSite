@@ -299,20 +299,17 @@ a:hover {
 
 .ens-mid {
     border: 1px solid rgb(237, 237, 237);
-    clear: left;
+    padding-bottom: 35px;
 }
 
 .ens-mid .related-enta {
     margin-left: 40px;
     margin-top: 40px;
     width: 820px;
-    height: 400px;
-    float: left;
 }
 
 .ens-mid .related-enta a {
     width: 80px;
-    height: 40px;
     text-align: center;
     top: 50%;
     left: 50%;

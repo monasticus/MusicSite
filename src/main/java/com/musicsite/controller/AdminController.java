@@ -118,7 +118,7 @@ public class AdminController {
                 userService.removeUser(id);
         }
 
-        return "redirect:/ranking".concat(itemType).concat("s");
+        return "redirect:/ranking/".concat(itemType).concat("s");
     }
 
     @RequestMapping("users")

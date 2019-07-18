@@ -20,7 +20,7 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<section class="ens-page">
+<section  class="ens-page border border-info">
     <div class="ens-top">
         <div class="ens-image">
             <i class="fas fa-headphones"></i>

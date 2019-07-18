@@ -37,7 +37,7 @@ public class PerformerService {
         this.ratingRepository = ratingRepository;
     }
 
-    public Performer getPerformer(Long id) {
+    public Performer getPerformerById(Long id) {
         Performer performer = performerRepository.findOne(id);
         Hibernate.initialize(performer.getAlbums());
         performer.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories()));
@@ -47,6 +47,17 @@ public class PerformerService {
         return performer;
     }
 
+    public void save(Performer performer) {
+        performerRepository.save(performer);
+    }
+
+    public Performer getPerformerByPseudonymSaute(String pseudonym) {
+        return performerRepository.getFirstPerformerByPseudonymIgnoreCase(pseudonym);
+    }
+
+    public List<Performer> getPerformersByPseudonymSaute(String pseudonym) {
+        return performerRepository.getPerformersByPseudonymIgnoreCase(pseudonym);
+    }
 
     public List<Performer> getOnlyPerformers() {
         List<Performer> performers = performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();

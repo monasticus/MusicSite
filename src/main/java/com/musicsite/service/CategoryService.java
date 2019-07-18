@@ -20,6 +20,10 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    public List<Category> getCategoriesSaute() {
+        return categoryRepository.findAll();
+    }
+
     public List<Category> getCategories() {
         List<Category> categories = categoryRepository.findAll();
         categories.forEach(c -> Hibernate.initialize(c.getTracks()));

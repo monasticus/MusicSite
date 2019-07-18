@@ -26,7 +26,9 @@ public class SearcherController {
     }
 
     @RequestMapping("/search")
-    public String search(Model model,  @RequestParam String q) {
+    public String search(Model model,  @RequestParam(required = false) String q) {
+        if(q == null || "".equals(q.trim()))
+            return "main/home";
         model.addAttribute("performers", performerService.getPerformersByQuery(q));
         model.addAttribute("albums", albumService.getAlbumsByQuery(q));
         model.addAttribute("tracks", trackService.getTracksByQuery(q));
