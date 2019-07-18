@@ -147,15 +147,17 @@ public class HomeController {
     @RequestMapping("/user-confirm/{id}")
     public String confirmUser(@PathVariable Long id, @RequestParam String x, Model model) {
         User user = userService.getUserById(id);
-        if(user.isConfirmed())
-            return "main/blank";
+
 
         try {
             if (!BCrypt.checkpw(user.getUsername(), x))
-                return "main/blank";
+                return "main/error";
         } catch (IllegalArgumentException e) {
-            return "main/blank";
+            return "main/error";
         }
+
+        if(user.isConfirmed())
+            return "main/blank";
 
         userService.confirm(id);
         model.addAttribute("justConfirmed", true);

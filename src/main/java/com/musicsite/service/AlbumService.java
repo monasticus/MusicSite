@@ -32,6 +32,7 @@ public class AlbumService {
         Hibernate.initialize(album.getCategories());
         Hibernate.initialize(album.getRatings());
         Hibernate.initialize(album.getTracks());
+        Hibernate.initialize(album.getComments());
         return album;
     }
 
@@ -70,6 +71,7 @@ public class AlbumService {
         albums.forEach(a -> Hibernate.initialize(a.getCategories()));
         albums.forEach(a -> Hibernate.initialize(a.getRatings()));
         albums.forEach(a -> Hibernate.initialize(a.getTracks()));
+        albums.forEach(a -> Hibernate.initialize(a.getComments()));
         return albums;
     }
 
@@ -78,6 +80,7 @@ public class AlbumService {
         albums.forEach(a -> Hibernate.initialize(a.getCategories()));
         albums.forEach(a -> Hibernate.initialize(a.getRatings()));
         albums.forEach(a -> Hibernate.initialize(a.getTracks()));
+        albums.forEach(a -> Hibernate.initialize(a.getComments()));
         return albums;
     }
 
@@ -86,6 +89,7 @@ public class AlbumService {
         albums.forEach(a -> Hibernate.initialize(a.getCategories()));
         albums.forEach(a -> Hibernate.initialize(a.getRatings()));
         albums.forEach(a -> Hibernate.initialize(a.getTracks()));
+        albums.forEach(a -> Hibernate.initialize(a.getComments()));
         return albums;
     }
 
@@ -94,6 +98,7 @@ public class AlbumService {
         albums.forEach(a -> Hibernate.initialize(a.getCategories()));
         albums.forEach(a -> Hibernate.initialize(a.getRatings()));
         albums.forEach(a -> Hibernate.initialize(a.getTracks()));
+        albums.forEach(a -> Hibernate.initialize(a.getComments()));
         return albums;
     }
 
@@ -102,6 +107,7 @@ public class AlbumService {
         albums.forEach(a -> Hibernate.initialize(a.getCategories()));
         albums.forEach(a -> Hibernate.initialize(a.getRatings()));
         albums.forEach(a -> Hibernate.initialize(a.getTracks()));
+        albums.forEach(a -> Hibernate.initialize(a.getComments()));
         return albumRepository.customGetAlbumsByQuery(query);
     }
 

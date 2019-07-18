@@ -38,7 +38,7 @@
     <form:form method="post" modelAttribute="album">
 
         <div class="form-group">
-            Name: <br>
+            *Name: <br>
             <form:input path="name" cssClass="form-control"/>
             <form:errors path="name" cssClass="error" element="div"/><br>
         </div>
@@ -72,6 +72,9 @@
                      multiple="true"
                      cssClass="form-control"/>
         <form:errors path="categories" cssClass="error" element="div"/><br>
+        <p class="form-information">
+            <c:out value="*can be \"Various Artists\""/>
+        </p>
 
         <br><input type="submit" value="Save" class=" btn btn-primary">
 

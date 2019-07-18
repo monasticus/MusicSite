@@ -1,5 +1,8 @@
 package com.musicsite.entity;
 
+import com.musicsite.validation.CleanLanguage;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -11,7 +14,12 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 500)
+    @ManyToOne
+    private User user;
+
+    @NotBlank
+    @CleanLanguage
+    @Column(columnDefinition = "BIT")
     private String content;
 
     @ManyToOne
@@ -22,6 +30,9 @@ public class Comment {
 
     @ManyToOne
     private Performer performer;
+
+    public Comment() {
+    }
 
     public Long getId() {
         return id;
@@ -43,24 +54,35 @@ public class Comment {
         return track;
     }
 
-    public void setTrack(Track track) {
+    public Comment setTrack(Track track) {
         this.track = track;
+        return this;
     }
 
     public Album getAlbum() {
         return album;
     }
 
-    public void setAlbum(Album album) {
+    public Comment setAlbum(Album album) {
         this.album = album;
+        return this;
     }
 
     public Performer getPerformer() {
         return performer;
     }
 
-    public void setPerformer(Performer performer) {
+    public Comment setPerformer(Performer performer) {
         this.performer = performer;
+        return this;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public Comment setUser(User user) {
+        this.user = user;
+        return this;
+    }
 }

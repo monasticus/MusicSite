@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -107,8 +108,9 @@
                                 <c:forEach var="track" items="${performerTracks}">
                                     <li class="list-group-item list-group-item-primary"><a
                                             href="/track/${track.id}">(${track.yearOfPublication}) ${track.name}
-                                        </a> <br>
-                                        <span class="performers-track-album">Album: <c:out value="${track.album.name}" default="---"/> </span>
+                                    </a> <br>
+                                        <span class="performers-track-album">Album: <c:out value="${track.album.name}"
+                                                                                           default="---"/> </span>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -118,6 +120,40 @@
             </div>
         </div>
     </div>
+
+
+    <div class="border border-primary bg-light">
+        <c:if test="${not empty loggedUserId}">
+            <div class="comment-area d-block p-2 bg-info">
+                <h1>Comment</h1>
+                <form:form method="post" modelAttribute="comment">
+
+                    <div class="form-group">
+                        <form:textarea path="content" rows="3" cssClass="form-control bg-light"/>
+                        <form:errors path="content" cssClass="error" element="div"/>
+                    </div>
+                    <form:hidden path="user" value="${loggedUserId}"/>
+                    <div class="d-flex flex-row-reverse">
+                        <input type="submit" class="btn btn-warning" value="Comment">
+                    </div>
+                </form:form>
+            </div>
+        </c:if>
+        <c:if test="${not empty performer.comments}">
+            <div class="comment-area d-block p-2 bg-light">
+                <c:forEach var="comment" items="${performer.comments}">
+                    <div class="comment-div">
+                        <span>${comment.user.username}</span>
+                        <div class="comment-single bg-secondary">
+                                ${comment.content}
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+        </c:if>
+    </div>
+
+
 </section>
 
 

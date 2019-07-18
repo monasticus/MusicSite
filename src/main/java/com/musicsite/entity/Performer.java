@@ -23,11 +23,11 @@ public class Performer extends Ens {
     @Column(unique = true)
     private String pseudonym;
 
-    @Size(min = 2, max = 50)
+    @Size(max = 50)
     @Column(name = "first_name")
     private String firstName;
 
-    @Size(min = 2, max = 50)
+    @Size(max = 50)
     @Column(name = "last_name")
     private String lastName;
 

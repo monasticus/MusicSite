@@ -1,5 +1,6 @@
 package com.musicsite.app;
 
+import com.musicsite.entity.Comment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -65,6 +66,7 @@ public class AppConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(getPerformerConverter());
         registry.addConverter(getCategoryConverter());
+        registry.addConverter(getUserConverter());
     }
 
     @Bean
@@ -77,6 +79,10 @@ public class AppConfig implements WebMvcConfigurer {
         return new CategoryConverter();
     }
 
+    @Bean
+    public UserConverter getUserConverter() {
+        return new UserConverter();
+    }
 
     // === RESOURCE HANDLERS
     @Override

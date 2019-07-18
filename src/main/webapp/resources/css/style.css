@@ -1,7 +1,12 @@
 body {
-    height: 150%;
-    background-color: black;
-    /*background-color: rgb(229,255,204);*/
+    /*height: 150%;*/
+    background: url('/resources/pictures/jordan-mixson-UpdR5OaUJl0-unsplash.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color:#fff;
+    background-color:#333;
     font-family: Michroma, sans-serif;
 }
 
@@ -468,4 +473,14 @@ p.no-data {
 .ranking-rate div {
     margin-top: 20px;
     text-align: center;
+}
+
+.comment-area form,
+.comment-area .comment-div{
+    width: 700px;
+    margin: 0 auto;
+}
+
+.comment-div {
+    padding: 20px;
 }

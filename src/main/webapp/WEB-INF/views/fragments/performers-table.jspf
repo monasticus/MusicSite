@@ -15,10 +15,20 @@
                     </div>
                         <div class="category-list bg-info">
                             Categories:
-                            <c:forEach var="category" items="${performer.categories}">
+
+                            <c:choose>
+                                <c:when test="${empty performer.categories}">
+                                    ---
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var="category" items="${performer.categories}">
                                             <span class="categories-ens-category"><c:out
                                                     value="${category.name}"/></span>
-                            </c:forEach>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+
+
                         </div>
                 </td>
                 <td class="ranking-rate rounded-sm border border-dark bg-success">

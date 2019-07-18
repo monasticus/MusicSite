@@ -43,6 +43,7 @@ public class PerformerService {
         performer.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories()));
         Hibernate.initialize(performer.getTracks());
         Hibernate.initialize(performer.getRatings());
+        Hibernate.initialize(performer.getComments());
         setPerformerCategories(performer);
         return performer;
     }
