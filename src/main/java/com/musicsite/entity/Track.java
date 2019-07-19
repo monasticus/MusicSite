@@ -31,6 +31,9 @@ public class Track extends Opus {
     @ManyToOne
     private Album album;
 
+    @Column(name = "ordering_num")
+    private Integer orderingNum;
+
     @ManyToOne
     @NotNull(groups = TrackValidationGroup.class)
     private Performer performer;
@@ -141,6 +144,14 @@ public class Track extends Opus {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Integer getOrderingNum() {
+        return orderingNum;
+    }
+
+    public void setOrderingNum(Integer orderingNum) {
+        this.orderingNum = orderingNum;
     }
 
     @PrePersist

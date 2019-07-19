@@ -8,31 +8,31 @@ INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, 
 
 
 -- =============== PERFORMERS
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (1, 3.5, 'Ryszard', 'Andrzejewski', false, 'Peja');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (1, 3.6666666666666665, 'Ryszard', 'Andrzejewski', false, 'Peja');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (2, 0, 'Bob', 'Marley', false, 'Bob Marley & The Wailers');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (3, 0, 'Earl', 'Simmons', false, 'DMX');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (4, 0, null, null, false, 'A Tribe Called Quest');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (5, 0, 'Piotr', 'Kowalczyk', false, 'Tau');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (6, 0, 'Lauryn', 'Hill', false, 'Lauryn Hill');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (7, 0, 'Adam', 'Zieliński', false, 'Łona');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (8, 0, 'Riley Ben', 'King', true, 'B.B. King');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (9, 0, 'Eric', 'Clapton', true, 'Eric Clapton');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (10, 0, 'Erykah', 'Badu', true, 'Erykah Badu');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (11, 0, null, null, true, 'Esbjorn Svensson Trio');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (12, 0, 'Isaac', 'Hayes', true, 'Isaac Hayes');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (13, 0, 'Jacek', 'Kaczmarski', true, 'Jacek Kaczmarski');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (14, 0, 'Przemysław', 'Gintrowski', true, 'Przemysław Gintrowski');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (15, 0, 'Zbigniew', 'Łapiński', true, 'Zbigniew Łapiński');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (16, 0, null, null, true, 'Led Zeppelin');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (17, 0, 'Miles', 'Davis', true, 'Miles Davis');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (18, 0, 'Peter', 'Tosh', true, 'Peter Tosh');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (19, 0, null, null, true, 'Pink Floyd');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (20, 0, null, null, true, 'The Doors');
-INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (21, 0, null, null, true, 'The Rolling Stones');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (8, 0, 'Riley Ben', 'King', false, 'B.B. King');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (9, 0, 'Eric', 'Clapton', false, 'Eric Clapton');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (10, 0, 'Erykah', 'Badu', false, 'Erykah Badu');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (11, 0, null, null, false, 'Esbjorn Svensson Trio');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (12, 0, 'Isaac', 'Hayes', false, 'Isaac Hayes');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (13, 0, 'Jacek', 'Kaczmarski', false, 'Jacek Kaczmarski');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (14, 0, 'Przemysław', 'Gintrowski', false, 'Przemysław Gintrowski');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (15, 0, 'Zbigniew', 'Łapiński', false, 'Zbigniew Łapiński');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (16, 0, null, null, false, 'Led Zeppelin');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (17, 0, 'Miles', 'Davis', false, 'Miles Davis');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (18, 0, 'Peter', 'Tosh', false, 'Peter Tosh');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (19, 0, null, null, false, 'Pink Floyd');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (20, 0, null, null, false, 'The Doors');
+INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (21, 0, null, null, false, 'The Rolling Stones');
 
 
 -- =============== ALBUMS
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (1, 0, 'Szacunek ludzi ulicy', false, '2006', 1);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (1, 4, 'Szacunek ludzi ulicy', false, '2006', 1);
 INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (2, 0, 'Najlepszą obroną jest atak', false, '2005', 1);
 INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (3, 0, 'Kaya', false, '1978', 2);
 INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (4, 0, 'Flesh of my flesh blood of my blood', false, '1998', 3);
@@ -80,15 +80,28 @@ INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (6, 1)
 -- =============== RATINGS
 INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (1, 4, null, 1, null, 2);
 INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (2, 3, null, 1, null, 3);
+INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (5, 4, null, 1, null, 1);
+INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (6, 4, 1, null, null, 1);
 
 
 
 -- =============== TRACKS
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (1, 0, 'We can get down', false, '1993', 6, 1, 4);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (3, 0, 'Insert', false, '2008', 8, 1, 7);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (4, 0, 'Bumbox', false, '2008', 8, 1, 7);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (5, 0, 'Świat jest pełen filozofów', false, '2008', 8, 1, 7);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (6, 0, 'Co to będzie?', false, '2008', 8, 1, 7);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (7, 0, 'Nic tu po nas', false, '2008', 8, 1, 7);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (8, 0, 'Nie zostało nic', false, '2008', 8, 1, 7);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (9, 0, 'Traper', false, '2013', null, 1, 5);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (1, 0, 'We can get down', false, '1993', 6, 1, 4, null);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (3, 0, 'Insert', false, '2008', 8, 1, 7, null);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (4, 0, 'Bumbox', false, '2008', 8, 1, 7, null);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (5, 0, 'Świat jest pełen filozofów', false, '2008', 8, 1, 7, null);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (6, 0, 'Co to będzie?', false, '2008', 8, 1, 7, null);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (7, 0, 'Nic tu po nas', false, '2008', 8, 1, 7, null);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (8, 0, 'Nie zostało nic', false, '2008', 8, 1, 7, null);
+INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (9, 0, 'Traper', false, '2013', null, 1, 5, null);
+
+
+-- =============== COMMENTS
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (8, 'asdsad', null, null, 1, 1);
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (10, '1', null, 1, null, 1);
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (12, '3', null, 1, null, 1);
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (13, '4', null, 1, null, 1);
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (14, '11', null, 1, null, 3);
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (15, 'zxcsac', null, 1, null, 3);
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (16, 'asdsad', 1, null, null, 3);
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (17, '1', 1, null, null, 3);

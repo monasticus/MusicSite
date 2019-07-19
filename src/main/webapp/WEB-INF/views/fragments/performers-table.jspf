@@ -32,7 +32,7 @@
 
                         </div>
                 </td>
-                <td class="ranking-rate rounded-sm border border-dark bg-success">
+                <td class="ens-average rounded-sm border border-dark bg-success">
                     <div><fmt:formatNumber type="number" maxFractionDigits="2" value="${performer.average}"/></div>
                 </td>
 

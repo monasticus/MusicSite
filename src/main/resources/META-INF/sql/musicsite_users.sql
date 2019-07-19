@@ -1,4 +1,0 @@
-INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (1, true, true, 'pss@gmail.com', 'Mr. Hide', '$2a$10$1gb3IF3813JSbZ2X7XERGOVPTYAmIvdOP1MdCs5xVG8DLKEB41uby', 'Dr. Jekyll');
-INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (2, false, true, 'blabla@gmail.com', 'Tomasz', '$2a$10$crECq/A.Cdlvb5CTsJAIJ.Pjmxi2xsYBtSFaakYIm2EJtwVzy0kCm', 'Angel');
-INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (3, false, true, 'barbara@rabarbar', 'Barbara', '$2a$10$xp2XCf2OIQjcuf02KjbnrupLCrfzAyfE4OAEZN1P0xagIsy4uUIwm', 'Rabarbar');
-INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (5, false, true, 'aniolowski93@gmail.com', 'Tomasz', '$2a$10$tFPVOJz9Ev/fDcuhbr7xBuBWxKMd2xJ/ESKjoMAldCRRGbebY6f2e', 'Filozof');
