@@ -21,36 +21,24 @@
 
 <%@include file="../fragments/header.jspf" %>
 
-<div class="container border border-danger">
+<section class="ens-page container border border-danger">
     <h1 class="heading">Albums</h1>
-
-
         <c:if test="${empty albums}">
 
             <p class="no-data">
                 Albums list is empty.
             </p>
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/performer">add performer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/album">add album</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/track">add track</a>
-                </li>
-            </ul>
+
+            <a class="btn btn-success btn-lg btn-block" href="/add/album">Add album</a>
 
         </c:if>
         <c:if test="${not empty albums}">
             <%@include file="../fragments/albums-table.jspf"%>
         </c:if>
 
+</section>
 
-
-</div>
-
+<%@include file="../fragments/footer.jspf" %>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

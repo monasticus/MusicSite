@@ -20,7 +20,7 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<div class="container border border-danger">
+<section class="ens-page container border border-danger">
     <h1 class="heading">Performers</h1>
 
 
@@ -30,17 +30,8 @@
             <p class="no-data">
                 Performers list is empty.
             </p>
-            <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/performer">add performer</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/album">add album</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/add/track">add track</a>
-                </li>
-            </ul>
+
+            <a class="btn btn-success btn-lg btn-block" href="/add/performer">Add performer</a>
 
         </c:when>
         <c:otherwise>
@@ -49,8 +40,9 @@
     </c:choose>
 
 
-</div>
+</section>
 
+<%@include file="../fragments/footer.jspf" %>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

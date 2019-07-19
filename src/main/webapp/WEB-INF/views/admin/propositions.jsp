@@ -20,7 +20,9 @@
 </head>
 <body>
 <%@include file="../fragments/header.jspf" %>
-<section class="ens-page">
+
+<section class="ens-page border border-info bg-dark">
+    \
     <h1 class="ranking-ens-type">Propositions</h1>
 
     <div class="propositions-table">
@@ -32,8 +34,10 @@
     <div class="propositions-table">
         <%@include file="../fragments/tracks-propositions.jspf" %>
     </div>
-
+    \
 </section>
+
+<%@include file="../fragments/footer.jspf" %>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

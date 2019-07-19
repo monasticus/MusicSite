@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -71,7 +72,7 @@
             </div>
 
             <div class="ens-average rounded ml-auto p-2 border border-dark bg-success">
-                <div>${performer.average}</div>
+                <div><fmt:formatNumber type="number" maxFractionDigits="2" value="${performer.average}"/></div>
             </div>
         </div>
     </div>
@@ -88,13 +89,30 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <ul class="list-group">
-                        <c:forEach var="album" items="${performerAlbums}">
-                            <li class="list-group-item list-group-item-primary"><a
-                                    href="/album/${album.id}">${album.name}
-                                (${album.yearOfPublication})</a></li>
-                        </c:forEach>
-                    </ul>
+                    <c:choose>
+                        <c:when test="${empty performer.albums}">
+                            <p class="empty-track-list">
+                                Album list is empty.
+                            </p>
+                        </c:when>
+                        <c:otherwise>
+                            <ul class="list-group">
+                                <c:forEach var="album" items="${performerAlbums}">
+                                    <li class="list-group-item list-group-item-primary d-flex mb-3">
+
+                                        <div class="mr-auto p-2 bd-highlight">
+                                            <a href="/album/${album.id}">${album.name}</a>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            <c:out value="${album.yearOfPublication}" default="---"/>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </c:otherwise>
+
+                    </c:choose>
+
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <c:choose>
@@ -106,11 +124,14 @@
                         <c:otherwise>
                             <ul class="list-group">
                                 <c:forEach var="track" items="${performerTracks}">
-                                    <li class="list-group-item list-group-item-primary"><a
-                                            href="/track/${track.id}">(${track.yearOfPublication}) ${track.name}
-                                    </a> <br>
-                                        <span class="performers-track-album">Album: <c:out value="${track.album.name}"
-                                                                                           default="---"/> </span>
+                                    <li class="list-group-item list-group-item-primary d-flex mb-3">
+                                        <div class="mr-auto p-2 bd-highlight">
+                                            <a href="/track/${track.id}">(${track.yearOfPublication}) ${track.name} </a>
+                                        </div>
+                                        <div class="p-2 bd-highlight">
+                                            Album: <c:out value="${track.album.name}" default="---"/>
+                                        </div>
+
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -121,49 +142,53 @@
         </div>
     </div>
 
-    <div class="ens-bottom bg-light">
-        <div class="border border-primary bg-info">
-            <c:if test="${not empty loggedUserId}">
-                <div class="comment-area d-block p-2">
-                    <h1>New comment</h1>
-                    <form:form method="post" modelAttribute="comment">
 
-                        <div class="form-group">
-                            <form:textarea path="content" rows="3" cssClass="form-control bg-light"/>
-                            <form:errors path="content" cssClass="error" element="div"/>
-                        </div>
-                        <form:hidden path="user" value="${loggedUserId}"/>
-                        <div class="d-flex flex-row-reverse">
-                            <input type="submit" class="btn btn-warning" value="Comment" title="Comment">
-                        </div>
-                    </form:form>
-                </div>
-            </c:if>
-            <c:if test="${not empty performer.comments}">
-                <h3 class="comments-h2">Comments</h3>
-                <div class="comment-area overflow-auto d-block p-2">
-                    <c:forEach var="comment" items="${performer.comments}">
-                        <div class="comment-div bg-secondary">
-                            <div class="comment-content">
-                                    ${comment.content}
+    <c:if test="${not empty performer.comments || not empty loggedUserId}">
+        <div class="ens-bottom bg-light">
+            <div class="border border-primary bg-info">
+                <c:if test="${not empty loggedUserId}">
+                    <div class="comment-area d-block p-2">
+                        <h1>New comment</h1>
+                        <form:form method="post" modelAttribute="comment">
+
+                            <div class="form-group">
+                                <form:textarea path="content" rows="3" cssClass="form-control bg-light"/>
+                                <form:errors path="content" cssClass="error" element="div"/>
                             </div>
+                            <form:hidden path="user" value="${loggedUserId}"/>
+                            <div class="d-flex flex-row-reverse">
+                                <input type="submit" class="btn btn-warning" value="Comment" title="Comment">
+                            </div>
+                        </form:form>
+                    </div>
+                </c:if>
+                <c:if test="${not empty performer.comments}">
+                    <h3 class="comments-h2">Comments</h3>
+                    <div class="comment-area overflow-auto d-block p-2">
+                        <c:forEach var="comment" items="${performer.comments}">
+                            <div class="comment-div bg-secondary">
+                                <div class="comment-content">
+                                        ${comment.content}
+                                </div>
 
-                            <p class="comment-username text-warning">
-                                by ${comment.user.username}
-                                <c:if test="${loggedUserId == comment.user.id}">
-                                    <a href="/usr/comment-remove/${comment.id}" class="btn btn-danger btn-sm"
-                                       title="Remove comment">Remove</a>
-                                </c:if>
-                            </p>
-                        </div>
-                    </c:forEach>
-                </div>
-            </c:if>
+                                <p class="comment-username text-warning">
+                                    by ${comment.user.username}
+                                    <c:if test="${loggedUserId == comment.user.id}">
+                                        <a href="/usr/comment-remove/${comment.id}" class="btn btn-danger btn-sm"
+                                           title="Remove comment">Remove</a>
+                                    </c:if>
+                                </p>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </c:if>
+            </div>
         </div>
-    </div>
+    </c:if>
 
 </section>
 
+<%@include file="../fragments/footer.jspf" %>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

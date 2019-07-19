@@ -49,6 +49,7 @@ public class Track extends Opus {
     private boolean proposition;
 
     @OneToMany(mappedBy = "track")
+    @OrderBy("id DESC")
     private List<Comment> comments = new ArrayList<>();
 
     public Track() {

@@ -1,8 +1,9 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="rankings-content">
-    <table class="table table-hover">
+    <table class="table table-hover ">
         <tbody>
         <c:forEach var="album" items="${albums}" varStatus="nums">
-            <tr class="shadow p-3 mb-5 bg-white rounded">
+            <tr class="shadow p-3 mb-5 bg-secondary rounded">
                 <th class="ranking-ordering-num" scope="row">
                     <div>${nums.count}</div>
                 </th>
@@ -10,19 +11,19 @@
                 <td class="ranking-ens-name">
                     <div class="bg-warning category-list">
                         <a href="/album/${album.id}">
-                                ${album.name}
+                                ${album.performer.pseudonym} - ${album.name}
                         </a>
                     </div>
+
                     <div class="category-list bg-info">
                         Categories:
                         <c:forEach var="category" items="${album.categories}">
-                                            <span class="categories-ens-category"><c:out
-                                                    value="${category.name}"/></span>
+                            <span class="categories-ens-category"><c:out value="${category.name}"/></span>
                         </c:forEach>
                     </div>
                 </td>
                 <td class="ranking-rate rounded-sm border border-dark bg-success">
-                    <div>${album.average}</div>
+                    <div><fmt:formatNumber type="number" maxFractionDigits="2" value="${album.average}"/></div>
                 </td>
 
                 <c:if test="${capo == true}">

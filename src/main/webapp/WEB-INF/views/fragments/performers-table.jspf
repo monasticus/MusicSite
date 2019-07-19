@@ -1,8 +1,9 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="rankings-content">
     <table class="table table-hover">
         <tbody>
         <c:forEach var="performer" items="${performers}" varStatus="nums">
-            <tr class="shadow p-3 mb-5 bg-white rounded">
+            <tr class="shadow p-3 mb-5 bg-secondary rounded">
                 <th class="ranking-ordering-num" scope="row">
                     <div>${nums.count}</div>
                 </th>
@@ -32,7 +33,7 @@
                         </div>
                 </td>
                 <td class="ranking-rate rounded-sm border border-dark bg-success">
-                    <div>${performer.average}</div>
+                    <div><fmt:formatNumber type="number" maxFractionDigits="2" value="${performer.average}"/></div>
                 </td>
 
                 <c:if test="${capo == true}">

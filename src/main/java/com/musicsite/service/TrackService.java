@@ -45,9 +45,12 @@ public class TrackService {
         Track track = trackRepository.findOne(id);
         Hibernate.initialize(track.getRatings());
         Hibernate.initialize(track.getComments());
-        Hibernate.initialize(track.getAlbum().getRatings());
-        Hibernate.initialize(track.getAlbum().getCategories());
-        Hibernate.initialize(track.getAlbum().getComments());
+        if (track.getAlbum() != null){
+            Hibernate.initialize(track.getAlbum().getRatings());
+            Hibernate.initialize(track.getAlbum().getCategories());
+            Hibernate.initialize(track.getAlbum().getComments());
+        }
+
         return track;
     }
 

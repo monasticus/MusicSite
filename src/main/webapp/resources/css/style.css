@@ -5,30 +5,34 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    color:#fff;
-    background-color:#333;
+    color: #fff;
+    background-color: #333;
     font-family: Michroma, sans-serif;
-    padding-bottom: 40px;
 }
+
+
+.push-users {
+   margin-top: 216px;
+}
+
 
 /*========== HEADER =======================*/
 
 header {
     background: black;
-    margin-bottom: 70px;
 }
 
 h1 {
-    color: white;
+    color: black;
     margin-top: 30px;
     margin-left: 20px;
     margin-bottom: 25px;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
 
 }
 
 .my-form h1 {
-    color:black;
+    color: black;
     border-bottom: 1px solid black;
 }
 
@@ -96,6 +100,23 @@ h1 {
     color: black;
 }
 
+/*========== FOOTER =======================*/
+
+
+footer {
+    height: 44px;
+    margin-top: 70px;
+    background-color: black;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+}
+
+footer p {
+    padding-top: 8px;
+    font-style: italic;
+}
+
 /*========== FORMS =======================*/
 
 .my-form {
@@ -103,6 +124,7 @@ h1 {
     width: 600px;
     text-align: center;
     padding-bottom: 40px;
+    color: black;
 }
 
 .my-form h1 {
@@ -119,6 +141,7 @@ h1 {
 .error {
     color: red;
     font-size: 15px;
+    margin-top: 10px;
 }
 
 .success {
@@ -193,10 +216,20 @@ h1 {
 
 /*========== MAIN PAGES =======================*/
 
+.home {
+    margin-top: 50px;
+    padding: 40px;
+}
+
+
+a:hover {
+    cursor: pointer;
+}
+
 .ens-page {
     width: 900px;
-    margin: 30px auto 0;
     opacity: 0.9;
+    margin: 30px auto
 }
 
 .ens-top {
@@ -207,6 +240,14 @@ h1 {
     color: black;
 }
 
+.ens-mid {
+    border: 1px solid rgb(237, 237, 237);
+    padding-bottom: 35px;
+}
+
+.ens-bottom {
+    margin-top: 20px;
+}
 
 .ens-image {
     text-align: center;
@@ -226,7 +267,7 @@ h1 {
 
 i.track-icon {
     font-size: 90px;
-    margin-top: 40px;
+    margin-top: 35px;
 }
 
 .ens-name {
@@ -236,7 +277,7 @@ i.track-icon {
     margin-left: 20px;
 }
 
-.ens-user-rating{
+.ens-user-rating {
     font-size: 30px;
 }
 
@@ -251,12 +292,13 @@ i.track-icon {
     width: 100px;
     height: 100px;
     text-align: center;
-    font-size: 35px;
     margin-right: 60px;
 }
 
 .ens-average div {
     margin-top: 15px;
+    font-size: 35px;
+    color: black;
 }
 
 .ens-categories {
@@ -268,18 +310,20 @@ i.track-icon {
     padding-right: 10px;
 }
 
-.empty-track-list {
-    font-size: 20px;
-    color: black;
-    margin-left: 20px;
-    margin-top: 20px;
+.ens-details {
+    margin-left: 40px;
 }
 
-.ens-performer {
-    color:white;
-    font-size: 25px;
-    margin-left: 10px;
-    width: 370px;
+.ens-details p {
+    margin-bottom: 0;
+}
+
+.empty-track-list {
+    color: black;
+    margin-top: 20px;
+    margin-left: 60px;
+    font-size: 20px;
+    font-style: italic;
 }
 
 .ens-performer a {
@@ -291,26 +335,32 @@ a:hover {
 }
 
 
-
 .tune {
     padding-right: 10px;
     left: 10px;
 }
 
 
+/*======= TRACKS-AREA ============*/
 
+
+
+
+/*======= COMMENT-AREA ============*/
+
+.comment-area {
+    margin-bottom: 70px;
+}
 
 .comments-h2 {
     margin-top: 25px;
     margin-left: 30px;
 }
 
-.comment-area {
-    margin-bottom: 70px;
-}
+
 
 .comment-area form,
-.comment-area .comment-div{
+.comment-area .comment-div {
     width: 700px;
     margin: 0 auto;
     margin-bottom: 30px;
@@ -327,7 +377,6 @@ a:hover {
     margin-top: 20px;
     text-align: right;
 }
-
 
 
 .comment-username {
@@ -355,36 +404,27 @@ a:hover {
     margin-left: 30px
 }
 
-.ens-page-categories{
+.ens-page-categories {
     clear: left;
     color: white;
     margin-left: 220px;
     margin-bottom: 10px;
 }
 
-.ens-mid {
-    border: 1px solid rgb(237, 237, 237);
-    padding-bottom: 35px;
-    margin-bottom: 20px;
-}
 
-.ens-mid .related-enta {
+
+.related-enta {
     margin-left: 40px;
     margin-top: 40px;
     width: 820px;
 }
 
-.ens-mid .related-enta a {
-    width: 80px;
+.ens-mid .related-enta nav>div>a {
+    width: 115px;
     text-align: center;
     top: 50%;
     left: 50%;
-    font-size: 15px;
-}
-
-#nav-profile {
-    color: white;
-    font-size: 50px;
+    font-size: 20px;
 }
 
 
@@ -400,17 +440,11 @@ h1.ranking-ens-type {
     margin-left: 30px;
     font-size: 50px;
     color: white;
-}
-
-p.no-data {
-    color: white;
-    margin-left: 60px;
-    font-size: 20px;
-    font-style: italic;
+    padding-top: 0;
 }
 
 .ranking {
-    color:white;
+    color: white;
     background-color: grey;
 }
 
@@ -442,12 +476,12 @@ p.no-data {
     width: 50px;
 }
 
-.ranking-ordering-num div{
+.ranking-ordering-num div {
     font-size: 30px;
 }
 
 
-.form-check{
+.form-check {
     margin-right: 10px;
 }
 
@@ -460,7 +494,6 @@ p.no-data {
 
 
 .rankings-content {
-    color:white;
     margin-top: 50px;
     margin-left: 30px;
     margin-right: 30px;
@@ -487,11 +520,11 @@ p.no-data {
     margin: 70px auto 0;
 }
 
-.propositions-table th{
+.propositions-table th {
     color: white;
 }
 
-.propositions-table td{
+.propositions-table td {
     color: chocolate;
 }
 
@@ -500,24 +533,16 @@ p.no-data {
     font-size: 17px;
 }
 
-.album-tracks {
-    color:white;
-    margin: 50px
+.album-tracks-area {
+    margin: 50px;
+    color: black;
 }
 
-.album-tracks h2 {
-    margin: 50px
-}
-
-.ranking-rate {
-    width: 70px;
-    height: 70px;
-    font-size: 30px;
-    text-align: center;
+.album-tracks-area button {
+    margin-top: 40px;
 }
 
 .ranking-rate div {
     margin-top: 20px;
     text-align: center;
 }
-

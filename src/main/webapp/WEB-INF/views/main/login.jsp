@@ -21,7 +21,7 @@
 <body>
 <%@include file="../fragments/header.jspf" %>
 
-<div class="container my-form">
+<section class="container my-form">
     <h1>Login</h1>
     <c:if test="${correct == false}">
         <p class="error">Data is not correct!</p>
@@ -64,9 +64,9 @@
 
         <br><input type="submit" value="Log In" class=" btn btn-primary">
     </form>
+</section>
 
-
-</div>
+<%@include file="../fragments/footer.jspf" %>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

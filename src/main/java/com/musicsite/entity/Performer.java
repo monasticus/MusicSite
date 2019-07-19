@@ -48,6 +48,7 @@ public class Performer extends Ens {
     private boolean proposition;
 
     @OneToMany(mappedBy = "performer")
+    @OrderBy("id DESC")
     private List<Comment> comments = new ArrayList<>();
 
     @Transient
