@@ -1,5 +1,7 @@
 package com.musicsite.entity;
 
+import com.musicsite.performer.Performer;
+
 public abstract class Opus extends Ens{
 
     private String name;

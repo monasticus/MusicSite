@@ -1,7 +1,7 @@
 package com.musicsite.app;
 
-import com.musicsite.entity.User;
-import com.musicsite.repository.UserRepository;
+import com.musicsite.user.User;
+import com.musicsite.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 

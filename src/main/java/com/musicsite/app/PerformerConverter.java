@@ -1,7 +1,7 @@
 package com.musicsite.app;
 
-import com.musicsite.entity.Performer;
-import com.musicsite.repository.PerformerRepository;
+import com.musicsite.performer.Performer;
+import com.musicsite.performer.PerformerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 

@@ -1,10 +1,10 @@
 package com.musicsite.controller;
 
-import com.musicsite.entity.CategorySelector;
-import com.musicsite.service.AlbumService;
-import com.musicsite.service.CategoryService;
-import com.musicsite.service.PerformerService;
-import com.musicsite.service.TrackService;
+import com.musicsite.category.CategorySelector;
+import com.musicsite.album.AlbumService;
+import com.musicsite.category.CategoryService;
+import com.musicsite.performer.PerformerService;
+import com.musicsite.track.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

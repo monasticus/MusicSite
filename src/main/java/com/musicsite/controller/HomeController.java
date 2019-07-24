@@ -1,10 +1,10 @@
 package com.musicsite.controller;
 
-import com.musicsite.entity.Track;
-import com.musicsite.entity.User;
+import com.musicsite.track.Track;
+import com.musicsite.user.User;
 import com.musicsite.service.EmailService;
-import com.musicsite.service.TrackService;
-import com.musicsite.service.UserService;
+import com.musicsite.track.TrackService;
+import com.musicsite.user.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
