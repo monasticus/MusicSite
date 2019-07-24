@@ -131,9 +131,14 @@ public class Performer extends Ens {
 
     public void updateAverage() {
         double sum = 0.0;
+
+        if (ratings.size() == 0){
+            average = 0.0;
+            return;
+        }
+
         for (Rating rating : ratings)
             sum += rating.getRating();
-
 
         average = sum / ratings.size();
     }

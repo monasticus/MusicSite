@@ -90,7 +90,7 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <c:choose>
-                        <c:when test="${empty performer.albums}">
+                        <c:when test="${empty performerAlbums}">
                             <p class="empty-track-list">
                                 Album list is empty.
                             </p>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <c:choose>
-                        <c:when test="${empty performer.tracks}">
+                        <c:when test="${empty performerTracks}">
                             <p class="empty-track-list">
                                 Track list is empty.
                             </p>

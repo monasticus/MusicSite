@@ -113,6 +113,12 @@ public class Album extends Opus {
 
     public void updateAverage() {
         double sum = 0.0;
+
+        if (ratings.size() == 0){
+            average = 0.0;
+            return;
+        }
+
         for (Rating rating : ratings)
             sum += rating.getRating();
 

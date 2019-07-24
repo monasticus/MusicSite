@@ -22,7 +22,7 @@
 
 <section class="container">
 
-    <div class="rankings-content">
+    <div class="ens-page container border border-danger bg-light">
 
         <c:if test="${not empty performers}">
             <h1 class="ens-type">Performers</h1>
@@ -39,11 +39,11 @@
             <%@include file="../fragments/tracks-table.jspf" %>
         </c:if>
         <c:if test="${empty performers && empty albums && empty tracks}">
-            <div class="ens-page bg-light">
+
                 <p class="search-no-results">
                     No results.
                 </p>
-            </div>
+
         </c:if>
 
     </div>

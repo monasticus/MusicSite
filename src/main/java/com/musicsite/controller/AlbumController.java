@@ -88,8 +88,8 @@ public class AlbumController {
         if (userId == null)
             return "redirect:/login";
 
-        if (userService.getAlbumUserRating(userId, albumService.getAlbum(albumId)) == (rating))
-            ratingService.removePerformerRating(userId, albumId);
+        if (userService.getAlbumUserRating(userId, albumService.getAlbum(albumId)) == rating)
+            ratingService.removeAlbumRating(userId, albumId);
         else
             albumService.saveRating(userId, albumId, rating);
 

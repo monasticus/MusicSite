@@ -21,7 +21,7 @@
 
 <%@include file="../fragments/header.jspf" %>
 
-<section class="ens-page container border border-danger">
+<section class="ens-page container border border-danger bg-light">
     <h1 class="heading">Albums</h1>
         <c:if test="${empty albums}">
 

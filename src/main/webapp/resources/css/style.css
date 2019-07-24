@@ -5,7 +5,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    color: #fff;
+    color: black;
     background-color: #333;
     font-family: Michroma, sans-serif;
 }
@@ -23,7 +23,6 @@ header {
 }
 
 h1 {
-    color: black;
     margin-top: 30px;
     margin-left: 20px;
     margin-bottom: 25px;
@@ -32,7 +31,6 @@ h1 {
 }
 
 .my-form h1 {
-    color: black;
     border-bottom: 1px solid black;
 }
 
@@ -96,10 +94,6 @@ h1 {
     background-color: rgb(237, 237, 0);
 }
 
-#highlighted-elem a {
-    color: black;
-}
-
 /*========== FOOTER =======================*/
 
 
@@ -124,7 +118,6 @@ footer p {
     width: 600px;
     text-align: center;
     padding-bottom: 40px;
-    color: black;
 }
 
 .my-form h1 {
@@ -242,7 +235,6 @@ a:hover {
     padding-bottom: 40px;
     margin-bottom: 20px;
     opacity: 1;
-    color: black;
 }
 
 .ens-mid {
@@ -265,7 +257,6 @@ a:hover {
 .ens-image i {
     font-size: 120px;
     margin-top: 30px;
-    color: black;
     opacity: 0.8;
     top: 35px;
 }
@@ -277,7 +268,6 @@ i.track-icon {
 
 .ens-name {
     font-size: 40px;
-    color: black;
     font-weight: bold;
     margin-left: 20px;
 }
@@ -303,7 +293,6 @@ i.track-icon {
 .ens-average div {
     margin-top: 15px;
     font-size: 35px;
-    color: black;
 }
 
 .ens-categories {
@@ -324,7 +313,6 @@ i.track-icon {
 }
 
 .empty-track-list {
-    color: black;
     margin-top: 20px;
     margin-left: 60px;
     font-size: 20px;
@@ -367,8 +355,7 @@ a:hover {
 .comment-area form,
 .comment-area .comment-div {
     width: 700px;
-    margin: 0 auto;
-    margin-bottom: 30px;
+    margin: 0 auto 30px;
 }
 
 .comment-div {
@@ -460,7 +447,6 @@ h1.ranking-ens-type {
 
 .ranking-ens-average div {
     font-size: 40px;
-    color: black;
     border-radius: 35%;
     width: 75px;
     height: 65px;
@@ -475,7 +461,6 @@ h1.ranking-ens-type {
 
 .ranking-ens-name a {
     font-size: 20px;
-    color: black;
 }
 
 .ranking-ordering-num {
@@ -496,11 +481,6 @@ h1.ranking-ens-type {
     margin-left: 30px;
     margin-right: 30px;
 }
-
-.categories-form .numbers {
-    color: black;
-}
-
 
 .rankings-content {
     margin-top: 50px;
@@ -544,7 +524,6 @@ h1.ranking-ens-type {
 
 .album-tracks-area {
     margin: 50px;
-    color: black;
 }
 
 .album-tracks-area button {
@@ -561,11 +540,17 @@ h1.ranking-ens-type {
 }
 
 .ordinal-number {
-    color: black;
     font-size: 15px;
 }
 
 .search-no-results {
     padding: 50px;
+}
+
+a {
+    color: black;
+}
+
+#highlighted-elem a {
     color: black;
 }
