@@ -155,6 +155,9 @@ public class TrackService {
 
         websiteURL = websiteURL.concat(track.getPerformer().getPseudonym().replaceAll(" ", "+")).concat("+");
         websiteURL = websiteURL.concat(track.getName().replaceAll(" ", "+"));
+        if (track.getAlbum() != null && track.getAlbum().getName().equals(track.getName()))
+            websiteURL = websiteURL.concat("+track");
+
         Connection connect = Jsoup.connect(websiteURL);
 
         String result = new String();

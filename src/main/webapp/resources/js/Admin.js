@@ -4,6 +4,9 @@ $('#deleteModal').on('show.bs.modal', function (event) {
     var itemType = $(event.relatedTarget).data('item-type');
     $(this).find('.modal-body p #itemName').text(itemName);
     $('#deleteId').on('click', function () {
-        window.location.href = "/adm/" + itemType + "/remove/" + itemId;
+        if ($(this).text() == "Remove")
+            window.location.href = "/adm/" + itemType + "/remove/" + itemId;
+        else if ($(this).text() == "Discard")
+            window.location.href = "/admgi/propositions/" + itemType + "/discard?id=" + itemId;
     })
 });
