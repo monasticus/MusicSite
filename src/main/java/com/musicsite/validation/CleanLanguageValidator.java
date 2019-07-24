@@ -10,12 +10,12 @@ public class CleanLanguageValidator implements ConstraintValidator<CleanLanguage
 
     private List<String> REGEXES =
             Arrays.asList(
-                    "\\.*k+u+r+w+\\.*",
-                    "\\.*j+e+b+\\.*",
-                    "\\.*c+h+u+j+\\.*",
-                    "\\.*p+i+e+r+d+\\.*",
-                    "\\.*f+u+c+k+\\.*",
-                    "\\.*b+i+a*t+c+h+\\.*");
+                    ".*k+u+r+w+(.)*",
+                    ".*j+e+b+(.)*",
+                    ".*c+h+u+j+(.)*",
+                    ".*p+i+e+r+d+(.)*",
+                    ".*f+u+c+k+(.)*",
+                    ".*b+i+a*t+c+h+(.)*");
 
     @Override
     public void initialize(CleanLanguage cleanLanguage) {
