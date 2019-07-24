@@ -29,6 +29,8 @@ public class AlbumService {
 
     public Album getAlbum(Long id) {
         Album album = albumRepository.findOne(id);
+        if (album == null)
+            return null;
         Hibernate.initialize(album.getCategories());
         Hibernate.initialize(album.getRatings());
         Hibernate.initialize(album.getTracks());

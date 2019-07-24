@@ -7,7 +7,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "AuthenticationFilter", urlPatterns = {"/usr/*", "/add/*", "/*/*/setRate/*"})
+@WebFilter(filterName = "AuthenticationFilter",
+        urlPatterns = {
+                "/usr/*",
+                "/usr/*/*",
+                "/logout",
+                "/add/*",
+                "/*/*/setRate/*",
+                "/album/add/tracks"})
 public class AuthenticationFilter implements Filter {
     public void destroy() {
     }

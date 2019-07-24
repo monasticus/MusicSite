@@ -64,7 +64,6 @@ public class PerformerController {
             Performer performer = performerService.getPerformerById(performerId);
             Long userId = (Long) session.getAttribute("loggedUserId");
             model.addAttribute("userPerformerRating", userService.getPerformerUserRating(userId, performer));
-            model.addAttribute("comment", new Comment().setUser(userService.getUserById(userId)).setPerformer(performer));
             performerService.orderData(performer);
             model.addAttribute("performer", performer);
             model.addAttribute("performerAlbums", albumService.getAlbumsByPerformerAndPropositionOrderByYear(performer, false));

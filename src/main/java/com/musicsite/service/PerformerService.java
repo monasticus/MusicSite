@@ -39,6 +39,8 @@ public class PerformerService {
 
     public Performer getPerformerById(Long id) {
         Performer performer = performerRepository.findOne(id);
+        if (performer == null)
+            return null;
         Hibernate.initialize(performer.getAlbums());
         performer.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories()));
         Hibernate.initialize(performer.getTracks());

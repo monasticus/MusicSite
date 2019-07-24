@@ -40,7 +40,7 @@ INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publicatio
 INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (6, 0, 'Midnight marauders', false, '1993', 4);
 INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (7, 0, 'The Miseducation of Lauryn Hill', false, '1998', 6);
 INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (8, 0, 'Insert EP', false, '2008', 7);
-
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (9, 0, 'Baduizm', false, '1997', 10);
 
 
 -- =============== CATEGORIES
@@ -73,6 +73,8 @@ INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (7, 7)
 INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (8, 1);
 INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (5, 1);
 INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (6, 1);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (9, 6);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (9, 7);
 
 
 
@@ -86,15 +88,28 @@ INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, use
 
 
 -- =============== TRACKS
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (1, 0, 'We can get down', false, '1993', 6, 1, 4, null);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (3, 0, 'Insert', false, '2008', 8, 1, 7, null);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (4, 0, 'Bumbox', false, '2008', 8, 1, 7, null);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (5, 0, 'Świat jest pełen filozofów', false, '2008', 8, 1, 7, null);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (6, 0, 'Co to będzie?', false, '2008', 8, 1, 7, null);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (7, 0, 'Nic tu po nas', false, '2008', 8, 1, 7, null);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (8, 0, 'Nie zostało nic', false, '2008', 8, 1, 7, null);
-INSERT INTO musicsite.tracks (id, average, name, proposition, year_of_publication, album_id, category_id, performer_id, ordering_num) VALUES (9, 0, 'Traper', false, '2013', null, 1, 5, null);
-
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (1, 0, 'We can get down', null, false, '1993', 6, 1, 4);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (3, 0, 'Insert', null, false, '2008', 8, 1, 7);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (4, 0, 'Bumbox', null, false, '2008', 8, 1, 7);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (5, 0, 'Świat jest pełen filozofów', null, false, '2008', 8, 1, 7);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (6, 0, 'Co to będzie?', null, false, '2008', 8, 1, 7);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (7, 0, 'Nic tu po nas', null, false, '2008', 8, 1, 7);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (8, 0, 'Nie zostało nic', null, false, '2008', 8, 1, 7);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (9, 0, 'Traper', null, false, '2013', null, 1, 5);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (10, 0, 'Rimshot (Intro)', 1, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (11, 0, 'On & On', 2, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (12, 0, 'Appletree', 3, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (13, 0, 'Otherside of the Game', 4, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (14, 0, 'Sometimes (Mix #9)', 5, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (15, 0, 'Next Lifetime', 6, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (16, 0, 'Afro', 7, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (17, 0, 'Certainly', 8, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (18, 0, '4 Leaf Clover', 9, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (19, 0, 'No Love', 10, false, '1997', 9, 7, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (20, 0, 'Drama', 11, false, '1997', 9, 7, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (21, 0, 'Sometimes...', 12, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (22, 0, 'Certainly [Flipped It]', 13, false, '1997', 9, 6, 10);
+INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (23, 0, 'Rimshot (Outro)', 14, false, '1997', 9, 6, 10);
 
 -- =============== COMMENTS
 INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (8, 'asdsad', null, null, 1, 1);

@@ -19,7 +19,7 @@ public class Comment {
 
     @NotBlank
     @CleanLanguage
-    @Column(columnDefinition = "BIT")
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @ManyToOne

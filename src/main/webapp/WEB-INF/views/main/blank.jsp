@@ -19,15 +19,16 @@
 </head>
 <body>
 <%@include file="../fragments/header.jspf" %>
-<section class="page-not-found">
-
-    <i class="glyphicon glyphicon-search"></i>
+<section class="page-not-found container">
+<div class="bg-dark">
+    <i class="fas fa-question-circle"></i>
     <div>
         <h1>Sorry</h1>
         <span>
             Page not found.
         </span>
     </div>
+</div>
 </section>
 
 <%@include file="../fragments/footer.jspf" %>

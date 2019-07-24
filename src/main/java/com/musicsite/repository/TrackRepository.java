@@ -18,6 +18,8 @@ public interface TrackRepository extends JpaRepository<Track, Long> {
 
     List<Track> getTracksByPerformerOrderByYearOfPublicationDesc(Performer performer);
 
+    List<Track> getTracksByAlbumAndPropositionOrderByOrdinalNum(Album album, boolean value);
+
     List<Track> getTracksByPerformerAndPropositionOrderByYearOfPublicationDesc(Performer performer, boolean value);
 
     List<Track> getTracksByPropositionOrderByAverageDesc(boolean value);

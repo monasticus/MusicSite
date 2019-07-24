@@ -1,11 +1,10 @@
 package com.musicsite.entity;
 
 import com.musicsite.validation.TrackValidationGroup;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -31,8 +30,9 @@ public class Track extends Opus {
     @ManyToOne
     private Album album;
 
-    @Column(name = "ordering_num")
-    private Integer orderingNum;
+    @Column(name = "ordinal_num")
+    @Digits(integer = 2, fraction = 0)
+    private Integer ordinalNum;
 
     @ManyToOne
     @NotNull(groups = TrackValidationGroup.class)
@@ -146,12 +146,12 @@ public class Track extends Opus {
         this.comments = comments;
     }
 
-    public Integer getOrderingNum() {
-        return orderingNum;
+    public Integer getOrdinalNum() {
+        return ordinalNum;
     }
 
-    public void setOrderingNum(Integer orderingNum) {
-        this.orderingNum = orderingNum;
+    public void setOrdinalNum(Integer ordinalNum) {
+        this.ordinalNum = ordinalNum;
     }
 
     @PrePersist

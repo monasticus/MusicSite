@@ -43,6 +43,9 @@ public class TrackService {
 
     public Track getTrack(Long id) {
         Track track = trackRepository.findOne(id);
+        if (track == null)
+            return null;
+
         Hibernate.initialize(track.getRatings());
         Hibernate.initialize(track.getComments());
         if (track.getAlbum() != null){
@@ -96,6 +99,11 @@ public class TrackService {
         tracks.forEach(p -> Hibernate.initialize(p.getRatings()));
         return tracks;
     }
+
+    public List<Track> getTracksByAlbumAndPropositionsOrderByYearSaute(Album album, boolean value) {
+        return trackRepository.getTracksByAlbumAndPropositionOrderByOrdinalNum(album, value);
+    }
+
 
     public List<Track> getTracksByCategoriesAndPropositionOrderByAverage(List<Category> categories, boolean value) {
         List<Track> tracks =  trackRepository.getDistinctTracksByCategoryInAndPropositionOrderByAverageDesc(categories, value).stream().distinct().collect(Collectors.toList());

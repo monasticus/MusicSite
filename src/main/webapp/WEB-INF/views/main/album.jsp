@@ -93,17 +93,17 @@
         <div class="album-tracks-area">
             <h1>Track listing</h1>
             <c:choose>
-                <c:when test="${empty album.tracks}">
+                <c:when test="${empty tracksNoProposition}">
                     <p class="empty-track-list">
                         Track list is empty.
                     </p>
-                    <a class="btn btn-success btn-lg btn-block">Add tracks to album</a>
+                    <a href="/album/${album.id}/add/tracks" class="btn btn-success btn-lg btn-block">Add tracks to album</a>
                 </c:when>
                 <c:otherwise>
                     <ol class="track-list">
-                        <c:forEach var="track" items="${album.tracks}">
+                        <c:forEach var="track" items="${tracksNoProposition}">
                             <li class="album-single-track">
-                                <a href="/track/${track.id}">${track.name}
+                                <span class="ordinal-number">${track.ordinalNum}.</span> <a href="/track/${track.id}">${track.name}
                                 </a></li>
                         </c:forEach>
                     </ol>

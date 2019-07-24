@@ -14,8 +14,9 @@ import java.io.IOException;
 @WebFilter(filterName = "AdminAuthenticationFilter",
         urlPatterns = {
                 "/adm/*",
-                "/adm/add/*",
-                "/adm/propositions/*/*"})
+                "/adm/add/category",
+                "/adm/propositions/*/*",
+                "/adm/*/remove/*"})
 
 public class AdminAuthenticationFilter implements Filter {
 

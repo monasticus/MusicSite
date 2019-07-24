@@ -59,7 +59,6 @@ public class TrackController {
             Track track = trackService.getTrack(trackId);
             Long userId = (Long) session.getAttribute("loggedUserId");
             model.addAttribute("userTrackRating", userService.getTrackUserRating(userId, track));
-            model.addAttribute("comment", new Comment().setUser(userService.getUserById(userId)).setTrack(track));
             String hyperlink = trackService.getYoutubeURL(trackId);
             model.addAttribute("trackHyperlink", hyperlink);
             model.addAttribute("track", track);

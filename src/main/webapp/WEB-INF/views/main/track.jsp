@@ -48,19 +48,19 @@
                             </c:choose>
 
 
-                    <a class="text-success" href="/album/${track.id}/setRate/1">
+                    <a class="text-success" href="/track/${track.id}/setRate/1">
                         <i class="tune fas fa-music" data-rating-tune="1"></i>
                     </a>
-                    <a class="text-success" href="/album/${track.id}/setRate/2">
+                    <a class="text-success" href="/track/${track.id}/setRate/2">
                         <i class="tune fas fa-music" data-rating-tune="2"></i>
                     </a>
-                    <a class="text-success" href="/album/${track.id}/setRate/3">
+                    <a class="text-success" href="/track/${track.id}/setRate/3">
                         <i class="tune fas fa-music" data-rating-tune="3"></i>
                     </a>
-                    <a class="text-success" href="/album/${track.id}/setRate/4">
+                    <a class="text-success" href="/track/${track.id}/setRate/4">
                         <i class="tune fas fa-music" data-rating-tune="4"></i>
                     </a>
-                    <a class="text-success" href="/album/${track.id}/setRate/5">
+                    <a class="text-success" href="/track/${track.id}/setRate/5">
                         <i class="tune fas fa-music" data-rating-tune="5"></i>
                     </a>
                     </div>

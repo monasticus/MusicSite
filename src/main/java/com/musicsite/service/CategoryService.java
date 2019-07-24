@@ -47,4 +47,8 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
+    public Category getCategoryByName (String name) {
+        return categoryRepository.getFirstCategoryByNameIgnoreCase(name);
+    }
+
 }

@@ -76,6 +76,12 @@
             <br>
         </c:if>
 
+        <div class="form-group">
+            Ordinal Number: <br>
+            <form:input path="ordinalNum" cssClass="form-control"/>
+            <form:errors path="ordinalNum" cssClass="error" element="div"/><br>
+        </div>
+
         Category:<br>
         <form:select path="category"
                      items="${categories}"

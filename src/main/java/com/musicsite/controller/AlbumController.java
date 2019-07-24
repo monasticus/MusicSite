@@ -2,7 +2,7 @@ package com.musicsite.controller;
 
 import com.musicsite.entity.Album;
 import com.musicsite.entity.Comment;
-import com.musicsite.entity.Performer;
+import com.musicsite.entity.Track;
 import com.musicsite.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,27 +13,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/album")
 public class AlbumController {
 
     private UserService userService;
+    private TrackService trackService;
     private AlbumService albumService;
     private RatingService ratingService;
     private CommentService commentService;
+    private CategoryService categoryService;
 
     @Autowired
     public AlbumController(UserService userService,
                            AlbumService albumService,
+                           TrackService trackService,
                            RatingService ratingService,
-                           CommentService commentService) {
+                           CommentService commentService,
+                           CategoryService categoryService) {
         this.userService = userService;
         this.albumService = albumService;
+        this.trackService = trackService;
         this.ratingService = ratingService;
         this.commentService = commentService;
+        this.categoryService = categoryService;
+
     }
 
 
@@ -50,7 +60,7 @@ public class AlbumController {
         }
 
         model.addAttribute("album", album);
-
+        model.addAttribute("tracksNoProposition", trackService.getTracksByAlbumAndPropositionsOrderByYearSaute(album, false));
         return "main/album";
     }
 
@@ -60,7 +70,6 @@ public class AlbumController {
             Album album = albumService.getAlbum(albumId);
             Long userId = (Long) session.getAttribute("loggedUserId");
             model.addAttribute("userAlbumRating", userService.getAlbumUserRating(userId, album));
-            model.addAttribute("comment", new Comment().setUser(userService.getUserById(userId)).setAlbum(album));
             model.addAttribute("album", album);
 
             return "main/album";
@@ -85,6 +94,40 @@ public class AlbumController {
             albumService.saveRating(userId, albumId, rating);
 
         albumService.updateAlbumAverage(albumId);
+
+        return "redirect:/album/".concat(String.valueOf(albumId));
+    }
+
+    @GetMapping("/{albumId}/add/tracks")
+    public String displayAlbumTracksForm (@PathVariable Long albumId, Model model) {
+        model.addAttribute("albumName", albumService.getAlbum(albumId).getName());
+        return "add/tracks";
+    }
+
+    @PostMapping("/{albumId}/add/tracks")
+    public String addTracksToAlbum(@PathVariable Long albumId, Model model, HttpServletRequest request) {
+        String[] names = request.getParameterValues("trackName");
+        if (names == null){
+            int counter = Integer.valueOf(request.getParameter("counter"));
+            model.addAttribute("counter", counter);
+            model.addAttribute("categories", categoryService.getCategories());
+            return "add/tracks";
+        }
+
+        List<String> trackNames = Arrays.asList(names);
+        List<String> categories = Arrays.asList(request.getParameterValues("category"));
+        for (int i = 0; i < trackNames.size(); i++) {
+
+            Album album = albumService.getAlbum(albumId);
+            Track track = new Track();
+            track.setName(trackNames.get(i));
+            track.setPerformer(album.getPerformer());
+            track.setAlbum(album);
+            track.setYearOfPublication(album.getYearOfPublication());
+            track.setOrdinalNum(i+1);
+            track.setCategory(categoryService.getCategoryByName(categories.get(i)));
+            trackService.save(track);
+        }
 
         return "redirect:/album/".concat(String.valueOf(albumId));
     }

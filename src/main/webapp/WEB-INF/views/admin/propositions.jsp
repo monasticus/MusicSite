@@ -22,7 +22,7 @@
 <%@include file="../fragments/header.jspf" %>
 
 <section class="ens-page border border-info bg-dark">
-    \
+
     <h1 class="ranking-ens-type">Propositions</h1>
 
     <div class="propositions-table">
@@ -34,7 +34,7 @@
     <div class="propositions-table">
         <%@include file="../fragments/tracks-propositions.jspf" %>
     </div>
-    \
+
 </section>
 
 <%@include file="../fragments/footer.jspf" %>
