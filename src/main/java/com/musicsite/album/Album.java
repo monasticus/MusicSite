@@ -33,14 +33,14 @@ public class Album extends Opus {
     @NotNull(groups = AlbumValidationGroup.class)
     private Performer performer;
 
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
     private List<Track> tracks = new ArrayList<>();
 
     @Pattern(regexp = "\\d{4}", groups = {AlbumValidationGroup.class, Default.class})
     @Column(name = "year_of_publication")
     private String yearOfPublication;
 
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
     private List<Rating> ratings = new ArrayList<>();
 
     @Column(precision = 3, scale = 2)
@@ -53,7 +53,7 @@ public class Album extends Opus {
     @NotEmpty
     private List<Category> categories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
     @OrderBy("id DESC")
     private List<Comment> comments = new ArrayList<>();
 

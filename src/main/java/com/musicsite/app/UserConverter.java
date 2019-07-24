@@ -7,8 +7,7 @@ import org.springframework.core.convert.converter.Converter;
 
 public class UserConverter implements Converter<String, User> {
 
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public User convert(String id) {

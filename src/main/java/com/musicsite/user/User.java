@@ -41,7 +41,7 @@ public class User extends Ens {
     @Column(columnDefinition = "BIT")
     private boolean confirmed;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Rating> ratings;
 
 

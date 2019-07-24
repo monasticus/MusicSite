@@ -9,7 +9,7 @@ import com.musicsite.user.User;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "recommendations")
+@Table(name = "favorite")
 public class Favorite extends Ens {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

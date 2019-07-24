@@ -30,21 +30,14 @@ import java.util.stream.Collectors;
 @Transactional
 public class TrackService {
 
-    private PerformerRepository performerRepository;
-    private AlbumRepository albumRepository;
     private TrackRepository trackRepository;
     private UserRepository userRepository;
     private RatingRepository ratingRepository;
 
-    @Autowired
-    public TrackService(PerformerRepository performerRepository,
-                        AlbumRepository albumRepository,
-                        TrackRepository trackRepository,
+    public TrackService(TrackRepository trackRepository,
                         UserRepository userRepository,
                         RatingRepository ratingRepository) {
 
-        this.performerRepository = performerRepository;
-        this.albumRepository = albumRepository;
         this.trackRepository = trackRepository;
         this.userRepository = userRepository;
         this.ratingRepository = ratingRepository;

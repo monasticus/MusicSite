@@ -116,7 +116,7 @@ public class AlbumController {
         String[] names = request.getParameterValues("trackName");
         model.addAttribute("albumName", albumService.getAlbum(albumId).getName());
         if (names == null){
-            int counter = Integer.valueOf(request.getParameter("counter"));
+            int counter = Integer.parseInt(request.getParameter("counter"));
             model.addAttribute("counter", counter);
             model.addAttribute("categories", categoryService.getCategories());
             return "add/tracks";

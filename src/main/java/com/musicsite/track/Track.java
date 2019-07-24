@@ -46,7 +46,7 @@ public class Track extends Opus {
     @Column(precision = 3, scale = 2)
     private Double average;
 
-    @OneToMany(mappedBy = "track")
+    @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE)
     private List<Rating> ratings = new ArrayList<>();
 
     @ManyToOne
@@ -56,7 +56,7 @@ public class Track extends Opus {
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
-    @OneToMany(mappedBy = "track")
+    @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE)
     @OrderBy("id DESC")
     private List<Comment> comments = new ArrayList<>();
 

@@ -1,6 +1,5 @@
 package com.musicsite.album;
 
-import com.musicsite.album.Album;
 import com.musicsite.category.Category;
 import com.musicsite.performer.Performer;
 import org.springframework.data.jpa.repository.JpaRepository;

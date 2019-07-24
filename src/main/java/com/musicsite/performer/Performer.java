@@ -34,23 +34,23 @@ public class Performer extends Ens {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "performer", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.REMOVE)
     @Column
     private List<Album> albums = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "performer")
+    @ManyToMany(mappedBy = "performer", cascade = CascadeType.REMOVE)
     private List<Track> tracks = new ArrayList<>();
 
     @Column(precision = 3, scale = 2)
     private Double average;
 
-    @OneToMany(mappedBy = "performer")
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.REMOVE)
     private List<Rating> ratings = new ArrayList<>();
 
     @Column(columnDefinition = "BIT")
     private boolean proposition;
 
-    @OneToMany(mappedBy = "performer")
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.REMOVE)
     @OrderBy("id DESC")
     private List<Comment> comments = new ArrayList<>();
 

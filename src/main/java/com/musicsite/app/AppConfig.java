@@ -25,7 +25,7 @@ import java.util.Properties;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.musicsite")
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.musicsite.repository")
+@EnableJpaRepositories(basePackages = "com.musicsite")
 public class AppConfig implements WebMvcConfigurer {
 
     // === HIBERNATE CONFIGURATIONS

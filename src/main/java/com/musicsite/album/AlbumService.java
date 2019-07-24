@@ -1,7 +1,5 @@
 package com.musicsite.album;
 
-import com.musicsite.album.Album;
-import com.musicsite.album.AlbumRepository;
 import com.musicsite.category.Category;
 import com.musicsite.performer.Performer;
 import com.musicsite.rating.Rating;
@@ -9,7 +7,6 @@ import com.musicsite.rating.RatingRepository;
 import com.musicsite.user.User;
 import com.musicsite.user.UserRepository;
 import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,10 +20,7 @@ public class AlbumService {
     private UserRepository userRepository;
     private RatingRepository ratingRepository;
 
-    @Autowired
-    public AlbumService(AlbumRepository albumRepository,
-                        UserRepository userRepository,
-                        RatingRepository ratingRepository) {
+    public AlbumService(AlbumRepository albumRepository, UserRepository userRepository, RatingRepository ratingRepository) {
         this.albumRepository = albumRepository;
         this.userRepository = userRepository;
         this.ratingRepository = ratingRepository;
@@ -75,15 +69,15 @@ public class AlbumService {
 
     public List<Album> getAlbumsByPropositions(boolean value) {
         List<Album> albums = albumRepository.getAlbumsByProposition(value);
-        albums.forEach(a -> Hibernate.initialize(a.getCategories()));
-        albums.forEach(a -> Hibernate.initialize(a.getRatings()));
-        albums.forEach(a -> Hibernate.initialize(a.getTracks()));
-        albums.forEach(a -> Hibernate.initialize(a.getComments()));
-        return albums;
+        return getAlbums(albums);
     }
 
     public List<Album> getAlbumsByPerformerAndPropositionOrderByYear(Performer performer, boolean value) {
         List<Album> albums = albumRepository.getAlbumsByPerformerAndPropositionOrderByYearOfPublicationDesc(performer, value);
+        return getAlbums(albums);
+    }
+
+    private List<Album> getAlbums(List<Album> albums) {
         albums.forEach(a -> Hibernate.initialize(a.getCategories()));
         albums.forEach(a -> Hibernate.initialize(a.getRatings()));
         albums.forEach(a -> Hibernate.initialize(a.getTracks()));
@@ -93,29 +87,17 @@ public class AlbumService {
 
     public List<Album> getAlbumsByPropositionOrderByAverage(boolean value) {
         List<Album> albums = albumRepository.getAlbumsByPropositionOrderByAverageDesc(value);
-        albums.forEach(a -> Hibernate.initialize(a.getCategories()));
-        albums.forEach(a -> Hibernate.initialize(a.getRatings()));
-        albums.forEach(a -> Hibernate.initialize(a.getTracks()));
-        albums.forEach(a -> Hibernate.initialize(a.getComments()));
-        return albums;
+        return getAlbums(albums);
     }
 
     public List<Album> getAlbumsByCategoriesAndPropositionsOrderByAverage(List<Category> categories, boolean value) {
         List<Album> albums = albumRepository.getDistinctAlbumsByCategoriesInAndPropositionOrderByAverageDesc(categories, value);
-        albums.forEach(a -> Hibernate.initialize(a.getCategories()));
-        albums.forEach(a -> Hibernate.initialize(a.getRatings()));
-        albums.forEach(a -> Hibernate.initialize(a.getTracks()));
-        albums.forEach(a -> Hibernate.initialize(a.getComments()));
-        return albums;
+        return getAlbums(albums);
     }
 
     public List<Album> getAlbumsByQuery(String query) {
         List<Album> albums = albumRepository.customGetAlbumsByQuery(query);
-        albums.forEach(a -> Hibernate.initialize(a.getCategories()));
-        albums.forEach(a -> Hibernate.initialize(a.getRatings()));
-        albums.forEach(a -> Hibernate.initialize(a.getTracks()));
-        albums.forEach(a -> Hibernate.initialize(a.getComments()));
-        return albumRepository.customGetAlbumsByQuery(query);
+        return getAlbums(albums);
     }
 
     public void removeAlbum(Long id) {

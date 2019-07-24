@@ -32,7 +32,6 @@ public class PerformerService {
     private UserRepository userRepository;
     private RatingRepository ratingRepository;
 
-    @Autowired
     public PerformerService(PerformerRepository performerRepository,
                             AlbumRepository albumRepository,
                             TrackRepository trackRepository,

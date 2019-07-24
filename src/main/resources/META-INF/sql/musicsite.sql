@@ -1,13 +1,45 @@
-
-
--- =============== USERS
-INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (1, true, true, 'pss@gmail.com', 'Mr. Hide', '$2a$10$1gb3IF3813JSbZ2X7XERGOVPTYAmIvdOP1MdCs5xVG8DLKEB41uby', 'Dr. Jekyll');
-INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (2, false, true, 'blabla@gmail.com', 'Roman', '$2a$10$crECq/A.Cdlvb5CTsJAIJ.Pjmxi2xsYBtSFaakYIm2EJtwVzy0kCm', 'Angel');
-INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (3, false, true, 'barbara@rabarbar', 'Barbara', '$2a$10$xp2XCf2OIQjcuf02KjbnrupLCrfzAyfE4OAEZN1P0xagIsy4uUIwm', 'Rabarbar');
-INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (5, false, true, 'aniolowski93@gmail.com', 'Tomasz', '$2a$10$tFPVOJz9Ev/fDcuhbr7xBuBWxKMd2xJ/ESKjoMAldCRRGbebY6f2e', 'Filozof');
-
-
--- =============== PERFORMERS
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (1, 3.5, 'Szacunek ludzi ulicy', false, '2006', 1);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (2, 3.5, 'Najlepszą obroną jest atak', false, '2005', 1);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (3, 2.5, 'Kaya', false, '1978', 2);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (4, 5, 'Flesh of my flesh blood of my blood', false, '1998', 3);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (5, 3.5, 'Reedukacja', false, '2011', 1);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (6, 4.5, 'Midnight marauders', false, '1993', 4);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (7, 4.5, 'The Miseducation of Lauryn Hill', false, '1998', 6);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (8, 3.5, 'Insert EP', false, '2008', 7);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (9, 4, 'Baduizm', false, '1997', 10);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (10, 4, 'Blues On The Bayou', false, '1998', 8);
+INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (11, 3, 'Please Please Me', false, '1963', 23);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (1, 1);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (2, 1);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (3, 4);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (4, 1);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (7, 1);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (7, 6);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (7, 7);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (8, 1);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (5, 1);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (6, 1);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (9, 6);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (9, 7);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (10, 9);
+INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (11, 2);
+INSERT INTO musicsite.categories (id, name) VALUES (9, 'Blues‎');
+INSERT INTO musicsite.categories (id, name) VALUES (15, 'Classical music');
+INSERT INTO musicsite.categories (id, name) VALUES (10, 'Country');
+INSERT INTO musicsite.categories (id, name) VALUES (17, 'Dance music');
+INSERT INTO musicsite.categories (id, name) VALUES (11, 'Film music');
+INSERT INTO musicsite.categories (id, name) VALUES (8, 'Funk');
+INSERT INTO musicsite.categories (id, name) VALUES (12, 'Jazz');
+INSERT INTO musicsite.categories (id, name) VALUES (18, 'Metal');
+INSERT INTO musicsite.categories (id, name) VALUES (3, 'Pop');
+INSERT INTO musicsite.categories (id, name) VALUES (1, 'Rap');
+INSERT INTO musicsite.categories (id, name) VALUES (4, 'Reggae');
+INSERT INTO musicsite.categories (id, name) VALUES (6, 'Rhythm and blues');
+INSERT INTO musicsite.categories (id, name) VALUES (2, 'Rock');
+INSERT INTO musicsite.categories (id, name) VALUES (7, 'Soul');
+INSERT INTO musicsite.categories (id, name) VALUES (16, 'Sung poetry');
+INSERT INTO musicsite.categories (id, name) VALUES (5, 'Trip-hop');
+INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (21, 'Tauuuuuuu', null, 5, null, 1);
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (1, 4, 'Ryszard', 'Andrzejewski', false, 'Peja');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (2, 4.5, 'Bob', 'Marley', false, 'Bob Marley & The Wailers');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (3, 3.6666666666666665, 'Earl', 'Simmons', false, 'DMX');
@@ -30,61 +62,6 @@ INSERT INTO musicsite.performers (id, average, first_name, last_name, propositio
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (20, 4, null, null, false, 'The Doors');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (21, 4.333333333333333, null, null, false, 'The Rolling Stones');
 INSERT INTO musicsite.performers (id, average, first_name, last_name, proposition, pseudonym) VALUES (23, 0, '', '', false, 'The Beatles');
-
-
--- =============== ALBUMS
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (1, 3.5, 'Szacunek ludzi ulicy', false, '2006', 1);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (2, 3.5, 'Najlepszą obroną jest atak', false, '2005', 1);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (3, 2.5, 'Kaya', false, '1978', 2);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (4, 5, 'Flesh of my flesh blood of my blood', false, '1998', 3);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (5, 3.5, 'Reedukacja', false, '2011', 1);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (6, 4.5, 'Midnight marauders', false, '1993', 4);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (7, 4.5, 'The Miseducation of Lauryn Hill', false, '1998', 6);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (8, 3.5, 'Insert EP', false, '2008', 7);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (9, 4, 'Baduizm', false, '1997', 10);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (10, 4, 'Blues On The Bayou', false, '1998', 8);
-INSERT INTO musicsite.albums (id, average, name, proposition, year_of_publication, performer_id) VALUES (11, 3, 'Please Please Me', false, '1963', 23);
-
-
--- =============== CATEGORIES
-INSERT INTO musicsite.categories (id, name) VALUES (9, 'Blues‎');
-INSERT INTO musicsite.categories (id, name) VALUES (15, 'Classical music');
-INSERT INTO musicsite.categories (id, name) VALUES (10, 'Country');
-INSERT INTO musicsite.categories (id, name) VALUES (17, 'Dance music');
-INSERT INTO musicsite.categories (id, name) VALUES (11, 'Film music');
-INSERT INTO musicsite.categories (id, name) VALUES (8, 'Funk');
-INSERT INTO musicsite.categories (id, name) VALUES (12, 'Jazz');
-INSERT INTO musicsite.categories (id, name) VALUES (18, 'Metal');
-INSERT INTO musicsite.categories (id, name) VALUES (3, 'Pop');
-INSERT INTO musicsite.categories (id, name) VALUES (1, 'Rap');
-INSERT INTO musicsite.categories (id, name) VALUES (4, 'Reggae');
-INSERT INTO musicsite.categories (id, name) VALUES (6, 'Rhythm and blues');
-INSERT INTO musicsite.categories (id, name) VALUES (2, 'Rock');
-INSERT INTO musicsite.categories (id, name) VALUES (7, 'Soul');
-INSERT INTO musicsite.categories (id, name) VALUES (16, 'Sung poetry');
-INSERT INTO musicsite.categories (id, name) VALUES (5, 'Trip-hop');
-
-
--- =============== ALBUMS CATEGORIES
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (1, 1);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (2, 1);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (3, 4);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (4, 1);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (7, 1);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (7, 6);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (7, 7);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (8, 1);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (5, 1);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (6, 1);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (9, 6);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (9, 7);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (10, 9);
-INSERT INTO musicsite.albums_categories (albums_id, categories_id) VALUES (11, 2);
-
-
-
-
--- =============== RATINGS
 INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (1, 4, null, 1, null, 2);
 INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (2, 3, null, 1, null, 3);
 INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (6, 4, 1, null, null, 1);
@@ -249,10 +226,6 @@ INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, use
 INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (166, 5, null, null, 20, 5);
 INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (167, 4, null, 2, null, 3);
 INSERT INTO musicsite.ratings (id, rating, album_id, performer_id, track_id, user_id) VALUES (169, 3, 11, null, null, 3);
-
-
-
--- =============== TRACKS
 INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (1, 4, 'We can get down', 7, false, '1993', 6, 1, 4);
 INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (3, 4, 'Insert', 1, false, '2008', 8, 1, 7);
 INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (4, 3.5, 'Bumbox', 2, false, '2008', 8, 1, 7);
@@ -305,15 +278,7 @@ INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_
 INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (51, 0, 'A Taste of Honey', 12, false, '1963', 11, 2, 23);
 INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (52, 0, 'There’s a Place', 13, false, '1963', 11, 2, 23);
 INSERT INTO musicsite.tracks (id, average, name, ordinal_num, proposition, year_of_publication, album_id, category_id, performer_id) VALUES (53, 0, 'Twist and Shout', 14, false, '1963', 11, 2, 23);
-
-
--- =============== COMMENTS
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (8, 'asdsad', null, null, 1, 1);
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (10, '1', null, 1, null, 1);
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (12, '3', null, 1, null, 1);
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (13, '4', null, 1, null, 1);
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (14, '11', null, 1, null, 3);
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (15, 'zxcsac', null, 1, null, 3);
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (16, 'asdsad', 1, null, null, 3);
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (17, '1', 1, null, null, 3);
-INSERT INTO musicsite.comments (id, content, album_id, performer_id, track_id, user_id) VALUES (21, 'Tauuuuuuu', null, 5, null, 1);
+INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (1, true, true, 'pss@gmail.com', 'Mr. Hide', '$2a$10$1gb3IF3813JSbZ2X7XERGOVPTYAmIvdOP1MdCs5xVG8DLKEB41uby', 'Dr. Jekyll');
+INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (2, false, true, 'blabla@gmail.com', 'Roman', '$2a$10$crECq/A.Cdlvb5CTsJAIJ.Pjmxi2xsYBtSFaakYIm2EJtwVzy0kCm', 'Angel');
+INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (3, false, true, 'barbara@rabarbar', 'Barbara', '$2a$10$xp2XCf2OIQjcuf02KjbnrupLCrfzAyfE4OAEZN1P0xagIsy4uUIwm', 'Rabarbar');
+INSERT INTO musicsite.users (id, admin, confirmed, email, first_name, password, username) VALUES (5, false, true, 'aniolowski93@gmail.com', 'Tomasz', '$2a$10$tFPVOJz9Ev/fDcuhbr7xBuBWxKMd2xJ/ESKjoMAldCRRGbebY6f2e', 'Filozof');

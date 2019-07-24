@@ -11,12 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CommentService {
 
-    private UserRepository userRepository;
     private CommentRepository commentRepository;
 
-    @Autowired
-    public CommentService(UserRepository userRepository, CommentRepository commentRepository) {
-        this.userRepository = userRepository;
+    public CommentService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
 
