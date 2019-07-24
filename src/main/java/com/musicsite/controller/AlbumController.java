@@ -98,15 +98,20 @@ public class AlbumController {
         return "redirect:/album/".concat(String.valueOf(albumId));
     }
 
-    @GetMapping("/{albumId}/add/tracks")
+    @GetMapping("/add/tracks/{albumId}")
     public String displayAlbumTracksForm (@PathVariable Long albumId, Model model) {
-        model.addAttribute("albumName", albumService.getAlbum(albumId).getName());
+        Album album = albumService.getAlbum(albumId);
+        if (album == null)
+            return "main/blank";
+
+        model.addAttribute("albumName", album.getName());
         return "add/tracks";
     }
 
-    @PostMapping("/{albumId}/add/tracks")
+    @PostMapping("/add/tracks/{albumId}")
     public String addTracksToAlbum(@PathVariable Long albumId, Model model, HttpServletRequest request) {
         String[] names = request.getParameterValues("trackName");
+        model.addAttribute("albumName", albumService.getAlbum(albumId).getName());
         if (names == null){
             int counter = Integer.valueOf(request.getParameter("counter"));
             model.addAttribute("counter", counter);
@@ -128,6 +133,7 @@ public class AlbumController {
             track.setCategory(categoryService.getCategoryByName(categories.get(i)));
             trackService.save(track);
         }
+
 
         return "redirect:/album/".concat(String.valueOf(albumId));
     }

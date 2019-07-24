@@ -25,28 +25,29 @@
     <div class="rankings-content">
 
         <c:if test="${not empty performers}">
-                <h1 class="ens-type">Performers</h1>
-                <%@include file="../fragments/performers-table.jspf"%>
+            <h1 class="ens-type">Performers</h1>
+            <%@include file="../fragments/performers-table.jspf" %>
 
         </c:if>
         <c:if test="${not empty albums}">
-                <h1 class="ens-type">Albums</h1>
-                <%@include file="../fragments/albums-table.jspf"%>
+            <h1 class="ens-type">Albums</h1>
+            <%@include file="../fragments/albums-table.jspf" %>
 
         </c:if>
         <c:if test="${not empty tracks}">
-                <h1 class="ens-type">Tracks</h1>
-                <%@include file="../fragments/tracks-table.jspf"%>
+            <h1 class="ens-type">Tracks</h1>
+            <%@include file="../fragments/tracks-table.jspf" %>
         </c:if>
         <c:if test="${empty performers && empty albums && empty tracks}">
-            <p class="no-data">
-                No results.
-            </p>
+            <div class="ens-page bg-light">
+                <p class="search-no-results">
+                    No results.
+                </p>
+            </div>
         </c:if>
 
     </div>
 </section>
-
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

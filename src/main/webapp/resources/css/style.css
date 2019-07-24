@@ -222,6 +222,7 @@ footer p {
 
 .home {
     margin-top: 50px;
+    margin-bottom: 50px;
     padding: 40px;
 }
 
@@ -562,4 +563,9 @@ h1.ranking-ens-type {
 .ordinal-number {
     color: black;
     font-size: 15px;
+}
+
+.search-no-results {
+    padding: 50px;
+    color: black;
 }

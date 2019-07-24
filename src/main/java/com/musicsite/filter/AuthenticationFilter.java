@@ -11,10 +11,9 @@ import java.io.IOException;
         urlPatterns = {
                 "/usr/*",
                 "/usr/*/*",
-                "/logout",
+                "/album/add/*",
                 "/add/*",
-                "/*/*/setRate/*",
-                "/album/add/tracks"})
+                "/*/*/setRate/*"})
 public class AuthenticationFilter implements Filter {
     public void destroy() {
     }

@@ -97,7 +97,7 @@
                     <p class="empty-track-list">
                         Track list is empty.
                     </p>
-                    <a href="/album/${album.id}/add/tracks" class="btn btn-success btn-lg btn-block">Add tracks to album</a>
+                    <a href="/album/add/tracks/${album.id}" class="btn btn-success btn-lg btn-block">Add tracks to album</a>
                 </c:when>
                 <c:otherwise>
                     <ol class="track-list">
