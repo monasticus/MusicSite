@@ -1,8 +1,6 @@
 package com.musicsite.app;
 
-import com.musicsite.entity.Category;
 import com.musicsite.entity.User;
-import com.musicsite.repository.CategoryRepository;
 import com.musicsite.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;

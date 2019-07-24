@@ -1,13 +1,6 @@
 package com.musicsite.entity;
 
-import com.musicsite.controller.PerformerController;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "ratings")

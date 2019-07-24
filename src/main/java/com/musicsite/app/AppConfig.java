@@ -1,6 +1,5 @@
 package com.musicsite.app;
 
-import com.musicsite.entity.Comment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -1,8 +1,6 @@
 package com.musicsite.entity;
 
-import com.musicsite.repository.CategoryValidationGroup;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.musicsite.validation.CategoryValidationGroup;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;

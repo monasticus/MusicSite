@@ -1,4 +1,4 @@
-package com.musicsite.repository;
+package com.musicsite.validation;
 
 public interface CategoryValidationGroup {
 }

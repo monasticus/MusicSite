@@ -1,9 +1,7 @@
 package com.musicsite.controller;
 
 import com.musicsite.entity.Comment;
-import com.musicsite.entity.Ens;
 import com.musicsite.entity.User;
-import com.musicsite.repository.UserRepository;
 import com.musicsite.service.CommentService;
 import com.musicsite.service.UserService;
 import org.mindrot.jbcrypt.BCrypt;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 

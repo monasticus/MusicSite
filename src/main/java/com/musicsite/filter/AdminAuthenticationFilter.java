@@ -1,9 +1,5 @@
 package com.musicsite.filter;
 
-import com.musicsite.entity.User;
-import com.musicsite.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
