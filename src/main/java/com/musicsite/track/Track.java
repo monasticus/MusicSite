@@ -4,8 +4,10 @@ import com.musicsite.album.Album;
 import com.musicsite.category.Category;
 import com.musicsite.comment.Comment;
 import com.musicsite.entity.Opus;
+import com.musicsite.favorite.Favorite;
 import com.musicsite.rating.Rating;
 import com.musicsite.performer.Performer;
+import com.musicsite.recommendation.Recommendation;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -48,6 +50,12 @@ public class Track extends Opus {
 
     @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE)
     private List<Rating> ratings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE)
+    private List<Recommendation> recommendations;
+
+    @OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE)
+    private List<Favorite> favorite;
 
     @ManyToOne
     @NotNull
@@ -163,6 +171,22 @@ public class Track extends Opus {
 
     public void setOrdinalNum(Integer ordinalNum) {
         this.ordinalNum = ordinalNum;
+    }
+
+    public List<Recommendation> getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(List<Recommendation> recommendations) {
+        this.recommendations = recommendations;
+    }
+
+    public List<Favorite> getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(List<Favorite> favorite) {
+        this.favorite = favorite;
     }
 
     @PrePersist

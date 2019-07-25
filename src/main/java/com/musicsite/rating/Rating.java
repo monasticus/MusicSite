@@ -20,13 +20,13 @@ public class Rating extends Ens {
 
     private int rating;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Performer performer;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Album album;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Track track;
 
 

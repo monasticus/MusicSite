@@ -1,7 +1,9 @@
 package com.musicsite.user;
 
 import com.musicsite.entity.Ens;
+import com.musicsite.favorite.Favorite;
 import com.musicsite.rating.Rating;
+import com.musicsite.recommendation.Recommendation;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.mindrot.jbcrypt.BCrypt;
@@ -43,6 +45,12 @@ public class User extends Ens {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Rating> ratings;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Recommendation> recommendations;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Favorite> favorite;
 
 
     public User() {
@@ -114,6 +122,22 @@ public class User extends Ens {
 
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    public List<Recommendation> getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(List<Recommendation> recommendations) {
+        this.recommendations = recommendations;
+    }
+
+    public List<Favorite> getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(List<Favorite> favorite) {
+        this.favorite = favorite;
     }
 
     @PrePersist

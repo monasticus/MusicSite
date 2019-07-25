@@ -4,7 +4,9 @@ import com.musicsite.album.Album;
 import com.musicsite.category.Category;
 import com.musicsite.comment.Comment;
 import com.musicsite.entity.Ens;
+import com.musicsite.favorite.Favorite;
 import com.musicsite.rating.Rating;
+import com.musicsite.recommendation.Recommendation;
 import com.musicsite.track.Track;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -46,6 +48,12 @@ public class Performer extends Ens {
 
     @OneToMany(mappedBy = "performer", cascade = CascadeType.REMOVE)
     private List<Rating> ratings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.REMOVE)
+    private List<Recommendation> recommendations;
+
+    @OneToMany(mappedBy = "performer", cascade = CascadeType.REMOVE)
+    private List<Favorite> favorite;
 
     @Column(columnDefinition = "BIT")
     private boolean proposition;
@@ -184,6 +192,21 @@ public class Performer extends Ens {
         this.categories = categories;
     }
 
+    public List<Recommendation> getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(List<Recommendation> recommendations) {
+        this.recommendations = recommendations;
+    }
+
+    public List<Favorite> getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(List<Favorite> favorite) {
+        this.favorite = favorite;
+    }
 
     @Override
     public String toString() {

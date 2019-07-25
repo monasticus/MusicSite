@@ -7,11 +7,14 @@ import com.musicsite.track.Track;
 import com.musicsite.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RecommendationRepository extends JpaRepository<Rating, Long> {
-    Rating getRecommendationByUserAndPerformer(User user, Performer performer);
-    Rating getRecommendationByUserIdAndPerformerId(Long userId, Long performerId);
-    Rating getRecommendationByUserAndAlbum(User user, Album album);
-    Rating getRecommendationByUserIdAndAlbumId(Long userId, Long albumId);
-    Rating getRecommendationByUserAndTrack(User user, Track track);
-    Rating getRecommendationByUserIdAndTrackId(Long userId, Long trackId);
+public interface RecommendationRepository extends JpaRepository<Recommendation, Long> {
+    Recommendation getRecommendationByUserAndPerformer(User user, Performer performer);
+    Recommendation getRecommendationByUserIdAndPerformerId(Long userId, Long performerId);
+    Recommendation getRecommendationByUserAndAlbum(User user, Album album);
+    Recommendation getRecommendationByUserIdAndAlbumId(Long userId, Long albumId);
+    Recommendation getRecommendationByUserAndTrack(User user, Track track);
+    Recommendation getRecommendationByUserIdAndTrackId(Long userId, Long trackId);
+    int countRecommendationsByPerformerId(Long id);
+    int countRecommendationsByAlbumId(Long id);
+    int countRecommendationsByTrackId(Long id);
 }

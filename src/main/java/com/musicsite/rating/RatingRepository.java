@@ -13,4 +13,7 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
     Rating getRatingByUserIdAndAlbumId(Long userId, Long albumId);
     Rating getRatingByUserAndTrack(User user, Track track);
     Rating getRatingByUserIdAndTrackId(Long userId, Long trackId);
+    int countRatingsByPerformerId(Long id);
+    int countRatingsByAlbumId(Long id);
+    int countRatingsByTrackId(Long id);
 }

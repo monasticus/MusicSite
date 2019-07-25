@@ -265,12 +265,16 @@ i.track-icon {
     width: 100px;
     height: 100px;
     text-align: center;
-    margin-right: 60px;
 }
 
 .ens-average div {
-    margin-top: 15px;
+    text-align: center;
+    margin-top: 23.75px;
     font-size: 35px;
+}
+
+.ens-average p {
+    width: 100px;
 }
 
 .ens-categories {
@@ -531,4 +535,35 @@ a {
 
 #highlighted-elem a {
     color: black;
+}
+
+.user-themes {
+    margin-top: 10px;
+    margin-left: 8px;
+}
+
+.user-themes i {
+    font-size: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.ens-top-right {
+    margin-right: 60px;
+}
+
+.number-informations {
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.recommendation-true {
+    color:  rgb(237, 237, 0);
+    text-shadow: -1px 0 2px black, 0 1px 2px black, 1px 0 2px black, 0 -1px 2px black;
+}
+
+.favorite-true {
+    color: rgba(240, 0, 0, 1);
+    text-shadow: -1px 0 4px black, 0 1px 4px black, 1px 0 4px black, 0 -1px 4px black;
 }

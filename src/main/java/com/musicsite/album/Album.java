@@ -3,8 +3,10 @@ package com.musicsite.album;
 import com.musicsite.category.Category;
 import com.musicsite.comment.Comment;
 import com.musicsite.entity.*;
+import com.musicsite.favorite.Favorite;
 import com.musicsite.performer.Performer;
 import com.musicsite.rating.Rating;
+import com.musicsite.recommendation.Recommendation;
 import com.musicsite.track.Track;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -42,6 +44,12 @@ public class Album extends Opus {
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
     private List<Rating> ratings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
+    private List<Recommendation> recommendations;
+
+    @OneToMany(mappedBy = "album", cascade = CascadeType.REMOVE)
+    private List<Favorite> favorite;
 
     @Column(precision = 3, scale = 2)
     private Double average;

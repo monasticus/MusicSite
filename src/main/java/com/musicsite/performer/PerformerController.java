@@ -4,7 +4,9 @@ package com.musicsite.performer;
 import com.musicsite.album.AlbumService;
 import com.musicsite.comment.Comment;
 import com.musicsite.comment.CommentService;
+import com.musicsite.favorite.FavoriteService;
 import com.musicsite.rating.RatingService;
+import com.musicsite.recommendation.RecommendationService;
 import com.musicsite.track.TrackService;
 import com.musicsite.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class PerformerController {
     private TrackService trackService;
     private CommentService commentService;
     private RatingService ratingService;
+    private RecommendationService recommendationService;
+    private FavoriteService favoriteService;
 
     @Autowired
     public PerformerController(PerformerService performerService,
@@ -32,13 +36,17 @@ public class PerformerController {
                                AlbumService albumService,
                                TrackService trackService,
                                CommentService commentService,
-                               RatingService ratingService) {
+                               RatingService ratingService,
+                               RecommendationService recommendationService,
+                               FavoriteService favoriteService) {
         this.performerService = performerService;
         this.userService = userService;
         this.albumService = albumService;
         this.trackService = trackService;
         this.commentService = commentService;
         this.ratingService = ratingService;
+        this.recommendationService = recommendationService;
+        this.favoriteService = favoriteService;
     }
 
 
@@ -52,12 +60,18 @@ public class PerformerController {
         if (userId != null) {
             model.addAttribute("userPerformerRating", userService.getPerformerUserRating(userId, performer));
             model.addAttribute("comment", new Comment().setUser(userService.getUserById(userId)).setPerformer(performer));
+            model.addAttribute("recommendation", userService.getEnsUserRecommendation(userId, performerService.getPerformerById(id)));
+            model.addAttribute("favorite", userService.getEnsUserFavorite(userId, performerService.getPerformerById(id)));
         }
 
         performerService.orderData(performer);
         model.addAttribute("performer", performer);
         model.addAttribute("performerAlbums", albumService.getAlbumsByPerformerAndPropositionOrderByYear(performer, false));
         model.addAttribute("performerTracks", trackService.getTracksByPerformerAndPropositionsOrderByYear(performer, false));
+        model.addAttribute("recommendationCounter", recommendationService.countRecommend(performer));
+        model.addAttribute("ratingCounter", ratingService.countRatings(performer));
+
+
 
         return "main/performer";
     }
@@ -95,6 +109,36 @@ public class PerformerController {
             performerService.saveRating(userId, performerId, rating);
 
         performerService.updatePerformerAverage(performerId);
+
+        return "redirect:/performer/".concat(String.valueOf(performerId));
+    }
+
+    @GetMapping("/{performerId}/setRecomm")
+    public String recommPerformer(@PathVariable Long performerId, HttpSession session){
+        Long userId = (Long) session.getAttribute("loggedUserId");
+
+        if (userId == null)
+            return "redirect:/login";
+
+        if(userService.getEnsUserRecommendation(userId, performerService.getPerformerById(performerId)))
+            recommendationService.removePerformerRecommendation(userId, performerId);
+        else
+            recommendationService.setRecommendation(userId, performerService.getPerformerById(performerId));
+
+        return "redirect:/performer/".concat(String.valueOf(performerId));
+    }
+
+    @GetMapping("/{performerId}/setFavorite")
+    public String favPerformer(@PathVariable Long performerId, HttpSession session){
+        Long userId = (Long) session.getAttribute("loggedUserId");
+
+        if (userId == null)
+            return "redirect:/login";
+
+        if(userService.getEnsUserFavorite(userId, performerService.getPerformerById(performerId)))
+            favoriteService.removePerformerRecommendation(userId, performerId);
+        else
+            favoriteService.setFavorite(userId, performerService.getPerformerById(performerId));
 
         return "redirect:/performer/".concat(String.valueOf(performerId));
     }

@@ -42,7 +42,7 @@
                                     data-user-rating='0'>
                                 </c:when>
                                 <c:otherwise>
-                                    data-user-rating=${userAlbumRating}'>
+                                    data-user-rating='${userAlbumRating}'>
                                 </c:otherwise>
                             </c:choose>
 

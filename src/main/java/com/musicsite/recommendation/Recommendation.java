@@ -18,7 +18,7 @@ public class Recommendation extends Ens {
     @ManyToOne
     private User user;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     private Performer performer;
 
     @ManyToOne

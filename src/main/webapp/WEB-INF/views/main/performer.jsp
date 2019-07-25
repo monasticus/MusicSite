@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
     <title>musicsite - ${performer.pseudonym}</title>
     <!-- Bootstrap -->
     <meta charset="utf-8">
@@ -30,6 +31,7 @@
             </div>
             <div class="ens-name align-self-start">
                 <p>${performer.pseudonym}</p>
+
                 <div class="small-inf">
                     Your rating:
                 </div>
@@ -40,7 +42,7 @@
                                     data-user-rating='0'>
                                 </c:when>
                                 <c:otherwise>
-                                    data-user-rating=${userPerformerRating}'>
+                                    data-user-rating='${userPerformerRating}'>
                                 </c:otherwise>
                             </c:choose>
 
@@ -71,8 +73,42 @@
                 </div>
             </div>
 
-            <div class="ens-average rounded ml-auto p-2 border border-dark bg-success">
-                <div><fmt:formatNumber type="number" maxFractionDigits="2" value="${performer.average}"/></div>
+            <div class="ens-top-right ml-auto p-2">
+
+
+                <div class="ens-average rounded  border border-dark bg-success d-flex align-items-start">
+                    <div>
+                        <p>
+                        <fmt:formatNumber type="number" maxFractionDigits="2" value="${performer.average}"/>
+                        </p>
+                    </div>
+
+
+                </div>
+                <div class="user-themes d-flex align-items-center">
+                    <c:choose>
+                        <c:when test="${recommendation == true}">
+                            <a href="/performer/${performer.id}/setRecomm" title="recommend"><i class="fas fa-bullhorn recommendation-true"></i></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/performer/${performer.id}/setRecomm" title="recommend"><i class="fas fa-bullhorn"></i></a>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${favorite == true}">
+                            <a href="/performer/${performer.id}/setFavorite" title="add to favorite"><i class="fas fa-heart favorite-true"></i></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/performer/${performer.id}/setFavorite" title="add to favorite"><i class="far fa-heart"></i></a>
+                        </c:otherwise>
+                    </c:choose>
+
+
+                </div>
+                <div class="number-informations d-flex">
+                    Ratings: ${ratingCounter}<br>
+                    Recomm.: ${recommendationCounter}
+                </div>
             </div>
         </div>
     </div>
@@ -187,7 +223,6 @@
     </c:if>
 
 </section>
-
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

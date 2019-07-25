@@ -84,12 +84,12 @@ public class PerformerService {
         return setPerformersCategories(getOnlyPerformers());
     }
 
-    public List<Performer> setPerformersCategories(List<Performer> performers) {
+    private List<Performer> setPerformersCategories(List<Performer> performers) {
         performers.forEach(this::setPerformerCategories);
         return performers;
     }
 
-    public Performer setPerformerCategories(Performer performer) {
+    private Performer setPerformerCategories(Performer performer) {
         List<Category> categories = new ArrayList<>();
 
         for (Album album : performer.getAlbums()) {
