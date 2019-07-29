@@ -1,9 +1,9 @@
 package com.musicsite.controller;
 
-import com.musicsite.track.Track;
-import com.musicsite.user.User;
 import com.musicsite.service.EmailService;
+import com.musicsite.track.Track;
 import com.musicsite.track.TrackService;
+import com.musicsite.user.User;
 import com.musicsite.user.UserService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,6 @@ public class HomeController {
     private UserService userService;
     private TrackService trackService;
     private EmailService emailService;
-
 
     @Autowired
     public HomeController(UserService userService,
@@ -73,7 +72,7 @@ public class HomeController {
             return "main/login";
         }
 
-        if (!user.isConfirmed()){
+        if (!user.isConfirmed()) {
             model.addAttribute("justConfirmed", false);
             return "main/login";
         }
@@ -114,7 +113,7 @@ public class HomeController {
             return "main/register";
         }
 
-        if (user.getPassword().length() < 8 || user.getPassword().length() > 30){
+        if (user.getPassword().length() < 8 || user.getPassword().length() > 30) {
             result.addError(new FieldError("user", "password", "The password must contain between 8 and 30 characters!"));
             return "main/register";
         }
@@ -152,7 +151,7 @@ public class HomeController {
             return "main/error";
         }
 
-        if(user.isConfirmed())
+        if (user.isConfirmed())
             return "main/blank";
 
         userService.confirm(id);

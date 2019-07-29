@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -71,8 +74,6 @@ public class PerformerController {
         model.addAttribute("recommendationCounter", recommendationService.countRecommend(performer));
         model.addAttribute("ratingCounter", ratingService.countRatings(performer));
 
-
-
         return "main/performer";
     }
 
@@ -80,9 +81,9 @@ public class PerformerController {
     public String comment(@Valid Comment comment, BindingResult result, HttpSession session, Model model, @PathVariable Long performerId) {
         if (result.hasErrors()) {
             Performer performer = performerService.getPerformer(performerId);
+            performerService.orderData(performer);
             Long userId = (Long) session.getAttribute("loggedUserId");
             model.addAttribute("userPerformerRating", userService.getPerformerUserRating(userId, performer));
-            performerService.orderData(performer);
             model.addAttribute("performer", performer);
             model.addAttribute("performerAlbums", albumService.getAlbumsByPerformerAndPropositionOrderByYear(performer, false));
             model.addAttribute("performerTracks", trackService.getTracksByPerformerAndPropositionsOrderByYear(performer, false));
@@ -94,26 +95,6 @@ public class PerformerController {
         commentService.save(comment);
         return "redirect:/performer/".concat(String.valueOf(performerId));
     }
-
-//    @GetMapping("/{performerId}/setRate/{rating}")
-//    public String ratePerformer(@PathVariable Long performerId, @PathVariable int rating, HttpSession session) {
-//
-//        Long userId = (Long) session.getAttribute("loggedUserId");
-//
-//        if (userId == null)
-//            return "redirect:/login";
-//
-//        Performer performer = performerService.getPerformer(performerId);
-//
-//        if (userService.getPerformerUserRating(userId, performer) == (rating))
-//            ratingService.removeEnsRating(userId, performer);
-//        else
-//            ratingService.setRating(userId, performer, rating);
-//
-//        performerService.updatePerformerAverage(performerId);
-//
-//        return "redirect:/performer/".concat(String.valueOf(performerId));
-//    }
 
 }
 

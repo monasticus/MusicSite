@@ -11,10 +11,15 @@ import java.util.List;
 public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     List<Album> getAlbumsByPerformerOrderByYearOfPublicationDesc(Performer performer);
+
     List<Album> getAlbumsByPerformerAndPropositionOrderByYearOfPublicationDesc(Performer performer, boolean value);
+
     List<Album> getAlbumsByNameIgnoreCase(String name);
+
     List<Album> getAlbumsByProposition(boolean value);
+
     List<Album> getAlbumsByPropositionOrderByAverageDesc(boolean value);
+
     List<Album> getDistinctAlbumsByCategoriesInAndPropositionOrderByAverageDesc(List<Category> categories, boolean vallue);
 
 

@@ -2,7 +2,7 @@ package com.musicsite.album;
 
 import com.musicsite.category.Category;
 import com.musicsite.comment.Comment;
-import com.musicsite.entity.*;
+import com.musicsite.entity.Opus;
 import com.musicsite.favorite.Favorite;
 import com.musicsite.performer.Performer;
 import com.musicsite.rating.Rating;
@@ -129,7 +129,7 @@ public class Album extends Opus {
     public void updateAverage() {
         double sum = 0.0;
 
-        if (ratings.size() == 0){
+        if (ratings.size() == 0) {
             average = 0.0;
             return;
         }

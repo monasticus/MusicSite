@@ -65,14 +65,6 @@ public class Performer extends Ens {
     @Transient
     private List<Category> categories;
 
-
-//    private String wiki;
-//
-//    private String lastFm;
-//
-//    private String spotify;
-
-
     public Performer() {
         proposition = true;
     }
@@ -146,7 +138,7 @@ public class Performer extends Ens {
     public void updateAverage() {
         double sum = 0.0;
 
-        if (ratings.size() == 0){
+        if (ratings.size() == 0) {
             average = 0.0;
             return;
         }
@@ -163,17 +155,6 @@ public class Performer extends Ens {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    @PrePersist
-    public void prePers() {
-        average = 0.0;
-        pseudonym = pseudonym.trim();
-    }
-
-    @PreUpdate
-    public void preUp() {
-        pseudonym = pseudonym.trim();
     }
 
     public boolean isProposition() {
@@ -211,6 +192,17 @@ public class Performer extends Ens {
     @Override
     public String toString() {
         return pseudonym + " (performer)";
+    }
+
+    @PrePersist
+    public void prePers() {
+        average = 0.0;
+        pseudonym = pseudonym.trim();
+    }
+
+    @PreUpdate
+    public void preUp() {
+        pseudonym = pseudonym.trim();
     }
 
 //    public String getWiki() {

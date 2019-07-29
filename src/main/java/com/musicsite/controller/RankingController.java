@@ -1,7 +1,7 @@
 package com.musicsite.controller;
 
-import com.musicsite.category.CategorySelector;
 import com.musicsite.album.AlbumService;
+import com.musicsite.category.CategorySelector;
 import com.musicsite.category.CategoryService;
 import com.musicsite.performer.PerformerService;
 import com.musicsite.track.TrackService;
@@ -40,7 +40,7 @@ public class RankingController {
             case "tracks":
                 model.addAttribute("tracks", trackService.getTracksByPropositionsOrderByAverage(false));
                 return "ranking/tracks";
-            case "categories" :
+            case "categories":
                 model.addAttribute("categories", categoryService.getActiveCategories());
                 model.addAttribute("categorySelector", new CategorySelector());
                 return "ranking/categories";

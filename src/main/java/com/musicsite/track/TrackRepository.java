@@ -3,7 +3,6 @@ package com.musicsite.track;
 import com.musicsite.album.Album;
 import com.musicsite.category.Category;
 import com.musicsite.performer.Performer;
-import com.musicsite.track.Track;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -68,10 +71,10 @@ public class TrackController {
     @PostMapping("/{trackId}")
     public String comment(@Valid Comment comment, BindingResult result, HttpSession session, Model model, @PathVariable Long trackId) {
         if (result.hasErrors()) {
-            Track track = trackService.getTrack(trackId);
             Long userId = (Long) session.getAttribute("loggedUserId");
-            model.addAttribute("userTrackRating", userService.getTrackUserRating(userId, track));
+            Track track = trackService.getTrack(trackId);
             String hyperlink = trackService.getYoutubeURL(trackId);
+            model.addAttribute("userTrackRating", userService.getTrackUserRating(userId, track));
             model.addAttribute("trackHyperlink", hyperlink);
             model.addAttribute("track", track);
 

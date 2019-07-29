@@ -75,13 +75,13 @@ public class UserController {
 
         String direct = new String();
         Long id = 0L;
-        if (comment.getAlbum() != null){
+        if (comment.getAlbum() != null) {
             id = comment.getAlbum().getId();
             direct = "album";
-        } else if (comment.getPerformer() != null){
+        } else if (comment.getPerformer() != null) {
             id = comment.getPerformer().getId();
             direct = "performer";
-        } else if (comment.getTrack() != null){
+        } else if (comment.getTrack() != null) {
             id = comment.getTrack().getId();
             direct = "track";
         }

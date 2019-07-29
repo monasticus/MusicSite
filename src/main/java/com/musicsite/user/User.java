@@ -1,6 +1,5 @@
 package com.musicsite.user;
 
-import com.musicsite.entity.Ens;
 import com.musicsite.favorite.Favorite;
 import com.musicsite.rating.Rating;
 import com.musicsite.recommendation.Recommendation;

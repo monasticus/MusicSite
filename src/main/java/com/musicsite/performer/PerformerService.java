@@ -32,6 +32,37 @@ public class PerformerService {
         this.trackRepository = trackRepository;
     }
 
+    public void save(Performer performer) {
+        performerRepository.save(performer);
+    }
+
+    public void removePerformer(Long id) {
+        performerRepository.delete(id);
+    }
+
+    public void confirmPerformer(Long id) {
+        Performer performer = performerRepository.findOne(id);
+        performer.setProposition(false);
+        performerRepository.save(performer);
+    }
+
+    @Transactional(propagation = Propagation.NEVER)
+    public void orderData(Performer performer) {
+        if (performer.getAlbums().size() > 0) {
+            performer.setAlbums(albumRepository.getAlbumsByPerformerOrderByYearOfPublicationDesc(performer));
+            performer.getAlbums().forEach(a -> a.setName(StringUtils.capitalize(a.getName())));
+        }
+
+        if (performer.getTracks().size() > 0)
+            performer.setTracks(trackRepository.getTracksByPerformerOrderByYearOfPublicationDesc(performer));
+    }
+
+    public void updatePerformerAverage(Long performerId) {
+        Performer performer = performerRepository.findOne(performerId);
+        performer.updateAverage();
+        performerRepository.save(performer);
+    }
+
     public Performer getPerformer(Long id) {
         Performer performer = performerRepository.findOne(id);
         if (performer == null)
@@ -44,10 +75,6 @@ public class PerformerService {
         return setPerformerCategories(performer);
     }
 
-    public void save(Performer performer) {
-        performerRepository.save(performer);
-    }
-
     public Performer getPerformerByPseudonymSaute(String pseudonym) {
         return performerRepository.getFirstPerformerByPseudonymIgnoreCase(pseudonym);
     }
@@ -56,13 +83,49 @@ public class PerformerService {
         return performerRepository.getPerformersByPseudonymIgnoreCase(pseudonym);
     }
 
-    private List<Performer> getOnlyPerformers() {
-        List<Performer> performers = performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
+    public List<Performer> getPerformersWithCategories() {
+        return setPerformersCategories(getOnlyPerformers());
+    }
+
+    public List<Performer> getPerformersByCategories(List<Category> categories) {
+
+        List<Performer> performers = getOnlyPerformers()
+                .stream()
+                .filter(p -> p.getAlbums()
+                        .stream()
+                        .anyMatch(a -> a.getCategories()
+                                .stream()
+                                .anyMatch(c1 -> categories.stream().anyMatch(c2 -> c1.getId().equals(c2.getId()))))
+                        ||
+                        p.getTracks()
+                                .stream()
+                                .anyMatch(t -> categories.stream().anyMatch(c -> t.getCategory().getId().equals(c.getId()))))
+                .collect(Collectors.toList());
+        setPerformersCategories(performers);
+        return performers;
+    }
+
+    public List<Performer> getOnlyPerformerPropositions() {
+        List<Performer> propositions = performerRepository.getPerformersByPropositionTrue();
+        return getPerformers(propositions);
+    }
+
+    public List<Performer> getPerformersByQuery(String query) {
+        List<Performer> performers = performerRepository.customGetPerformersByQuery(query);
         return getPerformers(performers);
     }
 
-    public List<Performer> getPerformersWithCategories() {
-        return setPerformersCategories(getOnlyPerformers());
+    private List<Performer> getPerformers(List<Performer> propositions) {
+        propositions.forEach(p -> Hibernate.initialize(p.getAlbums()));
+        propositions.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));
+        propositions.forEach(p -> Hibernate.initialize(p.getTracks()));
+        propositions.forEach(p -> Hibernate.initialize(p.getRatings()));
+        return setPerformersCategories(propositions);
+    }
+
+    private List<Performer> getOnlyPerformers() {
+        List<Performer> performers = performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
+        return getPerformers(performers);
     }
 
     private List<Performer> setPerformersCategories(List<Performer> performers) {
@@ -90,68 +153,5 @@ public class PerformerService {
 
         performer.setCategories(categories);
         return performer;
-    }
-
-    @Transactional(propagation = Propagation.NEVER)
-    public void orderData(Performer performer) {
-        if (performer.getAlbums().size() > 0) {
-            performer.setAlbums(albumRepository.getAlbumsByPerformerOrderByYearOfPublicationDesc(performer));
-            performer.getAlbums().forEach(a -> a.setName(StringUtils.capitalize(a.getName())));
-        }
-
-        if (performer.getTracks().size() > 0)
-            performer.setTracks(trackRepository.getTracksByPerformerOrderByYearOfPublicationDesc(performer));
-    }
-
-    public void updatePerformerAverage(Long performerId) {
-        Performer performer = performerRepository.findOne(performerId);
-        performer.updateAverage();
-        performerRepository.save(performer);
-    }
-
-    public List<Performer> getPerformersByCategories(List<Category> categories) {
-
-        List<Performer> performers = getOnlyPerformers()
-                .stream()
-                .filter(p -> p.getAlbums()
-                        .stream()
-                        .anyMatch(a -> a.getCategories()
-                                .stream()
-                                .anyMatch(c1 -> categories.stream().anyMatch(c2 -> c1.getId().equals(c2.getId()))))
-                        ||
-                        p.getTracks()
-                                .stream()
-                                .anyMatch(t -> categories.stream().anyMatch(c -> t.getCategory().getId().equals(c.getId()))))
-                .collect(Collectors.toList());
-        setPerformersCategories(performers);
-        return performers;
-    }
-
-    public List<Performer> getOnlyPerformerPropositions() {
-        List<Performer> propositions = performerRepository.getPerformersByPropositionTrue();
-        return getPerformers(propositions);
-    }
-
-    private List<Performer> getPerformers(List<Performer> propositions) {
-        propositions.forEach(p -> Hibernate.initialize(p.getAlbums()));
-        propositions.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));
-        propositions.forEach(p -> Hibernate.initialize(p.getTracks()));
-        propositions.forEach(p -> Hibernate.initialize(p.getRatings()));
-        return setPerformersCategories(propositions);
-    }
-
-    public List<Performer> getPerformersByQuery(String query) {
-        List<Performer> performers = performerRepository.customGetPerformersByQuery(query);
-        return getPerformers(performers);
-    }
-
-    public void removePerformer(Long id) {
-        performerRepository.delete(id);
-    }
-
-    public void confirmPerformer(Long id) {
-        Performer performer = performerRepository.findOne(id);
-        performer.setProposition(false);
-        performerRepository.save(performer);
     }
 }

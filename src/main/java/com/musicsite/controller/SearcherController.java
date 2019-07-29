@@ -18,16 +18,16 @@ public class SearcherController {
 
     @Autowired
     public SearcherController(PerformerService performerService,
-                               AlbumService albumService,
-                               TrackService trackService) {
+                              AlbumService albumService,
+                              TrackService trackService) {
         this.performerService = performerService;
         this.albumService = albumService;
         this.trackService = trackService;
     }
 
     @RequestMapping("/search")
-    public String search(Model model,  @RequestParam(required = false) String q) {
-        if(q == null || "".equals(q.trim()))
+    public String search(Model model, @RequestParam(required = false) String q) {
+        if (q == null || "".equals(q.trim()))
             return "main/home";
         model.addAttribute("performers", performerService.getPerformersByQuery(q));
         model.addAttribute("albums", albumService.getAlbumsByQuery(q));

@@ -5,8 +5,8 @@ import com.musicsite.category.Category;
 import com.musicsite.comment.Comment;
 import com.musicsite.entity.Opus;
 import com.musicsite.favorite.Favorite;
-import com.musicsite.rating.Rating;
 import com.musicsite.performer.Performer;
+import com.musicsite.rating.Rating;
 import com.musicsite.recommendation.Recommendation;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="tracks")
+@Table(name = "tracks")
 public class Track extends Opus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -131,7 +131,7 @@ public class Track extends Opus {
     public void updateAverage() {
         double sum = 0.0;
 
-        if (ratings.size() == 0){
+        if (ratings.size() == 0) {
             average = 0.0;
             return;
         }

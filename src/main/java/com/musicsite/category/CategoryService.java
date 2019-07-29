@@ -1,7 +1,5 @@
 package com.musicsite.category;
 
-import com.musicsite.category.Category;
-import com.musicsite.category.CategoryRepository;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +18,12 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<Category> getCategoriesSaute() {
-        return categoryRepository.findAll();
+    public void save(Category category) {
+        categoryRepository.save(category);
+    }
+
+    public Category getCategoryByName(String name) {
+        return categoryRepository.getFirstCategoryByNameIgnoreCase(name);
     }
 
     public List<Category> getCategories() {
@@ -29,6 +31,10 @@ public class CategoryService {
         categories.forEach(c -> Hibernate.initialize(c.getTracks()));
         categories.forEach(c -> Hibernate.initialize(c.getAlbums()));
         return categories;
+    }
+
+    public List<Category> getCategoriesSaute() {
+        return categoryRepository.findAll();
     }
 
     public List<Category> getActiveCategories() {
@@ -41,14 +47,6 @@ public class CategoryService {
             return null;
         else
             return activeCategories;
-    }
-
-    public void save (Category category) {
-        categoryRepository.save(category);
-    }
-
-    public Category getCategoryByName (String name) {
-        return categoryRepository.getFirstCategoryByNameIgnoreCase(name);
     }
 
 }

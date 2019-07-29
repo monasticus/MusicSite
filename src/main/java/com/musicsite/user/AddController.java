@@ -1,14 +1,14 @@
 package com.musicsite.user;
 
 import com.musicsite.album.Album;
-import com.musicsite.category.Category;
-import com.musicsite.entity.*;
-import com.musicsite.performer.Performer;
 import com.musicsite.album.AlbumService;
+import com.musicsite.category.Category;
 import com.musicsite.category.CategoryService;
+import com.musicsite.entity.Opus;
+import com.musicsite.performer.Performer;
 import com.musicsite.performer.PerformerService;
-import com.musicsite.track.TrackService;
 import com.musicsite.track.Track;
+import com.musicsite.track.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,23 +41,23 @@ public class AddController {
         return categoryService.getCategoriesSaute();
     }
 
-    @GetMapping("/{className:performer|album|track}")
-    public String showForm(@PathVariable String className, Model model, @RequestParam(required = false) Long id) {
+    @GetMapping("/{species:performer|album|track}")
+    public String showForm(@PathVariable String species, Model model, @RequestParam(required = false) Long id) {
 
-        switch (className) {
+        switch (species) {
             case "performer":
                 if (id != null)
-                    model.addAttribute(className, performerService.getPerformer(id));
+                    model.addAttribute(species, performerService.getPerformer(id));
                 else
-                    model.addAttribute(className, new Performer());
+                    model.addAttribute(species, new Performer());
                 break;
             case "album":
                 if (id != null) {
                     Album album = albumService.getAlbum(id);
                     model.addAttribute("loadPerformerName", album.getPerformer().getPseudonym());
-                    model.addAttribute(className, album);
+                    model.addAttribute(species, album);
                 } else
-                    model.addAttribute(className, new Album());
+                    model.addAttribute(species, new Album());
                 break;
             case "track":
                 if (id != null) {
@@ -65,13 +65,13 @@ public class AddController {
                     model.addAttribute("loadPerformerName", track.getPerformer().getPseudonym());
                     if (track.getAlbum() != null)
                         model.addAttribute("loadAlbumName", track.getAlbum().getName());
-                    model.addAttribute(className, track);
+                    model.addAttribute(species, track);
                 } else
-                    model.addAttribute(className, new Track());
+                    model.addAttribute(species, new Track());
                 break;
         }
 
-        return "add/" + className;
+        return "add/" + species;
     }
 
 
@@ -137,7 +137,6 @@ public class AddController {
         }
 
 
-
         albumService.save(album);
 
         model.addAttribute("album", new Album());
@@ -186,11 +185,10 @@ public class AddController {
             return "add/track";
         }
 
-        if (!"".equals(albumName) && !track.getYearOfPublication().equals(track.getAlbum().getYearOfPublication())){
-            result.addError (new FieldError("track","yearOfPublication","The year of publication of the following album is different from the one given to the song. Album's year of publication is: "+ track.getAlbum().getYearOfPublication()));
+        if (!"".equals(albumName) && !track.getYearOfPublication().equals(track.getAlbum().getYearOfPublication())) {
+            result.addError(new FieldError("track", "yearOfPublication", "The year of publication of the following album is different from the one given to the song. Album's year of publication is: " + track.getAlbum().getYearOfPublication()));
             return "add/track";
         }
-
 
 
         trackService.save(track);
@@ -219,7 +217,7 @@ public class AddController {
 
         Performer performer = performerService.getPerformerByPseudonymSaute(performerName);
 
-        if(performer == null)
+        if (performer == null)
             model.addAttribute("performerDoesNotExists", true);
 
 
@@ -231,7 +229,7 @@ public class AddController {
         if (albumService.getAlbumsByNameSaute(albumName).stream().anyMatch(a -> a.getPerformer().getId().equals(performer.getId())))
             album = albumService.getAlbumsByNameSaute(albumName).stream().filter(a -> a.getPerformer().getId().equals(performer.getId())).findFirst().get();
 
-        if(album == null)
+        if (album == null)
             model.addAttribute("albumDoesNotExists", true);
 
         return album;

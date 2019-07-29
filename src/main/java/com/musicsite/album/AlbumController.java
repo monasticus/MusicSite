@@ -94,7 +94,7 @@ public class AlbumController {
     }
 
     @GetMapping("/add/tracks/{albumId}")
-    public String displayAlbumTracksForm (@PathVariable Long albumId, Model model) {
+    public String displayAlbumTracksForm(@PathVariable Long albumId, Model model) {
         Album album = albumService.getAlbum(albumId);
         if (album == null)
             return "main/blank";
@@ -107,7 +107,7 @@ public class AlbumController {
     public String addTracksToAlbum(@PathVariable Long albumId, Model model, HttpServletRequest request) {
         String[] names = request.getParameterValues("trackName");
         model.addAttribute("albumName", albumService.getAlbum(albumId).getName());
-        if (names == null){
+        if (names == null) {
             int counter = Integer.parseInt(request.getParameter("counter"));
             model.addAttribute("counter", counter);
             model.addAttribute("categories", categoryService.getCategories());
@@ -124,7 +124,7 @@ public class AlbumController {
             track.setPerformer(album.getPerformer());
             track.setAlbum(album);
             track.setYearOfPublication(album.getYearOfPublication());
-            track.setOrdinalNum(i+1);
+            track.setOrdinalNum(i + 1);
             track.setCategory(categoryService.getCategoryByName(categories.get(i)));
             trackService.save(track);
         }

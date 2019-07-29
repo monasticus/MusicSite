@@ -80,10 +80,10 @@ public class Rating extends Evaluation {
         this.track = track;
     }
 
-    public Ens getEns(){
+    public Ens getEns() {
         if (performer != null)
             return performer;
-        else  if (album != null)
+        else if (album != null)
             return album;
         else if (track != null)
             return track;
@@ -91,7 +91,7 @@ public class Rating extends Evaluation {
             return null;
     }
 
-    public void setEns(Ens ens){
+    public void setEns(Ens ens) {
         if (ens instanceof Performer)
             this.setPerformer((Performer) ens);
         else if (ens instanceof Album)

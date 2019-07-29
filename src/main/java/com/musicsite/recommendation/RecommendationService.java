@@ -3,8 +3,6 @@ package com.musicsite.recommendation;
 import com.musicsite.album.Album;
 import com.musicsite.entity.Ens;
 import com.musicsite.performer.Performer;
-import com.musicsite.rating.Rating;
-import com.musicsite.rating.RatingRepository;
 import com.musicsite.track.Track;
 import com.musicsite.user.User;
 import com.musicsite.user.UserRepository;
@@ -57,7 +55,7 @@ public class RecommendationService {
             recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndTrackId(userId, ens.getId()));
     }
 
-    public Integer countRecommend (Ens ens){
+    public Integer countRecommend(Ens ens) {
         if (ens instanceof Performer)
             return recommendationRepository.countRecommendationsByPerformerId(ens.getId());
         else if (ens instanceof Album)

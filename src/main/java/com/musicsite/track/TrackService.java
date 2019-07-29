@@ -28,6 +28,49 @@ public class TrackService {
         this.trackRepository = trackRepository;
     }
 
+    public void save(Track track) {
+        trackRepository.save(track);
+    }
+
+    public void removeTrack(Long id) {
+        trackRepository.delete(id);
+    }
+
+    public void confirmTrack(Long id) {
+        Track track = trackRepository.findOne(id);
+        track.setProposition(false);
+        trackRepository.save(track);
+    }
+
+    public void updateTrackAverage(Long trackId) {
+        Track track = trackRepository.findOne(trackId);
+        track.updateAverage();
+        trackRepository.save(track);
+    }
+
+    public String getYoutubeURL(Long id) {
+        Track track = trackRepository.findOne(id);
+        String websiteURL = "https://www.youtube.com/results?search_query=";
+
+        websiteURL = websiteURL.concat(track.getPerformer().getPseudonym().replaceAll(" ", "+")).concat("+");
+        websiteURL = websiteURL.concat(track.getName().replaceAll(" ", "+"));
+        if (track.getAlbum() != null && track.getAlbum().getName().equals(track.getName()))
+            websiteURL = websiteURL.concat("+track");
+
+        Connection connect = Jsoup.connect(websiteURL);
+
+        String result = new String();
+        try {
+            Document doc = connect.get();
+            Elements links = doc.select("ol.item-section>li>div>div>div>a");
+            result = links.get(0).attr("href");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return result.replace("/watch?v=", "");
+    }
+
     public Track getTrack(Long id) {
         Track track = trackRepository.findOne(id);
         if (track == null)
@@ -42,10 +85,6 @@ public class TrackService {
         }
 
         return track;
-    }
-
-    public void save(Track track) {
-        trackRepository.save(track);
     }
 
     public List<Track> getRandomTracks(int bound) {
@@ -102,44 +141,5 @@ public class TrackService {
         List<Track> tracks = trackRepository.customGetTracksByQuery(query);
         tracks.forEach(p -> Hibernate.initialize(p.getRatings()));
         return tracks;
-    }
-
-    public void removeTrack(Long id) {
-        trackRepository.delete(id);
-    }
-
-    public void confirmTrack(Long id) {
-        Track track = trackRepository.findOne(id);
-        track.setProposition(false);
-        trackRepository.save(track);
-    }
-
-    public void updateTrackAverage(Long trackId) {
-        Track track = trackRepository.findOne(trackId);
-        track.updateAverage();
-        trackRepository.save(track);
-    }
-
-    public String getYoutubeURL(Long id) {
-        Track track = trackRepository.findOne(id);
-        String websiteURL = "https://www.youtube.com/results?search_query=";
-
-        websiteURL = websiteURL.concat(track.getPerformer().getPseudonym().replaceAll(" ", "+")).concat("+");
-        websiteURL = websiteURL.concat(track.getName().replaceAll(" ", "+"));
-        if (track.getAlbum() != null && track.getAlbum().getName().equals(track.getName()))
-            websiteURL = websiteURL.concat("+track");
-
-        Connection connect = Jsoup.connect(websiteURL);
-
-        String result = new String();
-        try {
-            Document doc = connect.get();
-            Elements links = doc.select("ol.item-section>li>div>div>div>a");
-            result = links.get(0).attr("href");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return result.replace("/watch?v=", "");
     }
 }

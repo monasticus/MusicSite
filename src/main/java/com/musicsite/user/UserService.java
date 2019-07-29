@@ -1,14 +1,9 @@
 package com.musicsite.user;
 
 import com.musicsite.album.Album;
-import com.musicsite.entity.Ens;
-import com.musicsite.favorite.Favorite;
-import com.musicsite.favorite.FavoriteRepository;
 import com.musicsite.performer.Performer;
 import com.musicsite.rating.Rating;
 import com.musicsite.rating.RatingRepository;
-import com.musicsite.recommendation.Recommendation;
-import com.musicsite.recommendation.RecommendationRepository;
 import com.musicsite.track.Track;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
