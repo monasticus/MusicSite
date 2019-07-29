@@ -3,7 +3,9 @@ package com.musicsite.album;
 import com.musicsite.category.CategoryService;
 import com.musicsite.comment.Comment;
 import com.musicsite.comment.CommentService;
+import com.musicsite.favorite.FavoriteService;
 import com.musicsite.rating.RatingService;
+import com.musicsite.recommendation.RecommendationService;
 import com.musicsite.track.Track;
 import com.musicsite.track.TrackService;
 import com.musicsite.user.UserService;
@@ -32,6 +34,8 @@ public class AlbumController {
     private RatingService ratingService;
     private CommentService commentService;
     private CategoryService categoryService;
+    private RecommendationService recommendationService;
+    private FavoriteService favoriteService;
 
     @Autowired
     public AlbumController(UserService userService,
@@ -39,31 +43,38 @@ public class AlbumController {
                            TrackService trackService,
                            RatingService ratingService,
                            CommentService commentService,
-                           CategoryService categoryService) {
+                           CategoryService categoryService,
+                           RecommendationService recommendationService,
+                           FavoriteService favoriteService) {
         this.userService = userService;
         this.albumService = albumService;
         this.trackService = trackService;
         this.ratingService = ratingService;
         this.commentService = commentService;
         this.categoryService = categoryService;
-
+        this.recommendationService = recommendationService;
+        this.favoriteService = favoriteService;
     }
 
 
     @GetMapping("/{id}")
-    public String showForm(@PathVariable String id, Model model, HttpSession session) {
-        Album album = albumService.getAlbum(Long.parseLong(id));
+    public String showForm(@PathVariable Long id, Model model, HttpSession session) {
+        Album album = albumService.getAlbum(id);
         if (album == null || album.isProposition())
             return "main/blank";
 
         Long userId = (Long) session.getAttribute("loggedUserId");
         if (userId != null) {
             model.addAttribute("userAlbumRating", userService.getAlbumUserRating(userId, album));
+            model.addAttribute("recommendation", recommendationService.getEnsUserRecommendation(userId, albumService.getAlbum(id)));
+            model.addAttribute("favorite", favoriteService.getEnsUserFavorite(userId, albumService.getAlbum(id)));
             model.addAttribute("comment", new Comment().setUser(userService.getUserById(userId)).setAlbum(album));
         }
 
         model.addAttribute("album", album);
         model.addAttribute("tracksNoProposition", trackService.getTracksByAlbumAndPropositionsOrderByYearSaute(album, false));
+        model.addAttribute("recommendationCounter", recommendationService.countRecommend(album));
+        model.addAttribute("ratingCounter", ratingService.countRatings(album));
         return "main/album";
     }
 
@@ -83,25 +94,25 @@ public class AlbumController {
         return "redirect:/album/".concat(String.valueOf(albumId));
     }
 
-    @GetMapping("/{albumId}/setRate/{rating}")
-    public String ratePerformer(@PathVariable Long albumId, @PathVariable int rating, HttpSession session) {
-
-        Long userId = (Long) session.getAttribute("loggedUserId");
-
-        if (userId == null)
-            return "redirect:/login";
-
-        Album album = albumService.getAlbum(albumId);
-
-        if (userService.getAlbumUserRating(userId, album) == rating)
-            ratingService.removeEnsRating(userId, album);
-        else
-            ratingService.setRating(userId, album, rating);
-
-        albumService.updateAlbumAverage(albumId);
-
-        return "redirect:/album/".concat(String.valueOf(albumId));
-    }
+//    @GetMapping("/{albumId}/setRate/{rating}")
+//    public String ratePerformer(@PathVariable Long albumId, @PathVariable int rating, HttpSession session) {
+//
+//        Long userId = (Long) session.getAttribute("loggedUserId");
+//
+//        if (userId == null)
+//            return "redirect:/login";
+//
+//        Album album = albumService.getAlbum(albumId);
+//
+//        if (userService.getAlbumUserRating(userId, album) == rating)
+//            ratingService.removeEnsRating(userId, album);
+//        else
+//            ratingService.setRating(userId, album, rating);
+//
+//        albumService.updateAlbumAverage(album);
+//
+//        return "redirect:/album/".concat(String.valueOf(albumId));
+//    }
 
     @GetMapping("/add/tracks/{albumId}")
     public String displayAlbumTracksForm (@PathVariable Long albumId, Model model) {

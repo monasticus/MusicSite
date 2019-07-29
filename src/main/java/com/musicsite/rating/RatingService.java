@@ -7,7 +7,6 @@ import com.musicsite.track.Track;
 import com.musicsite.user.User;
 import com.musicsite.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +21,29 @@ public class RatingService {
     public RatingService(RatingRepository ratingRepository, UserRepository userRepository) {
         this.ratingRepository = ratingRepository;
         this.userRepository = userRepository;
+    }
+
+    public void rateEns(Long userId, Ens ens, int rating) {
+        Rating userRating = getEnsUserRating(ens, userId);
+
+        if (userRating != null && userRating.getRating() == rating)
+            removeEnsRating(userId, ens);
+        else
+            setRating(userId, ens, rating);
+    }
+
+    public void setRating(Long userId, Ens ens, int rating) {
+        Rating userRating = getEnsUserRating(ens, userId);
+
+        if (userRating == null) {
+            userRating = new Rating();
+            userRating.setUser(userRepository.findOne(userId));
+            userRating.setPerformer((Performer) ens);
+        }
+
+        userRating.setRating(rating);
+
+        ratingRepository.save(userRating);
     }
 
     public void removeEnsRating(Long userId, Ens ens) {
@@ -44,34 +66,17 @@ public class RatingService {
             return null;
     }
 
-
-    public void setRating(Long userId, Ens ens, int rating) {
+    public Rating getEnsUserRating(Ens ens, Long userId) {
         User user = userRepository.findOne(userId);
-        Rating userRating = getRating(ens, user);
-
-
-        if (userRating == null) {
-            userRating = new Rating();
-            userRating.setUser(user);
-            userRating.setEns(ens);
-        }
-
-        userRating.setRating(rating);
-
-        ratingRepository.save(userRating);
-    }
-
-    private Rating getRating(Ens ens, User user) {
-        Rating userRating = null;
 
         if (ens instanceof Performer)
-            userRating = ratingRepository.getRatingByUserAndPerformer(user, (Performer) ens);
+            return ratingRepository.getRatingByUserAndPerformer(user, (Performer) ens);
         else if (ens instanceof Album)
-            userRating = ratingRepository.getRatingByUserAndAlbum(user, (Album) ens);
+            return ratingRepository.getRatingByUserAndAlbum(user, (Album) ens);
         else if (ens instanceof Track)
-            userRating = ratingRepository.getRatingByUserAndTrack(user, (Track) ens);
-
-        return userRating;
+            return ratingRepository.getRatingByUserAndTrack(user, (Track) ens);
+        else
+            return null;
     }
 
 }

@@ -23,6 +23,27 @@ public class FavoriteService {
         this.userRepository = userRepository;
     }
 
+    public void toggleFavorite(Long userId, Ens ens) {
+        if (getEnsUserFavorite(userId, ens))
+            removeEnsFavorite(userId, ens);
+        else
+            setFavorite(userId, ens);
+    }
+
+    public boolean getEnsUserFavorite(Long userId, Ens ens) {
+        Favorite favorite = null;
+        User user = userRepository.findOne(userId);
+
+        if (ens instanceof Performer)
+            favorite = favoriteRepository.getFavoriteByUserAndPerformer(user, (Performer) ens);
+        else if (ens instanceof Album)
+            favorite = favoriteRepository.getFavoriteByUserAndAlbum(user, (Album) ens);
+        else if (ens instanceof Track)
+            favorite = favoriteRepository.getFavoriteByUserAndTrack(user, (Track) ens);
+
+        return favorite != null;
+    }
+
     public void removeEnsFavorite(Long userId, Ens ens) {
         if (ens instanceof Performer)
             favoriteRepository.delete(favoriteRepository.getFavoriteByUserIdAndPerformerId(userId, ens.getId()));

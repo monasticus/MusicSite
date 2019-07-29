@@ -47,7 +47,7 @@ public class AddController {
         switch (className) {
             case "performer":
                 if (id != null)
-                    model.addAttribute(className, performerService.getPerformerById(id));
+                    model.addAttribute(className, performerService.getPerformer(id));
                 else
                     model.addAttribute(className, new Performer());
                 break;

@@ -4,10 +4,6 @@ import com.musicsite.performer.Performer;
 
 public abstract class Opus extends Ens{
 
-    private String name;
-    private String yearOfPublication;
-    private Performer performer;
-
     public abstract String getName();
 
     public abstract void setName(String name) ;
@@ -16,11 +12,7 @@ public abstract class Opus extends Ens{
 
     public abstract void setYearOfPublication(String yearOfPublication);
 
-    public Performer getPerformer() {
-        return performer;
-    }
+    public abstract Performer getPerformer();
 
-    public void setPerformer(Performer performer) {
-        this.performer = performer;
-    }
+    public abstract void setPerformer(Performer performer);
 }

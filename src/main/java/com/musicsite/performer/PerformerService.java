@@ -32,7 +32,7 @@ public class PerformerService {
         this.trackRepository = trackRepository;
     }
 
-    public Performer getPerformerById(Long id) {
+    public Performer getPerformer(Long id) {
         Performer performer = performerRepository.findOne(id);
         if (performer == null)
             return null;
@@ -41,8 +41,7 @@ public class PerformerService {
         Hibernate.initialize(performer.getTracks());
         Hibernate.initialize(performer.getRatings());
         Hibernate.initialize(performer.getComments());
-        setPerformerCategories(performer);
-        return performer;
+        return setPerformerCategories(performer);
     }
 
     public void save(Performer performer) {
@@ -57,14 +56,9 @@ public class PerformerService {
         return performerRepository.getPerformersByPseudonymIgnoreCase(pseudonym);
     }
 
-    public List<Performer> getOnlyPerformers() {
+    private List<Performer> getOnlyPerformers() {
         List<Performer> performers = performerRepository.getPerformersByPropositionFalseOrderByAverageDesc();
-        performers.forEach(p -> Hibernate.initialize(p.getAlbums()));
-        performers.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));
-        performers.forEach(p -> Hibernate.initialize(p.getTracks()));
-        performers.forEach(p -> Hibernate.initialize(p.getRatings()));
-        performers.forEach(this::setPerformerCategories);
-        return performers;
+        return getPerformers(performers);
     }
 
     public List<Performer> getPerformersWithCategories() {
@@ -135,6 +129,10 @@ public class PerformerService {
 
     public List<Performer> getOnlyPerformerPropositions() {
         List<Performer> propositions = performerRepository.getPerformersByPropositionTrue();
+        return getPerformers(propositions);
+    }
+
+    private List<Performer> getPerformers(List<Performer> propositions) {
         propositions.forEach(p -> Hibernate.initialize(p.getAlbums()));
         propositions.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));
         propositions.forEach(p -> Hibernate.initialize(p.getTracks()));
@@ -144,11 +142,7 @@ public class PerformerService {
 
     public List<Performer> getPerformersByQuery(String query) {
         List<Performer> performers = performerRepository.customGetPerformersByQuery(query);
-        performers.forEach(p -> Hibernate.initialize(p.getAlbums()));
-        performers.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));
-        performers.forEach(p -> Hibernate.initialize(p.getTracks()));
-        performers.forEach(p -> Hibernate.initialize(p.getRatings()));
-        return setPerformersCategories(performers);
+        return getPerformers(performers);
     }
 
     public void removePerformer(Long id) {

@@ -37,8 +37,8 @@ public class AlbumService {
         return albumRepository.getAlbumsByNameIgnoreCase(name);
     }
 
-    public void updateAlbumAverage(Long albumId) {
-        Album album = albumRepository.findOne(albumId);
+    public void updateAlbumAverage(Long albumid) {
+        Album album = albumRepository.findOne(albumid);
         album.updateAverage();
         albumRepository.save(album);
     }

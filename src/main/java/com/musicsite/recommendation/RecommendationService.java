@@ -25,15 +25,11 @@ public class RecommendationService {
         this.userRepository = userRepository;
     }
 
-
-
-    public void removeEnsRecommendation(Long userId, Ens ens) {
-        if (ens instanceof Performer)
-            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndPerformerId(userId, ens.getId()));
-        else if (ens instanceof Album)
-            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndAlbumId(userId, ens.getId()));
-        else if (ens instanceof Track)
-            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndTrackId(userId, ens.getId()));
+    public void toggleRecommendation(Long userId, Ens ens) {
+        if (getEnsUserRecommendation(userId, ens))
+            removeEnsRecommendation(userId, ens);
+        else
+            setRecommendation(userId, ens);
     }
 
     public void setRecommendation(Long userId, Ens ens) {
@@ -52,6 +48,15 @@ public class RecommendationService {
         recommendationRepository.save(recommendation);
     }
 
+    public void removeEnsRecommendation(Long userId, Ens ens) {
+        if (ens instanceof Performer)
+            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndPerformerId(userId, ens.getId()));
+        else if (ens instanceof Album)
+            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndAlbumId(userId, ens.getId()));
+        else if (ens instanceof Track)
+            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndTrackId(userId, ens.getId()));
+    }
+
     public Integer countRecommend (Ens ens){
         if (ens instanceof Performer)
             return recommendationRepository.countRecommendationsByPerformerId(ens.getId());
@@ -61,5 +66,20 @@ public class RecommendationService {
             return recommendationRepository.countRecommendationsByTrackId(ens.getId());
         else
             return null;
+    }
+
+    public boolean getEnsUserRecommendation(Long userId, Ens ens) {
+        Recommendation recommendation = null;
+        User user = userRepository.findOne(userId);
+
+        if (ens instanceof Performer)
+            recommendation = recommendationRepository.getRecommendationByUserAndPerformer(user, (Performer) ens);
+        else if (ens instanceof Album)
+            recommendation = recommendationRepository.getRecommendationByUserAndAlbum(user, (Album) ens);
+        else if (ens instanceof Track)
+            recommendation = recommendationRepository.getRecommendationByUserAndTrack(user, (Track) ens);
+
+
+        return recommendation != null;
     }
 }

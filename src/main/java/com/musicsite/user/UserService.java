@@ -21,14 +21,11 @@ public class UserService {
 
     private UserRepository userRepository;
     private RatingRepository ratingRepository;
-    private RecommendationRepository recommendationRepository;
-    private FavoriteRepository favoriteRepository;
 
-    public UserService(UserRepository userRepository, RatingRepository ratingRepository, RecommendationRepository recommendationRepository, FavoriteRepository favoriteRepository) {
+    public UserService(UserRepository userRepository,
+                       RatingRepository ratingRepository) {
         this.userRepository = userRepository;
         this.ratingRepository = ratingRepository;
-        this.recommendationRepository = recommendationRepository;
-        this.favoriteRepository = favoriteRepository;
     }
 
     public User getUserByUsername(String username) {
@@ -73,34 +70,6 @@ public class UserService {
             return 0;
         else
             return rating.getRating();
-    }
-
-    public boolean getEnsUserRecommendation(Long userId, Ens ens) {
-        Recommendation recommendation = new Recommendation();
-
-        if (ens instanceof Performer)
-            recommendation = recommendationRepository.getRecommendationByUserAndPerformer(getUserById(userId), (Performer) ens);
-        else if (ens instanceof Album)
-            recommendation = recommendationRepository.getRecommendationByUserAndAlbum(getUserById(userId), (Album) ens);
-        else if (ens instanceof Track)
-            recommendation = recommendationRepository.getRecommendationByUserAndTrack(getUserById(userId), (Track) ens);
-
-
-        return recommendation != null;
-    }
-
-    public boolean getEnsUserFavorite(Long userId, Ens ens) {
-        Favorite favorite = new Favorite();
-
-        if (ens instanceof Performer)
-            favorite = favoriteRepository.getFavoriteByUserAndPerformer(getUserById(userId), (Performer) ens);
-        else if (ens instanceof Album)
-            favorite = favoriteRepository.getFavoriteByUserAndAlbum(getUserById(userId), (Album) ens);
-        else if (ens instanceof Track)
-            favorite = favoriteRepository.getFavoriteByUserAndTrack(getUserById(userId), (Track) ens);
-
-
-        return favorite != null;
     }
 
     public void updateUser(User originUser, User newUser) {

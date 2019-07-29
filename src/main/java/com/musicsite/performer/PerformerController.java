@@ -52,16 +52,16 @@ public class PerformerController {
 
     @GetMapping("/{id}")
     public String showForm(@PathVariable Long id, Model model, HttpSession session) {
-        Performer performer = performerService.getPerformerById(id);
+        Performer performer = performerService.getPerformer(id);
         if (performer == null || performer.isProposition())
             return "main/blank";
 
         Long userId = (Long) session.getAttribute("loggedUserId");
         if (userId != null) {
             model.addAttribute("userPerformerRating", userService.getPerformerUserRating(userId, performer));
+            model.addAttribute("recommendation", recommendationService.getEnsUserRecommendation(userId, performerService.getPerformer(id)));
+            model.addAttribute("favorite", favoriteService.getEnsUserFavorite(userId, performerService.getPerformer(id)));
             model.addAttribute("comment", new Comment().setUser(userService.getUserById(userId)).setPerformer(performer));
-            model.addAttribute("recommendation", userService.getEnsUserRecommendation(userId, performerService.getPerformerById(id)));
-            model.addAttribute("favorite", userService.getEnsUserFavorite(userId, performerService.getPerformerById(id)));
         }
 
         performerService.orderData(performer);
@@ -79,7 +79,7 @@ public class PerformerController {
     @PostMapping("/{performerId}")
     public String comment(@Valid Comment comment, BindingResult result, HttpSession session, Model model, @PathVariable Long performerId) {
         if (result.hasErrors()) {
-            Performer performer = performerService.getPerformerById(performerId);
+            Performer performer = performerService.getPerformer(performerId);
             Long userId = (Long) session.getAttribute("loggedUserId");
             model.addAttribute("userPerformerRating", userService.getPerformerUserRating(userId, performer));
             performerService.orderData(performer);
@@ -90,65 +90,30 @@ public class PerformerController {
             return "main/performer";
         }
 
-        comment.setPerformer(performerService.getPerformerById(performerId));
+        comment.setPerformer(performerService.getPerformer(performerId));
         commentService.save(comment);
         return "redirect:/performer/".concat(String.valueOf(performerId));
     }
 
-    @GetMapping("/{performerId}/setRate/{rating}")
-    public String ratePerformer(@PathVariable Long performerId, @PathVariable int rating, HttpSession session) {
-
-        Long userId = (Long) session.getAttribute("loggedUserId");
-
-        if (userId == null)
-            return "redirect:/login";
-
-        Performer performer = performerService.getPerformerById(performerId);
-
-        if (userService.getPerformerUserRating(userId, performer) == (rating))
-            ratingService.removeEnsRating(userId, performer);
-        else
-            ratingService.setRating(userId, performer, rating);
-
-        performerService.updatePerformerAverage(performerId);
-
-        return "redirect:/performer/".concat(String.valueOf(performerId));
-    }
-
-    @GetMapping("/{performerId}/setRecomm")
-    public String recommPerformer(@PathVariable Long performerId, HttpSession session){
-        Long userId = (Long) session.getAttribute("loggedUserId");
-
-        if (userId == null)
-            return "redirect:/login";
-
-        Performer performer = performerService.getPerformerById(performerId);
-
-        if(userService.getEnsUserRecommendation(userId, performer))
-            recommendationService.removeEnsRecommendation(userId, performer);
-        else
-            recommendationService.setRecommendation(userId, performer);
-
-        return "redirect:/performer/".concat(String.valueOf(performerId));
-    }
-
-    @GetMapping("/{performerId}/setFavorite")
-    public String favPerformer(@PathVariable Long performerId, HttpSession session){
-        Long userId = (Long) session.getAttribute("loggedUserId");
-
-        if (userId == null)
-            return "redirect:/login";
-
-        Performer performer = performerService.getPerformerById(performerId);
-
-        if(userService.getEnsUserFavorite(userId, performer))
-            favoriteService.removeEnsFavorite(userId, performer);
-        else
-            favoriteService.setFavorite(userId, performer);
-
-        return "redirect:/performer/".concat(String.valueOf(performerId));
-    }
-
+//    @GetMapping("/{performerId}/setRate/{rating}")
+//    public String ratePerformer(@PathVariable Long performerId, @PathVariable int rating, HttpSession session) {
+//
+//        Long userId = (Long) session.getAttribute("loggedUserId");
+//
+//        if (userId == null)
+//            return "redirect:/login";
+//
+//        Performer performer = performerService.getPerformer(performerId);
+//
+//        if (userService.getPerformerUserRating(userId, performer) == (rating))
+//            ratingService.removeEnsRating(userId, performer);
+//        else
+//            ratingService.setRating(userId, performer, rating);
+//
+//        performerService.updatePerformerAverage(performerId);
+//
+//        return "redirect:/performer/".concat(String.valueOf(performerId));
+//    }
 
 }
 

@@ -102,10 +102,12 @@ public class Track extends Opus {
         this.yearOfPublication = yearOfPublication;
     }
 
+    @Override
     public Performer getPerformer() {
         return performer;
     }
 
+    @Override
     public void setPerformer(Performer performer) {
         this.performer = performer;
     }
