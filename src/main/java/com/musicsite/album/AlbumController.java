@@ -56,7 +56,6 @@ public class AlbumController {
         this.favoriteService = favoriteService;
     }
 
-
     @GetMapping("/{id}")
     public String showForm(@PathVariable Long id, Model model, HttpSession session) {
         Album album = albumService.getAlbum(id);
@@ -93,26 +92,6 @@ public class AlbumController {
         commentService.save(comment);
         return "redirect:/album/".concat(String.valueOf(albumId));
     }
-
-//    @GetMapping("/{albumId}/setRate/{rating}")
-//    public String ratePerformer(@PathVariable Long albumId, @PathVariable int rating, HttpSession session) {
-//
-//        Long userId = (Long) session.getAttribute("loggedUserId");
-//
-//        if (userId == null)
-//            return "redirect:/login";
-//
-//        Album album = albumService.getAlbum(albumId);
-//
-//        if (userService.getAlbumUserRating(userId, album) == rating)
-//            ratingService.removeEnsRating(userId, album);
-//        else
-//            ratingService.setRating(userId, album, rating);
-//
-//        albumService.updateAlbumAverage(album);
-//
-//        return "redirect:/album/".concat(String.valueOf(albumId));
-//    }
 
     @GetMapping("/add/tracks/{albumId}")
     public String displayAlbumTracksForm (@PathVariable Long albumId, Model model) {

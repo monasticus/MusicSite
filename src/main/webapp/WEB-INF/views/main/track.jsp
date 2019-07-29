@@ -72,9 +72,45 @@
                 </div>
             </div>
 
-            <div class="ens-average rounded ml-auto p-2 border border-dark bg-success">
-                <div><fmt:formatNumber type="number" maxFractionDigits="2" value="${track.average}"/></div>
+            <div class="ens-top-right ml-auto p-2">
+
+
+                <div class="ens-average rounded border border-dark bg-success d-flex align-items-start">
+                    <div>
+                        <p>
+                            <fmt:formatNumber type="number" maxFractionDigits="2" value="${track.average}"/>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="user-themes d-flex align-items-center">
+                    <c:choose>
+                        <c:when test="${recommendation == true}">
+                            <a href="/track/${track.id}/setRecomm" title="recommend"><i
+                                    class="fas fa-bullhorn recommendation-true"></i></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/track/${track.id}/setRecomm" title="recommend"><i class="fas fa-bullhorn"></i></a>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${favorite == true}">
+                            <a href="/track/${track.id}/setFavorite" title="add to favorite"><i
+                                    class="fas fa-heart favorite-true"></i></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/track/${track.id}/setFavorite" title="add to favorite"><i
+                                    class="far fa-heart"></i></a>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="number-informations d-flex">
+                    Ratings: ${ratingCounter}<br>
+                    Recomm.: ${recommendationCounter}
+                </div>
+
             </div>
+
         </div>
 
 

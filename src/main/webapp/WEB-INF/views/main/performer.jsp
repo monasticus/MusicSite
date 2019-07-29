@@ -4,7 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../../resources/css/style.css"/>
     <title>musicsite - ${performer.pseudonym}</title>
     <!-- Bootstrap -->
     <meta charset="utf-8">
@@ -76,14 +75,12 @@
             <div class="ens-top-right ml-auto p-2">
 
 
-                <div class="ens-average rounded  border border-dark bg-success d-flex align-items-start">
+                <div class="ens-average rounded border border-dark bg-success d-flex align-items-start">
                     <div>
                         <p>
                         <fmt:formatNumber type="number" maxFractionDigits="2" value="${performer.average}"/>
                         </p>
                     </div>
-
-
                 </div>
                 <div class="user-themes d-flex align-items-center">
                     <c:choose>
@@ -102,8 +99,6 @@
                             <a href="/performer/${performer.id}/setFavorite" title="add to favorite"><i class="far fa-heart"></i></a>
                         </c:otherwise>
                     </c:choose>
-
-
                 </div>
                 <div class="number-informations d-flex">
                     Ratings: ${ratingCounter}<br>

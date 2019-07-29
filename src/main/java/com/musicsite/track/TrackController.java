@@ -83,24 +83,4 @@ public class TrackController {
         return "redirect:/track/".concat(String.valueOf(trackId));
     }
 
-//    @GetMapping("/{trackId}/setRate/{rating}")
-//    public String ratePerformer(@PathVariable Long trackId, @PathVariable int rating, HttpSession session) {
-//
-//        Long userId = (Long) session.getAttribute("loggedUserId");
-//
-//        if (userId == null)
-//            return "redirect:/login";
-//
-//        Track track = trackService.getTrack(trackId);
-//
-//        if (userService.getTrackUserRating(userId, track) == (rating))
-//            ratingService.removeEnsRating(userId, track);
-//        else
-//            ratingService.setRating(userId, track, rating);
-//
-//        trackService.updateTrackAverage(track);
-//
-//        return "redirect:/track/".concat(String.valueOf(trackId));
-//    }
-
 }

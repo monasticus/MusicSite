@@ -73,9 +73,46 @@
                 </div>
             </div>
 
-            <div class="ens-average rounded ml-auto p-2 border border-dark bg-success">
-                <div> <fmt:formatNumber type="number" maxFractionDigits="2" value="${album.average}"/> </div>
+            <div class="ens-top-right ml-auto p-2">
+
+
+                <div class="ens-average rounded border border-dark bg-success d-flex align-items-start">
+                    <div>
+                        <p>
+                            <fmt:formatNumber type="number" maxFractionDigits="2" value="${album.average}"/>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="user-themes d-flex align-items-center">
+                    <c:choose>
+                        <c:when test="${recommendation == true}">
+                            <a href="/album/${album.id}/setRecomm" title="recommend"><i
+                                    class="fas fa-bullhorn recommendation-true"></i></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/album/${album.id}/setRecomm" title="recommend"><i class="fas fa-bullhorn"></i></a>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:choose>
+                        <c:when test="${favorite == true}">
+                            <a href="/album/${album.id}/setFavorite" title="add to favorite"><i
+                                    class="fas fa-heart favorite-true"></i></a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/album/${album.id}/setFavorite" title="add to favorite"><i
+                                    class="far fa-heart"></i></a>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+                <div class="number-informations d-flex">
+                    Ratings: ${ratingCounter}<br>
+                    Recomm.: ${recommendationCounter}
+                </div>
+
             </div>
+
+
         </div>
         <div class="ens-details">
             <p>
@@ -97,14 +134,16 @@
                     <p class="empty-track-list">
                         Track list is empty.
                     </p>
-                    <a href="/album/add/tracks/${album.id}" class="btn btn-success btn-lg btn-block">Add tracks to album</a>
+                    <a href="/album/add/tracks/${album.id}" class="btn btn-success btn-lg btn-block">Add tracks to
+                        album</a>
                 </c:when>
                 <c:otherwise>
                     <ol class="track-list">
                         <c:forEach var="track" items="${tracksNoProposition}">
                             <li class="album-single-track">
-                                <span class="ordinal-number">${track.ordinalNum}.</span> <a href="/track/${track.id}">${track.name}
-                                </a></li>
+                                <span class="ordinal-number">${track.ordinalNum}.</span> <a
+                                    href="/track/${track.id}">${track.name}
+                            </a></li>
                         </c:forEach>
                     </ol>
                 </c:otherwise>
@@ -156,7 +195,6 @@
     </c:if>
 
 </section>
-
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -38,7 +38,7 @@ public class RatingService {
         if (userRating == null) {
             userRating = new Rating();
             userRating.setUser(userRepository.findOne(userId));
-            userRating.setPerformer((Performer) ens);
+            userRating.setEns(ens);
         }
 
         userRating.setRating(rating);
