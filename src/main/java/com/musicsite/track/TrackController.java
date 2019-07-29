@@ -79,10 +79,12 @@ public class TrackController {
         if (userId == null)
             return "redirect:/login";
 
-        if (userService.getTrackUserRating(userId, trackService.getTrack(trackId)) == (rating))
-            ratingService.removeTrackRating(userId, trackId);
+        Track track = trackService.getTrack(trackId);
+
+        if (userService.getTrackUserRating(userId, track) == (rating))
+            ratingService.removeEnsRating(userId, track);
         else
-            trackService.saveRating(userId, trackId, rating);
+            ratingService.setRating(userId, track, rating);
 
         trackService.updateTrackAverage(trackId);
 

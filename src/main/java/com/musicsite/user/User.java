@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User extends Ens {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,12 +58,10 @@ public class User extends Ens {
         confirmed = false;
     }
 
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }

@@ -3,7 +3,6 @@ package com.musicsite.favorite;
 import com.musicsite.album.Album;
 import com.musicsite.entity.Ens;
 import com.musicsite.performer.Performer;
-import com.musicsite.recommendation.Recommendation;
 import com.musicsite.track.Track;
 import com.musicsite.user.User;
 import com.musicsite.user.UserRepository;
@@ -24,16 +23,13 @@ public class FavoriteService {
         this.userRepository = userRepository;
     }
 
-    public void removePerformerRecommendation(Long userId, Long performerId) {
-        favoriteRepository.delete(favoriteRepository.getFavoriteByUserIdAndPerformerId(userId, performerId));
-    }
-
-    public void removeAlbumRecommendation(Long userId, Long albumId) {
-        favoriteRepository.delete(favoriteRepository.getFavoriteByUserIdAndAlbumId(userId, albumId));
-    }
-
-    public void removeTrackRecommendation(Long userId, Long trackId) {
-        favoriteRepository.delete(favoriteRepository.getFavoriteByUserIdAndTrackId(userId, trackId));
+    public void removeEnsFavorite(Long userId, Ens ens) {
+        if (ens instanceof Performer)
+            favoriteRepository.delete(favoriteRepository.getFavoriteByUserIdAndPerformerId(userId, ens.getId()));
+        else if (ens instanceof Album)
+            favoriteRepository.delete(favoriteRepository.getFavoriteByUserIdAndAlbumId(userId, ens.getId()));
+        else if (ens instanceof Track)
+            favoriteRepository.delete(favoriteRepository.getFavoriteByUserIdAndTrackId(userId, ens.getId()));
     }
 
     public void setFavorite(Long userId, Ens ens) {

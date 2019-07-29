@@ -25,16 +25,15 @@ public class RecommendationService {
         this.userRepository = userRepository;
     }
 
-    public void removePerformerRecommendation(Long userId, Long performerId) {
-        recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndPerformerId(userId, performerId));
-    }
 
-    public void removeAlbumRecommendation(Long userId, Long albumId) {
-        recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndAlbumId(userId, albumId));
-    }
 
-    public void removeTrackRecommendation(Long userId, Long trackId) {
-        recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndTrackId(userId, trackId));
+    public void removeEnsRecommendation(Long userId, Ens ens) {
+        if (ens instanceof Performer)
+            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndPerformerId(userId, ens.getId()));
+        else if (ens instanceof Album)
+            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndAlbumId(userId, ens.getId()));
+        else if (ens instanceof Track)
+            recommendationRepository.delete(recommendationRepository.getRecommendationByUserIdAndTrackId(userId, ens.getId()));
     }
 
     public void setRecommendation(Long userId, Ens ens) {

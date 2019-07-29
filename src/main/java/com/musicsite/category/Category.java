@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "categories")
-public class Category extends Ens {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,13 +29,10 @@ public class Category extends Ens {
     @OneToMany(mappedBy = "category")
     private List<Track> tracks = new ArrayList<>();
 
-
-    @Override
     public Long getId() {
         return id;
     }
 
-    @Override
     public void setId(Long id) {
         this.id = id;
     }

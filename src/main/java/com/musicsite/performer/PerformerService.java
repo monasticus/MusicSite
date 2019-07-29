@@ -3,17 +3,10 @@ package com.musicsite.performer;
 import com.musicsite.album.Album;
 import com.musicsite.album.AlbumRepository;
 import com.musicsite.category.Category;
-import com.musicsite.performer.Performer;
-import com.musicsite.performer.PerformerRepository;
-import com.musicsite.rating.Rating;
-import com.musicsite.rating.RatingRepository;
 import com.musicsite.track.Track;
 import com.musicsite.track.TrackRepository;
-import com.musicsite.user.User;
-import com.musicsite.user.UserRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,20 +22,14 @@ public class PerformerService {
     private PerformerRepository performerRepository;
     private AlbumRepository albumRepository;
     private TrackRepository trackRepository;
-    private UserRepository userRepository;
-    private RatingRepository ratingRepository;
 
     public PerformerService(PerformerRepository performerRepository,
                             AlbumRepository albumRepository,
-                            TrackRepository trackRepository,
-                            UserRepository userRepository,
-                            RatingRepository ratingRepository) {
+                            TrackRepository trackRepository) {
 
         this.performerRepository = performerRepository;
         this.albumRepository = albumRepository;
         this.trackRepository = trackRepository;
-        this.userRepository = userRepository;
-        this.ratingRepository = ratingRepository;
     }
 
     public Performer getPerformerById(Long id) {
@@ -122,24 +109,6 @@ public class PerformerService {
             performer.setTracks(trackRepository.getTracksByPerformerOrderByYearOfPublicationDesc(performer));
     }
 
-    public void saveRating(Long userId, Long performerId, int rating) {
-        User user = userRepository.findOne(userId);
-
-        Performer performer = performerRepository.findOne(performerId);
-
-        Rating userRating = ratingRepository.getRatingByUserAndPerformer(user, performer);
-
-        if (userRating == null) {
-            userRating = new Rating();
-            userRating.setPerformer(performer);
-            userRating.setUser(user);
-        }
-
-        userRating.setRating(rating);
-
-        ratingRepository.save(userRating);
-    }
-
     public void updatePerformerAverage(Long performerId) {
         Performer performer = performerRepository.findOne(performerId);
         performer.updateAverage();
@@ -173,7 +142,7 @@ public class PerformerService {
         return setPerformersCategories(propositions);
     }
 
-    public List<Performer> getPerformersByQuery (String query) {
+    public List<Performer> getPerformersByQuery(String query) {
         List<Performer> performers = performerRepository.customGetPerformersByQuery(query);
         performers.forEach(p -> Hibernate.initialize(p.getAlbums()));
         performers.forEach(p -> p.getAlbums().forEach(a -> Hibernate.initialize(a.getCategories())));

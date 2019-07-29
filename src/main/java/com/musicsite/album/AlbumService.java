@@ -2,28 +2,20 @@ package com.musicsite.album;
 
 import com.musicsite.category.Category;
 import com.musicsite.performer.Performer;
-import com.musicsite.rating.Rating;
-import com.musicsite.rating.RatingRepository;
-import com.musicsite.user.User;
-import com.musicsite.user.UserRepository;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 @Transactional
 public class AlbumService {
 
     private AlbumRepository albumRepository;
-    private UserRepository userRepository;
-    private RatingRepository ratingRepository;
 
-    public AlbumService(AlbumRepository albumRepository, UserRepository userRepository, RatingRepository ratingRepository) {
+    public AlbumService(AlbumRepository albumRepository) {
         this.albumRepository = albumRepository;
-        this.userRepository = userRepository;
-        this.ratingRepository = ratingRepository;
     }
 
     public Album getAlbum(Long id) {
@@ -43,22 +35,6 @@ public class AlbumService {
 
     public List<Album> getAlbumsByNameSaute(String name) {
         return albumRepository.getAlbumsByNameIgnoreCase(name);
-    }
-
-    public void saveRating(Long userId, Long albumId, int rating) {
-        User user = userRepository.findOne(userId);
-        Album album = albumRepository.findOne(albumId);
-        Rating userRating = ratingRepository.getRatingByUserAndAlbum(user, album);
-
-        if (userRating == null) {
-            userRating = new Rating();
-            userRating.setAlbum(album);
-            userRating.setUser(user);
-        }
-
-        userRating.setRating(rating);
-
-        ratingRepository.save(userRating);
     }
 
     public void updateAlbumAverage(Long albumId) {

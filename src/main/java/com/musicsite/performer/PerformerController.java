@@ -103,10 +103,12 @@ public class PerformerController {
         if (userId == null)
             return "redirect:/login";
 
-        if (userService.getPerformerUserRating(userId, performerService.getPerformerById(performerId)) == (rating))
-            ratingService.removePerformerRating(userId, performerId);
+        Performer performer = performerService.getPerformerById(performerId);
+
+        if (userService.getPerformerUserRating(userId, performer) == (rating))
+            ratingService.removeEnsRating(userId, performer);
         else
-            performerService.saveRating(userId, performerId, rating);
+            ratingService.setRating(userId, performer, rating);
 
         performerService.updatePerformerAverage(performerId);
 
@@ -120,10 +122,12 @@ public class PerformerController {
         if (userId == null)
             return "redirect:/login";
 
-        if(userService.getEnsUserRecommendation(userId, performerService.getPerformerById(performerId)))
-            recommendationService.removePerformerRecommendation(userId, performerId);
+        Performer performer = performerService.getPerformerById(performerId);
+
+        if(userService.getEnsUserRecommendation(userId, performer))
+            recommendationService.removeEnsRecommendation(userId, performer);
         else
-            recommendationService.setRecommendation(userId, performerService.getPerformerById(performerId));
+            recommendationService.setRecommendation(userId, performer);
 
         return "redirect:/performer/".concat(String.valueOf(performerId));
     }
@@ -135,10 +139,12 @@ public class PerformerController {
         if (userId == null)
             return "redirect:/login";
 
-        if(userService.getEnsUserFavorite(userId, performerService.getPerformerById(performerId)))
-            favoriteService.removePerformerRecommendation(userId, performerId);
+        Performer performer = performerService.getPerformerById(performerId);
+
+        if(userService.getEnsUserFavorite(userId, performer))
+            favoriteService.removeEnsFavorite(userId, performer);
         else
-            favoriteService.setFavorite(userId, performerService.getPerformerById(performerId));
+            favoriteService.setFavorite(userId, performer);
 
         return "redirect:/performer/".concat(String.valueOf(performerId));
     }
